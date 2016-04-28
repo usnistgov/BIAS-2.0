@@ -1,0 +1,4165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Biometric Identity Assurance Services (BIAS) SOAP Profile Version 2.0
+     30 March 2016
+     Copyright (c) OASIS Open 2016.  All Rights Reserved.
+-->
+<!--
+    Document   : BIAS.xml
+    Created on : December 17, 2009, 9:31 AM
+    Last Edit  : April 14, 2016 by Karen Marshall, National Institute of Standards and Technology
+    Description:
+        This document represents the WSDL definitions of BIAS Profile.
+-->
+<wsdl:definitions 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+	xmlns:cbeff="http://standards.iso.org/iso-iec/19785/-3/ed-2/" 
+	xmlns:iso_3166_1="http://standards.iso.org/iso/3166/-1/ed-3/" 
+	xmlns:tns="http://docs.oasis-open.org/bias/ns/bias-2.0/" 
+	targetNamespace="http://docs.oasis-open.org/bias/ns/bias-2.0/">
+	
+	<wsdl:types>
+		<xsd:schema elementFormDefault="qualified" targetNamespace="http://docs.oasis-open.org/bias/ns/bias-2.0/">
+			<xsd:import namespace="http://standards.iso.org/iso-iec/19785/-3/ed-2/" schemaLocation="cbeff.xsd"/>
+			<xsd:import namespace="http://standards.iso.org/iso/3166/-1/ed-3/" schemaLocation="iso_country_codes.xsd"/>
+			
+			<xsd:complexType name="AggregateRequestTemplate">
+				<xsd:annotation>
+					<xsd:documentation>Base template for BIAS aggregate service requests.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexContent>
+					<xsd:extension base="tns:RequestTemplate">
+						<xsd:sequence>
+							<xsd:element name="ProcessingOptions" type="tns:ProcessingOptionsType" minOccurs="1" maxOccurs="1">
+								<xsd:annotation>
+									<xsd:documentation>Options that guide how the aggregate service request is processed.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+							<xsd:element name="InputData" type="tns:InformationType" minOccurs="1" maxOccurs="1">
+								<xsd:annotation>
+									<xsd:documentation>Contains the input data for the aggregate service request.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="AggregateResponseTemplate">
+				<xsd:annotation>
+					<xsd:documentation>Base template for BIAS aggregate service responses.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexContent>
+					<xsd:extension base="tns:ResponseTemplate">
+						<xsd:sequence>
+							<xsd:element name="ReturnData" type="tns:InformationType" minOccurs="0" maxOccurs="1">
+								<xsd:annotation>
+									<xsd:documentation>Contains the output data for the aggregate service response.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			
+			<xsd:simpleType name="ApplicationIdentifier">
+				<xsd:annotation>
+					<xsd:documentation>Identifies an application.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="1"/>
+					<xsd:maxLength value="255"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:simpleType name="ApplicationUserIdentifier">
+				<xsd:annotation>
+					<xsd:documentation>Identifies an application user or instance.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="1"/>
+					<xsd:maxLength value="255"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:complexType name="BIASBiometricDataType">
+				<xsd:annotation>
+					<xsd:documentation>Wraps the various BIAS biometric types.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="BIRList" type="tns:CBEFF_BIR_ListType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A list of CBEFF-BIR elements.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="BIR" type="tns:CBEFF_BIR_Type" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Contains biometric information in either a non-XML and an XML representation.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="InputBIR" type="tns:CBEFF_BIR_Type" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Maps to specific INCITS BIAS elements as required by that specification.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="ReferenceBIR" type="tns:CBEFF_BIR_Type" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Maps to specific INCITS BIAS elements as required by that specification.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="BiometricDataList" type="tns:BiometricDataListType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A list of biometric data elements.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:simpleType name="BIASFaultCode">
+				<xsd:annotation>
+					<xsd:documentation>Error code referenced in a SOAP fault. </xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="UNKNOWN_ERROR">
+						<xsd:annotation>
+							<xsd:documentation>The service failed for an unknown reason.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="UNSUPPORTED_CAPABILITY">
+						<xsd:annotation>
+							<xsd:documentation>A requested capability is not supported by the service implementation.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="INVALID_INPUT">
+						<xsd:annotation>
+							<xsd:documentation>The data in a service input parameter is invalid.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="BIR_QUALITY_ERROR">
+						<xsd:annotation>
+							<xsd:documentation>Biometric sample quality is too poor for the service to succeed.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="INVALID_BIR">
+						<xsd:annotation>
+							<xsd:documentation>The input BIR is empty or in an invalid or unrecognized format.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="BIR_SIGNATURE_FAILURE">
+						<xsd:annotation>
+							<xsd:documentation>The service could not validate the signature, if used, on the input BIR.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="BIR_DECRYPTION_FAILURE">
+						<xsd:annotation>
+							<xsd:documentation>The service could not decrypt an encrypted input BIR.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="INVALID_ENCOUNTER_ID">
+						<xsd:annotation>
+							<xsd:documentation>The input encounter ID is empty or in an invalid format.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="INVALID_SUBJECT_ID">
+						<xsd:annotation>
+							<xsd:documentation>The input subject ID is empty or in an invalid format.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="UNKNOWN_SUBJECT">
+						<xsd:annotation>
+							<xsd:documentation>The subject referenced by the input subject ID does not exist.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="UNKNOWN_GALLERY">
+						<xsd:annotation>
+							<xsd:documentation>The gallery referenced by the input gallery ID does not exist.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="UNKNOWN_ENCOUNTER">
+						<xsd:annotation>
+							<xsd:documentation>The encounter referenced by the input encounter ID does not exist.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="UNKNOWN_BIOGRAPHIC_FORMAT">
+						<xsd:annotation>
+							<xsd:documentation>The biographic data format is not known or not supported.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="UNKNOWN_IDENTITY_CLAIM">
+						<xsd:annotation>
+							<xsd:documentation>The identity referenced by the input identity claim does not exist.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="INVALID_IDENTITY_CLAIM">
+						<xsd:annotation>
+							<xsd:documentation>The identity claim requested is already in use.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="NONEXISTANT_DATA">
+						<xsd:annotation>
+							<xsd:documentation>The data requested for deletion does not exist.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:complexType name="BIASFaultDetail">
+				<xsd:annotation>
+					<xsd:documentation>Defines the error information associated with a SOAP fault.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element minOccurs="1" maxOccurs="1" name="BIASFaultType" type="tns:BIASFaultCode">
+						<xsd:annotation>
+							<xsd:documentation>References an error code.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element minOccurs="1" maxOccurs="1" name="BIASFaultMessage" type="xsd:string">
+						<xsd:annotation>
+							<xsd:documentation>Provides an explanation of the fault.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element minOccurs="0" maxOccurs="1" name="BIASFaultDescription" type="xsd:string">
+						<xsd:annotation>
+							<xsd:documentation>Provides detailed information about a BIAS fault, such as trace details.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="BIASIdentity">
+				<xsd:annotation>
+					<xsd:documentation>
+            Defines a single element for encapsulating the data associated
+            with an Identity.  Includes the Identity's reference identifiers,
+            biographic data, and biometric data.
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="SubjectID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A system unique identifier for a subject.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="IdentityClaim" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>An identifier by which a subject is known to a particular gallery or population group.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="EncounterID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The identifier of an encounter associated with the subject, required for encounter-centric models.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="EncounterList" type="tns:EncounterListType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A list of encounters associated with a subject.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="BiographicData" type="tns:BiographicDataType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>An Identity's biographic data.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<!--<xsd:element name="BiographicDataElements" type="tns:BiographicDataType" minOccurs="0" maxOccurs="1">-->
+						<!--<xsd:annotation>
+							<xsd:documentation>An Identity's biographic data elements that are stored in the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>-->
+					<xsd:element name="BiometricData" type="tns:BIASBiometricDataType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>An Identity's biometric data.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:simpleType name="BIASIDType">
+				<xsd:annotation>
+					<xsd:documentation>A BIAS identifier</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:string"/>
+			</xsd:simpleType>
+			<xsd:complexType name="BiographicDataListType">
+				<xsd:annotation>
+					<xsd:documentation>Defines a list of biographic data.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="BiographicData" type="tns:BiographicDataType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Data structure containing information about a biographic record.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+			</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="BiographicDataItemType">
+				<xsd:annotation>
+					<xsd:documentation>Defines a single biographic data element.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="Name" type="xsd:string" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The name of the biographic data item.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Type" type="xsd:string" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The data type for the biographic data item.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Value" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The value assigned to the biographic data item.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="BiographicDataItemListType">
+				<xsd:annotation>
+					<xsd:documentation>Defines a list of biographic data elements.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="BiographicDataItem" type="tns:BiographicDataItemType" minOccurs="1" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Data structure containing information about a biographic record.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+			</xsd:sequence>
+			</xsd:complexType>			
+			<xsd:complexType name="BiographicDataSetType">
+				<xsd:annotation>
+					<xsd:documentation>Defines a set of biographic data that is formatted according to the specified format.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The name of the biographic data format. Use these names for common formats: FBI-EFTS, FBI-EBTS, DOD-EBTS, INT-I, NIEM, xNAL, HR-XML.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="version" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The version of the biographic data format (e.g., “7.1" for FBI-EFTS or “2.0" for NIEM).</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="source" type="xsd:string" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Reference to a URI/IRI describing the biographic data format. For example: (FBI-EFTS) www.fbibiospecs.org, (DOD-EBTS) www.biometrics.dod.mil, (INT-I) www.interpol.int, (NIEM) www.niem.gov, (xNAL) www.oasis-open.org, (HR-XML) www.hr-xml.org.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="type" type="xsd:string" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The biographic data format type. Use these types for common formats: ASCII (e.g., for non-XML versions of FBI-EFTS, FBI-EBTS, DOD-EFTS, or INT-I), XML (e.g., for NIEM, xNAL, and HR-XML or future version of FBI-EBTS).</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:any namespace="##any">
+						<xsd:annotation>
+							<xsd:documentation>Biographic data formatted according to a specific format.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:any>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="BiographicDataType">
+				<xsd:annotation>
+					<xsd:documentation>
+            Defines a set of biographic data elements, utilizing either the
+            BiographicDataItemType to represent a list of elements or the
+            BiographicDataSetType to represent a complete, formatted set of
+            biographic information.
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="LastName" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The last name of a subject.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="FirstName" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The first name of a subject.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="BiographicDataItemList" type="tns:BiographicDataItemListType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A list of biographic data elements.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="BiographicDataItem" type="tns:BiographicDataItemType" minOccurs="1" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>A single biographic data element.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="BiographicDataSet" type="tns:BiographicDataSetType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A set of biographic data information.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="BiometricDataType">
+				<xsd:annotation>
+					<xsd:documentation>
+            Provides descriptive information about biometric data, such as
+            the biometric type, subtype, and format, contained in the BDB of
+            the CBEFF-BIR.
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="BiometricType" type="cbeff:MultipleTypesType" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The type of biological or behavioral data stored in the biometric record, as defined by CBEFF.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="BiometricTypeCount" type="xsd:positiveInteger" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The number of biometric records having the biometric type recorded in the biometric type field.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="BiometricSubType" type="cbeff:SubtypeType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>More specifically defines the type of biometric data stored in the biometric record, as defined by CBEFF.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="BDBFormatOwner" type="xsd:positiveInteger" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Identifies the standards body, working group, industry consortium, or other CBEFF biometric organization that has defined the format for the biometric data.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="BDBFormatType" type="xsd:positiveInteger" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Identifies the specific biometric data format specified by the CBEFF biometric organization recorded in the BDB Format Owner field.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="BiometricDataListType">
+				<xsd:annotation>
+					<xsd:documentation>A list of biometric data elements.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="BiometricData" type="tns:BiometricDataType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Data structure containing information about a biometric record.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="CandidateListType">
+				<xsd:annotation>
+					<xsd:documentation>
+            Defines a set of candidates, utilizing the Candidate Type to
+            represent each element in the set.
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="Candidate" type="tns:CandidateType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>A single candidate.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="CandidateType">
+				<xsd:annotation>
+					<xsd:documentation>
+            Defines a single candidate as a possible match in response to a
+            biometric identification request.
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="ScoreList"  minOccurs="0" >
+						<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Score" type="tns:ScoreType"/>
+						</xsd:sequence>
+						</xsd:complexType>
+						
+					
+					
+						
+					</xsd:element>
+					<xsd:element name="Identity" type="tns:BIASIdentity" />
+					<xsd:element name="Rank" type="xsd:integer" minOccurs="1" maxOccurs="1" >
+						<xsd:annotation>
+							<xsd:documentation>The rank of the candidate in relation to other candidates for the same biometric identification operation.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="BiographicData" type="tns:BiographicDataType" minOccurs="0" >
+						<xsd:annotation>
+							<xsd:documentation>Biographic data associated with the candidate match.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+				<!--<xsd:attribute name="Rank" type="xsd:integer" minOccurs="1" maxOccurs="1" ></xsd:attribute>-->
+			</xsd:complexType>
+			<xsd:complexType name="CapabilityListType">
+				<xsd:annotation>
+					<xsd:documentation>Defines a set of capabilities.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="Capability" type="tns:CapabilityType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>A single capability.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:simpleType name="CapabilityName">
+				<xsd:annotation>
+					<xsd:documentation>A list of capability items.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="AggregateInputDataOptional">
+						<xsd:annotation>
+							<xsd:documentation>A data element accepted as optional input by the implementing system for the aggregate services.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="AggregateInputDataRequired">
+						<xsd:annotation>
+							<xsd:documentation>A data element required as input by the implementing system for the aggregate services.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="AggregateProcessingOption">
+						<xsd:annotation>
+							<xsd:documentation>A processing option supported by the implementing system for the aggregate services.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="AggregateReturnData">
+						<xsd:annotation>
+							<xsd:documentation>A data element returned by the implementing system for the aggregate services.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="AggregateServiceDescription">
+						<xsd:annotation>
+							<xsd:documentation>Describes the processing logic of an aggregate service supported by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="BiographicDataSet">
+						<xsd:annotation>
+							<xsd:documentation>Identifies a biographic data set supported by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="CBEFFPatronFormat">
+						<xsd:annotation>
+							<xsd:documentation>A patron format supported by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="ClassificationAlgorithmType">
+						<xsd:annotation>
+							<xsd:documentation>A classification algorithm type supported by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="ConformanceClass">
+						<xsd:annotation>
+							<xsd:documentation>Identifies the conformance class of the BIAS implementation.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="Gallery">
+						<xsd:annotation>
+							<xsd:documentation>A gallery or population group supported by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="IdentityModel">
+						<xsd:annotation>
+							<xsd:documentation>Identifies whether the implementing system is person-centric or encounter-centric based.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="MatchAlgorithm">
+						<xsd:annotation>
+							<xsd:documentation>A match algorithm vendor and algorithm vendor product ID supported by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="MatchScore">
+						<xsd:annotation>
+							<xsd:documentation> Identifies the use of match scores returned by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="QualityAlgorithm">
+						<xsd:annotation>
+							<xsd:documentation>A quality algorithm vendor and algorithm vendor product ID supported by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="SupportedBiometric">
+						<xsd:annotation>
+							<xsd:documentation>A biometric type supported by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="TransformOperation">
+						<xsd:annotation>
+							<xsd:documentation>A transform operation type supported by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:complexType name="CapabilityType">
+				<xsd:annotation>
+					<xsd:documentation>Defines a single capability supported by an implementing system.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="CapabilityName" type="tns:CapabilityName" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The name of the capability.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="CapabilityID" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>An identifier assigned to the capability by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="CapabilityDescription" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A description of the capability.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="CapabilityValue" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A value assigned to the capability.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="CapabilitySupportingValue" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A secondary value supporting the capability.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="CapabilityAdditionalInfo" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation> Contains additional information for the supported capability.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="CBEFF_BIR_ListType">
+				<xsd:annotation>
+					<xsd:documentation>A list of CBEFF-BIR elements.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="BIR" type="tns:CBEFF_BIR_Type" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>CBEFF structure containing information about a biometric sample.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="CBEFF_BIR_Type">
+				<xsd:annotation>
+					<xsd:documentation>Represents biometric information, with either a non-XML or XML representation.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="FormatOwner" type="xsd:positiveInteger" minOccurs="1" maxOccurs="1"/>
+					<xsd:element name="FormatType" type="xsd:positiveInteger" minOccurs="1" maxOccurs="1"/>
+					<xsd:element name="BIR_Information" minOccurs="0" maxOccurs="1">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="BIR_Info" type="cbeff:BIRInfoType" minOccurs="0" maxOccurs="1"/>
+								<xsd:element name="BDB_Info" type="cbeff:BDBInfoType" minOccurs="0" maxOccurs="1"/>
+								<xsd:element name="SB_Info" type="cbeff:SBInfoType" minOccurs="0" maxOccurs="1"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="BIR" type="tns:BaseBIRType"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="BaseBIRType">
+			</xsd:complexType>
+			<xsd:complexType name="BinaryBIR">
+				<xsd:complexContent>
+					<xsd:extension base="tns:BaseBIRType">
+						<xsd:sequence>
+							<xsd:element name="Binary" type="xsd:base64Binary"/>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="URI_BIR">
+				<xsd:complexContent>
+					<xsd:extension base="tns:BaseBIRType">
+						<xsd:sequence>
+							<xsd:element name="URI" type="xsd:anyURI"/>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="XML_BIR">
+				<xsd:complexContent>
+					<xsd:extension base="tns:BaseBIRType">
+						<xsd:sequence>
+							<xsd:element name="XML" type="cbeff:BIRType"/>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:simpleType name="Classification">
+				<xsd:annotation>
+					<xsd:documentation>The result of a classification.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:string"/>
+			</xsd:simpleType>
+			<xsd:simpleType name="ClassificationAlgorithmType">
+				<xsd:annotation>
+					<xsd:documentation>Type of classification algorithm that was used to perform the classification.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:string"/>
+			</xsd:simpleType>
+			<xsd:complexType name="ClassificationData">
+				<xsd:annotation>
+					<xsd:documentation>Contains information on classification results and the algorithm used to determine the classification.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="Classification" type="tns:Classification" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The result of the classification.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="ClassificationAlgorithmType" type="tns:ClassificationAlgorithmType" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Identifies the type of classification algorithm that was used to perform the classification.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="DocumentDataType">
+				<xsd:annotation>
+					<xsd:documentation>Defines a set of document data elements providing information about the presented identity document. </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="DocumentCategory" type="xsd:string" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The type of identity document presented (e.g. passport).</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DocumentIDNumber" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The number associated with the identity document (e.g. passport number).</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DocumentIssuanceCountryCode" type="iso_3166_1:CountryAlpha2CodeType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The ISO 2-character code for the country which issued the document or from within which it was issued.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DocumentIssuingOrganization" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The entity which issued the identity document.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DocumentIssuanceDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The date upon which the identity document was issued.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DocumentExpirationDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The date upon which the identity document is no longer valid (expires).</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DocumentLastName" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The family name of the person to whom the identity document was issued, as contained within the document itself.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DocumentFirstName" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The first given name of the person to whom the identity document was issued, as contained within the document itself.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DocumentMiddleName" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The second given name of the person to whom the identity document was issued, as contained within the document itself.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DocumentValidity" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The assessed validity of the identity document (e.g. as the result of local or online validity checks).</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DocumentValidityText" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Details or remarks associated with the assessed validity (e.g. description of validity issue).</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DocumentImage" type="xsd:base64Binary" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A scanned image of the subject document (e.g. passport picture page).</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="DocumentDataListType">
+				<xsd:annotation>
+					<xsd:documentation>Defines a list of documents. </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="DocumentData" type="tns:DocumentDataType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Data structure containing information about a document and optionally an image of that document.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:simpleType name="EncounterCategoryType">
+				<xsd:annotation>
+					<xsd:documentation>Identifies the type of encounter (interaction) during which the identity (biographic, biometric, and/or document) data was collected from the subject as determined by the requester.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="Enrolment">
+						<xsd:annotation>
+							<xsd:documentation>The encounter is created during an enrolment interaction.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="Recognition">
+						<xsd:annotation>
+							<xsd:documentation>The encounter is created during a recognition interaction.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="Unspecified">
+						<xsd:annotation>
+							<xsd:documentation>The type of encounter is unknown.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:pattern value="([a-zA-Z0-9])+"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:complexType name="EncounterListType">
+				<xsd:annotation>
+					<xsd:documentation>Defines a set of encounters.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="EncounterID" type="tns:BIASIDType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>The identifier of an encounter.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="FusionIdentityListType">
+				<xsd:annotation>
+					<xsd:documentation>
+            Contains fusion input elements for one or more identities, utilizing the FusionInformationListType to represent a single set of fusion information for each identity.
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="FusionIdentity" type="tns:FusionInformationListType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>A set of fusion information for a single identity.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="FusionInformationListType">
+				<xsd:annotation>
+					<xsd:documentation>
+            Contains at a minimum two sets of fusion input
+            elements, as input to the PerformFusion request.
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="FusionElement" type="tns:FusionInformationType" minOccurs="2" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>A set of fusion information.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="FusionInformationType">
+				<xsd:annotation>
+					<xsd:documentation>Represents the information necessary to perform a fusion operation.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="BiometricType" type="cbeff:MultipleTypesType" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The type of biological or behavioral data stored in the biometric record, as defined by CBEFF.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="BiometricSubType" type="cbeff:SubtypeType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>More specifically defines the type of biometric data stored in the biometric record.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="AlgorithmOwner" type="xsd:string" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The owner or vendor of the algorithm used to determine the score or decision.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="AlgorithmType" type="xsd:string" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The Algorithm Owner's identifier for the specific algorithm product and version used to determine the score or decision.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="FusionResult" type="tns:FusionResult"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="FusionResult">
+				<xsd:sequence/>
+			</xsd:complexType>
+			
+			<xsd:complexType name="FusionScore">
+				<xsd:complexContent>
+					<xsd:extension base="tns:FusionResult">
+						<xsd:sequence>
+							<xsd:element name="Score" type="tns:ScoreType">
+								<xsd:annotation>
+									<xsd:documentation>The similarity score assigned by the matching algorithm.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="FusionDecision">
+				<xsd:complexContent>
+					<xsd:extension base="tns:FusionResult">
+						<xsd:sequence>
+							<xsd:element name="Decision" type="xsd:string">
+								<xsd:annotation>
+									<xsd:documentation>The match decision assigned by the matching algorithm.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="GenericRequestParameters">
+				<xsd:annotation>
+					<xsd:documentation>Common request parameters that can be used to identify the requester.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="Application" type="tns:ApplicationIdentifier" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Identifies the requesting application.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="ApplicationUser" type="tns:ApplicationUserIdentifier" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Identifers the user or instance of the requesting application.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="BIASOperationName" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Identifers the BIAS operation name that is being requested.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="InformationType">
+				<xsd:annotation>
+					<xsd:documentation>
+            Allows for an unlimited number of data element types, and it does
+            not specify nor require any particular data element.
+          </xsd:documentation>
+				</xsd:annotation>
+				<!-- THE FOLLOWING COMMENTED SECTION IS PROVIDED AS AN INFORMATIVE
+					     EXAMPLE OF WHAT 'InformationType'S CONTENT COULD BE -->
+				<!-- xsd:sequence>
+					<xsd:element name="GUID" type="xsd:string" minOccurs="0" />
+					<xsd:element name="GivenName" type="xsd:string" minOccurs="0" />
+					<xsd:element name="FamilyName" type="xsd:string" minOccurs="0" />
+					<xsd:element name="DateOfBirth" type="xsd:string" minOccurs="0" />
+					<xsd:element name="Sex" type="xsd:string" minOccurs="0" />
+					<xsd:element name="Citizenship" type="xsd:string" minOccurs="0" />
+					<xsd:element name="Images" minOccurs="0">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="Image" minOccurs="0" maxOccurs="unbounded">
+									<xsd:complexType>
+										<xsd:sequence>
+											<xsd:element name="ContentType" type="xsd:string" minOccurs="0" />
+											<xsd:element name="FingerPosition" type="xsd:string" minOccurs="0" />
+											<xsd:element name="HandPosition" type="xsd:string" minOccurs="0" />
+											<xsd:element name="ImageData" type="xsd:base64Binary" minOccurs="0" />
+										</xsd:sequence>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="Identities" minOccurs="0">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="Identity" type="xsd:string" maxOccurs="unbounded" />
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence-->
+			</xsd:complexType>
+			<xsd:complexType name="ListFilterType">
+				<xsd:annotation>
+					<xsd:documentation>Provides a method to filter the amount of information returned in a search of biometric data.
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="BiometricTypeFilters">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="BiometricTypeFilter" type="cbeff:MultipleTypesType" minOccurs="1" maxOccurs="unbounded">
+									<xsd:annotation>
+										<xsd:documentation>Limits the returned information to a specific type of biometric, as defined by CBEFF.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="IncludeBiometricSubtype" type="xsd:boolean" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A Boolean flag indicating if biometric subtype information should be returned.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:simpleType name="MatchType">
+				<xsd:annotation>
+					<xsd:documentation>The result of a fusion method.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:boolean"/>
+			</xsd:simpleType>
+			<xsd:complexType name="OptionType">
+				<xsd:annotation>
+					<xsd:documentation>
+            BIAS aggregate operations support the ability to include various processing options which direct and possibly control the business logic for that operation. Together with the ProcessingOptionsType, The OptionType provides a method to represent those options. Processing options SHOULD be defined by the implementing system.
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="Key" type="xsd:string" >
+						<xsd:annotation>
+							<xsd:documentation>The identifier of an option supported by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Value" type="xsd:string" minOccurs="0" >
+						<xsd:annotation>
+							<xsd:documentation>The value for an option supported by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="ProcessingOptionsType">
+				<xsd:annotation>
+					<xsd:documentation>
+            BIAS aggregate services support the ability to include various
+            processing options which direct and possibly control the business
+            logic for that service. The ProcessingOptionsType provides a
+            method to represent those options. Processing options should be
+            defined by the implementing system.
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="Option" type="tns:OptionType" minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>An option supported by the implementing system.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:simpleType name="ProductID">
+				<xsd:annotation>
+					<xsd:documentation>The vendor's ID for a particular product.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:string"/>
+			</xsd:simpleType>
+			<xsd:complexType name="QualityData">
+				<xsd:annotation>
+					<xsd:documentation>Contains information about a biometric sample's quality and the algorithm used to compute the quality.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="QualityScore" type="cbeff:QualityType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The quality of a biometric sample.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="AlgorithmVendor" type="tns:VendorIdentifier" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The vendor of the qualilty algorithm used to determine the quality score.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="AlgorithmVendorProductID" type="tns:ProductID" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The vendor's ID for the algorithm used to determine the quality.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="AlgorithmVersion" type="tns:VersionType" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The version of the algorithm used to determine the quality.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="RequestTemplate">
+				<xsd:annotation>
+					<xsd:documentation>Base template for BIAS primitive service requests.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="GenericRequestParameters" type="tns:GenericRequestParameters" minOccurs="0" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ResponseStatus">
+				<xsd:sequence>
+					<xsd:element name="Return" type="tns:ReturnCode" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>The return code indicates the return status of the operation.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Message" type="xsd:string" minOccurs="0" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A short message corresponding to the return code.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ResponseTemplate">
+				<xsd:annotation>
+					<xsd:documentation>Base template for BIAS responses.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="ResponseStatus" type="tns:ResponseStatus" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Returned status for the operation.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:simpleType name="ReturnCode">
+				<xsd:annotation>
+					<xsd:documentation>BIAS Operation Return Codes</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:unsignedLong">
+					<xsd:enumeration value="0">
+						<xsd:annotation>
+							<xsd:documentation>Success</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<!--<xsd:simpleType name="Score">
+				<xsd:annotation>
+					<xsd:documentation>Match result or quality score.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:float"/>
+			</xsd:simpleType>-->
+			<xsd:complexType name="ScoreType">
+				<xsd:annotation>
+					<xsd:documentation>Match result or quality score.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+				<xsd:element name="Value" type="xsd:float"/>
+				<xsd:element name="BiometricType" type="cbeff:MultipleTypesType" minOccurs="0"/>
+				<xsd:element name="BiometricSubType" type="cbeff:SubtypeType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="TokenType">
+				<xsd:annotation>
+					<xsd:documentation>Defines a token that is returned for asynchronous processing.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="TokenValue" type="xsd:string" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A value returned by the implementing system that is used to retrieve the results to a service at a later time.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Expiration" type="xsd:date" minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>A date and time at which point the token expires and the service results are no longer guaranteed to be available.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:simpleType name="VendorIdentifier">
+				<xsd:annotation>
+					<xsd:documentation>Identifies a vendor.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:string"/>
+			</xsd:simpleType>
+			<xsd:complexType name="Version">
+				<xsd:annotation>
+					<xsd:documentation>
+            For a description or definition of each data element, see the
+            referenced CBEFF standards in the CBEFF_XML_BIR_Type schema.
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="major" type="xsd:nonNegativeInteger" minOccurs="1" maxOccurs="1"/>
+					<xsd:element name="minor" type="xsd:nonNegativeInteger" minOccurs="1" maxOccurs="1"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:simpleType name="VersionType">
+				<xsd:annotation>
+					<xsd:documentation>The version of a component.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:string"/>
+			</xsd:simpleType>
+			<xsd:element name="AddSubjectToGallery">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Register a subject to a given gallery or population group.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="AddSubjectToGalleryRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group to which the subject will be added.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identity to add to the gallery.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="AddSubjectToGalleryResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to an AddSubjectToGallery request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="AddSubjectToGalleryResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="CheckQuality">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Calculate a quality score for a given biometric.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="CheckQualityRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="BiometricData" type="tns:BIASBiometricDataType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Data structure containing a single biometric sample for which a quality score is to be determined; required if no SubjectID is provided.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Data structure containing a Subject ID associated with a single biometric sample for which a quality score is to be determined; required if no BIR is provided.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="QualityInfo" type="tns:QualityData" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Specifies a particular algorithm vendor and vender product ID.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="CheckQualityResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a CheckQuality request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="CheckQualityResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="QualityInfo" type="tns:QualityData" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Contains the quality information for the submitted biometric sample.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ClassifyBiometricData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Classifies a biometric sample.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="ClassifyBiometricDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="BiometricData" type="tns:BIASBiometricDataType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Data structure containing a single biometric sample for which the classification is to be determined.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="ClassificationData" type="tns:ClassificationData" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Contains the algorithm to be used to determine the classification.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ClassifyBiometricDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a ClassifyBiometricData request, containing
+							the classification of a biometric sample.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="ClassifyBiometricDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="ClassificationData" type="tns:ClassificationData" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Information on the results and type of classification performed.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="CreateEncounter">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+              Create a new encounter record.
+            </xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="CreateEncounterRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="CreateEncounterResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+              The response to a CreateEncounter request, containing the encounter
+              ID of the new encounter record.
+            </xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="CreateEncounterResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Contains the encounter ID of the new encounter record.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="CreateSubject">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Create a new subject record.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="CreateSubjectRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="CreateSubjectResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a CreateSubject request, containing the subject
+							ID of the new subject record.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="CreateSubjectResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Contains the subject ID of the new subject record.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteBiographicData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Erase all of the biographic data associated with a given
+							subject record or, in the encounter-centric model, with a
+							given encounter.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteBiographicDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Contains either the subject ID or encounter ID reference.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group from which the biographic information will be deleted.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteBiographicDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a DeleteBiographicData request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteBiographicDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteBiometricData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Erase all of the biometric data associated with a given
+							subject record or, in the encounter-centric model, with a
+							given encounter.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteBiometricDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Contains either the subject ID or encounter ID reference.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="BiometricType" type="cbeff:MultipleTypesType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The type of biological or behavioral data to delete, as defined by CBEFF.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group from which the biometric information will be deleted.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteBiometricDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a DeleteBiometricData request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteBiometricDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteDocumentData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>Erase all of the document data associated with a given subject record or, in the encounter-centric model, with a given encounter.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteDocumentDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Contains either the subject ID or encounter ID reference.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="DocumentData" type="tns:DocumentDataType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Defines a set of document data elements providing information about the presented identity document. </xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteDocumentDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a DeleteDocumentData request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteDocumentDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteEncounter">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Delete an existing encounter record from the system.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteEncounterRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Subject ID and encounter ID of the identity to delete.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteEncounterResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a DeleteEncounter request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteEncounterResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteSubject">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Delete an existing subject record and, in an encounter-centric
+							model, any associated encounter information.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteSubjectRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Subject ID of the identity to delete.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteSubjectResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a DeleteSubject request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteSubjectResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteSubjectFromGallery">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Remove the registration of a subject from a gallery or
+							population group.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteSubjectFromGalleryRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group from which the subject will be deleted.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identity to remove from the gallery.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteSubjectFromGalleryResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a DeleteSubjectFromGallery request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteSubjectFromGalleryResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetIdentifySubjectResults">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Retrieve the identification results for a specified token,
+							which was returned by the Identify Subject service.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="GetIdentifySubjectResultsRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Token" type="tns:TokenType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A value used to retrieve the results of an IdentifySubject request.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetIdentifySubjectResultsResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a GetIdentifySubjectResults request, which includes a candidate list.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="GetIdentifySubjectResultsResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="CandidateList" type="tns:CandidateListType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A rank-ordered list of candidates that have a likelihood of matching the input biometric sample.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="IdentifySubject">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Perform an identification search against a given gallery for
+							a given biometric.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="IdentifySubjectRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group which will be searched. Must not be used in conjunction with Gallery parameter</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Gallery" type="tns:CandidateListType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A list of BIRs to be used instead of a stored gallery. Must not be used in conjunction with GalleryID parameter.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Contains the BIR, a data structure containing the biometric sample for the search.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="MaxListSize" type="xsd:positiveInteger" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The maximum size of the candidate list that should be returned.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="IdentifySubjectResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to an IdentifySubject request, returning a
+							rank-ordered candidate list.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="IdentifySubjectResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="IdentifySubjectResult" type="tns:IdentifySubjectResultType"/>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:complexType name="IdentifySubjectResultType">
+				<xsd:sequence/>
+			</xsd:complexType>
+			<xsd:complexType name="CandidateListResultType">
+				<xsd:complexContent>
+					<xsd:extension base="tns:IdentifySubjectResultType">
+						<xsd:sequence>
+							<xsd:element name="CandidateList" type="tns:CandidateListType" minOccurs="0" maxOccurs="1">
+								<xsd:annotation>
+									<xsd:documentation>A rank-ordered list of candidates that have a likelihood of matching the input biometric sample; returned with successful synchronous request processing.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="TokenResultType">
+				<xsd:complexContent>
+					<xsd:extension base="tns:IdentifySubjectResultType">
+						<xsd:sequence>
+							<xsd:element name="Token" type="tns:TokenType" minOccurs="0" maxOccurs="1">
+								<xsd:annotation>
+									<xsd:documentation>A token used to retrieve the results of the IdentifySubject request; returned with asynchronous request processing.</xsd:documentation>
+								</xsd:annotation>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:element name="ListBiographicData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Lists the biographic data elements stored for a subject.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="ListBiographicDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the subject or, in the encounter-centric model, a subject and an encounter.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="EncounterType" type="tns:EncounterCategoryType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the category of encounter. If an encounter ID is not specified 
+														and encounter data exists for the subject, the operation returns the list of encounter IDs of a specific 
+														type which contain biographic data using the Encounter List output parameter, and the Biographic 
+														Data Elements output parameter is empty. Should not be used in conjunction with EncounterID.
+													 </xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ListBiographicDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a ListBiographicData request, containing a list
+							of biographic data elements stored for a subject.  In the
+							encounter-centric model, the biographic data elements for a
+							specific encounter are returned.  If an encounter ID is not
+							specified and encounter data exists for the subject, the list
+							of encounter IDs which contain biographic data is returned.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="ListBiographicDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>
+														Contains a list of biographic data elements associated with a
+														subject or encounter; non-empty if the service was
+														successful, biographic data exists, and either (a) the
+														person-centric model is being used or (b) the
+														encounter-centric model is being used and an encounter
+														identifier was specified.
+													</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ListBiometricData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Lists the biometric data elements stored for a subject. Note
+							that no actual biometric data is returned by this service (see
+							the RetrieveBiometricData service to obtain the biometric
+							data).
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="ListBiometricDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the subject or, in the encounter-centric model, a subject and an encounter.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="EncounterType" type="tns:EncounterCategoryType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the category of encounter. If an encounter ID is not specified and 
+														encounter data exists for the subject, the operation may return the list of encounter IDs of a specific 
+														type which contain biometric data using the Encounter List output parameter, and the Biometric Data 
+														List output parameter is empty. Should not be used in conjunction with EncounterID. 
+													</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="ListFilter" type="tns:ListFilterType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Indicates what biometric information should be returned.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ListBiometricDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a ListBiometricData request, containing a list
+							of biometric data elements stored for a subject.  In the
+							encounter-centric model, the biometric data elements for a
+							specific encounter are returned.  If an encounter ID is not
+							specified and encounter data exists for the subject, the list
+							of encounter IDs which contain biometric data is returned.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="ListBiometricDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity">
+												<xsd:annotation>
+													<xsd:documentation>
+														Includes a list of biometric data elements associated
+														with a subject or encounter or a list of encounter ID's
+														associated with a subject and which contain biometric
+														data.
+													</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ListDocumentData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Lists the document categories stored for a subject.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="ListDocumentDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the subject or, in the encounter-centric model, a subject and an encounter.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="EncounterType" type="tns:EncounterCategoryType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the category of encounter. If an encounter ID is not specified and encounter data exists for the 
+													subject, the operation shall return the list of encounter IDs which contain document data using the Encounter List Output parameter, 
+													and the Document Data Elements output parameter shall be empty. Should not be used in conjunction with EncounterID.
+													 </xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ListDocumentDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a ListDocumentData request, containing a list of document categories stored for a subject.  
+							In the encounter-centric model, an encounterID may be specified to indicate that only document data categories 
+							stored for that encounter should be returned. If an encounter ID is not
+							specified and encounter data exists for the subject, the list
+							of encounter IDs which contain document data is returned.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="ListDocumentDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="DocumentDataList" type="tns:DocumentDataListType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>
+														A list of document categories associated with a subject or encounter; non-empty if the service 
+														was successful, document data exists, and either the person-centric model is being used or the 
+														encounter-centric model is being used and an encounter identifier was specified.
+													</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>
+														A list of encounter IDs associated with a subject and which contain document data; non-empty 
+														if the service was successful, document data exists, the encounter-centric model is being used, 
+														and an encounter identifier was not specified..
+													</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="PerformFusion">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Accepts either match score or match decision information and creates a fused match result.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="PerformFusionRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="FusionInput" type="tns:FusionIdentityListType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Score or decision input information to the fusion method for each identity.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="PerformFusionResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to the PerformFusion request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="PerformFusionResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Match" type="tns:MatchType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Indicates the result of the fusion method</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="QueryCapabilities">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Returns a list of the capabilities, options, galleries, etc.
+							that are supported by the BIAS implementation.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="QueryCapabilitiesRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="QueryCapabilitiesResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a QueryCapabilities request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="QueryCapabilitiesResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="CapabilityList" type="tns:CapabilityListType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A list of capabilities supported by the BIAS implementation.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="RetrieveBiographicData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Retrieves the biographic data associated with a subject ID.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="RetrieveBiographicDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the subject or, in the encounter-centric model, a subject and an encounter.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="EncounterType" type="tns:EncounterCategoryType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the type of encounter during which data was collected from the subject, 
+													as determined by the requester. 
+													 </xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group from which the biographic information will be retrieved.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="RetrieveBiographicDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a RetrieveBiographicData request,
+							containing the biographic data associated with a subject ID. In
+							the encounter-centric model, the biographic data associated with
+							a specified encounter is returned. If the encounter ID is not
+							specified in the encounter-centric model, the biographic
+							information associated with the most recent encounter is returned.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="RetrieveBiographicDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Includes the set of biographic data associated with a subject.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="RetrieveBiometricData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Retrieves the biometric data associated with a subject ID.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="RetrieveBiometricDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the subject or, in the encounter-centric model, a subject and an encounter.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="EncounterType" type="tns:EncounterCategoryType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the type of encounter during which data was collected from the subject, 
+													as determined by the requester. 
+													 </xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group from which the biometric information will be retrieved.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="BiometricType" type="cbeff:MultipleTypesType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The type of biological or behavioral data to retrieve.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="RetrieveBiometricDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a RetrieveBiometricData request,
+							containing the biometric data associated with a subject ID. In
+							the encounter-centric model, the biometric data associated with
+							a specified encounter is returned. If the encounter ID is not
+							specified in the encounter-centric model, the biometric
+							information associated with the most recent encounter is returned.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="RetrieveBiometricDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Includes the biometric data associated with a subject.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="RetrieveDocumentData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>Retrieves the list of document data associated with a subject ID for the category(ies) specified. </xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="RetrieveDocumentDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Contains either the subject ID or encounter ID reference.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="DocumentData" type="tns:DocumentDataType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Defines a set of document data elements providing information about the requested identity document. </xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="EncounterType" type="tns:EncounterCategoryType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the category of encounter.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group from which the biographic information will be retrieved. </xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="RetrieveDocumentDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a RetrieveDocumentData request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="RetrieveDocumentDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="DocumentDataList" type="tns:DocumentDataListType" minOccurs="1" maxOccurs="1">
+							<xsd:annotation>
+								<xsd:documentation>A list of document data associated with a subject or encounter</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SetBiographicData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Associates biographic data to a given subject record.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="SetBiographicDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the subject or, in the encounter-centric model, a subject and an encounter, and includes the biographic data to store.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group to which the biographic will be added.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SetBiographicDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a SetBiographicData request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="SetBiographicDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>In an encounter-centric model, identifies the encounter ID assigned to a new encounter.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SetBiometricData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Associates biometric data to a given subject record.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="SetBiometricDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the subject or, in the encounter-centric model, a subject and an encounter, and includes the biometric data to store.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group to which the biometric will be added.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SetBiometricDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a SetBiometricData request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="SetBiometricDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>In an encounter-centric model, identifies the encounter ID assigned to a new encounter.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SetDocumentData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Associates document data to a given subject record.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="SetDocumentDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the subject or, in the encounter-centric model, a subject and an encounter, and includes the document data to store.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group to which the document data will be added.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="DocumentDataList" type="tns:DocumentDataListType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Defines a set of document data elements to associate with the subject or encounter. </xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SetDocumentDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a SetDocumentData request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="SetDocumentDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>In an encounter-centric model, identifies the encounter ID assigned to a new encounter.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="TransformBiometricData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Transforms or processes a given biometric in one format into a new target format.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="TransformBiometricDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="InputBIR" type="tns:CBEFF_BIR_Type" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Data structure containing the biometric information to be transformed.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="TransformOperation" type="xsd:unsignedLong" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Value indicating the type of transformation to perform.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="TransformControl" type="xsd:string" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation> Specifies controls for the requested transform operation.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="TransformBiometricDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a TransformBiometricData request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="TransformBiometricDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="OutputBIR" type="tns:CBEFF_BIR_Type" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Data structure containing the new, transformed biometric information.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="UpdateBiographicData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Updates the biographic data for a given subject record.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="UpdateBiographicDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the subject or, in the encounter-centric model, a subject and an encounter, and includes the biographic data to update.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="UpdateBiographicDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to an UpdateBiographicData request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="UpdateBiographicDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="UpdateBiometricData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Updates a single biometric sample for a given subject record.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="UpdateBiometricDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the subject or, in the encounter-centric model, a subject and an encounter, and includes the biometric data to update.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Merge" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Value indicating if the input biometric sample should be merged with any existing biometric information.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="UpdateBiometricDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to an UpdateBiometricData request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="UpdateBiometricDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="UpdateDocumentData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Updates the document data for a given subject record.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="UpdateDocumentDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Identifies the subject or, in the encounter-centric model, a subject and an encounter, and includes the document data to update.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="DocumentDataList" type="tns:DocumentDataListType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Defines a set of updated document data elements to associate with the subject or encounter. </xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="UpdateDocumentDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to an UpdateDocumentData request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="UpdateDocumentDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="VerifySubject">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							Performs a 1:1 verification match between a given biometric and
+							either a claim to identity in a given gallery or another given
+							biometric.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="VerifySubjectRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group of which the subject must be a member.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Includes the identifying information and/or input and reference biometric samples.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="VerifySubjectResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The response to a VerifySubject request.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="VerifySubjectResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Match" type="xsd:boolean" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Indicates if the Input BIR matched either the biometric information associated with the Identity Claim or the Reference BIR.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Score" type="tns:ScoreType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The score if the biometric information matched.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Delete">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+						The Delete operation deletes an existing subject or, in an encounter-centric model, an existing encounter from the 
+						system. 
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateRequestTemplate">
+										<xsd:sequence>
+											
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier for the subject, or in encounter-centric model the encounter to be 
+													deleted; required for encounter-centric models.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeleteResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>The response to an Delete request.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="DeleteResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier for the subject, or in encounter-centric model, the encounter being deleted; 
+													required for encounter-centric models.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Token" type="tns:TokenType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A value used to retrieve the results of the Delete request.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Enroll">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The Enroll aggregate service adds a new subject or, in an
+							encounter-centric model, a new encounter to the system. 
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="EnrollRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateRequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier for the encounter; required for encounter-centric models.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="EnrollResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>The response to an Enroll request.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="EnrollResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier for the encounter; required for encounter-centric models.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Token" type="tns:TokenType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A value used to retrieve the results of the Enroll request.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetDeletionResults">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The GetDeletionResults operation retrieves the deletion results for the specified token. 
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="GetDeletionResultsRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Token" type="tns:TokenType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A value used to retrieve the results of the Deletion request.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetDeletionResultsResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>The response to a GetDeletionResults request.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="GetDeletionResultsResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:ResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="ReturnData" type="tns:InformationType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Contains the output data for the response.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetEnrollResults">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The GetEnrollResults aggregate service retrieves the enrollment
+							results for the specified token. 
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="GetEnrollResultsRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Token" type="tns:TokenType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A value used to retrieve the results of the Enroll request.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetEnrollResultsResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>The response to a GetEnrollResults request.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="GetEnrollResultsResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier for the subject, and in encounter-centric models, the encounter.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetIdentifyResults">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The GetIdentifyResults aggregate service retrieves the
+							identification results for the specified token. 
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="GetIdentifyResultsRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Token" type="tns:TokenType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A value used to retrieve the results of the Identify request.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetIdentifyResultsResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>The response to a GetIdentifyResults request.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="GetIdentifyResultsResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the encounter, if assigned.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="CandidateList" type="tns:CandidateListType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A rank-ordered list of candidates that have a likelihood of matching the 
+													input biometric sample.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetUpdateResults">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The GetUpdateResults operation retrieves the update results for the specified token. 
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="GetUpdateResultsRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Token" type="tns:TokenType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A value used to retrieve the results of the Update request.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetUpdateResultsResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>The response to a GetUpdateResults request.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="GetUpdateResultsResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateResponseTemplate">
+										<xsd:sequence>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetVerifyResults">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The GetVerifyResults aggregate service retrieves the verification
+							results for the specified token. 
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="GetVerifyResultsRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Token" type="tns:TokenType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A value used to retrieve the results of the Verify request.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetVerifyResultsResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>The response to a GetVerifyResults request.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="GetVerifyResultsResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Match" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Indicates if the Input BIR matched either the biometric information 
+													associated with the Identity Claim or the Reference BIR.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Score" type="tns:ScoreType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The score if the biometric information matched.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the encounter, if assigned.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Identify">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The Identify aggregate service performs an identification
+							function according to system requirements and/or resources. 
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="IdentifyRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateRequestTemplate">
+									<xsd:sequence>
+										<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group which will be searched.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										<xsd:element name="MaxListSize" type="xsd:positiveInteger" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The maximum size of the candidate list that should be returned.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+									</xsd:sequence>
+								</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="IdentifyResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>The response to an Identify request.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="IdentifyResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the encounter, if assigned.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="CandidateList" type="tns:CandidateListType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A rank-ordered list of candidates that have a likelihood of matching the input 
+													biometric sample; returned with successful, synchronous processing.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Token" type="tns:TokenType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A value used to retrieve the results of the Identify request.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="RetrieveData">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The RetrieveData aggregate service retrieves requested
+							information about a subject, or in an encounter-centric model
+							about an encounter. 
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="RetrieveDataRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:RequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="ProcessingOptions" type="tns:ProcessingOptionsType" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Options that guide how the service request is processed, and may identify what 
+													type(s) of information should be returned.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Includes the identifier of the subject or encounter.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="RetrieveDataResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>The response to a RetrieveData request.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="RetrieveDataResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateResponseTemplate"/>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Update">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The Update operation updates specified information about a subject, or in an 
+							encounter-centric model about an encounter. 
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="UpdateRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateRequestTemplate">
+										<xsd:sequence>
+												<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Includes the identifier of the subject or encounter.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="UpdateResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>The response to a Update request.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="UpdateResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateResponseTemplate">
+									<xsd:sequence>
+										<xsd:element name="Token" type="tns:TokenType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A value used to retrieve the results of the Update request.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+									</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Verify">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>
+							The Verify aggregate service performs a 1:1 verification
+							function according to system requirements and/or resources.
+							Either the IdentityClaim or ReferenceBIR input data elements in
+							the Identity parameter are required.
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="VerifyRequest" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateRequestTemplate">
+										<xsd:sequence>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Includes either the IdentityClaim or ReferenceBIR.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the gallery or population group of which the subject must be a member.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="VerifyResponse">
+				<xsd:complexType>
+					<xsd:annotation>
+						<xsd:documentation>The response to a Verify request.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:sequence>
+						<xsd:element name="VerifyResponsePackage" nillable="true">
+							<xsd:complexType>
+								<xsd:complexContent>
+									<xsd:extension base="tns:AggregateResponseTemplate">
+										<xsd:sequence>
+											<xsd:element name="Match" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Indicates if the Input BIR matched either the biometric information 
+													associated with the Identity Claim or the Reference BIR.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Score" type="tns:ScoreType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The score if the biometric information matched.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>The identifier of the encounter, if assigned.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+											<xsd:element name="Token" type="tns:TokenType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>A value used to retrieve the results of the Verify request; </xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
+										</xsd:sequence>
+									</xsd:extension>
+								</xsd:complexContent>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="BIASFault" type="tns:BIASFaultDetail"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="BIASFaultMessage">
+		<wsdl:part name="parameters" element="tns:BIASFault"/>
+	</wsdl:message>
+	<wsdl:message name="AddSubjectToGalleryRequestMessage">
+		<wsdl:part name="parameters" element="tns:AddSubjectToGallery"/>
+	</wsdl:message>
+	<wsdl:message name="AddSubjectToGalleryResponseMessage">
+		<wsdl:part name="parameters" element="tns:AddSubjectToGalleryResponse"/>
+	</wsdl:message>
+	<wsdl:message name="CheckQualityRequestMessage">
+		<wsdl:part name="parameters" element="tns:CheckQuality"/>
+	</wsdl:message>
+	<wsdl:message name="CheckQualityResponseMessage">
+		<wsdl:part name="parameters" element="tns:CheckQualityResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ClassifyBiometricDataRequestMessage">
+		<wsdl:part name="parameters" element="tns:ClassifyBiometricData"/>
+	</wsdl:message>
+	<wsdl:message name="ClassifyBiometricDataResponseMessage">
+		<wsdl:part name="parameters" element="tns:ClassifyBiometricDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="CreateSubjectRequestMessage">
+		<wsdl:part name="parameters" element="tns:CreateSubject"/>
+	</wsdl:message>
+	<wsdl:message name="CreateSubjectResponseMessage">
+		<wsdl:part name="parameters" element="tns:CreateSubjectResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteBiographicDataRequestMessage">
+		<wsdl:part name="parameters" element="tns:DeleteBiographicData"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteBiographicDataResponseMessage">
+		<wsdl:part name="parameters" element="tns:DeleteBiographicDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteBiometricDataRequestMessage">
+		<wsdl:part name="parameters" element="tns:DeleteBiometricData"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteBiometricDataResponseMessage">
+		<wsdl:part name="parameters" element="tns:DeleteBiometricDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteSubjectRequestMessage">
+		<wsdl:part name="parameters" element="tns:DeleteSubject"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteSubjectResponseMessage">
+		<wsdl:part name="parameters" element="tns:DeleteSubjectResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteSubjectFromGalleryRequestMessage">
+		<wsdl:part name="parameters" element="tns:DeleteSubjectFromGallery"/>
+	</wsdl:message>
+	<wsdl:message name="DeleteSubjectFromGalleryResponseMessage">
+		<wsdl:part name="parameters" element="tns:DeleteSubjectFromGalleryResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetIdentifySubjectResultsRequestMessage">
+		<wsdl:part name="parameters" element="tns:GetIdentifySubjectResults"/>
+	</wsdl:message>
+	<wsdl:message name="GetIdentifySubjectResultsResponseMessage">
+		<wsdl:part name="parameters" element="tns:GetIdentifySubjectResultsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="IdentifySubjectRequestMessage">
+		<wsdl:part name="parameters" element="tns:IdentifySubject"/>
+	</wsdl:message>
+	<wsdl:message name="IdentifySubjectResponseMessage">
+		<wsdl:part name="parameters" element="tns:IdentifySubjectResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ListBiographicDataRequestMessage">
+		<wsdl:part name="parameters" element="tns:ListBiographicData"/>
+	</wsdl:message>
+	<wsdl:message name="ListBiographicDataResponseMessage">
+		<wsdl:part name="parameters" element="tns:ListBiographicDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ListBiometricDataRequestMessage">
+		<wsdl:part name="parameters" element="tns:ListBiometricData"/>
+	</wsdl:message>
+	<wsdl:message name="ListBiometricDataResponseMessage">
+		<wsdl:part name="parameters" element="tns:ListBiometricDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="PerformFusionRequestMessage">
+		<wsdl:part name="parameters" element="tns:PerformFusion"/>
+	</wsdl:message>
+	<wsdl:message name="PerformFusionResponseMessage">
+		<wsdl:part name="parameters" element="tns:PerformFusionResponse"/>
+	</wsdl:message>
+	<wsdl:message name="QueryCapabilitiesRequestMessage">
+		<wsdl:part name="parameters" element="tns:QueryCapabilities"/>
+	</wsdl:message>
+	<wsdl:message name="QueryCapabilitiesResponseMessage">
+		<wsdl:part name="parameters" element="tns:QueryCapabilitiesResponse"/>
+	</wsdl:message>
+	<wsdl:message name="RetrieveBiographicDataRequestMessage">
+		<wsdl:part name="parameters" element="tns:RetrieveBiographicData"/>
+	</wsdl:message>
+	<wsdl:message name="RetrieveBiographicDataResponseMessage">
+		<wsdl:part name="parameters" element="tns:RetrieveBiographicDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="RetrieveBiometricDataRequestMessage">
+		<wsdl:part name="parameters" element="tns:RetrieveBiometricData"/>
+	</wsdl:message>
+	<wsdl:message name="RetrieveBiometricDataResponseMessage">
+		<wsdl:part name="parameters" element="tns:RetrieveBiometricDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SetBiographicDataRequestMessage">
+		<wsdl:part name="parameters" element="tns:SetBiographicData"/>
+	</wsdl:message>
+	<wsdl:message name="SetBiographicDataResponseMessage">
+		<wsdl:part name="parameters" element="tns:SetBiographicDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="SetBiometricDataRequestMessage">
+		<wsdl:part name="parameters" element="tns:SetBiometricData"/>
+	</wsdl:message>
+	<wsdl:message name="SetBiometricDataResponseMessage">
+		<wsdl:part name="parameters" element="tns:SetBiometricDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="TransformBiometricDataRequestMessage">
+		<wsdl:part name="parameters" element="tns:TransformBiometricData"/>
+	</wsdl:message>
+	<wsdl:message name="TransformBiometricDataResponseMessage">
+		<wsdl:part name="parameters" element="tns:TransformBiometricDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateBiographicDataRequestMessage">
+		<wsdl:part name="parameters" element="tns:UpdateBiographicData"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateBiographicDataResponseMessage">
+		<wsdl:part name="parameters" element="tns:UpdateBiographicDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateBiometricDataRequestMessage">
+		<wsdl:part name="parameters" element="tns:UpdateBiometricData"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateBiometricDataResponseMessage">
+		<wsdl:part name="parameters" element="tns:UpdateBiometricDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="VerifySubjectRequestMessage">
+		<wsdl:part name="parameters" element="tns:VerifySubject"/>
+	</wsdl:message>
+	<wsdl:message name="VerifySubjectResponseMessage">
+		<wsdl:part name="parameters" element="tns:VerifySubjectResponse"/>
+	</wsdl:message>
+	<wsdl:message name="EnrollRequestMessage">
+		<wsdl:part name="parameters" element="tns:Enroll"/>
+	</wsdl:message>
+	<wsdl:message name="EnrollResponseMessage">
+		<wsdl:part name="parameters" element="tns:EnrollResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetEnrollResultsRequestMessage">
+		<wsdl:part name="parameters" element="tns:GetEnrollResults"/>
+	</wsdl:message>
+	<wsdl:message name="GetEnrollResultsResponseMessage">
+		<wsdl:part name="parameters" element="tns:GetEnrollResultsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetIdentifyResultsRequestMessage">
+		<wsdl:part name="parameters" element="tns:GetIdentifyResults"/>
+	</wsdl:message>
+	<wsdl:message name="GetIdentifyResultsResponseMessage">
+		<wsdl:part name="parameters" element="tns:GetIdentifyResultsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetVerifyResultsRequestMessage">
+		<wsdl:part name="parameters" element="tns:GetVerifyResults"/>
+	</wsdl:message>
+	<wsdl:message name="GetVerifyResultsResponseMessage">
+		<wsdl:part name="parameters" element="tns:GetVerifyResultsResponse"/>
+	</wsdl:message>
+	<wsdl:message name="IdentifyRequestMessage">
+		<wsdl:part name="parameters" element="tns:Identify"/>
+	</wsdl:message>
+	<wsdl:message name="IdentifyResponseMessage">
+		<wsdl:part name="parameters" element="tns:IdentifyResponse"/>
+	</wsdl:message>
+	<wsdl:message name="RetrieveDataRequestMessage">
+		<wsdl:part name="parameters" element="tns:RetrieveData"/>
+	</wsdl:message>
+	<wsdl:message name="RetrieveDataResponseMessage">
+		<wsdl:part name="parameters" element="tns:RetrieveDataResponse"/>
+	</wsdl:message>
+	<wsdl:message name="VerifyRequestMessage">
+		<wsdl:part name="parameters" element="tns:Verify"/>
+	</wsdl:message>
+	<wsdl:message name="VerifyResponseMessage">
+		<wsdl:part name="parameters" element="tns:VerifyResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="BIAS_v1">
+		<wsdl:operation name="AddSubjectToGallery">
+			<wsdl:input name="AddSubjectToGallery" message="tns:AddSubjectToGalleryRequestMessage"/>
+			<wsdl:output name="AddSubjectToGalleryResponse" message="tns:AddSubjectToGalleryResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="CheckQuality">
+			<wsdl:input name="CheckQuality" message="tns:CheckQualityRequestMessage"/>
+			<wsdl:output name="CheckQualityResponse" message="tns:CheckQualityResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="ClassifyBiometricData">
+			<wsdl:input name="ClassifyBiometricData" message="tns:ClassifyBiometricDataRequestMessage"/>
+			<wsdl:output name="ClassifyBiometricDataResponse" message="tns:ClassifyBiometricDataResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="CreateSubject">
+			<wsdl:input name="CreateSubject" message="tns:CreateSubjectRequestMessage"/>
+			<wsdl:output name="CreateSubjectResponse" message="tns:CreateSubjectResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteBiographicData">
+			<wsdl:input name="DeleteBiographicData" message="tns:DeleteBiographicDataRequestMessage"/>
+			<wsdl:output name="DeleteBiographicDataResponse" message="tns:DeleteBiographicDataResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteBiometricData">
+			<wsdl:input name="DeleteBiometricData" message="tns:DeleteBiometricDataRequestMessage"/>
+			<wsdl:output name="DeleteBiometricDataResponse" message="tns:DeleteBiometricDataResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteSubject">
+			<wsdl:input name="DeleteSubject" message="tns:DeleteSubjectRequestMessage"/>
+			<wsdl:output name="DeleteSubjectResponse" message="tns:DeleteSubjectResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteSubjectFromGallery">
+			<wsdl:input name="DeleteSubjectFromGallery" message="tns:DeleteSubjectFromGalleryRequestMessage"/>
+			<wsdl:output name="DeleteSubjectFromGalleryResponse" message="tns:DeleteSubjectFromGalleryResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetIdentifySubjectResults">
+			<wsdl:input name="GetIdentifySubjectResults" message="tns:GetIdentifySubjectResultsRequestMessage"/>
+			<wsdl:output name="GetIdentifySubjectResultsResponse" message="tns:GetIdentifySubjectResultsResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="IdentifySubject">
+			<wsdl:input name="IdentifySubject" message="tns:IdentifySubjectRequestMessage"/>
+			<wsdl:output name="IdentifySubjectResponse" message="tns:IdentifySubjectResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="ListBiographicData">
+			<wsdl:input name="ListBiographicData" message="tns:ListBiographicDataRequestMessage"/>
+			<wsdl:output name="ListBiographicDataResponse" message="tns:ListBiographicDataResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="ListBiometricData">
+			<wsdl:input name="ListBiometricData" message="tns:ListBiometricDataRequestMessage"/>
+			<wsdl:output name="ListBiometricDataResponse" message="tns:ListBiometricDataResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="PerformFusion">
+			<wsdl:input name="PerformFusion" message="tns:PerformFusionRequestMessage"/>
+			<wsdl:output name="PerformFusionResponse" message="tns:PerformFusionResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="QueryCapabilities">
+			<wsdl:input name="QueryCapabilities" message="tns:QueryCapabilitiesRequestMessage"/>
+			<wsdl:output name="QueryCapabilitiesResponse" message="tns:QueryCapabilitiesResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="RetrieveBiographicData">
+			
+			<wsdl:input name="RetrieveBiographicData" message="tns:RetrieveBiographicDataRequestMessage"/>
+			<wsdl:output name="RetrieveBiographicDataResponse" message="tns:RetrieveBiographicDataResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="RetrieveBiometricData">
+			<wsdl:input name="RetrieveBiometricData" message="tns:RetrieveBiometricDataRequestMessage"/>
+			<wsdl:output name="RetrieveBiometricDataResponse" message="tns:RetrieveBiometricDataResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetBiographicData">
+			<wsdl:input name="SetBiographicData" message="tns:SetBiographicDataRequestMessage"/>
+			<wsdl:output name="SetBiographicDataResponse" message="tns:SetBiographicDataResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="SetBiometricData">
+			<wsdl:input name="SetBiometricData" message="tns:SetBiometricDataRequestMessage"/>
+			<wsdl:output name="SetBiometricDataResponse" message="tns:SetBiometricDataResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="TransformBiometricData">
+			<wsdl:input name="TransformBiometricData" message="tns:TransformBiometricDataRequestMessage"/>
+			<wsdl:output name="TransformBiometricDataResponse" message="tns:TransformBiometricDataResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateBiographicData">
+			<wsdl:input name="UpdateBiographicData" message="tns:UpdateBiographicDataRequestMessage"/>
+			<wsdl:output name="UpdateBiographicDataResponse" message="tns:UpdateBiographicDataResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateBiometricData">
+			<wsdl:input name="UpdateBiometricData" message="tns:UpdateBiometricDataRequestMessage"/>
+			<wsdl:output name="UpdateBiometricDataResponse" message="tns:UpdateBiometricDataResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="VerifySubject">
+			<wsdl:input name="VerifySubject" message="tns:VerifySubjectRequestMessage"/>
+			<wsdl:output name="VerifySubjectResponse" message="tns:VerifySubjectResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="Enroll">
+			<wsdl:input name="Enroll" message="tns:EnrollRequestMessage"/>
+			<wsdl:output name="EnrollResponse" message="tns:EnrollResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetEnrollResults">
+			<wsdl:input name="GetEnrollResults" message="tns:GetEnrollResultsRequestMessage"/>
+			<wsdl:output name="GetEnrollResultsResponse" message="tns:GetEnrollResultsResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetIdentifyResults">
+			<wsdl:input name="GetIdentifyResults" message="tns:GetIdentifyResultsRequestMessage"/>
+			<wsdl:output name="GetIdentifyResultsResponse" message="tns:GetIdentifyResultsResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetVerifyResults">
+			<wsdl:input name="GetVerifyResults" message="tns:GetVerifyResultsRequestMessage"/>
+			<wsdl:output name="GetVerifyResultsResponse" message="tns:GetVerifyResultsResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="Identify">
+			<wsdl:input name="Identify" message="tns:IdentifyRequestMessage"/>
+			<wsdl:output name="IdentifyResponse" message="tns:IdentifyResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="RetrieveData">
+			<wsdl:input name="RetrieveData" message="tns:RetrieveDataRequestMessage"/>
+			<wsdl:output name="RetrieveDataResponse" message="tns:RetrieveDataResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="Verify">
+			<wsdl:input name="Verify" message="tns:VerifyRequestMessage"/>
+			<wsdl:output name="VerifyResponse" message="tns:VerifyResponseMessage"/>
+			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BIAS_v1HttpBinding" type="tns:BIAS_v1">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="AddSubjectToGallery">
+			<soap:operation soapAction="AddSubjectToGallery"/>
+			<wsdl:input name="AddSubjectToGallery">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="AddSubjectToGalleryResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CheckQuality">
+			<soap:operation soapAction="CheckQuality"/>
+			<wsdl:input name="CheckQuality">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CheckQualityResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ClassifyBiometricData">
+			<soap:operation soapAction="ClassifyBiometricData"/>
+			<wsdl:input name="ClassifyBiometricData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ClassifyBiometricDataResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CreateSubject">
+			<soap:operation soapAction="CreateSubject"/>
+			<wsdl:input name="CreateSubject">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreateSubjectResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteBiographicData">
+			<soap:operation soapAction="DeleteBiographicData"/>
+			<wsdl:input name="DeleteBiographicData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeleteBiographicDataResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteBiometricData">
+			<soap:operation soapAction="DeleteBiometricData"/>
+			<wsdl:input name="DeleteBiometricData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeleteBiometricDataResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteSubject">
+			<soap:operation soapAction="DeleteSubject"/>
+			<wsdl:input name="DeleteSubject">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeleteSubjectResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteSubjectFromGallery">
+			<soap:operation soapAction="DeleteSubjectFromGallery"/>
+			<wsdl:input name="DeleteSubjectFromGallery">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeleteSubjectFromGalleryResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetIdentifySubjectResults">
+			<soap:operation soapAction="GetIdentifySubjectResults"/>
+			<wsdl:input name="GetIdentifySubjectResults">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetIdentifySubjectResultsResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="IdentifySubject">
+			<soap:operation soapAction="IdentifySubject"/>
+			<wsdl:input name="IdentifySubject">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="IdentifySubjectResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ListBiographicData">
+			<soap:operation soapAction="ListBiographicData"/>
+			<wsdl:input name="ListBiographicData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListBiographicDataResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ListBiometricData">
+			<soap:operation soapAction="ListBiometricData"/>
+			<wsdl:input name="ListBiometricData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListBiometricDataResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="PerformFusion">
+			<soap:operation soapAction="PerformFusion"/>
+			<wsdl:input name="PerformFusion">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="PerformFusionResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="QueryCapabilities">
+			<soap:operation soapAction="QueryCapabilities"/>
+			<wsdl:input name="QueryCapabilities">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="QueryCapabilitiesResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RetrieveBiographicData">
+			<soap:operation soapAction="RetrieveBiographicData"/>
+			<wsdl:input name="RetrieveBiographicData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="RetrieveBiographicDataResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RetrieveBiometricData">
+			<soap:operation soapAction="RetrieveBiometricData"/>
+			<wsdl:input name="RetrieveBiometricData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="RetrieveBiometricDataResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetBiographicData">
+			<soap:operation soapAction="SetBiographicData"/>
+			<wsdl:input name="SetBiographicData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SetBiographicDataResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="SetBiometricData">
+			<soap:operation soapAction="SetBiometricData"/>
+			<wsdl:input name="SetBiometricData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="SetBiometricDataResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="TransformBiometricData">
+			<soap:operation soapAction="TransformBiometricData"/>
+			<wsdl:input name="TransformBiometricData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="TransformBiometricDataResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateBiographicData">
+			<soap:operation soapAction="UpdateBiographicData"/>
+			<wsdl:input name="UpdateBiographicData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdateBiographicDataResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateBiometricData">
+			<soap:operation soapAction="UpdateBiometricData"/>
+			<wsdl:input name="UpdateBiometricData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdateBiometricDataResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="VerifySubject">
+			<soap:operation soapAction="VerifySubject"/>
+			<wsdl:input name="VerifySubject">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="VerifySubjectResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Enroll">
+			<soap:operation soapAction="Enroll"/>
+			<wsdl:input name="Enroll">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="EnrollResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetEnrollResults">
+			<soap:operation soapAction="GetEnrollResults"/>
+			<wsdl:input name="GetEnrollResults">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetEnrollResultsResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetIdentifyResults">
+			<soap:operation soapAction="GetIdentifyResults"/>
+			<wsdl:input name="GetIdentifyResults">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetIdentifyResultsResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetVerifyResults">
+			<soap:operation soapAction="GetVerifyResults"/>
+			<wsdl:input name="GetVerifyResults">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetVerifyResultsResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Identify">
+			<soap:operation soapAction="Identify"/>
+			<wsdl:input name="Identify">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="IdentifyResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="RetrieveData">
+			<soap:operation soapAction="RetrieveData"/>
+			<wsdl:input name="RetrieveData">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="RetrieveDataResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Verify">
+			<soap:operation soapAction="Verify"/>
+			<wsdl:input name="Verify">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="VerifyResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="BIASFault">
+				<soap:fault name="BIASFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="BIAS_v1">
+		<wsdl:port name="BIAS_v1HttpBindingPort" binding="tns:BIAS_v1HttpBinding">
+			<soap:address location="http://your_URI/IRI_to_your_BIAS_implementation"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
