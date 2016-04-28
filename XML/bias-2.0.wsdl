@@ -3658,7 +3658,7 @@
 	<wsdl:message name="VerifyResponseMessage">
 		<wsdl:part name="parameters" element="tns:VerifyResponse"/>
 	</wsdl:message>
-	<wsdl:portType name="BIAS_v1">
+	<wsdl:portType name="BIAS_v2">
 		<wsdl:operation name="AddSubjectToGallery">
 			<wsdl:input name="AddSubjectToGallery" message="tns:AddSubjectToGalleryRequestMessage"/>
 			<wsdl:output name="AddSubjectToGalleryResponse" message="tns:AddSubjectToGalleryResponseMessage"/>
@@ -3806,7 +3806,7 @@
 			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
 		</wsdl:operation>
 	</wsdl:portType>
-	<wsdl:binding name="BIAS_v1HttpBinding" type="tns:BIAS_v1">
+	<wsdl:binding name="BIAS_v2HttpBinding" type="tns:BIAS_v2">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 		<wsdl:operation name="AddSubjectToGallery">
 			<soap:operation soapAction="AddSubjectToGallery"/>
@@ -4157,8 +4157,8 @@
 			</wsdl:fault>
 		</wsdl:operation>
 	</wsdl:binding>
-	<wsdl:service name="BIAS_v1">
-		<wsdl:port name="BIAS_v1HttpBindingPort" binding="tns:BIAS_v1HttpBinding">
+	<wsdl:service name="BIAS_v2">
+		<wsdl:port name="BIAS_v2HttpBindingPort" binding="tns:BIAS_v2HttpBinding">
 			<soap:address location="http://your_URI/IRI_to_your_BIAS_implementation"/>
 		</wsdl:port>
 	</wsdl:service>

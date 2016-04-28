@@ -13,48 +13,48 @@ Option Explicit On
 
 Imports System.Runtime.Serialization
 
-Namespace gov.nist.itl.iad.ig.bias.ref
+Namespace OASIS.BIAS.V2
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="RequestTemplate", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/"), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.AggregateRequestTemplate)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.AddSubjectToGalleryRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.CheckQualityRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.ClassifyBiometricDataRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.CreateSubjectRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.DeleteBiographicDataRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.DeleteBiometricDataRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.DeleteSubjectRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.DeleteSubjectFromGalleryRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.GetIdentifySubjectResultsRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.IdentifySubjectRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.ListBiographicDataRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.ListBiometricDataRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.PerformFusionRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.QueryCapabilitiesRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.RetrieveBiographicDataRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.RetrieveBiometricDataRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.SetBiographicDataRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.SetBiometricDataRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.TransformBiometricDataRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.UpdateBiographicDataRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.UpdateBiometricDataRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.VerifySubjectRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.EnrollRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.GetEnrollResultsRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.GetIdentifyResultsRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.GetVerifyResultsRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.IdentifyRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.RetrieveDataRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.VerifyRequest))> _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.AggregateRequestTemplate)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.AddSubjectToGalleryRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.CheckQualityRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.ClassifyBiometricDataRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.CreateSubjectRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.DeleteBiographicDataRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.DeleteBiometricDataRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.DeleteSubjectRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.DeleteSubjectFromGalleryRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.GetIdentifySubjectResultsRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.IdentifySubjectRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.ListBiographicDataRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.ListBiometricDataRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.PerformFusionRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.QueryCapabilitiesRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.RetrieveBiographicDataRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.RetrieveBiometricDataRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.SetBiographicDataRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.SetBiometricDataRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.TransformBiometricDataRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.UpdateBiographicDataRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.UpdateBiometricDataRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.VerifySubjectRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.EnrollRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.GetEnrollResultsRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.GetIdentifyResultsRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.GetVerifyResultsRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.IdentifyRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.RetrieveDataRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.VerifyRequest))> _
     Partial Public Class RequestTemplate
         Inherits Object
         Implements System.Runtime.Serialization.IExtensibleDataObject
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
-        Private GenericRequestParametersField As gov.nist.itl.iad.ig.bias.ref.GenericRequestParameters
+        Private GenericRequestParametersField As OASIS.BIAS.V2.GenericRequestParameters
 
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
@@ -66,11 +66,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property GenericRequestParameters() As gov.nist.itl.iad.ig.bias.ref.GenericRequestParameters
+        Public Property GenericRequestParameters() As OASIS.BIAS.V2.GenericRequestParameters
             Get
                 Return Me.GenericRequestParametersField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.GenericRequestParameters)
+            Set(value As OASIS.BIAS.V2.GenericRequestParameters)
                 Me.GenericRequestParametersField = value
             End Set
         End Property
@@ -134,32 +134,32 @@ Namespace gov.nist.itl.iad.ig.bias.ref
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="AggregateRequestTemplate", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/"), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.EnrollRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.IdentifyRequest)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.VerifyRequest))> _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.EnrollRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.IdentifyRequest)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.VerifyRequest))> _
     Partial Public Class AggregateRequestTemplate
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private ProcessingOptionsField As gov.nist.itl.iad.ig.bias.ref.ProcessingOptionsType
+        Private ProcessingOptionsField As OASIS.BIAS.V2.ProcessingOptionsType
 
-        Private InputDataField As gov.nist.itl.iad.ig.bias.ref.InformationType
+        Private InputDataField As OASIS.BIAS.V2.InformationType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property ProcessingOptions() As gov.nist.itl.iad.ig.bias.ref.ProcessingOptionsType
+        Public Property ProcessingOptions() As OASIS.BIAS.V2.ProcessingOptionsType
             Get
                 Return Me.ProcessingOptionsField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.ProcessingOptionsType)
+            Set(value As OASIS.BIAS.V2.ProcessingOptionsType)
                 Me.ProcessingOptionsField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False, Order:=1)> _
-        Public Property InputData() As gov.nist.itl.iad.ig.bias.ref.InformationType
+        Public Property InputData() As OASIS.BIAS.V2.InformationType
             Get
                 Return Me.InputDataField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.InformationType)
+            Set(value As OASIS.BIAS.V2.InformationType)
                 Me.InputDataField = value
             End Set
         End Property
@@ -169,11 +169,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="AddSubjectToGalleryRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class AddSubjectToGalleryRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
         Public GalleryIDField As String
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
         Public Property GalleryID() As String
@@ -186,11 +186,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -200,40 +200,40 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="CheckQualityRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class CheckQualityRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private BiometricDataField As gov.nist.itl.iad.ig.bias.ref.BIASBiometricDataType
+        Private BiometricDataField As OASIS.BIAS.V2.BIASBiometricDataType
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
-        Private QualityInfoField As gov.nist.itl.iad.ig.bias.ref.QualityData
+        Private QualityInfoField As OASIS.BIAS.V2.QualityData
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property BiometricData() As gov.nist.itl.iad.ig.bias.ref.BIASBiometricDataType
+        Public Property BiometricData() As OASIS.BIAS.V2.BIASBiometricDataType
             Get
                 Return Me.BiometricDataField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASBiometricDataType)
+            Set(value As OASIS.BIAS.V2.BIASBiometricDataType)
                 Me.BiometricDataField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property QualityInfo() As gov.nist.itl.iad.ig.bias.ref.QualityData
+        Public Property QualityInfo() As OASIS.BIAS.V2.QualityData
             Get
                 Return Me.QualityInfoField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.QualityData)
+            Set(value As OASIS.BIAS.V2.QualityData)
                 Me.QualityInfoField = value
             End Set
         End Property
@@ -243,28 +243,28 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="ClassifyBiometricDataRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class ClassifyBiometricDataRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private BiometricDataField As gov.nist.itl.iad.ig.bias.ref.BIASBiometricDataType
+        Private BiometricDataField As OASIS.BIAS.V2.BIASBiometricDataType
 
-        Private ClassificationDataField As gov.nist.itl.iad.ig.bias.ref.ClassificationData
+        Private ClassificationDataField As OASIS.BIAS.V2.ClassificationData
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property BiometricData() As gov.nist.itl.iad.ig.bias.ref.BIASBiometricDataType
+        Public Property BiometricData() As OASIS.BIAS.V2.BIASBiometricDataType
             Get
                 Return Me.BiometricDataField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASBiometricDataType)
+            Set(value As OASIS.BIAS.V2.BIASBiometricDataType)
                 Me.BiometricDataField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property ClassificationData() As gov.nist.itl.iad.ig.bias.ref.ClassificationData
+        Public Property ClassificationData() As OASIS.BIAS.V2.ClassificationData
             Get
                 Return Me.ClassificationDataField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.ClassificationData)
+            Set(value As OASIS.BIAS.V2.ClassificationData)
                 Me.ClassificationDataField = value
             End Set
         End Property
@@ -274,25 +274,25 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="CreateSubjectRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class CreateSubjectRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="DeleteBiographicDataRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class DeleteBiographicDataRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         Private GalleryIDField As String
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -312,30 +312,30 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="DeleteBiometricDataRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class DeleteBiometricDataRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
-        Private BiometricTypeField As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType
+        Private BiometricTypeField As OASIS.BIAS.V2.MultipleTypesType
 
         Private GalleryIDField As String
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=1)> _
-        Public Property BiometricType() As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType
+        Public Property BiometricType() As OASIS.BIAS.V2.MultipleTypesType
             Get
                 Return Me.BiometricTypeField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType)
+            Set(value As OASIS.BIAS.V2.MultipleTypesType)
                 Me.BiometricTypeField = value
             End Set
         End Property
@@ -355,16 +355,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="DeleteSubjectRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class DeleteSubjectRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -374,11 +374,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="DeleteSubjectFromGalleryRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class DeleteSubjectFromGalleryRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
         Private GalleryIDField As String
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
         Public Property GalleryID() As String
@@ -391,11 +391,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -405,16 +405,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="GetIdentifySubjectResultsRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class GetIdentifySubjectResultsRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private TokenField As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Private TokenField As OASIS.BIAS.V2.TokenType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Token() As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Public Property Token() As OASIS.BIAS.V2.TokenType
             Get
                 Return Me.TokenField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.TokenType)
+            Set(value As OASIS.BIAS.V2.TokenType)
                 Me.TokenField = value
             End Set
         End Property
@@ -424,13 +424,13 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="IdentifySubjectRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class IdentifySubjectRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
         Private GalleryIDField As String
 
-        Private GalleryField As gov.nist.itl.iad.ig.bias.ref.CandidateListType
+        Private GalleryField As OASIS.BIAS.V2.CandidateListType
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         Private MaxListSizeField As Long
 
@@ -445,21 +445,21 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=1)> _
-        Public Property Gallery() As gov.nist.itl.iad.ig.bias.ref.CandidateListType
+        Public Property Gallery() As OASIS.BIAS.V2.CandidateListType
             Get
                 Return Me.GalleryField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CandidateListType)
+            Set(value As OASIS.BIAS.V2.CandidateListType)
                 Me.GalleryField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False, Order:=2)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -479,18 +479,18 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="ListBiographicDataRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class ListBiographicDataRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         Private EncounterTypeField As String
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -510,20 +510,20 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="ListBiometricDataRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class ListBiometricDataRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         Private EncounterTypeField As String
 
-        Private ListFilterField As gov.nist.itl.iad.ig.bias.ref.ListFilterType
+        Private ListFilterField As OASIS.BIAS.V2.ListFilterType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -539,11 +539,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=2)> _
-        Public Property ListFilter() As gov.nist.itl.iad.ig.bias.ref.ListFilterType
+        Public Property ListFilter() As OASIS.BIAS.V2.ListFilterType
             Get
                 Return Me.ListFilterField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.ListFilterType)
+            Set(value As OASIS.BIAS.V2.ListFilterType)
                 Me.ListFilterField = value
             End Set
         End Property
@@ -553,16 +553,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="PerformFusionRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class PerformFusionRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private FusionInputField As gov.nist.itl.iad.ig.bias.ref.FusionIdentityListType
+        Private FusionInputField As OASIS.BIAS.V2.FusionIdentityListType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property FusionInput() As gov.nist.itl.iad.ig.bias.ref.FusionIdentityListType
+        Public Property FusionInput() As OASIS.BIAS.V2.FusionIdentityListType
             Get
                 Return Me.FusionInputField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.FusionIdentityListType)
+            Set(value As OASIS.BIAS.V2.FusionIdentityListType)
                 Me.FusionInputField = value
             End Set
         End Property
@@ -572,27 +572,27 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="QueryCapabilitiesRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class QueryCapabilitiesRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="RetrieveBiographicDataRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class RetrieveBiographicDataRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         Private EncounterTypeField As String
 
         Private GalleryIDField As String
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -622,22 +622,22 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="RetrieveBiometricDataRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class RetrieveBiometricDataRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         Private EncounterTypeField As String
 
         Private GalleryIDField As String
 
-        Private BiometricTypeField As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType
+        Private BiometricTypeField As OASIS.BIAS.V2.MultipleTypesType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -663,11 +663,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=3)> _
-        Public Property BiometricType() As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType
+        Public Property BiometricType() As OASIS.BIAS.V2.MultipleTypesType
             Get
                 Return Me.BiometricTypeField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType)
+            Set(value As OASIS.BIAS.V2.MultipleTypesType)
                 Me.BiometricTypeField = value
             End Set
         End Property
@@ -677,18 +677,18 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="SetBiographicDataRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class SetBiographicDataRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         Private GalleryIDField As String
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -708,18 +708,18 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="SetBiometricDataRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class SetBiometricDataRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         Private GalleryIDField As String
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -739,20 +739,20 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="TransformBiometricDataRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class TransformBiometricDataRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private InputBIRField As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type
+        Private InputBIRField As OASIS.BIAS.V2.CBEFF_BIR_Type
 
         Private TransformOperationField As ULong
 
         Private TransformControlField As String
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property InputBIR() As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type
+        Public Property InputBIR() As OASIS.BIAS.V2.CBEFF_BIR_Type
             Get
                 Return Me.InputBIRField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type)
+            Set(value As OASIS.BIAS.V2.CBEFF_BIR_Type)
                 Me.InputBIRField = value
             End Set
         End Property
@@ -782,16 +782,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="UpdateBiographicDataRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class UpdateBiographicDataRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -801,18 +801,18 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="UpdateBiometricDataRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class UpdateBiometricDataRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         Private MergeField As Boolean
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -832,11 +832,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="VerifySubjectRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class VerifySubjectRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
         Private GalleryIDField As String
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
         Public Property GalleryID() As String
@@ -849,11 +849,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -863,16 +863,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="EnrollRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class EnrollRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.AggregateRequestTemplate
+        Inherits OASIS.BIAS.V2.AggregateRequestTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -882,16 +882,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="GetEnrollResultsRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class GetEnrollResultsRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private TokenField As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Private TokenField As OASIS.BIAS.V2.TokenType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Token() As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Public Property Token() As OASIS.BIAS.V2.TokenType
             Get
                 Return Me.TokenField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.TokenType)
+            Set(value As OASIS.BIAS.V2.TokenType)
                 Me.TokenField = value
             End Set
         End Property
@@ -901,16 +901,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="GetIdentifyResultsRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class GetIdentifyResultsRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private TokenField As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Private TokenField As OASIS.BIAS.V2.TokenType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Token() As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Public Property Token() As OASIS.BIAS.V2.TokenType
             Get
                 Return Me.TokenField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.TokenType)
+            Set(value As OASIS.BIAS.V2.TokenType)
                 Me.TokenField = value
             End Set
         End Property
@@ -920,16 +920,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="GetVerifyResultsRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class GetVerifyResultsRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private TokenField As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Private TokenField As OASIS.BIAS.V2.TokenType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Token() As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Public Property Token() As OASIS.BIAS.V2.TokenType
             Get
                 Return Me.TokenField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.TokenType)
+            Set(value As OASIS.BIAS.V2.TokenType)
                 Me.TokenField = value
             End Set
         End Property
@@ -939,7 +939,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="IdentifyRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class IdentifyRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.AggregateRequestTemplate
+        Inherits OASIS.BIAS.V2.AggregateRequestTemplate
 
         Private GalleryIDField As String
 
@@ -970,28 +970,28 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="RetrieveDataRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class RetrieveDataRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.RequestTemplate
+        Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Private ProcessingOptionsField As gov.nist.itl.iad.ig.bias.ref.ProcessingOptionsType
+        Private ProcessingOptionsField As OASIS.BIAS.V2.ProcessingOptionsType
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property ProcessingOptions() As gov.nist.itl.iad.ig.bias.ref.ProcessingOptionsType
+        Public Property ProcessingOptions() As OASIS.BIAS.V2.ProcessingOptionsType
             Get
                 Return Me.ProcessingOptionsField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.ProcessingOptionsType)
+            Set(value As OASIS.BIAS.V2.ProcessingOptionsType)
                 Me.ProcessingOptionsField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False, Order:=1)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -1001,18 +1001,18 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="VerifyRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class VerifyRequest
-        Inherits gov.nist.itl.iad.ig.bias.ref.AggregateRequestTemplate
+        Inherits OASIS.BIAS.V2.AggregateRequestTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         Private GalleryIDField As String
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -1043,11 +1043,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private EncounterIDField As String
 
-        Private EncounterListField As gov.nist.itl.iad.ig.bias.ref.EncounterListType
+        Private EncounterListField As OASIS.BIAS.V2.EncounterListType
 
-        Private BiographicDataField As gov.nist.itl.iad.ig.bias.ref.BiographicDataType
+        Private BiographicDataField As OASIS.BIAS.V2.BiographicDataType
 
-        Private BiometricDataField As gov.nist.itl.iad.ig.bias.ref.BIASBiometricDataType
+        Private BiometricDataField As OASIS.BIAS.V2.BIASBiometricDataType
 
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
@@ -1089,31 +1089,31 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=3)> _
-        Public Property EncounterList() As gov.nist.itl.iad.ig.bias.ref.EncounterListType
+        Public Property EncounterList() As OASIS.BIAS.V2.EncounterListType
             Get
                 Return Me.EncounterListField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.EncounterListType)
+            Set(value As OASIS.BIAS.V2.EncounterListType)
                 Me.EncounterListField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=4)> _
-        Public Property BiographicData() As gov.nist.itl.iad.ig.bias.ref.BiographicDataType
+        Public Property BiographicData() As OASIS.BIAS.V2.BiographicDataType
             Get
                 Return Me.BiographicDataField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BiographicDataType)
+            Set(value As OASIS.BIAS.V2.BiographicDataType)
                 Me.BiographicDataField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=5)> _
-        Public Property BiometricData() As gov.nist.itl.iad.ig.bias.ref.BIASBiometricDataType
+        Public Property BiometricData() As OASIS.BIAS.V2.BIASBiometricDataType
             Get
                 Return Me.BiometricDataField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASBiometricDataType)
+            Set(value As OASIS.BIAS.V2.BIASBiometricDataType)
                 Me.BiometricDataField = value
             End Set
         End Property
@@ -1142,9 +1142,9 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private CitizenshipField As String
 
-        Private ImagesField As gov.nist.itl.iad.ig.bias.ref.InformationType.ImagesType
+        Private ImagesField As OASIS.BIAS.V2.InformationType.ImagesType
 
-        Private IdentitiesField As gov.nist.itl.iad.ig.bias.ref.InformationType.IdentitiesType
+        Private IdentitiesField As OASIS.BIAS.V2.InformationType.IdentitiesType
 
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
@@ -1226,21 +1226,21 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=6)> _
-        Public Property Images() As gov.nist.itl.iad.ig.bias.ref.InformationType.ImagesType
+        Public Property Images() As OASIS.BIAS.V2.InformationType.ImagesType
             Get
                 Return Me.ImagesField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.InformationType.ImagesType)
+            Set(value As OASIS.BIAS.V2.InformationType.ImagesType)
                 Me.ImagesField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=7)> _
-        Public Property Identities() As gov.nist.itl.iad.ig.bias.ref.InformationType.IdentitiesType
+        Public Property Identities() As OASIS.BIAS.V2.InformationType.IdentitiesType
             Get
                 Return Me.IdentitiesField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.InformationType.IdentitiesType)
+            Set(value As OASIS.BIAS.V2.InformationType.IdentitiesType)
                 Me.IdentitiesField = value
             End Set
         End Property
@@ -1265,7 +1265,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.CollectionDataContractAttribute(Name:="ProcessingOptionsType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ItemName:="Option")> _
     Public Class ProcessingOptionsType
-        Inherits System.Collections.Generic.List(Of gov.nist.itl.iad.ig.bias.ref.OptionType)
+        Inherits System.Collections.Generic.List(Of OASIS.BIAS.V2.OptionType)
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
@@ -1320,15 +1320,15 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
-        Private BIRListField As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_ListType
+        Private BIRListField As OASIS.BIAS.V2.CBEFF_BIR_ListType
 
-        Private BIRField As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type
+        Private BIRField As OASIS.BIAS.V2.CBEFF_BIR_Type
 
-        Private InputBIRField As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type
+        Private InputBIRField As OASIS.BIAS.V2.CBEFF_BIR_Type
 
-        Private ReferenceBIRField As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type
+        Private ReferenceBIRField As OASIS.BIAS.V2.CBEFF_BIR_Type
 
-        Private BiometricDataListField As gov.nist.itl.iad.ig.bias.ref.BiometricDataListType
+        Private BiometricDataListField As OASIS.BIAS.V2.BiometricDataListType
 
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
@@ -1340,51 +1340,51 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property BIRList() As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_ListType
+        Public Property BIRList() As OASIS.BIAS.V2.CBEFF_BIR_ListType
             Get
                 Return Me.BIRListField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_ListType)
+            Set(value As OASIS.BIAS.V2.CBEFF_BIR_ListType)
                 Me.BIRListField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=1)> _
-        Public Property BIR() As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type
+        Public Property BIR() As OASIS.BIAS.V2.CBEFF_BIR_Type
             Get
                 Return Me.BIRField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type)
+            Set(value As OASIS.BIAS.V2.CBEFF_BIR_Type)
                 Me.BIRField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=2)> _
-        Public Property InputBIR() As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type
+        Public Property InputBIR() As OASIS.BIAS.V2.CBEFF_BIR_Type
             Get
                 Return Me.InputBIRField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type)
+            Set(value As OASIS.BIAS.V2.CBEFF_BIR_Type)
                 Me.InputBIRField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=3)> _
-        Public Property ReferenceBIR() As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type
+        Public Property ReferenceBIR() As OASIS.BIAS.V2.CBEFF_BIR_Type
             Get
                 Return Me.ReferenceBIRField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type)
+            Set(value As OASIS.BIAS.V2.CBEFF_BIR_Type)
                 Me.ReferenceBIRField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=4)> _
-        Public Property BiometricDataList() As gov.nist.itl.iad.ig.bias.ref.BiometricDataListType
+        Public Property BiometricDataList() As OASIS.BIAS.V2.BiometricDataListType
             Get
                 Return Me.BiometricDataListField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BiometricDataListType)
+            Set(value As OASIS.BIAS.V2.BiometricDataListType)
                 Me.BiometricDataListField = value
             End Set
         End Property
@@ -1440,7 +1440,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.CollectionDataContractAttribute(Name:="BiographicDataItemListType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ItemName:="BiographicDataItem")> _
     Public Class BiographicDataItemListType
-        Inherits System.Collections.Generic.List(Of gov.nist.itl.iad.ig.bias.ref.BiographicDataItemType)
+        Inherits System.Collections.Generic.List(Of OASIS.BIAS.V2.BiographicDataItemType)
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
@@ -1511,9 +1511,9 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private FormatTypeField As Long
 
-        Private BIR_InformationField As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type.BIR_InformationType
+        Private BIR_InformationField As OASIS.BIAS.V2.CBEFF_BIR_Type.BIR_InformationType
 
-        Private BIRField As gov.nist.itl.iad.ig.bias.ref.BaseBIRType
+        Private BIRField As OASIS.BIAS.V2.BaseBIRType
 
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
@@ -1545,21 +1545,21 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=2)> _
-        Public Property BIR_Information() As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type.BIR_InformationType
+        Public Property BIR_Information() As OASIS.BIAS.V2.CBEFF_BIR_Type.BIR_InformationType
             Get
                 Return Me.BIR_InformationField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type.BIR_InformationType)
+            Set(value As OASIS.BIAS.V2.CBEFF_BIR_Type.BIR_InformationType)
                 Me.BIR_InformationField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False, Order:=3)> _
-        Public Property BIR() As gov.nist.itl.iad.ig.bias.ref.BaseBIRType
+        Public Property BIR() As OASIS.BIAS.V2.BaseBIRType
             Get
                 Return Me.BIRField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BaseBIRType)
+            Set(value As OASIS.BIAS.V2.BaseBIRType)
                 Me.BIRField = value
             End Set
         End Property
@@ -1573,11 +1573,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
             Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
-            Private BIR_InfoField As gov.nist.itl.iad.ig.bias.ref.BIRInfoType
+            Private BIR_InfoField As OASIS.BIAS.V2.BIRInfoType
 
-            Private BDB_InfoField As gov.nist.itl.iad.ig.bias.ref.BDBInfoType
+            Private BDB_InfoField As OASIS.BIAS.V2.BDBInfoType
 
-            Private SB_InfoField As gov.nist.itl.iad.ig.bias.ref.SBInfoType
+            Private SB_InfoField As OASIS.BIAS.V2.SBInfoType
 
             Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
                 Get
@@ -1589,31 +1589,31 @@ Namespace gov.nist.itl.iad.ig.bias.ref
             End Property
 
             <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-            Public Property BIR_Info() As gov.nist.itl.iad.ig.bias.ref.BIRInfoType
+            Public Property BIR_Info() As OASIS.BIAS.V2.BIRInfoType
                 Get
                     Return Me.BIR_InfoField
                 End Get
-                Set(value As gov.nist.itl.iad.ig.bias.ref.BIRInfoType)
+                Set(value As OASIS.BIAS.V2.BIRInfoType)
                     Me.BIR_InfoField = value
                 End Set
             End Property
 
             <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=1)> _
-            Public Property BDB_Info() As gov.nist.itl.iad.ig.bias.ref.BDBInfoType
+            Public Property BDB_Info() As OASIS.BIAS.V2.BDBInfoType
                 Get
                     Return Me.BDB_InfoField
                 End Get
-                Set(value As gov.nist.itl.iad.ig.bias.ref.BDBInfoType)
+                Set(value As OASIS.BIAS.V2.BDBInfoType)
                     Me.BDB_InfoField = value
                 End Set
             End Property
 
             <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=2)> _
-            Public Property SB_Info() As gov.nist.itl.iad.ig.bias.ref.SBInfoType
+            Public Property SB_Info() As OASIS.BIAS.V2.SBInfoType
                 Get
                     Return Me.SB_InfoField
                 End Get
-                Set(value As gov.nist.itl.iad.ig.bias.ref.SBInfoType)
+                Set(value As OASIS.BIAS.V2.SBInfoType)
                     Me.SB_InfoField = value
                 End Set
             End Property
@@ -1624,22 +1624,22 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.CollectionDataContractAttribute(Name:="CBEFF_BIR_ListType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ItemName:="BIR")> _
     Public Class CBEFF_BIR_ListType
-        Inherits System.Collections.Generic.List(Of gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type)
+        Inherits System.Collections.Generic.List(Of OASIS.BIAS.V2.CBEFF_BIR_Type)
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.CollectionDataContractAttribute(Name:="BiometricDataListType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ItemName:="BiometricData")> _
     Public Class BiometricDataListType
-        Inherits System.Collections.Generic.List(Of gov.nist.itl.iad.ig.bias.ref.BiometricDataType)
+        Inherits System.Collections.Generic.List(Of OASIS.BIAS.V2.BiometricDataType)
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="BaseBIRType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/"), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BinaryBIR)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.URI_BIR)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.XML_BIR))> _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.BinaryBIR)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.URI_BIR)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.XML_BIR))> _
     Partial Public Class BaseBIRType
         Inherits Object
         Implements System.Runtime.Serialization.IExtensibleDataObject
@@ -1772,7 +1772,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private IndexField As String
 
-        Private FormatField As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Private FormatField As OASIS.BIAS.V2.RegistryIDType
 
         Private EncryptionField As Boolean
 
@@ -1782,25 +1782,25 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private NotValidAfterField As Date
 
-        Private TypeField As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType
+        Private TypeField As OASIS.BIAS.V2.MultipleTypesType
 
-        Private SubtypeField As gov.nist.itl.iad.ig.bias.ref.SubtypeType
+        Private SubtypeField As OASIS.BIAS.V2.SubtypeType
 
-        Private LevelField As gov.nist.itl.iad.ig.bias.ref.ProcessedLevelType
+        Private LevelField As OASIS.BIAS.V2.ProcessedLevelType
 
-        Private ProductField As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Private ProductField As OASIS.BIAS.V2.RegistryIDType
 
-        Private CaptureDeviceField As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Private CaptureDeviceField As OASIS.BIAS.V2.RegistryIDType
 
-        Private FeatureExtractionAlgorithmField As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Private FeatureExtractionAlgorithmField As OASIS.BIAS.V2.RegistryIDType
 
-        Private ComparisonAlgorithmField As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Private ComparisonAlgorithmField As OASIS.BIAS.V2.RegistryIDType
 
-        Private CompressionAlgorithmField As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Private CompressionAlgorithmField As OASIS.BIAS.V2.RegistryIDType
 
-        Private PurposeField As gov.nist.itl.iad.ig.bias.ref.PurposeType
+        Private PurposeField As OASIS.BIAS.V2.PurposeType
 
-        Private QualityField As gov.nist.itl.iad.ig.bias.ref.QualityType
+        Private QualityField As OASIS.BIAS.V2.QualityType
 
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
@@ -1832,11 +1832,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=2)> _
-        Public Property Format() As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Public Property Format() As OASIS.BIAS.V2.RegistryIDType
             Get
                 Return Me.FormatField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.RegistryIDType)
+            Set(value As OASIS.BIAS.V2.RegistryIDType)
                 Me.FormatField = value
             End Set
         End Property
@@ -1882,101 +1882,101 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=7)> _
-        Public Property Type() As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType
+        Public Property Type() As OASIS.BIAS.V2.MultipleTypesType
             Get
                 Return Me.TypeField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType)
+            Set(value As OASIS.BIAS.V2.MultipleTypesType)
                 Me.TypeField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=8)> _
-        Public Property Subtype() As gov.nist.itl.iad.ig.bias.ref.SubtypeType
+        Public Property Subtype() As OASIS.BIAS.V2.SubtypeType
             Get
                 Return Me.SubtypeField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.SubtypeType)
+            Set(value As OASIS.BIAS.V2.SubtypeType)
                 Me.SubtypeField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(Order:=9)> _
-        Public Property Level() As gov.nist.itl.iad.ig.bias.ref.ProcessedLevelType
+        Public Property Level() As OASIS.BIAS.V2.ProcessedLevelType
             Get
                 Return Me.LevelField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.ProcessedLevelType)
+            Set(value As OASIS.BIAS.V2.ProcessedLevelType)
                 Me.LevelField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=10)> _
-        Public Property Product() As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Public Property Product() As OASIS.BIAS.V2.RegistryIDType
             Get
                 Return Me.ProductField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.RegistryIDType)
+            Set(value As OASIS.BIAS.V2.RegistryIDType)
                 Me.ProductField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=11)> _
-        Public Property CaptureDevice() As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Public Property CaptureDevice() As OASIS.BIAS.V2.RegistryIDType
             Get
                 Return Me.CaptureDeviceField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.RegistryIDType)
+            Set(value As OASIS.BIAS.V2.RegistryIDType)
                 Me.CaptureDeviceField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=12)> _
-        Public Property FeatureExtractionAlgorithm() As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Public Property FeatureExtractionAlgorithm() As OASIS.BIAS.V2.RegistryIDType
             Get
                 Return Me.FeatureExtractionAlgorithmField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.RegistryIDType)
+            Set(value As OASIS.BIAS.V2.RegistryIDType)
                 Me.FeatureExtractionAlgorithmField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=13)> _
-        Public Property ComparisonAlgorithm() As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Public Property ComparisonAlgorithm() As OASIS.BIAS.V2.RegistryIDType
             Get
                 Return Me.ComparisonAlgorithmField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.RegistryIDType)
+            Set(value As OASIS.BIAS.V2.RegistryIDType)
                 Me.ComparisonAlgorithmField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=14)> _
-        Public Property CompressionAlgorithm() As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Public Property CompressionAlgorithm() As OASIS.BIAS.V2.RegistryIDType
             Get
                 Return Me.CompressionAlgorithmField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.RegistryIDType)
+            Set(value As OASIS.BIAS.V2.RegistryIDType)
                 Me.CompressionAlgorithmField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(Order:=15)> _
-        Public Property Purpose() As gov.nist.itl.iad.ig.bias.ref.PurposeType
+        Public Property Purpose() As OASIS.BIAS.V2.PurposeType
             Get
                 Return Me.PurposeField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.PurposeType)
+            Set(value As OASIS.BIAS.V2.PurposeType)
                 Me.PurposeField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=16)> _
-        Public Property Quality() As gov.nist.itl.iad.ig.bias.ref.QualityType
+        Public Property Quality() As OASIS.BIAS.V2.QualityType
             Get
                 Return Me.QualityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.QualityType)
+            Set(value As OASIS.BIAS.V2.QualityType)
                 Me.QualityField = value
             End Set
         End Property
@@ -1991,7 +1991,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
-        Private FormatField As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Private FormatField As OASIS.BIAS.V2.RegistryIDType
 
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
@@ -2003,11 +2003,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property Format() As gov.nist.itl.iad.ig.bias.ref.RegistryIDType
+        Public Property Format() As OASIS.BIAS.V2.RegistryIDType
             Get
                 Return Me.FormatField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.RegistryIDType)
+            Set(value As OASIS.BIAS.V2.RegistryIDType)
                 Me.FormatField = value
             End Set
         End Property
@@ -2214,7 +2214,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="BinaryBIR", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class BinaryBIR
-        Inherits gov.nist.itl.iad.ig.bias.ref.BaseBIRType
+        Inherits OASIS.BIAS.V2.BaseBIRType
 
         Private BinaryField() As Byte
 
@@ -2233,7 +2233,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="URI_BIR", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class URI_BIR
-        Inherits gov.nist.itl.iad.ig.bias.ref.BaseBIRType
+        Inherits OASIS.BIAS.V2.BaseBIRType
 
         Private URIField As System.Uri
 
@@ -2252,16 +2252,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="XML_BIR", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class XML_BIR
-        Inherits gov.nist.itl.iad.ig.bias.ref.BaseBIRType
+        Inherits OASIS.BIAS.V2.BaseBIRType
 
-        Private XMLField As gov.nist.itl.iad.ig.bias.ref.BIRType
+        Private XMLField As OASIS.BIAS.V2.BIRType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property XML() As gov.nist.itl.iad.ig.bias.ref.BIRType
+        Public Property XML() As OASIS.BIAS.V2.BIRType
             Get
                 Return Me.XMLField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIRType)
+            Set(value As OASIS.BIAS.V2.BIRType)
                 Me.XMLField = value
             End Set
         End Property
@@ -2358,11 +2358,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
-        Private BiometricTypeField As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType
+        Private BiometricTypeField As OASIS.BIAS.V2.MultipleTypesType
 
         Private BiometricTypeCountField As Long
 
-        Private BiometricSubTypeField As gov.nist.itl.iad.ig.bias.ref.SubtypeType
+        Private BiometricSubTypeField As OASIS.BIAS.V2.SubtypeType
 
         Private BDBFormatOwnerField As Long
 
@@ -2378,11 +2378,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property BiometricType() As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType
+        Public Property BiometricType() As OASIS.BIAS.V2.MultipleTypesType
             Get
                 Return Me.BiometricTypeField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType)
+            Set(value As OASIS.BIAS.V2.MultipleTypesType)
                 Me.BiometricTypeField = value
             End Set
         End Property
@@ -2398,11 +2398,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=2)> _
-        Public Property BiometricSubType() As gov.nist.itl.iad.ig.bias.ref.SubtypeType
+        Public Property BiometricSubType() As OASIS.BIAS.V2.SubtypeType
             Get
                 Return Me.BiometricSubTypeField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.SubtypeType)
+            Set(value As OASIS.BIAS.V2.SubtypeType)
                 Me.BiometricSubTypeField = value
             End Set
         End Property
@@ -2431,43 +2431,43 @@ Namespace gov.nist.itl.iad.ig.bias.ref
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="ResponseTemplate", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/"), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.AggregateResponseTemplate)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.AddSubjectToGalleryResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.CheckQualityResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.ClassifyBiometricDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.CreateSubjectResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.DeleteBiographicDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.DeleteBiometricDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.DeleteSubjectResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.DeleteSubjectFromGalleryResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.GetIdentifySubjectResultsResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.IdentifySubjectResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.ListBiographicDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.ListBiometricDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.PerformFusionResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.QueryCapabilitiesResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.RetrieveBiographicDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.RetrieveBiometricDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.SetBiographicDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.SetBiometricDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.TransformBiometricDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.UpdateBiographicDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.UpdateBiometricDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.VerifySubjectResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.EnrollResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.GetEnrollResultsResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.GetIdentifyResultsResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.GetVerifyResultsResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.IdentifyResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.RetrieveDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.VerifyResponsePackage))> _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.AggregateResponseTemplate)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.AddSubjectToGalleryResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.CheckQualityResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.ClassifyBiometricDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.CreateSubjectResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.DeleteBiographicDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.DeleteBiometricDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.DeleteSubjectResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.DeleteSubjectFromGalleryResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.GetIdentifySubjectResultsResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.IdentifySubjectResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.ListBiographicDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.ListBiometricDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.PerformFusionResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.QueryCapabilitiesResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.RetrieveBiographicDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.RetrieveBiometricDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.SetBiographicDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.SetBiometricDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.TransformBiometricDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.UpdateBiographicDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.UpdateBiometricDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.VerifySubjectResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.EnrollResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.GetEnrollResultsResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.GetIdentifyResultsResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.GetVerifyResultsResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.IdentifyResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.RetrieveDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.VerifyResponsePackage))> _
     Partial Public Class ResponseTemplate
         Inherits Object
         Implements System.Runtime.Serialization.IExtensibleDataObject
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
-        Private ResponseStatusField As gov.nist.itl.iad.ig.bias.ref.ResponseStatus
+        Private ResponseStatusField As OASIS.BIAS.V2.ResponseStatus
 
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
@@ -2479,11 +2479,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property ResponseStatus() As gov.nist.itl.iad.ig.bias.ref.ResponseStatus
+        Public Property ResponseStatus() As OASIS.BIAS.V2.ResponseStatus
             Get
                 Return Me.ResponseStatusField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.ResponseStatus)
+            Set(value As OASIS.BIAS.V2.ResponseStatus)
                 Me.ResponseStatusField = value
             End Set
         End Property
@@ -2535,24 +2535,24 @@ Namespace gov.nist.itl.iad.ig.bias.ref
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="AggregateResponseTemplate", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/"), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.EnrollResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.GetEnrollResultsResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.GetIdentifyResultsResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.GetVerifyResultsResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.IdentifyResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.RetrieveDataResponsePackage)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.VerifyResponsePackage))> _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.EnrollResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.GetEnrollResultsResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.GetIdentifyResultsResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.GetVerifyResultsResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.IdentifyResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.RetrieveDataResponsePackage)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.VerifyResponsePackage))> _
     Partial Public Class AggregateResponseTemplate
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private ReturnDataField As gov.nist.itl.iad.ig.bias.ref.InformationType
+        Private ReturnDataField As OASIS.BIAS.V2.InformationType
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property ReturnData() As gov.nist.itl.iad.ig.bias.ref.InformationType
+        Public Property ReturnData() As OASIS.BIAS.V2.InformationType
             Get
                 Return Me.ReturnDataField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.InformationType)
+            Set(value As OASIS.BIAS.V2.InformationType)
                 Me.ReturnDataField = value
             End Set
         End Property
@@ -2562,23 +2562,23 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="AddSubjectToGalleryResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class AddSubjectToGalleryResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="CheckQualityResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class CheckQualityResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private QualityInfoField As gov.nist.itl.iad.ig.bias.ref.QualityData
+        Private QualityInfoField As OASIS.BIAS.V2.QualityData
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property QualityInfo() As gov.nist.itl.iad.ig.bias.ref.QualityData
+        Public Property QualityInfo() As OASIS.BIAS.V2.QualityData
             Get
                 Return Me.QualityInfoField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.QualityData)
+            Set(value As OASIS.BIAS.V2.QualityData)
                 Me.QualityInfoField = value
             End Set
         End Property
@@ -2588,16 +2588,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="ClassifyBiometricDataResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class ClassifyBiometricDataResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private ClassificationDataField As gov.nist.itl.iad.ig.bias.ref.ClassificationData
+        Private ClassificationDataField As OASIS.BIAS.V2.ClassificationData
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property ClassificationData() As gov.nist.itl.iad.ig.bias.ref.ClassificationData
+        Public Property ClassificationData() As OASIS.BIAS.V2.ClassificationData
             Get
                 Return Me.ClassificationDataField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.ClassificationData)
+            Set(value As OASIS.BIAS.V2.ClassificationData)
                 Me.ClassificationDataField = value
             End Set
         End Property
@@ -2607,16 +2607,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="CreateSubjectResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class CreateSubjectResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -2626,44 +2626,44 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="DeleteBiographicDataResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class DeleteBiographicDataResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="DeleteBiometricDataResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class DeleteBiometricDataResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="DeleteSubjectResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class DeleteSubjectResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="DeleteSubjectFromGalleryResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class DeleteSubjectFromGalleryResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="GetIdentifySubjectResultsResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class GetIdentifySubjectResultsResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private CandidateListField As gov.nist.itl.iad.ig.bias.ref.CandidateListType
+        Private CandidateListField As OASIS.BIAS.V2.CandidateListType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property CandidateList() As gov.nist.itl.iad.ig.bias.ref.CandidateListType
+        Public Property CandidateList() As OASIS.BIAS.V2.CandidateListType
             Get
                 Return Me.CandidateListField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CandidateListType)
+            Set(value As OASIS.BIAS.V2.CandidateListType)
                 Me.CandidateListField = value
             End Set
         End Property
@@ -2673,16 +2673,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="IdentifySubjectResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class IdentifySubjectResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private IdentifySubjectResultField As gov.nist.itl.iad.ig.bias.ref.IdentifySubjectResultType
+        Private IdentifySubjectResultField As OASIS.BIAS.V2.IdentifySubjectResultType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property IdentifySubjectResult() As gov.nist.itl.iad.ig.bias.ref.IdentifySubjectResultType
+        Public Property IdentifySubjectResult() As OASIS.BIAS.V2.IdentifySubjectResultType
             Get
                 Return Me.IdentifySubjectResultField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.IdentifySubjectResultType)
+            Set(value As OASIS.BIAS.V2.IdentifySubjectResultType)
                 Me.IdentifySubjectResultField = value
             End Set
         End Property
@@ -2692,16 +2692,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="ListBiographicDataResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class ListBiographicDataResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -2711,16 +2711,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="ListBiometricDataResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class ListBiometricDataResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -2730,7 +2730,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="PerformFusionResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class PerformFusionResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
         Private MatchField As Boolean
 
@@ -2749,16 +2749,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="QueryCapabilitiesResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class QueryCapabilitiesResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private CapabilityListField As gov.nist.itl.iad.ig.bias.ref.CapabilityListType
+        Private CapabilityListField As OASIS.BIAS.V2.CapabilityListType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property CapabilityList() As gov.nist.itl.iad.ig.bias.ref.CapabilityListType
+        Public Property CapabilityList() As OASIS.BIAS.V2.CapabilityListType
             Get
                 Return Me.CapabilityListField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CapabilityListType)
+            Set(value As OASIS.BIAS.V2.CapabilityListType)
                 Me.CapabilityListField = value
             End Set
         End Property
@@ -2768,16 +2768,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="RetrieveBiographicDataResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class RetrieveBiographicDataResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -2787,16 +2787,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="RetrieveBiometricDataResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class RetrieveBiometricDataResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -2806,16 +2806,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="SetBiographicDataResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class SetBiographicDataResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -2825,16 +2825,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="SetBiometricDataResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class SetBiometricDataResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -2844,16 +2844,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="TransformBiometricDataResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class TransformBiometricDataResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
-        Private OutputBIRField As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type
+        Private OutputBIRField As OASIS.BIAS.V2.CBEFF_BIR_Type
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property OutputBIR() As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type
+        Public Property OutputBIR() As OASIS.BIAS.V2.CBEFF_BIR_Type
             Get
                 Return Me.OutputBIRField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CBEFF_BIR_Type)
+            Set(value As OASIS.BIAS.V2.CBEFF_BIR_Type)
                 Me.OutputBIRField = value
             End Set
         End Property
@@ -2863,25 +2863,25 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="UpdateBiographicDataResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class UpdateBiographicDataResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="UpdateBiometricDataResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class UpdateBiometricDataResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="VerifySubjectResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class VerifySubjectResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.ResponseTemplate
+        Inherits OASIS.BIAS.V2.ResponseTemplate
 
         Private MatchField As Boolean
 
-        Private ScoreField As gov.nist.itl.iad.ig.bias.ref.ScoreType
+        Private ScoreField As OASIS.BIAS.V2.ScoreType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True)> _
         Public Property Match() As Boolean
@@ -2894,11 +2894,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property Score() As gov.nist.itl.iad.ig.bias.ref.ScoreType
+        Public Property Score() As OASIS.BIAS.V2.ScoreType
             Get
                 Return Me.ScoreField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.ScoreType)
+            Set(value As OASIS.BIAS.V2.ScoreType)
                 Me.ScoreField = value
             End Set
         End Property
@@ -2908,28 +2908,28 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="EnrollResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class EnrollResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.AggregateResponseTemplate
+        Inherits OASIS.BIAS.V2.AggregateResponseTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
-        Private TokenField As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Private TokenField As OASIS.BIAS.V2.TokenType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property Token() As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Public Property Token() As OASIS.BIAS.V2.TokenType
             Get
                 Return Me.TokenField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.TokenType)
+            Set(value As OASIS.BIAS.V2.TokenType)
                 Me.TokenField = value
             End Set
         End Property
@@ -2939,16 +2939,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="GetEnrollResultsResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class GetEnrollResultsResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.AggregateResponseTemplate
+        Inherits OASIS.BIAS.V2.AggregateResponseTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -2958,28 +2958,28 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="GetIdentifyResultsResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class GetIdentifyResultsResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.AggregateResponseTemplate
+        Inherits OASIS.BIAS.V2.AggregateResponseTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
-        Private CandidateListField As gov.nist.itl.iad.ig.bias.ref.CandidateListType
+        Private CandidateListField As OASIS.BIAS.V2.CandidateListType
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=1)> _
-        Public Property CandidateList() As gov.nist.itl.iad.ig.bias.ref.CandidateListType
+        Public Property CandidateList() As OASIS.BIAS.V2.CandidateListType
             Get
                 Return Me.CandidateListField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CandidateListType)
+            Set(value As OASIS.BIAS.V2.CandidateListType)
                 Me.CandidateListField = value
             End Set
         End Property
@@ -2989,13 +2989,13 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="GetVerifyResultsResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class GetVerifyResultsResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.AggregateResponseTemplate
+        Inherits OASIS.BIAS.V2.AggregateResponseTemplate
 
         Private MatchField As Boolean
 
-        Private ScoreField As gov.nist.itl.iad.ig.bias.ref.ScoreType
+        Private ScoreField As OASIS.BIAS.V2.ScoreType
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         <System.Runtime.Serialization.DataMemberAttribute()> _
         Public Property Match() As Boolean
@@ -3008,21 +3008,21 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property Score() As gov.nist.itl.iad.ig.bias.ref.ScoreType
+        Public Property Score() As OASIS.BIAS.V2.ScoreType
             Get
                 Return Me.ScoreField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.ScoreType)
+            Set(value As OASIS.BIAS.V2.ScoreType)
                 Me.ScoreField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=2)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -3032,40 +3032,40 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="IdentifyResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class IdentifyResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.AggregateResponseTemplate
+        Inherits OASIS.BIAS.V2.AggregateResponseTemplate
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
-        Private CandidateListField As gov.nist.itl.iad.ig.bias.ref.CandidateListType
+        Private CandidateListField As OASIS.BIAS.V2.CandidateListType
 
-        Private TokenField As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Private TokenField As OASIS.BIAS.V2.TokenType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=1)> _
-        Public Property CandidateList() As gov.nist.itl.iad.ig.bias.ref.CandidateListType
+        Public Property CandidateList() As OASIS.BIAS.V2.CandidateListType
             Get
                 Return Me.CandidateListField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CandidateListType)
+            Set(value As OASIS.BIAS.V2.CandidateListType)
                 Me.CandidateListField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=2)> _
-        Public Property Token() As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Public Property Token() As OASIS.BIAS.V2.TokenType
             Get
                 Return Me.TokenField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.TokenType)
+            Set(value As OASIS.BIAS.V2.TokenType)
                 Me.TokenField = value
             End Set
         End Property
@@ -3075,22 +3075,22 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="RetrieveDataResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class RetrieveDataResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.AggregateResponseTemplate
+        Inherits OASIS.BIAS.V2.AggregateResponseTemplate
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="VerifyResponsePackage", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class VerifyResponsePackage
-        Inherits gov.nist.itl.iad.ig.bias.ref.AggregateResponseTemplate
+        Inherits OASIS.BIAS.V2.AggregateResponseTemplate
 
         Private MatchField As Boolean
 
-        Private ScoreField As gov.nist.itl.iad.ig.bias.ref.ScoreType
+        Private ScoreField As OASIS.BIAS.V2.ScoreType
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
-        Private TokenField As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Private TokenField As OASIS.BIAS.V2.TokenType
 
         <System.Runtime.Serialization.DataMemberAttribute()> _
         Public Property Match() As Boolean
@@ -3103,31 +3103,31 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property Score() As gov.nist.itl.iad.ig.bias.ref.ScoreType
+        Public Property Score() As OASIS.BIAS.V2.ScoreType
             Get
                 Return Me.ScoreField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.ScoreType)
+            Set(value As OASIS.BIAS.V2.ScoreType)
                 Me.ScoreField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=2)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=3)> _
-        Public Property Token() As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Public Property Token() As OASIS.BIAS.V2.TokenType
             Get
                 Return Me.TokenField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.TokenType)
+            Set(value As OASIS.BIAS.V2.TokenType)
                 Me.TokenField = value
             End Set
         End Property
@@ -3142,7 +3142,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
-        Private QualityScoreField As gov.nist.itl.iad.ig.bias.ref.QualityType
+        Private QualityScoreField As OASIS.BIAS.V2.QualityType
 
         Private AlgorithmVendorField As String
 
@@ -3160,11 +3160,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property QualityScore() As gov.nist.itl.iad.ig.bias.ref.QualityType
+        Public Property QualityScore() As OASIS.BIAS.V2.QualityType
             Get
                 Return Me.QualityScoreField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.QualityType)
+            Set(value As OASIS.BIAS.V2.QualityType)
                 Me.QualityScoreField = value
             End Set
         End Property
@@ -3290,7 +3290,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.CollectionDataContractAttribute(Name:="CandidateListType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ItemName:="Candidate")> _
     Public Class CandidateListType
-        Inherits System.Collections.Generic.List(Of gov.nist.itl.iad.ig.bias.ref.CandidateType)
+        Inherits System.Collections.Generic.List(Of OASIS.BIAS.V2.CandidateType)
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
@@ -3302,13 +3302,13 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
-        Private ScoreListField As gov.nist.itl.iad.ig.bias.ref.CandidateType.ScoreListType
+        Private ScoreListField As OASIS.BIAS.V2.CandidateType.ScoreListType
 
-        Private IdentityField As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
         Private RankField As Long
 
-        Private BiographicDataField As gov.nist.itl.iad.ig.bias.ref.BiographicDataType
+        Private BiographicDataField As OASIS.BIAS.V2.BiographicDataType
 
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
@@ -3320,21 +3320,21 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property ScoreList() As gov.nist.itl.iad.ig.bias.ref.CandidateType.ScoreListType
+        Public Property ScoreList() As OASIS.BIAS.V2.CandidateType.ScoreListType
             Get
                 Return Me.ScoreListField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CandidateType.ScoreListType)
+            Set(value As OASIS.BIAS.V2.CandidateType.ScoreListType)
                 Me.ScoreListField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False, Order:=1)> _
-        Public Property Identity() As gov.nist.itl.iad.ig.bias.ref.BIASIdentity
+        Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASIdentity)
+            Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
             End Set
         End Property
@@ -3350,11 +3350,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=3)> _
-        Public Property BiographicData() As gov.nist.itl.iad.ig.bias.ref.BiographicDataType
+        Public Property BiographicData() As OASIS.BIAS.V2.BiographicDataType
             Get
                 Return Me.BiographicDataField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BiographicDataType)
+            Set(value As OASIS.BIAS.V2.BiographicDataType)
                 Me.BiographicDataField = value
             End Set
         End Property
@@ -3368,7 +3368,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
             Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
-            Private ScoreField As gov.nist.itl.iad.ig.bias.ref.ScoreType
+            Private ScoreField As OASIS.BIAS.V2.ScoreType
 
             Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
                 Get
@@ -3380,11 +3380,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
             End Property
 
             <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-            Public Property Score() As gov.nist.itl.iad.ig.bias.ref.ScoreType
+            Public Property Score() As OASIS.BIAS.V2.ScoreType
                 Get
                     Return Me.ScoreField
                 End Get
-                Set(value As gov.nist.itl.iad.ig.bias.ref.ScoreType)
+                Set(value As OASIS.BIAS.V2.ScoreType)
                     Me.ScoreField = value
                 End Set
             End Property
@@ -3402,9 +3402,9 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private ValueField As Single
 
-        Private BiometricTypeField As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType
+        Private BiometricTypeField As OASIS.BIAS.V2.MultipleTypesType
 
-        Private BiometricSubTypeField As gov.nist.itl.iad.ig.bias.ref.SubtypeType
+        Private BiometricSubTypeField As OASIS.BIAS.V2.SubtypeType
 
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
@@ -3426,21 +3426,21 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=1)> _
-        Public Property BiometricType() As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType
+        Public Property BiometricType() As OASIS.BIAS.V2.MultipleTypesType
             Get
                 Return Me.BiometricTypeField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType)
+            Set(value As OASIS.BIAS.V2.MultipleTypesType)
                 Me.BiometricTypeField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=2)> _
-        Public Property BiometricSubType() As gov.nist.itl.iad.ig.bias.ref.SubtypeType
+        Public Property BiometricSubType() As OASIS.BIAS.V2.SubtypeType
             Get
                 Return Me.BiometricSubTypeField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.SubtypeType)
+            Set(value As OASIS.BIAS.V2.SubtypeType)
                 Me.BiometricSubTypeField = value
             End Set
         End Property
@@ -3449,8 +3449,8 @@ Namespace gov.nist.itl.iad.ig.bias.ref
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="IdentifySubjectResultType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/"), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.CandidateListResultType)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.TokenResultType))> _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.CandidateListResultType)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.TokenResultType))> _
     Partial Public Class IdentifySubjectResultType
         Inherits Object
         Implements System.Runtime.Serialization.IExtensibleDataObject
@@ -3471,16 +3471,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="CandidateListResultType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class CandidateListResultType
-        Inherits gov.nist.itl.iad.ig.bias.ref.IdentifySubjectResultType
+        Inherits OASIS.BIAS.V2.IdentifySubjectResultType
 
-        Private CandidateListField As gov.nist.itl.iad.ig.bias.ref.CandidateListType
+        Private CandidateListField As OASIS.BIAS.V2.CandidateListType
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property CandidateList() As gov.nist.itl.iad.ig.bias.ref.CandidateListType
+        Public Property CandidateList() As OASIS.BIAS.V2.CandidateListType
             Get
                 Return Me.CandidateListField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CandidateListType)
+            Set(value As OASIS.BIAS.V2.CandidateListType)
                 Me.CandidateListField = value
             End Set
         End Property
@@ -3490,16 +3490,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="TokenResultType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class TokenResultType
-        Inherits gov.nist.itl.iad.ig.bias.ref.IdentifySubjectResultType
+        Inherits OASIS.BIAS.V2.IdentifySubjectResultType
 
-        Private TokenField As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Private TokenField As OASIS.BIAS.V2.TokenType
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property Token() As gov.nist.itl.iad.ig.bias.ref.TokenType
+        Public Property Token() As OASIS.BIAS.V2.TokenType
             Get
                 Return Me.TokenField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.TokenType)
+            Set(value As OASIS.BIAS.V2.TokenType)
                 Me.TokenField = value
             End Set
         End Property
@@ -3514,7 +3514,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
-        Private BiometricTypeFiltersField As gov.nist.itl.iad.ig.bias.ref.ListFilterType.BiometricTypeFiltersType
+        Private BiometricTypeFiltersField As OASIS.BIAS.V2.ListFilterType.BiometricTypeFiltersType
 
         Private IncludeBiometricSubtypeField As Boolean
 
@@ -3528,11 +3528,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property BiometricTypeFilters() As gov.nist.itl.iad.ig.bias.ref.ListFilterType.BiometricTypeFiltersType
+        Public Property BiometricTypeFilters() As OASIS.BIAS.V2.ListFilterType.BiometricTypeFiltersType
             Get
                 Return Me.BiometricTypeFiltersField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.ListFilterType.BiometricTypeFiltersType)
+            Set(value As OASIS.BIAS.V2.ListFilterType.BiometricTypeFiltersType)
                 Me.BiometricTypeFiltersField = value
             End Set
         End Property
@@ -3551,7 +3551,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
          System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
          System.Runtime.Serialization.CollectionDataContractAttribute(Name:="ListFilterType.BiometricTypeFiltersType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ItemName:="BiometricTypeFilter")> _
         Public Class BiometricTypeFiltersType
-            Inherits System.Collections.Generic.List(Of gov.nist.itl.iad.ig.bias.ref.MultipleTypesType)
+            Inherits System.Collections.Generic.List(Of OASIS.BIAS.V2.MultipleTypesType)
         End Class
     End Class
 
@@ -3559,14 +3559,14 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.CollectionDataContractAttribute(Name:="FusionIdentityListType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ItemName:="FusionIdentity")> _
     Public Class FusionIdentityListType
-        Inherits System.Collections.Generic.List(Of gov.nist.itl.iad.ig.bias.ref.FusionInformationListType)
+        Inherits System.Collections.Generic.List(Of OASIS.BIAS.V2.FusionInformationListType)
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.CollectionDataContractAttribute(Name:="FusionInformationListType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ItemName:="FusionElement")> _
     Public Class FusionInformationListType
-        Inherits System.Collections.Generic.List(Of gov.nist.itl.iad.ig.bias.ref.FusionInformationType)
+        Inherits System.Collections.Generic.List(Of OASIS.BIAS.V2.FusionInformationType)
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
@@ -3578,15 +3578,15 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
-        Private BiometricTypeField As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType
+        Private BiometricTypeField As OASIS.BIAS.V2.MultipleTypesType
 
-        Private BiometricSubTypeField As gov.nist.itl.iad.ig.bias.ref.SubtypeType
+        Private BiometricSubTypeField As OASIS.BIAS.V2.SubtypeType
 
         Private AlgorithmOwnerField As String
 
         Private AlgorithmTypeField As String
 
-        Private FusionResultField As gov.nist.itl.iad.ig.bias.ref.FusionResult
+        Private FusionResultField As OASIS.BIAS.V2.FusionResult
 
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
@@ -3598,21 +3598,21 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property BiometricType() As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType
+        Public Property BiometricType() As OASIS.BIAS.V2.MultipleTypesType
             Get
                 Return Me.BiometricTypeField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.MultipleTypesType)
+            Set(value As OASIS.BIAS.V2.MultipleTypesType)
                 Me.BiometricTypeField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=1)> _
-        Public Property BiometricSubType() As gov.nist.itl.iad.ig.bias.ref.SubtypeType
+        Public Property BiometricSubType() As OASIS.BIAS.V2.SubtypeType
             Get
                 Return Me.BiometricSubTypeField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.SubtypeType)
+            Set(value As OASIS.BIAS.V2.SubtypeType)
                 Me.BiometricSubTypeField = value
             End Set
         End Property
@@ -3638,11 +3638,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False, Order:=4)> _
-        Public Property FusionResult() As gov.nist.itl.iad.ig.bias.ref.FusionResult
+        Public Property FusionResult() As OASIS.BIAS.V2.FusionResult
             Get
                 Return Me.FusionResultField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.FusionResult)
+            Set(value As OASIS.BIAS.V2.FusionResult)
                 Me.FusionResultField = value
             End Set
         End Property
@@ -3651,8 +3651,8 @@ Namespace gov.nist.itl.iad.ig.bias.ref
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="FusionResult", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/"), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.FusionScore)), _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.FusionDecision))> _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.FusionScore)), _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(OASIS.BIAS.V2.FusionDecision))> _
     Partial Public Class FusionResult
         Inherits Object
         Implements System.Runtime.Serialization.IExtensibleDataObject
@@ -3673,16 +3673,16 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="FusionScore", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class FusionScore
-        Inherits gov.nist.itl.iad.ig.bias.ref.FusionResult
+        Inherits OASIS.BIAS.V2.FusionResult
 
-        Private ScoreField As gov.nist.itl.iad.ig.bias.ref.ScoreType
+        Private ScoreField As OASIS.BIAS.V2.ScoreType
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
-        Public Property Score() As gov.nist.itl.iad.ig.bias.ref.ScoreType
+        Public Property Score() As OASIS.BIAS.V2.ScoreType
             Get
                 Return Me.ScoreField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.ScoreType)
+            Set(value As OASIS.BIAS.V2.ScoreType)
                 Me.ScoreField = value
             End Set
         End Property
@@ -3692,7 +3692,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.DataContractAttribute(Name:="FusionDecision", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class FusionDecision
-        Inherits gov.nist.itl.iad.ig.bias.ref.FusionResult
+        Inherits OASIS.BIAS.V2.FusionResult
 
         Private DecisionField As String
 
@@ -3711,7 +3711,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
      System.Runtime.Serialization.CollectionDataContractAttribute(Name:="CapabilityListType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ItemName:="Capability")> _
     Public Class CapabilityListType
-        Inherits System.Collections.Generic.List(Of gov.nist.itl.iad.ig.bias.ref.CapabilityType)
+        Inherits System.Collections.Generic.List(Of OASIS.BIAS.V2.CapabilityType)
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
@@ -3723,7 +3723,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
-        Private CapabilityNameField As gov.nist.itl.iad.ig.bias.ref.CapabilityName
+        Private CapabilityNameField As OASIS.BIAS.V2.CapabilityName
 
         Private CapabilityIDField As String
 
@@ -3745,11 +3745,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True)> _
-        Public Property CapabilityName() As gov.nist.itl.iad.ig.bias.ref.CapabilityName
+        Public Property CapabilityName() As OASIS.BIAS.V2.CapabilityName
             Get
                 Return Me.CapabilityNameField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.CapabilityName)
+            Set(value As OASIS.BIAS.V2.CapabilityName)
                 Me.CapabilityNameField = value
             End Set
         End Property
@@ -3867,7 +3867,7 @@ Namespace gov.nist.itl.iad.ig.bias.ref
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
-        Private BIASFaultTypeField As gov.nist.itl.iad.ig.bias.ref.BIASFaultCode
+        Private BIASFaultTypeField As OASIS.BIAS.V2.BIASFaultCode
 
         Private BIASFaultMessageField As String
 
@@ -3883,11 +3883,11 @@ Namespace gov.nist.itl.iad.ig.bias.ref
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True)> _
-        Public Property BIASFaultType() As gov.nist.itl.iad.ig.bias.ref.BIASFaultCode
+        Public Property BIASFaultType() As OASIS.BIAS.V2.BIASFaultCode
             Get
                 Return Me.BIASFaultTypeField
             End Get
-            Set(value As gov.nist.itl.iad.ig.bias.ref.BIASFaultCode)
+            Set(value As OASIS.BIAS.V2.BIASFaultCode)
                 Me.BIASFaultTypeField = value
             End Set
         End Property
@@ -3967,136 +3967,136 @@ Namespace gov.nist.itl.iad.ig.bias.ref
     End Enum
 
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0"), _
-     System.ServiceModel.ServiceContractAttribute([Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ConfigurationName:="gov.nist.itl.iad.ig.bias.ref.BIAS_v1")> _
+     System.ServiceModel.ServiceContractAttribute([Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ConfigurationName:="OASIS.BIAS.V2.BIAS_v1")> _
     Public Interface BIAS_v1
 
         <System.ServiceModel.OperationContractAttribute(Action:="AddSubjectToGallery", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="AddSubjectToGallery", Name:="BIASFault")> _
-        Function AddSubjectToGallery(ByVal AddSubjectToGalleryRequest As gov.nist.itl.iad.ig.bias.ref.AddSubjectToGalleryRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="AddSubjectToGalleryResponsePackage")> gov.nist.itl.iad.ig.bias.ref.AddSubjectToGalleryResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="AddSubjectToGallery", Name:="BIASFault")> _
+        Function AddSubjectToGallery(ByVal AddSubjectToGalleryRequest As OASIS.BIAS.V2.AddSubjectToGalleryRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="AddSubjectToGalleryResponsePackage")> OASIS.BIAS.V2.AddSubjectToGalleryResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="CheckQuality", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="CheckQuality", Name:="BIASFault")> _
-        Function CheckQuality(ByVal CheckQualityRequest As gov.nist.itl.iad.ig.bias.ref.CheckQualityRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="CheckQualityResponsePackage")> gov.nist.itl.iad.ig.bias.ref.CheckQualityResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="CheckQuality", Name:="BIASFault")> _
+        Function CheckQuality(ByVal CheckQualityRequest As OASIS.BIAS.V2.CheckQualityRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="CheckQualityResponsePackage")> OASIS.BIAS.V2.CheckQualityResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="ClassifyBiometricData", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="ClassifyBiometricData", Name:="BIASFault")> _
-        Function ClassifyBiometricData(ByVal ClassifyBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.ClassifyBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="ClassifyBiometricDataResponsePackage")> gov.nist.itl.iad.ig.bias.ref.ClassifyBiometricDataResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="ClassifyBiometricData", Name:="BIASFault")> _
+        Function ClassifyBiometricData(ByVal ClassifyBiometricDataRequest As OASIS.BIAS.V2.ClassifyBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="ClassifyBiometricDataResponsePackage")> OASIS.BIAS.V2.ClassifyBiometricDataResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="CreateSubject", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="CreateSubject", Name:="BIASFault")> _
-        Function CreateSubject(ByVal CreateSubjectRequest As gov.nist.itl.iad.ig.bias.ref.CreateSubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="CreateSubjectResponsePackage")> gov.nist.itl.iad.ig.bias.ref.CreateSubjectResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="CreateSubject", Name:="BIASFault")> _
+        Function CreateSubject(ByVal CreateSubjectRequest As OASIS.BIAS.V2.CreateSubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="CreateSubjectResponsePackage")> OASIS.BIAS.V2.CreateSubjectResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="DeleteBiographicData", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="DeleteBiographicData", Name:="BIASFault")> _
-        Function DeleteBiographicData(ByVal DeleteBiographicDataRequest As gov.nist.itl.iad.ig.bias.ref.DeleteBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteBiographicDataResponsePackage")> gov.nist.itl.iad.ig.bias.ref.DeleteBiographicDataResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="DeleteBiographicData", Name:="BIASFault")> _
+        Function DeleteBiographicData(ByVal DeleteBiographicDataRequest As OASIS.BIAS.V2.DeleteBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteBiographicDataResponsePackage")> OASIS.BIAS.V2.DeleteBiographicDataResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="DeleteBiometricData", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="DeleteBiometricData", Name:="BIASFault")> _
-        Function DeleteBiometricData(ByVal DeleteBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.DeleteBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteBiometricDataResponsePackage")> gov.nist.itl.iad.ig.bias.ref.DeleteBiometricDataResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="DeleteBiometricData", Name:="BIASFault")> _
+        Function DeleteBiometricData(ByVal DeleteBiometricDataRequest As OASIS.BIAS.V2.DeleteBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteBiometricDataResponsePackage")> OASIS.BIAS.V2.DeleteBiometricDataResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="DeleteSubject", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="DeleteSubject", Name:="BIASFault")> _
-        Function DeleteSubject(ByVal DeleteSubjectRequest As gov.nist.itl.iad.ig.bias.ref.DeleteSubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteSubjectResponsePackage")> gov.nist.itl.iad.ig.bias.ref.DeleteSubjectResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="DeleteSubject", Name:="BIASFault")> _
+        Function DeleteSubject(ByVal DeleteSubjectRequest As OASIS.BIAS.V2.DeleteSubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteSubjectResponsePackage")> OASIS.BIAS.V2.DeleteSubjectResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="DeleteSubjectFromGallery", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="DeleteSubjectFromGallery", Name:="BIASFault")> _
-        Function DeleteSubjectFromGallery(ByVal DeleteSubjectFromGalleryRequest As gov.nist.itl.iad.ig.bias.ref.DeleteSubjectFromGalleryRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteSubjectFromGalleryResponsePackage")> gov.nist.itl.iad.ig.bias.ref.DeleteSubjectFromGalleryResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="DeleteSubjectFromGallery", Name:="BIASFault")> _
+        Function DeleteSubjectFromGallery(ByVal DeleteSubjectFromGalleryRequest As OASIS.BIAS.V2.DeleteSubjectFromGalleryRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteSubjectFromGalleryResponsePackage")> OASIS.BIAS.V2.DeleteSubjectFromGalleryResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="GetIdentifySubjectResults", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="GetIdentifySubjectResults", Name:="BIASFault")> _
-        Function GetIdentifySubjectResults(ByVal GetIdentifySubjectResultsRequest As gov.nist.itl.iad.ig.bias.ref.GetIdentifySubjectResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetIdentifySubjectResultsResponsePackage")> gov.nist.itl.iad.ig.bias.ref.GetIdentifySubjectResultsResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="GetIdentifySubjectResults", Name:="BIASFault")> _
+        Function GetIdentifySubjectResults(ByVal GetIdentifySubjectResultsRequest As OASIS.BIAS.V2.GetIdentifySubjectResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetIdentifySubjectResultsResponsePackage")> OASIS.BIAS.V2.GetIdentifySubjectResultsResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="IdentifySubject", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="IdentifySubject", Name:="BIASFault")> _
-        Function IdentifySubject(ByVal IdentifySubjectRequest As gov.nist.itl.iad.ig.bias.ref.IdentifySubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="IdentifySubjectResponsePackage")> gov.nist.itl.iad.ig.bias.ref.IdentifySubjectResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="IdentifySubject", Name:="BIASFault")> _
+        Function IdentifySubject(ByVal IdentifySubjectRequest As OASIS.BIAS.V2.IdentifySubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="IdentifySubjectResponsePackage")> OASIS.BIAS.V2.IdentifySubjectResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="ListBiographicData", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="ListBiographicData", Name:="BIASFault")> _
-        Function ListBiographicData(ByVal ListBiographicDataRequest As gov.nist.itl.iad.ig.bias.ref.ListBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="ListBiographicDataResponsePackage")> gov.nist.itl.iad.ig.bias.ref.ListBiographicDataResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="ListBiographicData", Name:="BIASFault")> _
+        Function ListBiographicData(ByVal ListBiographicDataRequest As OASIS.BIAS.V2.ListBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="ListBiographicDataResponsePackage")> OASIS.BIAS.V2.ListBiographicDataResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="ListBiometricData", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="ListBiometricData", Name:="BIASFault")> _
-        Function ListBiometricData(ByVal ListBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.ListBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="ListBiometricDataResponsePackage")> gov.nist.itl.iad.ig.bias.ref.ListBiometricDataResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="ListBiometricData", Name:="BIASFault")> _
+        Function ListBiometricData(ByVal ListBiometricDataRequest As OASIS.BIAS.V2.ListBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="ListBiometricDataResponsePackage")> OASIS.BIAS.V2.ListBiometricDataResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="PerformFusion", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="PerformFusion", Name:="BIASFault")> _
-        Function PerformFusion(ByVal PerformFusionRequest As gov.nist.itl.iad.ig.bias.ref.PerformFusionRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="PerformFusionResponsePackage")> gov.nist.itl.iad.ig.bias.ref.PerformFusionResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="PerformFusion", Name:="BIASFault")> _
+        Function PerformFusion(ByVal PerformFusionRequest As OASIS.BIAS.V2.PerformFusionRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="PerformFusionResponsePackage")> OASIS.BIAS.V2.PerformFusionResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="QueryCapabilities", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="QueryCapabilities", Name:="BIASFault")> _
-        Function QueryCapabilities(ByVal QueryCapabilitiesRequest As gov.nist.itl.iad.ig.bias.ref.QueryCapabilitiesRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="QueryCapabilitiesResponsePackage")> gov.nist.itl.iad.ig.bias.ref.QueryCapabilitiesResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="QueryCapabilities", Name:="BIASFault")> _
+        Function QueryCapabilities(ByVal QueryCapabilitiesRequest As OASIS.BIAS.V2.QueryCapabilitiesRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="QueryCapabilitiesResponsePackage")> OASIS.BIAS.V2.QueryCapabilitiesResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="RetrieveBiographicData", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="RetrieveBiographicData", Name:="BIASFault")> _
-        Function RetrieveBiographicData(ByVal RetrieveBiographicDataRequest As gov.nist.itl.iad.ig.bias.ref.RetrieveBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="RetrieveBiographicDataResponsePackage")> gov.nist.itl.iad.ig.bias.ref.RetrieveBiographicDataResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="RetrieveBiographicData", Name:="BIASFault")> _
+        Function RetrieveBiographicData(ByVal RetrieveBiographicDataRequest As OASIS.BIAS.V2.RetrieveBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="RetrieveBiographicDataResponsePackage")> OASIS.BIAS.V2.RetrieveBiographicDataResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="RetrieveBiometricData", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="RetrieveBiometricData", Name:="BIASFault")> _
-        Function RetrieveBiometricData(ByVal RetrieveBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.RetrieveBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="RetrieveBiometricDataResponsePackage")> gov.nist.itl.iad.ig.bias.ref.RetrieveBiometricDataResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="RetrieveBiometricData", Name:="BIASFault")> _
+        Function RetrieveBiometricData(ByVal RetrieveBiometricDataRequest As OASIS.BIAS.V2.RetrieveBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="RetrieveBiometricDataResponsePackage")> OASIS.BIAS.V2.RetrieveBiometricDataResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="SetBiographicData", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="SetBiographicData", Name:="BIASFault")> _
-        Function SetBiographicData(ByVal SetBiographicDataRequest As gov.nist.itl.iad.ig.bias.ref.SetBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="SetBiographicDataResponsePackage")> gov.nist.itl.iad.ig.bias.ref.SetBiographicDataResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="SetBiographicData", Name:="BIASFault")> _
+        Function SetBiographicData(ByVal SetBiographicDataRequest As OASIS.BIAS.V2.SetBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="SetBiographicDataResponsePackage")> OASIS.BIAS.V2.SetBiographicDataResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="SetBiometricData", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="SetBiometricData", Name:="BIASFault")> _
-        Function SetBiometricData(ByVal SetBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.SetBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="SetBiometricDataResponsePackage")> gov.nist.itl.iad.ig.bias.ref.SetBiometricDataResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="SetBiometricData", Name:="BIASFault")> _
+        Function SetBiometricData(ByVal SetBiometricDataRequest As OASIS.BIAS.V2.SetBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="SetBiometricDataResponsePackage")> OASIS.BIAS.V2.SetBiometricDataResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="TransformBiometricData", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="TransformBiometricData", Name:="BIASFault")> _
-        Function TransformBiometricData(ByVal TransformBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.TransformBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="TransformBiometricDataResponsePackage")> gov.nist.itl.iad.ig.bias.ref.TransformBiometricDataResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="TransformBiometricData", Name:="BIASFault")> _
+        Function TransformBiometricData(ByVal TransformBiometricDataRequest As OASIS.BIAS.V2.TransformBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="TransformBiometricDataResponsePackage")> OASIS.BIAS.V2.TransformBiometricDataResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="UpdateBiographicData", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="UpdateBiographicData", Name:="BIASFault")> _
-        Function UpdateBiographicData(ByVal UpdateBiographicDataRequest As gov.nist.itl.iad.ig.bias.ref.UpdateBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="UpdateBiographicDataResponsePackage")> gov.nist.itl.iad.ig.bias.ref.UpdateBiographicDataResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="UpdateBiographicData", Name:="BIASFault")> _
+        Function UpdateBiographicData(ByVal UpdateBiographicDataRequest As OASIS.BIAS.V2.UpdateBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="UpdateBiographicDataResponsePackage")> OASIS.BIAS.V2.UpdateBiographicDataResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="UpdateBiometricData", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="UpdateBiometricData", Name:="BIASFault")> _
-        Function UpdateBiometricData(ByVal UpdateBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.UpdateBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="UpdateBiometricDataResponsePackage")> gov.nist.itl.iad.ig.bias.ref.UpdateBiometricDataResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="UpdateBiometricData", Name:="BIASFault")> _
+        Function UpdateBiometricData(ByVal UpdateBiometricDataRequest As OASIS.BIAS.V2.UpdateBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="UpdateBiometricDataResponsePackage")> OASIS.BIAS.V2.UpdateBiometricDataResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="VerifySubject", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="VerifySubject", Name:="BIASFault")> _
-        Function VerifySubject(ByVal VerifySubjectRequest As gov.nist.itl.iad.ig.bias.ref.VerifySubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="VerifySubjectResponsePackage")> gov.nist.itl.iad.ig.bias.ref.VerifySubjectResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="VerifySubject", Name:="BIASFault")> _
+        Function VerifySubject(ByVal VerifySubjectRequest As OASIS.BIAS.V2.VerifySubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="VerifySubjectResponsePackage")> OASIS.BIAS.V2.VerifySubjectResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="Enroll", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="Enroll", Name:="BIASFault")> _
-        Function Enroll(ByVal EnrollRequest As gov.nist.itl.iad.ig.bias.ref.EnrollRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="EnrollResponsePackage")> gov.nist.itl.iad.ig.bias.ref.EnrollResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="Enroll", Name:="BIASFault")> _
+        Function Enroll(ByVal EnrollRequest As OASIS.BIAS.V2.EnrollRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="EnrollResponsePackage")> OASIS.BIAS.V2.EnrollResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="GetEnrollResults", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="GetEnrollResults", Name:="BIASFault")> _
-        Function GetEnrollResults(ByVal GetEnrollResultsRequest As gov.nist.itl.iad.ig.bias.ref.GetEnrollResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetEnrollResultsResponsePackage")> gov.nist.itl.iad.ig.bias.ref.GetEnrollResultsResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="GetEnrollResults", Name:="BIASFault")> _
+        Function GetEnrollResults(ByVal GetEnrollResultsRequest As OASIS.BIAS.V2.GetEnrollResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetEnrollResultsResponsePackage")> OASIS.BIAS.V2.GetEnrollResultsResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="GetIdentifyResults", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="GetIdentifyResults", Name:="BIASFault")> _
-        Function GetIdentifyResults(ByVal GetIdentifyResultsRequest As gov.nist.itl.iad.ig.bias.ref.GetIdentifyResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetIdentifyResultsResponsePackage")> gov.nist.itl.iad.ig.bias.ref.GetIdentifyResultsResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="GetIdentifyResults", Name:="BIASFault")> _
+        Function GetIdentifyResults(ByVal GetIdentifyResultsRequest As OASIS.BIAS.V2.GetIdentifyResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetIdentifyResultsResponsePackage")> OASIS.BIAS.V2.GetIdentifyResultsResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="GetVerifyResults", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="GetVerifyResults", Name:="BIASFault")> _
-        Function GetVerifyResults(ByVal GetVerifyResultsRequest As gov.nist.itl.iad.ig.bias.ref.GetVerifyResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetVerifyResultsResponsePackage")> gov.nist.itl.iad.ig.bias.ref.GetVerifyResultsResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="GetVerifyResults", Name:="BIASFault")> _
+        Function GetVerifyResults(ByVal GetVerifyResultsRequest As OASIS.BIAS.V2.GetVerifyResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetVerifyResultsResponsePackage")> OASIS.BIAS.V2.GetVerifyResultsResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="Identify", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="Identify", Name:="BIASFault")> _
-        Function Identify(ByVal IdentifyRequest As gov.nist.itl.iad.ig.bias.ref.IdentifyRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="IdentifyResponsePackage")> gov.nist.itl.iad.ig.bias.ref.IdentifyResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="Identify", Name:="BIASFault")> _
+        Function Identify(ByVal IdentifyRequest As OASIS.BIAS.V2.IdentifyRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="IdentifyResponsePackage")> OASIS.BIAS.V2.IdentifyResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="RetrieveData", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="RetrieveData", Name:="BIASFault")> _
-        Function RetrieveData(ByVal RetrieveDataRequest As gov.nist.itl.iad.ig.bias.ref.RetrieveDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="RetrieveDataResponsePackage")> gov.nist.itl.iad.ig.bias.ref.RetrieveDataResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="RetrieveData", Name:="BIASFault")> _
+        Function RetrieveData(ByVal RetrieveDataRequest As OASIS.BIAS.V2.RetrieveDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="RetrieveDataResponsePackage")> OASIS.BIAS.V2.RetrieveDataResponsePackage
 
         <System.ServiceModel.OperationContractAttribute(Action:="Verify", ReplyAction:="*"), _
-         System.ServiceModel.FaultContractAttribute(GetType(gov.nist.itl.iad.ig.bias.ref.BIASFaultDetail), Action:="Verify", Name:="BIASFault")> _
-        Function Verify(ByVal VerifyRequest As gov.nist.itl.iad.ig.bias.ref.VerifyRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="VerifyResponsePackage")> gov.nist.itl.iad.ig.bias.ref.VerifyResponsePackage
+         System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="Verify", Name:="BIASFault")> _
+        Function Verify(ByVal VerifyRequest As OASIS.BIAS.V2.VerifyRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="VerifyResponsePackage")> OASIS.BIAS.V2.VerifyResponsePackage
     End Interface
 
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")> _
     Public Interface BIAS_v1Channel
-        Inherits gov.nist.itl.iad.ig.bias.ref.BIAS_v1, System.ServiceModel.IClientChannel
+        Inherits OASIS.BIAS.V2.BIAS_v1, System.ServiceModel.IClientChannel
     End Interface
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")> _
     Partial Public Class BIAS_v1Client
-        Inherits System.ServiceModel.ClientBase(Of gov.nist.itl.iad.ig.bias.ref.BIAS_v1)
-        Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1
+        Inherits System.ServiceModel.ClientBase(Of OASIS.BIAS.V2.BIAS_v1)
+        Implements OASIS.BIAS.V2.BIAS_v1
 
         Public Sub New()
             MyBase.New()
@@ -4118,119 +4118,119 @@ Namespace gov.nist.itl.iad.ig.bias.ref
             MyBase.New(binding, remoteAddress)
         End Sub
 
-        Public Function AddSubjectToGallery(ByVal AddSubjectToGalleryRequest As gov.nist.itl.iad.ig.bias.ref.AddSubjectToGalleryRequest) As gov.nist.itl.iad.ig.bias.ref.AddSubjectToGalleryResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.AddSubjectToGallery
+        Public Function AddSubjectToGallery(ByVal AddSubjectToGalleryRequest As OASIS.BIAS.V2.AddSubjectToGalleryRequest) As OASIS.BIAS.V2.AddSubjectToGalleryResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.AddSubjectToGallery
             Return MyBase.Channel.AddSubjectToGallery(AddSubjectToGalleryRequest)
         End Function
 
-        Public Function CheckQuality(ByVal CheckQualityRequest As gov.nist.itl.iad.ig.bias.ref.CheckQualityRequest) As gov.nist.itl.iad.ig.bias.ref.CheckQualityResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.CheckQuality
+        Public Function CheckQuality(ByVal CheckQualityRequest As OASIS.BIAS.V2.CheckQualityRequest) As OASIS.BIAS.V2.CheckQualityResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.CheckQuality
             Return MyBase.Channel.CheckQuality(CheckQualityRequest)
         End Function
 
-        Public Function ClassifyBiometricData(ByVal ClassifyBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.ClassifyBiometricDataRequest) As gov.nist.itl.iad.ig.bias.ref.ClassifyBiometricDataResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.ClassifyBiometricData
+        Public Function ClassifyBiometricData(ByVal ClassifyBiometricDataRequest As OASIS.BIAS.V2.ClassifyBiometricDataRequest) As OASIS.BIAS.V2.ClassifyBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.ClassifyBiometricData
             Return MyBase.Channel.ClassifyBiometricData(ClassifyBiometricDataRequest)
         End Function
 
-        Public Function CreateSubject(ByVal CreateSubjectRequest As gov.nist.itl.iad.ig.bias.ref.CreateSubjectRequest) As gov.nist.itl.iad.ig.bias.ref.CreateSubjectResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.CreateSubject
+        Public Function CreateSubject(ByVal CreateSubjectRequest As OASIS.BIAS.V2.CreateSubjectRequest) As OASIS.BIAS.V2.CreateSubjectResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.CreateSubject
             Return MyBase.Channel.CreateSubject(CreateSubjectRequest)
         End Function
 
-        Public Function DeleteBiographicData(ByVal DeleteBiographicDataRequest As gov.nist.itl.iad.ig.bias.ref.DeleteBiographicDataRequest) As gov.nist.itl.iad.ig.bias.ref.DeleteBiographicDataResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.DeleteBiographicData
+        Public Function DeleteBiographicData(ByVal DeleteBiographicDataRequest As OASIS.BIAS.V2.DeleteBiographicDataRequest) As OASIS.BIAS.V2.DeleteBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.DeleteBiographicData
             Return MyBase.Channel.DeleteBiographicData(DeleteBiographicDataRequest)
         End Function
 
-        Public Function DeleteBiometricData(ByVal DeleteBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.DeleteBiometricDataRequest) As gov.nist.itl.iad.ig.bias.ref.DeleteBiometricDataResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.DeleteBiometricData
+        Public Function DeleteBiometricData(ByVal DeleteBiometricDataRequest As OASIS.BIAS.V2.DeleteBiometricDataRequest) As OASIS.BIAS.V2.DeleteBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.DeleteBiometricData
             Return MyBase.Channel.DeleteBiometricData(DeleteBiometricDataRequest)
         End Function
 
-        Public Function DeleteSubject(ByVal DeleteSubjectRequest As gov.nist.itl.iad.ig.bias.ref.DeleteSubjectRequest) As gov.nist.itl.iad.ig.bias.ref.DeleteSubjectResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.DeleteSubject
+        Public Function DeleteSubject(ByVal DeleteSubjectRequest As OASIS.BIAS.V2.DeleteSubjectRequest) As OASIS.BIAS.V2.DeleteSubjectResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.DeleteSubject
             Return MyBase.Channel.DeleteSubject(DeleteSubjectRequest)
         End Function
 
-        Public Function DeleteSubjectFromGallery(ByVal DeleteSubjectFromGalleryRequest As gov.nist.itl.iad.ig.bias.ref.DeleteSubjectFromGalleryRequest) As gov.nist.itl.iad.ig.bias.ref.DeleteSubjectFromGalleryResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.DeleteSubjectFromGallery
+        Public Function DeleteSubjectFromGallery(ByVal DeleteSubjectFromGalleryRequest As OASIS.BIAS.V2.DeleteSubjectFromGalleryRequest) As OASIS.BIAS.V2.DeleteSubjectFromGalleryResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.DeleteSubjectFromGallery
             Return MyBase.Channel.DeleteSubjectFromGallery(DeleteSubjectFromGalleryRequest)
         End Function
 
-        Public Function GetIdentifySubjectResults(ByVal GetIdentifySubjectResultsRequest As gov.nist.itl.iad.ig.bias.ref.GetIdentifySubjectResultsRequest) As gov.nist.itl.iad.ig.bias.ref.GetIdentifySubjectResultsResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.GetIdentifySubjectResults
+        Public Function GetIdentifySubjectResults(ByVal GetIdentifySubjectResultsRequest As OASIS.BIAS.V2.GetIdentifySubjectResultsRequest) As OASIS.BIAS.V2.GetIdentifySubjectResultsResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.GetIdentifySubjectResults
             Return MyBase.Channel.GetIdentifySubjectResults(GetIdentifySubjectResultsRequest)
         End Function
 
-        Public Function IdentifySubject(ByVal IdentifySubjectRequest As gov.nist.itl.iad.ig.bias.ref.IdentifySubjectRequest) As gov.nist.itl.iad.ig.bias.ref.IdentifySubjectResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.IdentifySubject
+        Public Function IdentifySubject(ByVal IdentifySubjectRequest As OASIS.BIAS.V2.IdentifySubjectRequest) As OASIS.BIAS.V2.IdentifySubjectResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.IdentifySubject
             Return MyBase.Channel.IdentifySubject(IdentifySubjectRequest)
         End Function
 
-        Public Function ListBiographicData(ByVal ListBiographicDataRequest As gov.nist.itl.iad.ig.bias.ref.ListBiographicDataRequest) As gov.nist.itl.iad.ig.bias.ref.ListBiographicDataResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.ListBiographicData
+        Public Function ListBiographicData(ByVal ListBiographicDataRequest As OASIS.BIAS.V2.ListBiographicDataRequest) As OASIS.BIAS.V2.ListBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.ListBiographicData
             Return MyBase.Channel.ListBiographicData(ListBiographicDataRequest)
         End Function
 
-        Public Function ListBiometricData(ByVal ListBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.ListBiometricDataRequest) As gov.nist.itl.iad.ig.bias.ref.ListBiometricDataResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.ListBiometricData
+        Public Function ListBiometricData(ByVal ListBiometricDataRequest As OASIS.BIAS.V2.ListBiometricDataRequest) As OASIS.BIAS.V2.ListBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.ListBiometricData
             Return MyBase.Channel.ListBiometricData(ListBiometricDataRequest)
         End Function
 
-        Public Function PerformFusion(ByVal PerformFusionRequest As gov.nist.itl.iad.ig.bias.ref.PerformFusionRequest) As gov.nist.itl.iad.ig.bias.ref.PerformFusionResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.PerformFusion
+        Public Function PerformFusion(ByVal PerformFusionRequest As OASIS.BIAS.V2.PerformFusionRequest) As OASIS.BIAS.V2.PerformFusionResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.PerformFusion
             Return MyBase.Channel.PerformFusion(PerformFusionRequest)
         End Function
 
-        Public Function QueryCapabilities(ByVal QueryCapabilitiesRequest As gov.nist.itl.iad.ig.bias.ref.QueryCapabilitiesRequest) As gov.nist.itl.iad.ig.bias.ref.QueryCapabilitiesResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.QueryCapabilities
+        Public Function QueryCapabilities(ByVal QueryCapabilitiesRequest As OASIS.BIAS.V2.QueryCapabilitiesRequest) As OASIS.BIAS.V2.QueryCapabilitiesResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.QueryCapabilities
             Return MyBase.Channel.QueryCapabilities(QueryCapabilitiesRequest)
         End Function
 
-        Public Function RetrieveBiographicData(ByVal RetrieveBiographicDataRequest As gov.nist.itl.iad.ig.bias.ref.RetrieveBiographicDataRequest) As gov.nist.itl.iad.ig.bias.ref.RetrieveBiographicDataResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.RetrieveBiographicData
+        Public Function RetrieveBiographicData(ByVal RetrieveBiographicDataRequest As OASIS.BIAS.V2.RetrieveBiographicDataRequest) As OASIS.BIAS.V2.RetrieveBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.RetrieveBiographicData
             Return MyBase.Channel.RetrieveBiographicData(RetrieveBiographicDataRequest)
         End Function
 
-        Public Function RetrieveBiometricData(ByVal RetrieveBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.RetrieveBiometricDataRequest) As gov.nist.itl.iad.ig.bias.ref.RetrieveBiometricDataResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.RetrieveBiometricData
+        Public Function RetrieveBiometricData(ByVal RetrieveBiometricDataRequest As OASIS.BIAS.V2.RetrieveBiometricDataRequest) As OASIS.BIAS.V2.RetrieveBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.RetrieveBiometricData
             Return MyBase.Channel.RetrieveBiometricData(RetrieveBiometricDataRequest)
         End Function
 
-        Public Function SetBiographicData(ByVal SetBiographicDataRequest As gov.nist.itl.iad.ig.bias.ref.SetBiographicDataRequest) As gov.nist.itl.iad.ig.bias.ref.SetBiographicDataResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.SetBiographicData
+        Public Function SetBiographicData(ByVal SetBiographicDataRequest As OASIS.BIAS.V2.SetBiographicDataRequest) As OASIS.BIAS.V2.SetBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.SetBiographicData
             Return MyBase.Channel.SetBiographicData(SetBiographicDataRequest)
         End Function
 
-        Public Function SetBiometricData(ByVal SetBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.SetBiometricDataRequest) As gov.nist.itl.iad.ig.bias.ref.SetBiometricDataResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.SetBiometricData
+        Public Function SetBiometricData(ByVal SetBiometricDataRequest As OASIS.BIAS.V2.SetBiometricDataRequest) As OASIS.BIAS.V2.SetBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.SetBiometricData
             Return MyBase.Channel.SetBiometricData(SetBiometricDataRequest)
         End Function
 
-        Public Function TransformBiometricData(ByVal TransformBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.TransformBiometricDataRequest) As gov.nist.itl.iad.ig.bias.ref.TransformBiometricDataResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.TransformBiometricData
+        Public Function TransformBiometricData(ByVal TransformBiometricDataRequest As OASIS.BIAS.V2.TransformBiometricDataRequest) As OASIS.BIAS.V2.TransformBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.TransformBiometricData
             Return MyBase.Channel.TransformBiometricData(TransformBiometricDataRequest)
         End Function
 
-        Public Function UpdateBiographicData(ByVal UpdateBiographicDataRequest As gov.nist.itl.iad.ig.bias.ref.UpdateBiographicDataRequest) As gov.nist.itl.iad.ig.bias.ref.UpdateBiographicDataResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.UpdateBiographicData
+        Public Function UpdateBiographicData(ByVal UpdateBiographicDataRequest As OASIS.BIAS.V2.UpdateBiographicDataRequest) As OASIS.BIAS.V2.UpdateBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.UpdateBiographicData
             Return MyBase.Channel.UpdateBiographicData(UpdateBiographicDataRequest)
         End Function
 
-        Public Function UpdateBiometricData(ByVal UpdateBiometricDataRequest As gov.nist.itl.iad.ig.bias.ref.UpdateBiometricDataRequest) As gov.nist.itl.iad.ig.bias.ref.UpdateBiometricDataResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.UpdateBiometricData
+        Public Function UpdateBiometricData(ByVal UpdateBiometricDataRequest As OASIS.BIAS.V2.UpdateBiometricDataRequest) As OASIS.BIAS.V2.UpdateBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.UpdateBiometricData
             Return MyBase.Channel.UpdateBiometricData(UpdateBiometricDataRequest)
         End Function
 
-        Public Function VerifySubject(ByVal VerifySubjectRequest As gov.nist.itl.iad.ig.bias.ref.VerifySubjectRequest) As gov.nist.itl.iad.ig.bias.ref.VerifySubjectResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.VerifySubject
+        Public Function VerifySubject(ByVal VerifySubjectRequest As OASIS.BIAS.V2.VerifySubjectRequest) As OASIS.BIAS.V2.VerifySubjectResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.VerifySubject
             Return MyBase.Channel.VerifySubject(VerifySubjectRequest)
         End Function
 
-        Public Function Enroll(ByVal EnrollRequest As gov.nist.itl.iad.ig.bias.ref.EnrollRequest) As gov.nist.itl.iad.ig.bias.ref.EnrollResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.Enroll
+        Public Function Enroll(ByVal EnrollRequest As OASIS.BIAS.V2.EnrollRequest) As OASIS.BIAS.V2.EnrollResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.Enroll
             Return MyBase.Channel.Enroll(EnrollRequest)
         End Function
 
-        Public Function GetEnrollResults(ByVal GetEnrollResultsRequest As gov.nist.itl.iad.ig.bias.ref.GetEnrollResultsRequest) As gov.nist.itl.iad.ig.bias.ref.GetEnrollResultsResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.GetEnrollResults
+        Public Function GetEnrollResults(ByVal GetEnrollResultsRequest As OASIS.BIAS.V2.GetEnrollResultsRequest) As OASIS.BIAS.V2.GetEnrollResultsResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.GetEnrollResults
             Return MyBase.Channel.GetEnrollResults(GetEnrollResultsRequest)
         End Function
 
-        Public Function GetIdentifyResults(ByVal GetIdentifyResultsRequest As gov.nist.itl.iad.ig.bias.ref.GetIdentifyResultsRequest) As gov.nist.itl.iad.ig.bias.ref.GetIdentifyResultsResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.GetIdentifyResults
+        Public Function GetIdentifyResults(ByVal GetIdentifyResultsRequest As OASIS.BIAS.V2.GetIdentifyResultsRequest) As OASIS.BIAS.V2.GetIdentifyResultsResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.GetIdentifyResults
             Return MyBase.Channel.GetIdentifyResults(GetIdentifyResultsRequest)
         End Function
 
-        Public Function GetVerifyResults(ByVal GetVerifyResultsRequest As gov.nist.itl.iad.ig.bias.ref.GetVerifyResultsRequest) As gov.nist.itl.iad.ig.bias.ref.GetVerifyResultsResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.GetVerifyResults
+        Public Function GetVerifyResults(ByVal GetVerifyResultsRequest As OASIS.BIAS.V2.GetVerifyResultsRequest) As OASIS.BIAS.V2.GetVerifyResultsResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.GetVerifyResults
             Return MyBase.Channel.GetVerifyResults(GetVerifyResultsRequest)
         End Function
 
-        Public Function Identify(ByVal IdentifyRequest As gov.nist.itl.iad.ig.bias.ref.IdentifyRequest) As gov.nist.itl.iad.ig.bias.ref.IdentifyResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.Identify
+        Public Function Identify(ByVal IdentifyRequest As OASIS.BIAS.V2.IdentifyRequest) As OASIS.BIAS.V2.IdentifyResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.Identify
             Return MyBase.Channel.Identify(IdentifyRequest)
         End Function
 
-        Public Function RetrieveData(ByVal RetrieveDataRequest As gov.nist.itl.iad.ig.bias.ref.RetrieveDataRequest) As gov.nist.itl.iad.ig.bias.ref.RetrieveDataResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.RetrieveData
+        Public Function RetrieveData(ByVal RetrieveDataRequest As OASIS.BIAS.V2.RetrieveDataRequest) As OASIS.BIAS.V2.RetrieveDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.RetrieveData
             Return MyBase.Channel.RetrieveData(RetrieveDataRequest)
         End Function
 
-        Public Function Verify(ByVal VerifyRequest As gov.nist.itl.iad.ig.bias.ref.VerifyRequest) As gov.nist.itl.iad.ig.bias.ref.VerifyResponsePackage Implements gov.nist.itl.iad.ig.bias.ref.BIAS_v1.Verify
+        Public Function Verify(ByVal VerifyRequest As OASIS.BIAS.V2.VerifyRequest) As OASIS.BIAS.V2.VerifyResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.Verify
             Return MyBase.Channel.Verify(VerifyRequest)
         End Function
     End Class
