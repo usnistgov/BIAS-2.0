@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
      Biometric Identity Assurance Services (BIAS) SOAP Profile Version 2.0
-     30 March 2016
+     28 April 2016
      Copyright (c) OASIS Open 2016.  All Rights Reserved.
 -->
 <!--
-    Document   : BIAS.xml
+    Document   : bias-2.0.wsdl
     Created on : December 17, 2009, 9:31 AM
-    Last Edit  : April 14, 2016 by Karen Marshall, National Institute of Standards and Technology
+    Last Edit  : April 28, 2016 by Kevin Mangold, National Institute of Standards and Technology
     Description:
         This document represents the WSDL definitions of BIAS Profile.
 -->
