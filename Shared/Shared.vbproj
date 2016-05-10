@@ -6,7 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BBDD8CEB-3531-4EFB-BD67-695C663B0B98}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Shared</RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <AssemblyName>Shared</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Empty</MyType>
@@ -60,11 +61,15 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Compile Include="Constants.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="BIAS.vb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

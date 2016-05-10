@@ -5,8 +5,9 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F399AEE5-6C7E-4E5F-BBD6-7D182B8D1914}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>Service</RootNamespace>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>
+    </RootNamespace>
     <AssemblyName>Service</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Empty</MyType>
@@ -48,10 +49,9 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>EntryPoint</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
   </ItemGroup>
   <ItemGroup>
@@ -67,9 +67,13 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntryPoint.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
