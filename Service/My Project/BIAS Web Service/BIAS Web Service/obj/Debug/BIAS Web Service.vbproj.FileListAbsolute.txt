@@ -1,9 +1,0 @@
-c:\users\pyl\documents\visual studio 2013\Projects\BIAS Web Service\BIAS Web Service\obj\Debug\BIAS_Web_Service.Resources.resources
-c:\users\pyl\documents\visual studio 2013\Projects\BIAS Web Service\BIAS Web Service\obj\Debug\BIAS Web Service.vbproj.GenerateResource.Cache
-c:\users\pyl\documents\visual studio 2013\Projects\BIAS Web Service\BIAS Web Service\bin\BIAS Web Service.dll.config
-c:\users\pyl\documents\visual studio 2013\Projects\BIAS Web Service\BIAS Web Service\bin\BIAS Web Service.dll
-c:\users\pyl\documents\visual studio 2013\Projects\BIAS Web Service\BIAS Web Service\bin\BIAS Web Service.pdb
-c:\users\pyl\documents\visual studio 2013\Projects\BIAS Web Service\BIAS Web Service\bin\BIAS Web Service.xml
-c:\users\pyl\documents\visual studio 2013\Projects\BIAS Web Service\BIAS Web Service\obj\Debug\BIAS Web Service.dll
-c:\users\pyl\documents\visual studio 2013\Projects\BIAS Web Service\BIAS Web Service\obj\Debug\BIAS Web Service.xml
-c:\users\pyl\documents\visual studio 2013\Projects\BIAS Web Service\BIAS Web Service\obj\Debug\BIAS Web Service.pdb
