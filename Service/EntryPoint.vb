@@ -6,10 +6,11 @@ Imports System.ServiceModel.Web
 
 Imports OASIS.BIAS.V2
 
+'netsh http add urlacl=http://+:12345/ user=nist\pyl
 
 Module EntryPoint
     Sub Main()
-
+        StartService()
     End Sub
 
     Sub StartService()
@@ -28,7 +29,7 @@ Module EntryPoint
         Dim b As New WebHttpBehavior()
         b.FaultExceptionEnabled = True
 
-        host.AddServiceEndpoint(GetType(BIAS_v1), binding, "bias")
+        host.AddServiceEndpoint(GetType(BIAS_v2), binding, "bias")
         'host.AddServiceEndpoint(GetType(IPolicyRetriever), New WebHttpBinding(), "").Behaviors.Add(b)
 
 
