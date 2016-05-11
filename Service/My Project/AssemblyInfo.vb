@@ -7,18 +7,17 @@ Imports System.Runtime.InteropServices
 ' associated with an assembly.
 
 ' Review the values of the assembly attributes
-
-<Assembly: AssemblyTitle("BIAS 2.0 Service")> 
+<Assembly: AssemblyTitle("Service")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("National Institute of Standards and Technology")> 
-<Assembly: AssemblyProduct("")> 
-<Assembly: AssemblyCopyright("")> 
+<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyProduct("Service")> 
+<Assembly: AssemblyCopyright("Copyright ©  2016")> 
 <Assembly: AssemblyTrademark("")> 
 
-<Assembly: ComVisible(False)> 
+<Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("3fa4e667-ce13-43d3-9a7a-95a800c3d11d")> 
+<Assembly: Guid("d7b923b3-28a1-4f6b-bdb1-b2c12fdc0c1a")> 
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -29,6 +28,7 @@ Imports System.Runtime.InteropServices
 '
 ' You can specify all the values or you can default the Build and Revision Numbers 
 ' by using the '*' as shown below:
+' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("2.0.0.0")> 
-<Assembly: AssemblyFileVersion("2.0.0.0")> 
+<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyFileVersion("1.0.0.0")> 
