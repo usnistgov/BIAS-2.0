@@ -1,14 +1,12 @@
 ﻿Imports OASIS.BIAS.V2
 
+Imports System.Text
+Imports System.IO
 Imports System.ServiceModel.Web
 
 <ServiceModel.ServiceBehavior(IncludeExceptionDetailInFaults:=True, Namespace:="http://docs.oasis-open.org/bias/ns/bias-2.0/")>
-Public Class BIASservice
+Public Class BIASService
     Implements BIAS_v2
-
-    Public Function HelloWorld(GreetingMessage As String)
-        Return GreetingMessage
-    End Function
 
     Public Function AddSubjectToGallery(AddSubjectToGalleryRequest As AddSubjectToGalleryRequest) As AddSubjectToGalleryResponsePackage Implements BIAS_v2.AddSubjectToGallery
         Dim galleryResponse As New AddSubjectToGalleryResponsePackage()
@@ -155,4 +153,23 @@ Public Class BIASservice
         Return verifySubjectResponse
     End Function
 
+    'Public Function GetPolicy() As IO.Stream Implements IPolicyRetriever.GetPolicy
+    '    '<cross-domain-policy xsi:noNamespaceSchemaLocation="http://www.adobe.com/xml/schemas/PolicyFile.xsd">
+    '    '<allow-access-from domain="twitter.com"/>
+    '    '<allow-access-from domain="api.twitter.com"/>
+    '    '<allow-access-from domain="search.twitter.com"/>
+    '    '<allow-access-from domain="static.twitter.com"/>
+    '    '<site-control permitted-cross-domain-policies="master-only"/>
+    '    '<allow-http-request-headers-from domain="*.twitter.com" headers="*" secure="true"/>
+    '    '</cross-domain-policy>
+
+    '    Dim policy = "<cross-domain-policy>" &
+    '                 "  <allow-access-from domain='*' />" &
+    '                 "  <site-control permitted-cross-domain-policies='all' />" &
+    '                 "  <allow-http-request-headers-from domain='*' headers='*' />" &
+    '                 "</cross-domain-policy>"
+
+    '    WebOperationContext.Current.OutgoingResponse.ContentType = "application/xml"
+    '    Return New MemoryStream(Encoding.UTF8.GetBytes(policy))
+    'End Function
 End Class

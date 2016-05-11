@@ -6,7 +6,12 @@ Imports System.ServiceModel.Web
 
 Imports OASIS.BIAS.V2
 
-'netsh http add urlacl=http://+:12345/ user=nist\pyl
+'netsh http add urlacl url=http://+:12345/ user=nist\pyl
+
+
+''BIAS.vb line 4120 ---- "_v1" -----  System.ServiceModel.ServiceContractAttribute([Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ConfigurationName:="OASIS.BIAS.V2.BIAS_v1")> _
+
+
 
 Module EntryPoint
     Sub Main()

@@ -73,8 +73,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BIASservice.vb" />
+    <Compile Include="BIASService.vb" />
     <Compile Include="EntryPoint.vb" />
+    <Compile Include="IPolicyRetriever.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
