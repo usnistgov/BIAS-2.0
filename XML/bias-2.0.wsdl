@@ -25,7 +25,7 @@
 	
 	<wsdl:types>
 		<xsd:schema elementFormDefault="qualified" targetNamespace="http://docs.oasis-open.org/bias/ns/bias-2.0/">
-			<xsd:import namespace="http://standards.iso.org/iso-iec/19785/-3/ed-2/" schemaLocation="cbeff.xsd"/>
+			<xsd:import namespace="http://standards.iso.org/iso-iec/19785/-3/ed-2/" schemaLocation="cbeff_ed2.xsd"/>
 			<xsd:import namespace="http://standards.iso.org/iso/3166/-1/ed-3/" schemaLocation="iso_country_codes.xsd"/>
 			
 			<xsd:complexType name="AggregateRequestTemplate">
@@ -4167,7 +4167,7 @@
 	</wsdl:binding>
 	<wsdl:service name="BIAS_v2">
 		<wsdl:port name="BIAS_v2HttpBindingPort" binding="tns:BIAS_v2HttpBinding">
-			<soap:address location="http://your_URI/IRI_to_your_BIAS_implementation"/>
+			<soap:address location="http://localhost:12345"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
