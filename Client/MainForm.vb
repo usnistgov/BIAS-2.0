@@ -9,17 +9,6 @@ Public Class MainForm
 
     Dim client As BIAS_v2Client
 
-
-
-    Public Sub New()
-        ' This call is required by the designer.
-        InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-        'ClientHelper.StartService()
-
-    End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         MessageBox.Show("Clear button was clicked")
     End Sub
