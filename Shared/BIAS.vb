@@ -4117,7 +4117,7 @@ Namespace OASIS.BIAS.V2
     End Enum
 
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0"), _
-     System.ServiceModel.ServiceContractAttribute([Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ConfigurationName:="OASIS.BIAS.V2.BIAS_v1")> _
+     System.ServiceModel.ServiceContractAttribute([Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ConfigurationName:="OASIS.BIAS.V2.BIAS_v2")> _
     Public Interface BIAS_v2
 
         <System.ServiceModel.OperationContractAttribute(Action:="AddSubjectToGallery", ReplyAction:=""), _
@@ -4383,10 +4383,5 @@ Namespace OASIS.BIAS.V2
         Public Function Verify(ByVal VerifyRequest As OASIS.BIAS.V2.VerifyRequest) As OASIS.BIAS.V2.VerifyResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.Verify
             Return MyBase.Channel.Verify(VerifyRequest)
         End Function
-
-        Sub QueryCapabilities()
-            Throw New NotImplementedException
-        End Sub
-
     End Class
 End Namespace
