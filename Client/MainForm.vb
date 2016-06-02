@@ -28,12 +28,12 @@ Public Class MainForm
 
     Private Sub Button7Click(sender As Object, e As EventArgs) Handles Button7.Click
         client = New BIAS_v2Client()
-        Dim resp1 As QueryCapabilitiesResponsePackage
+        'Dim resp1 As QueryCapabilitiesResponsePackage
 
         MessageBox.Show("QueryCapabilities button was clicked")
 
         Dim queryCapabilitiesRequest As New QueryCapabilitiesRequest()
-        resp1 = client.QueryCapabilities(queryCapabilitiesRequest())
+        'resp1 = client.QueryCapabilities(queryCapabilitiesRequest())
 
 
         Return
