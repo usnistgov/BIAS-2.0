@@ -16,6 +16,19 @@ Imports OASIS.BIAS.V2
 Module EntryPoint
     Sub Main()
         StartService()
+        'Dim client As BIAS_v2Client = New BIAS_v2Client()
+        ' Use the 'client' variable to call operations on the service.
+
+        'Dim request1 As New QueryCapabilitiesRequest()
+        'Dim response1 As New QueryCapabilitiesResponsePackage()
+
+        'response1 = client.QueryCapabilities(request1)
+
+
+
+
+        ' Always close the client.
+        'client.Close()
     End Sub
 
     Sub StartService()

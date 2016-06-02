@@ -42,9 +42,14 @@ Partial Class MainForm
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -55,22 +60,21 @@ Partial Class MainForm
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.TextBox10 = New System.Windows.Forms.TextBox()
+        Me.TextBox11 = New System.Windows.Forms.TextBox()
         Me.TextBox12 = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.TextBox11 = New System.Windows.Forms.TextBox()
+        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.TextBox17 = New System.Windows.Forms.TextBox()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
-        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.TextBox13 = New System.Windows.Forms.TextBox()
+        Me.Button7 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -79,14 +83,16 @@ Partial Class MainForm
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox5.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox8.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox8.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
+        Me.GroupBox11.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -94,6 +100,7 @@ Partial Class MainForm
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -279,6 +286,14 @@ Partial Class MainForm
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Biometric Data"
         '
+        'TextBox7
+        '
+        Me.TextBox7.Location = New System.Drawing.Point(6, 216)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(146, 20)
+        Me.TextBox7.TabIndex = 1
+        Me.TextBox7.Text = "filename"
+        '
         'PictureBox1
         '
         Me.PictureBox1.Location = New System.Drawing.Point(6, 19)
@@ -310,6 +325,42 @@ Partial Class MainForm
         Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "GroupBox4"
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Location = New System.Drawing.Point(39, 310)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(555, 119)
+        Me.GroupBox7.TabIndex = 4
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Verification Result"
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.TextBox8)
+        Me.GroupBox6.Controls.Add(Me.PictureBox2)
+        Me.GroupBox6.Location = New System.Drawing.Point(39, 32)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(197, 256)
+        Me.GroupBox6.TabIndex = 3
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Biometric Data"
+        '
+        'TextBox8
+        '
+        Me.TextBox8.Location = New System.Drawing.Point(7, 218)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(166, 20)
+        Me.TextBox8.TabIndex = 1
+        Me.TextBox8.Text = "filename"
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Location = New System.Drawing.Point(6, 19)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(167, 191)
+        Me.PictureBox2.TabIndex = 0
+        Me.PictureBox2.TabStop = False
         '
         'GroupBox5
         '
@@ -407,6 +458,13 @@ Partial Class MainForm
         Me.TextBox10.Size = New System.Drawing.Size(139, 20)
         Me.TextBox10.TabIndex = 2
         '
+        'TextBox11
+        '
+        Me.TextBox11.Location = New System.Drawing.Point(164, 38)
+        Me.TextBox11.Name = "TextBox11"
+        Me.TextBox11.Size = New System.Drawing.Size(139, 20)
+        Me.TextBox11.TabIndex = 1
+        '
         'TextBox12
         '
         Me.TextBox12.Location = New System.Drawing.Point(164, 12)
@@ -427,92 +485,14 @@ Partial Class MainForm
         Me.TabPage3.Text = "Identify"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
-        'GroupBox6
+        'GroupBox10
         '
-        Me.GroupBox6.Controls.Add(Me.TextBox8)
-        Me.GroupBox6.Controls.Add(Me.PictureBox2)
-        Me.GroupBox6.Location = New System.Drawing.Point(39, 32)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(197, 256)
-        Me.GroupBox6.TabIndex = 3
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Biometric Data"
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Location = New System.Drawing.Point(6, 19)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(167, 191)
-        Me.PictureBox2.TabIndex = 0
-        Me.PictureBox2.TabStop = False
-        '
-        'GroupBox7
-        '
-        Me.GroupBox7.Location = New System.Drawing.Point(39, 310)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(555, 119)
-        Me.GroupBox7.TabIndex = 4
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Verification Result"
-        '
-        'TextBox7
-        '
-        Me.TextBox7.Location = New System.Drawing.Point(6, 216)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(146, 20)
-        Me.TextBox7.TabIndex = 1
-        Me.TextBox7.Text = "filename"
-        '
-        'TextBox8
-        '
-        Me.TextBox8.Location = New System.Drawing.Point(7, 218)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(166, 20)
-        Me.TextBox8.TabIndex = 1
-        Me.TextBox8.Text = "filename"
-        '
-        'GroupBox8
-        '
-        Me.GroupBox8.AutoSize = True
-        Me.GroupBox8.Controls.Add(Me.Panel3)
-        Me.GroupBox8.Location = New System.Drawing.Point(311, 22)
-        Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(318, 291)
-        Me.GroupBox8.TabIndex = 3
-        Me.GroupBox8.TabStop = False
-        Me.GroupBox8.Text = "Identity Results"
-        '
-        'Button5
-        '
-        Me.Button5.Location = New System.Drawing.Point(98, 260)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(75, 23)
-        Me.Button5.TabIndex = 2
-        Me.Button5.Text = "Identify"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
-        'Button6
-        '
-        Me.Button6.Location = New System.Drawing.Point(6, 260)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(75, 23)
-        Me.Button6.TabIndex = 1
-        Me.Button6.Text = "Clear"
-        Me.Button6.UseVisualStyleBackColor = True
-        '
-        'Panel3
-        '
-        Me.Panel3.Location = New System.Drawing.Point(6, 19)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(306, 253)
-        Me.Panel3.TabIndex = 0
-        '
-        'TextBox11
-        '
-        Me.TextBox11.Location = New System.Drawing.Point(164, 38)
-        Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.Size = New System.Drawing.Size(139, 20)
-        Me.TextBox11.TabIndex = 1
+        Me.GroupBox10.Location = New System.Drawing.Point(50, 320)
+        Me.GroupBox10.Name = "GroupBox10"
+        Me.GroupBox10.Size = New System.Drawing.Size(579, 119)
+        Me.GroupBox10.TabIndex = 5
+        Me.GroupBox10.TabStop = False
+        Me.GroupBox10.Text = "Messages"
         '
         'GroupBox9
         '
@@ -526,6 +506,15 @@ Partial Class MainForm
         Me.GroupBox9.TabIndex = 4
         Me.GroupBox9.TabStop = False
         Me.GroupBox9.Text = "Biometric Data"
+        '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(98, 260)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(75, 23)
+        Me.Button5.TabIndex = 2
+        Me.Button5.Text = "Identify"
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'TextBox17
         '
@@ -543,14 +532,71 @@ Partial Class MainForm
         Me.PictureBox3.TabIndex = 0
         Me.PictureBox3.TabStop = False
         '
-        'GroupBox10
+        'Button6
         '
-        Me.GroupBox10.Location = New System.Drawing.Point(50, 320)
-        Me.GroupBox10.Name = "GroupBox10"
-        Me.GroupBox10.Size = New System.Drawing.Size(579, 119)
-        Me.GroupBox10.TabIndex = 5
-        Me.GroupBox10.TabStop = False
-        Me.GroupBox10.Text = "Messages"
+        Me.Button6.Location = New System.Drawing.Point(6, 260)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(75, 23)
+        Me.Button6.TabIndex = 1
+        Me.Button6.Text = "Clear"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'GroupBox8
+        '
+        Me.GroupBox8.AutoSize = True
+        Me.GroupBox8.Controls.Add(Me.Panel3)
+        Me.GroupBox8.Location = New System.Drawing.Point(311, 22)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(318, 291)
+        Me.GroupBox8.TabIndex = 3
+        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.Text = "Identity Results"
+        '
+        'Panel3
+        '
+        Me.Panel3.Location = New System.Drawing.Point(6, 19)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(306, 253)
+        Me.Panel3.TabIndex = 0
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.GroupBox11)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Size = New System.Drawing.Size(647, 462)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "QueryCapabilities"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'GroupBox11
+        '
+        Me.GroupBox11.Controls.Add(Me.Button7)
+        Me.GroupBox11.Controls.Add(Me.TextBox13)
+        Me.GroupBox11.Location = New System.Drawing.Point(26, 30)
+        Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.Size = New System.Drawing.Size(196, 378)
+        Me.GroupBox11.TabIndex = 1
+        Me.GroupBox11.TabStop = False
+        Me.GroupBox11.Text = "Query Capability Results"
+        '
+        'TextBox13
+        '
+        Me.TextBox13.Location = New System.Drawing.Point(17, 113)
+        Me.TextBox13.Multiline = True
+        Me.TextBox13.Name = "TextBox13"
+        Me.TextBox13.Size = New System.Drawing.Size(148, 237)
+        Me.TextBox13.TabIndex = 0
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(17, 43)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(148, 23)
+        Me.Button7.TabIndex = 1
+        Me.Button7.Text = "QueryCapabilities"
+        Me.Button7.UseVisualStyleBackColor = True
         '
         'MainForm
         '
@@ -571,18 +617,21 @@ Partial Class MainForm
         Me.TabPage2.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox5.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox9.ResumeLayout(False)
         Me.GroupBox9.PerformLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox8.ResumeLayout(False)
+        Me.TabPage4.ResumeLayout(False)
+        Me.GroupBox11.ResumeLayout(False)
+        Me.GroupBox11.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -635,4 +684,8 @@ Partial Class MainForm
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
     Friend WithEvents Panel3 As System.Windows.Forms.Panel
+    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
+    Friend WithEvents GroupBox11 As System.Windows.Forms.GroupBox
+    Friend WithEvents Button7 As System.Windows.Forms.Button
+    Friend WithEvents TextBox13 As System.Windows.Forms.TextBox
 End Class

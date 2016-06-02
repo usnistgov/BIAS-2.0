@@ -4383,5 +4383,10 @@ Namespace OASIS.BIAS.V2
         Public Function Verify(ByVal VerifyRequest As OASIS.BIAS.V2.VerifyRequest) As OASIS.BIAS.V2.VerifyResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.Verify
             Return MyBase.Channel.Verify(VerifyRequest)
         End Function
+
+        Sub QueryCapabilities()
+            Throw New NotImplementedException
+        End Sub
+
     End Class
 End Namespace
