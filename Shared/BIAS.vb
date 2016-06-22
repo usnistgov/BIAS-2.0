@@ -171,7 +171,7 @@ Namespace OASIS.BIAS.V2
     Partial Public Class AddSubjectToGalleryRequest
         Inherits OASIS.BIAS.V2.RequestTemplate
 
-        Public GalleryIDField As String
+        Private GalleryIDField As String
 
         Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
@@ -1136,8 +1136,6 @@ Namespace OASIS.BIAS.V2
 
         Private DateOfBirthField As String
 
-        Private AgeField As String
-
         Private SexField As String
 
         Private CitizenshipField As String
@@ -1196,16 +1194,6 @@ Namespace OASIS.BIAS.V2
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=4)> _
-        Public Property Age() As String
-            Get
-                Return Me.AgeField
-            End Get
-            Set(value As String)
-                Me.AgeField = value
-            End Set
-        End Property
-
-        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=4)> _
         Public Property Sex() As String
             Get
                 Return Me.SexField
@@ -1249,7 +1237,7 @@ Namespace OASIS.BIAS.V2
          System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
          System.Runtime.Serialization.CollectionDataContractAttribute(Name:="InformationType.ImagesType", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ItemName:="Image")> _
         Public Class ImagesType
-            Inherits System.Collections.Generic.List(Of Image)
+            Inherits System.Collections.Generic.List(Of OASIS.BIAS.V2.Image)
         End Class
 
         <System.Diagnostics.DebuggerStepThroughAttribute(), _
@@ -1259,7 +1247,6 @@ Namespace OASIS.BIAS.V2
             Inherits System.Collections.Generic.List(Of String)
         End Class
     End Class
-
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
@@ -1307,6 +1294,183 @@ Namespace OASIS.BIAS.V2
             End Get
             Set(value As String)
                 Me.ValueField = value
+            End Set
+        End Property
+    End Class
+
+    <System.Diagnostics.DebuggerStepThroughAttribute(), _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0"), _
+     System.Runtime.Serialization.DataContractAttribute(Name:="Image", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
+    Partial Public Class Image
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+
+        Private ContentTypeField As String
+
+        Private EyebrowDistanceField As String
+
+        Private LEyebrowWidthField As String
+
+        Private REyebrowWidthField As String
+
+        Private REyeHeightField As String
+
+        Private LEyeHeightField As String
+
+        Private EyeDistanceField As String
+
+        Private PupilDistanceField As String
+
+        Private BridgeWidthField As String
+
+        Private NoseAlarWidthField As String
+
+        Private NostrilWidthField As String
+
+        Private UpperLipHeightField As String
+
+        Private LowerLipHeightField As String
+
+        Private ImageDataField() As Byte
+
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set(value As System.Runtime.Serialization.ExtensionDataObject)
+                Me.extensionDataField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
+        Public Property ContentType() As String
+            Get
+                Return Me.ContentTypeField
+            End Get
+            Set(value As String)
+                Me.ContentTypeField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=1)> _
+        Public Property EyebrowDistance() As String
+            Get
+                Return Me.EyebrowDistanceField
+            End Get
+            Set(value As String)
+                Me.EyebrowDistanceField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=2)> _
+        Public Property LEyebrowWidth() As String
+            Get
+                Return Me.LEyebrowWidthField
+            End Get
+            Set(value As String)
+                Me.LEyebrowWidthField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=3)> _
+        Public Property REyebrowWidth() As String
+            Get
+                Return Me.REyebrowWidthField
+            End Get
+            Set(value As String)
+                Me.REyebrowWidthField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=4)> _
+        Public Property LEyeHeight() As String
+            Get
+                Return Me.LEyeHeightField
+            End Get
+            Set(value As String)
+                Me.LEyeHeightField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=4)> _
+        Public Property REyeHeight() As String
+            Get
+                Return Me.REyeHeightField
+            End Get
+            Set(value As String)
+                Me.REyeHeightField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=4)> _
+        Public Property EyeDistance() As String
+            Get
+                Return Me.EyeDistanceField
+            End Get
+            Set(value As String)
+                Me.EyeDistanceField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=5)> _
+        Public Property BridgeWidth() As String
+            Get
+                Return Me.BridgeWidthField
+            End Get
+            Set(value As String)
+                Me.BridgeWidthField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=7)> _
+        Public Property NoseAlarWidth() As String
+            Get
+                Return Me.NoseAlarWidthField
+            End Get
+            Set(value As String)
+                Me.NoseAlarWidthField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=7)> _
+        Public Property NostrilWidth() As String
+            Get
+                Return Me.NostrilWidthField
+            End Get
+            Set(value As String)
+                Me.NostrilWidthField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=8)> _
+        Public Property UpperLipHeight() As String
+            Get
+                Return Me.UpperLipHeightField
+            End Get
+            Set(value As String)
+                Me.UpperLipHeightField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=9)> _
+        Public Property LowerLipHeight() As String
+            Get
+                Return Me.LowerLipHeightField
+            End Get
+            Set(value As String)
+                Me.LowerLipHeightField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=11)> _
+        Public Property ImageData() As Byte()
+            Get
+                Return Me.ImageDataField
+            End Get
+            Set(value As Byte())
+                Me.ImageDataField = value
             End Set
         End Property
     End Class
@@ -3967,136 +4131,136 @@ Namespace OASIS.BIAS.V2
     End Enum
 
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0"), _
-     System.ServiceModel.ServiceContractAttribute([Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ConfigurationName:="OASIS.BIAS.V2.BIAS_v1")> _
-    Public Interface BIAS_v1
+     System.ServiceModel.ServiceContractAttribute([Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ConfigurationName:="OASIS.BIAS.V2.BIAS_v2")> _
+    Public Interface BIAS_v2
 
-        <System.ServiceModel.OperationContractAttribute(Action:="AddSubjectToGallery", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="AddSubjectToGallery", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="AddSubjectToGallery", Name:="BIASFault")> _
         Function AddSubjectToGallery(ByVal AddSubjectToGalleryRequest As OASIS.BIAS.V2.AddSubjectToGalleryRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="AddSubjectToGalleryResponsePackage")> OASIS.BIAS.V2.AddSubjectToGalleryResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="CheckQuality", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="CheckQuality", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="CheckQuality", Name:="BIASFault")> _
         Function CheckQuality(ByVal CheckQualityRequest As OASIS.BIAS.V2.CheckQualityRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="CheckQualityResponsePackage")> OASIS.BIAS.V2.CheckQualityResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="ClassifyBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="ClassifyBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="ClassifyBiometricData", Name:="BIASFault")> _
         Function ClassifyBiometricData(ByVal ClassifyBiometricDataRequest As OASIS.BIAS.V2.ClassifyBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="ClassifyBiometricDataResponsePackage")> OASIS.BIAS.V2.ClassifyBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="CreateSubject", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="CreateSubject", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="CreateSubject", Name:="BIASFault")> _
         Function CreateSubject(ByVal CreateSubjectRequest As OASIS.BIAS.V2.CreateSubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="CreateSubjectResponsePackage")> OASIS.BIAS.V2.CreateSubjectResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="DeleteBiographicData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="DeleteBiographicData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="DeleteBiographicData", Name:="BIASFault")> _
         Function DeleteBiographicData(ByVal DeleteBiographicDataRequest As OASIS.BIAS.V2.DeleteBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteBiographicDataResponsePackage")> OASIS.BIAS.V2.DeleteBiographicDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="DeleteBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="DeleteBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="DeleteBiometricData", Name:="BIASFault")> _
         Function DeleteBiometricData(ByVal DeleteBiometricDataRequest As OASIS.BIAS.V2.DeleteBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteBiometricDataResponsePackage")> OASIS.BIAS.V2.DeleteBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="DeleteSubject", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="DeleteSubject", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="DeleteSubject", Name:="BIASFault")> _
         Function DeleteSubject(ByVal DeleteSubjectRequest As OASIS.BIAS.V2.DeleteSubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteSubjectResponsePackage")> OASIS.BIAS.V2.DeleteSubjectResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="DeleteSubjectFromGallery", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="DeleteSubjectFromGallery", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="DeleteSubjectFromGallery", Name:="BIASFault")> _
         Function DeleteSubjectFromGallery(ByVal DeleteSubjectFromGalleryRequest As OASIS.BIAS.V2.DeleteSubjectFromGalleryRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteSubjectFromGalleryResponsePackage")> OASIS.BIAS.V2.DeleteSubjectFromGalleryResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="GetIdentifySubjectResults", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="GetIdentifySubjectResults", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="GetIdentifySubjectResults", Name:="BIASFault")> _
         Function GetIdentifySubjectResults(ByVal GetIdentifySubjectResultsRequest As OASIS.BIAS.V2.GetIdentifySubjectResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetIdentifySubjectResultsResponsePackage")> OASIS.BIAS.V2.GetIdentifySubjectResultsResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="IdentifySubject", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="IdentifySubject", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="IdentifySubject", Name:="BIASFault")> _
         Function IdentifySubject(ByVal IdentifySubjectRequest As OASIS.BIAS.V2.IdentifySubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="IdentifySubjectResponsePackage")> OASIS.BIAS.V2.IdentifySubjectResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="ListBiographicData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="ListBiographicData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="ListBiographicData", Name:="BIASFault")> _
         Function ListBiographicData(ByVal ListBiographicDataRequest As OASIS.BIAS.V2.ListBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="ListBiographicDataResponsePackage")> OASIS.BIAS.V2.ListBiographicDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="ListBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="ListBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="ListBiometricData", Name:="BIASFault")> _
         Function ListBiometricData(ByVal ListBiometricDataRequest As OASIS.BIAS.V2.ListBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="ListBiometricDataResponsePackage")> OASIS.BIAS.V2.ListBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="PerformFusion", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="PerformFusion", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="PerformFusion", Name:="BIASFault")> _
         Function PerformFusion(ByVal PerformFusionRequest As OASIS.BIAS.V2.PerformFusionRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="PerformFusionResponsePackage")> OASIS.BIAS.V2.PerformFusionResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="QueryCapabilities", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="QueryCapabilities", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="QueryCapabilities", Name:="BIASFault")> _
         Function QueryCapabilities(ByVal QueryCapabilitiesRequest As OASIS.BIAS.V2.QueryCapabilitiesRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="QueryCapabilitiesResponsePackage")> OASIS.BIAS.V2.QueryCapabilitiesResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="RetrieveBiographicData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="RetrieveBiographicData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="RetrieveBiographicData", Name:="BIASFault")> _
         Function RetrieveBiographicData(ByVal RetrieveBiographicDataRequest As OASIS.BIAS.V2.RetrieveBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="RetrieveBiographicDataResponsePackage")> OASIS.BIAS.V2.RetrieveBiographicDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="RetrieveBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="RetrieveBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="RetrieveBiometricData", Name:="BIASFault")> _
         Function RetrieveBiometricData(ByVal RetrieveBiometricDataRequest As OASIS.BIAS.V2.RetrieveBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="RetrieveBiometricDataResponsePackage")> OASIS.BIAS.V2.RetrieveBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="SetBiographicData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="SetBiographicData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="SetBiographicData", Name:="BIASFault")> _
         Function SetBiographicData(ByVal SetBiographicDataRequest As OASIS.BIAS.V2.SetBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="SetBiographicDataResponsePackage")> OASIS.BIAS.V2.SetBiographicDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="SetBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="SetBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="SetBiometricData", Name:="BIASFault")> _
         Function SetBiometricData(ByVal SetBiometricDataRequest As OASIS.BIAS.V2.SetBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="SetBiometricDataResponsePackage")> OASIS.BIAS.V2.SetBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="TransformBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="TransformBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="TransformBiometricData", Name:="BIASFault")> _
         Function TransformBiometricData(ByVal TransformBiometricDataRequest As OASIS.BIAS.V2.TransformBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="TransformBiometricDataResponsePackage")> OASIS.BIAS.V2.TransformBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="UpdateBiographicData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="UpdateBiographicData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="UpdateBiographicData", Name:="BIASFault")> _
         Function UpdateBiographicData(ByVal UpdateBiographicDataRequest As OASIS.BIAS.V2.UpdateBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="UpdateBiographicDataResponsePackage")> OASIS.BIAS.V2.UpdateBiographicDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="UpdateBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="UpdateBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="UpdateBiometricData", Name:="BIASFault")> _
         Function UpdateBiometricData(ByVal UpdateBiometricDataRequest As OASIS.BIAS.V2.UpdateBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="UpdateBiometricDataResponsePackage")> OASIS.BIAS.V2.UpdateBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="VerifySubject", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="VerifySubject", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="VerifySubject", Name:="BIASFault")> _
         Function VerifySubject(ByVal VerifySubjectRequest As OASIS.BIAS.V2.VerifySubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="VerifySubjectResponsePackage")> OASIS.BIAS.V2.VerifySubjectResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="Enroll", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="Enroll", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="Enroll", Name:="BIASFault")> _
         Function Enroll(ByVal EnrollRequest As OASIS.BIAS.V2.EnrollRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="EnrollResponsePackage")> OASIS.BIAS.V2.EnrollResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="GetEnrollResults", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="GetEnrollResults", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="GetEnrollResults", Name:="BIASFault")> _
         Function GetEnrollResults(ByVal GetEnrollResultsRequest As OASIS.BIAS.V2.GetEnrollResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetEnrollResultsResponsePackage")> OASIS.BIAS.V2.GetEnrollResultsResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="GetIdentifyResults", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="GetIdentifyResults", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="GetIdentifyResults", Name:="BIASFault")> _
         Function GetIdentifyResults(ByVal GetIdentifyResultsRequest As OASIS.BIAS.V2.GetIdentifyResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetIdentifyResultsResponsePackage")> OASIS.BIAS.V2.GetIdentifyResultsResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="GetVerifyResults", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="GetVerifyResults", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="GetVerifyResults", Name:="BIASFault")> _
         Function GetVerifyResults(ByVal GetVerifyResultsRequest As OASIS.BIAS.V2.GetVerifyResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetVerifyResultsResponsePackage")> OASIS.BIAS.V2.GetVerifyResultsResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="Identify", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="Identify", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="Identify", Name:="BIASFault")> _
         Function Identify(ByVal IdentifyRequest As OASIS.BIAS.V2.IdentifyRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="IdentifyResponsePackage")> OASIS.BIAS.V2.IdentifyResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="RetrieveData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="RetrieveData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="RetrieveData", Name:="BIASFault")> _
         Function RetrieveData(ByVal RetrieveDataRequest As OASIS.BIAS.V2.RetrieveDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="RetrieveDataResponsePackage")> OASIS.BIAS.V2.RetrieveDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="Verify", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="Verify", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="Verify", Name:="BIASFault")> _
         Function Verify(ByVal VerifyRequest As OASIS.BIAS.V2.VerifyRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="VerifyResponsePackage")> OASIS.BIAS.V2.VerifyResponsePackage
     End Interface
 
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")> _
-    Public Interface BIAS_v1Channel
-        Inherits OASIS.BIAS.V2.BIAS_v1, System.ServiceModel.IClientChannel
+    Public Interface BIAS_v2Channel
+        Inherits OASIS.BIAS.V2.BIAS_v2, System.ServiceModel.IClientChannel
     End Interface
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")> _
-    Partial Public Class BIAS_v1Client
-        Inherits System.ServiceModel.ClientBase(Of OASIS.BIAS.V2.BIAS_v1)
-        Implements OASIS.BIAS.V2.BIAS_v1
+    Partial Public Class BIAS_v2Client
+        Inherits System.ServiceModel.ClientBase(Of OASIS.BIAS.V2.BIAS_v2)
+        Implements OASIS.BIAS.V2.BIAS_v2
 
         Public Sub New()
             MyBase.New()
@@ -4118,119 +4282,119 @@ Namespace OASIS.BIAS.V2
             MyBase.New(binding, remoteAddress)
         End Sub
 
-        Public Function AddSubjectToGallery(ByVal AddSubjectToGalleryRequest As OASIS.BIAS.V2.AddSubjectToGalleryRequest) As OASIS.BIAS.V2.AddSubjectToGalleryResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.AddSubjectToGallery
+        Public Function AddSubjectToGallery(ByVal AddSubjectToGalleryRequest As OASIS.BIAS.V2.AddSubjectToGalleryRequest) As OASIS.BIAS.V2.AddSubjectToGalleryResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.AddSubjectToGallery
             Return MyBase.Channel.AddSubjectToGallery(AddSubjectToGalleryRequest)
         End Function
 
-        Public Function CheckQuality(ByVal CheckQualityRequest As OASIS.BIAS.V2.CheckQualityRequest) As OASIS.BIAS.V2.CheckQualityResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.CheckQuality
+        Public Function CheckQuality(ByVal CheckQualityRequest As OASIS.BIAS.V2.CheckQualityRequest) As OASIS.BIAS.V2.CheckQualityResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.CheckQuality
             Return MyBase.Channel.CheckQuality(CheckQualityRequest)
         End Function
 
-        Public Function ClassifyBiometricData(ByVal ClassifyBiometricDataRequest As OASIS.BIAS.V2.ClassifyBiometricDataRequest) As OASIS.BIAS.V2.ClassifyBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.ClassifyBiometricData
+        Public Function ClassifyBiometricData(ByVal ClassifyBiometricDataRequest As OASIS.BIAS.V2.ClassifyBiometricDataRequest) As OASIS.BIAS.V2.ClassifyBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.ClassifyBiometricData
             Return MyBase.Channel.ClassifyBiometricData(ClassifyBiometricDataRequest)
         End Function
 
-        Public Function CreateSubject(ByVal CreateSubjectRequest As OASIS.BIAS.V2.CreateSubjectRequest) As OASIS.BIAS.V2.CreateSubjectResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.CreateSubject
+        Public Function CreateSubject(ByVal CreateSubjectRequest As OASIS.BIAS.V2.CreateSubjectRequest) As OASIS.BIAS.V2.CreateSubjectResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.CreateSubject
             Return MyBase.Channel.CreateSubject(CreateSubjectRequest)
         End Function
 
-        Public Function DeleteBiographicData(ByVal DeleteBiographicDataRequest As OASIS.BIAS.V2.DeleteBiographicDataRequest) As OASIS.BIAS.V2.DeleteBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.DeleteBiographicData
+        Public Function DeleteBiographicData(ByVal DeleteBiographicDataRequest As OASIS.BIAS.V2.DeleteBiographicDataRequest) As OASIS.BIAS.V2.DeleteBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.DeleteBiographicData
             Return MyBase.Channel.DeleteBiographicData(DeleteBiographicDataRequest)
         End Function
 
-        Public Function DeleteBiometricData(ByVal DeleteBiometricDataRequest As OASIS.BIAS.V2.DeleteBiometricDataRequest) As OASIS.BIAS.V2.DeleteBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.DeleteBiometricData
+        Public Function DeleteBiometricData(ByVal DeleteBiometricDataRequest As OASIS.BIAS.V2.DeleteBiometricDataRequest) As OASIS.BIAS.V2.DeleteBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.DeleteBiometricData
             Return MyBase.Channel.DeleteBiometricData(DeleteBiometricDataRequest)
         End Function
 
-        Public Function DeleteSubject(ByVal DeleteSubjectRequest As OASIS.BIAS.V2.DeleteSubjectRequest) As OASIS.BIAS.V2.DeleteSubjectResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.DeleteSubject
+        Public Function DeleteSubject(ByVal DeleteSubjectRequest As OASIS.BIAS.V2.DeleteSubjectRequest) As OASIS.BIAS.V2.DeleteSubjectResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.DeleteSubject
             Return MyBase.Channel.DeleteSubject(DeleteSubjectRequest)
         End Function
 
-        Public Function DeleteSubjectFromGallery(ByVal DeleteSubjectFromGalleryRequest As OASIS.BIAS.V2.DeleteSubjectFromGalleryRequest) As OASIS.BIAS.V2.DeleteSubjectFromGalleryResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.DeleteSubjectFromGallery
+        Public Function DeleteSubjectFromGallery(ByVal DeleteSubjectFromGalleryRequest As OASIS.BIAS.V2.DeleteSubjectFromGalleryRequest) As OASIS.BIAS.V2.DeleteSubjectFromGalleryResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.DeleteSubjectFromGallery
             Return MyBase.Channel.DeleteSubjectFromGallery(DeleteSubjectFromGalleryRequest)
         End Function
 
-        Public Function GetIdentifySubjectResults(ByVal GetIdentifySubjectResultsRequest As OASIS.BIAS.V2.GetIdentifySubjectResultsRequest) As OASIS.BIAS.V2.GetIdentifySubjectResultsResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.GetIdentifySubjectResults
+        Public Function GetIdentifySubjectResults(ByVal GetIdentifySubjectResultsRequest As OASIS.BIAS.V2.GetIdentifySubjectResultsRequest) As OASIS.BIAS.V2.GetIdentifySubjectResultsResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.GetIdentifySubjectResults
             Return MyBase.Channel.GetIdentifySubjectResults(GetIdentifySubjectResultsRequest)
         End Function
 
-        Public Function IdentifySubject(ByVal IdentifySubjectRequest As OASIS.BIAS.V2.IdentifySubjectRequest) As OASIS.BIAS.V2.IdentifySubjectResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.IdentifySubject
+        Public Function IdentifySubject(ByVal IdentifySubjectRequest As OASIS.BIAS.V2.IdentifySubjectRequest) As OASIS.BIAS.V2.IdentifySubjectResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.IdentifySubject
             Return MyBase.Channel.IdentifySubject(IdentifySubjectRequest)
         End Function
 
-        Public Function ListBiographicData(ByVal ListBiographicDataRequest As OASIS.BIAS.V2.ListBiographicDataRequest) As OASIS.BIAS.V2.ListBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.ListBiographicData
+        Public Function ListBiographicData(ByVal ListBiographicDataRequest As OASIS.BIAS.V2.ListBiographicDataRequest) As OASIS.BIAS.V2.ListBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.ListBiographicData
             Return MyBase.Channel.ListBiographicData(ListBiographicDataRequest)
         End Function
 
-        Public Function ListBiometricData(ByVal ListBiometricDataRequest As OASIS.BIAS.V2.ListBiometricDataRequest) As OASIS.BIAS.V2.ListBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.ListBiometricData
+        Public Function ListBiometricData(ByVal ListBiometricDataRequest As OASIS.BIAS.V2.ListBiometricDataRequest) As OASIS.BIAS.V2.ListBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.ListBiometricData
             Return MyBase.Channel.ListBiometricData(ListBiometricDataRequest)
         End Function
 
-        Public Function PerformFusion(ByVal PerformFusionRequest As OASIS.BIAS.V2.PerformFusionRequest) As OASIS.BIAS.V2.PerformFusionResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.PerformFusion
+        Public Function PerformFusion(ByVal PerformFusionRequest As OASIS.BIAS.V2.PerformFusionRequest) As OASIS.BIAS.V2.PerformFusionResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.PerformFusion
             Return MyBase.Channel.PerformFusion(PerformFusionRequest)
         End Function
 
-        Public Function QueryCapabilities(ByVal QueryCapabilitiesRequest As OASIS.BIAS.V2.QueryCapabilitiesRequest) As OASIS.BIAS.V2.QueryCapabilitiesResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.QueryCapabilities
+        Public Function QueryCapabilities(ByVal QueryCapabilitiesRequest As OASIS.BIAS.V2.QueryCapabilitiesRequest) As OASIS.BIAS.V2.QueryCapabilitiesResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.QueryCapabilities
             Return MyBase.Channel.QueryCapabilities(QueryCapabilitiesRequest)
         End Function
 
-        Public Function RetrieveBiographicData(ByVal RetrieveBiographicDataRequest As OASIS.BIAS.V2.RetrieveBiographicDataRequest) As OASIS.BIAS.V2.RetrieveBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.RetrieveBiographicData
+        Public Function RetrieveBiographicData(ByVal RetrieveBiographicDataRequest As OASIS.BIAS.V2.RetrieveBiographicDataRequest) As OASIS.BIAS.V2.RetrieveBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.RetrieveBiographicData
             Return MyBase.Channel.RetrieveBiographicData(RetrieveBiographicDataRequest)
         End Function
 
-        Public Function RetrieveBiometricData(ByVal RetrieveBiometricDataRequest As OASIS.BIAS.V2.RetrieveBiometricDataRequest) As OASIS.BIAS.V2.RetrieveBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.RetrieveBiometricData
+        Public Function RetrieveBiometricData(ByVal RetrieveBiometricDataRequest As OASIS.BIAS.V2.RetrieveBiometricDataRequest) As OASIS.BIAS.V2.RetrieveBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.RetrieveBiometricData
             Return MyBase.Channel.RetrieveBiometricData(RetrieveBiometricDataRequest)
         End Function
 
-        Public Function SetBiographicData(ByVal SetBiographicDataRequest As OASIS.BIAS.V2.SetBiographicDataRequest) As OASIS.BIAS.V2.SetBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.SetBiographicData
+        Public Function SetBiographicData(ByVal SetBiographicDataRequest As OASIS.BIAS.V2.SetBiographicDataRequest) As OASIS.BIAS.V2.SetBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.SetBiographicData
             Return MyBase.Channel.SetBiographicData(SetBiographicDataRequest)
         End Function
 
-        Public Function SetBiometricData(ByVal SetBiometricDataRequest As OASIS.BIAS.V2.SetBiometricDataRequest) As OASIS.BIAS.V2.SetBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.SetBiometricData
+        Public Function SetBiometricData(ByVal SetBiometricDataRequest As OASIS.BIAS.V2.SetBiometricDataRequest) As OASIS.BIAS.V2.SetBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.SetBiometricData
             Return MyBase.Channel.SetBiometricData(SetBiometricDataRequest)
         End Function
 
-        Public Function TransformBiometricData(ByVal TransformBiometricDataRequest As OASIS.BIAS.V2.TransformBiometricDataRequest) As OASIS.BIAS.V2.TransformBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.TransformBiometricData
+        Public Function TransformBiometricData(ByVal TransformBiometricDataRequest As OASIS.BIAS.V2.TransformBiometricDataRequest) As OASIS.BIAS.V2.TransformBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.TransformBiometricData
             Return MyBase.Channel.TransformBiometricData(TransformBiometricDataRequest)
         End Function
 
-        Public Function UpdateBiographicData(ByVal UpdateBiographicDataRequest As OASIS.BIAS.V2.UpdateBiographicDataRequest) As OASIS.BIAS.V2.UpdateBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.UpdateBiographicData
+        Public Function UpdateBiographicData(ByVal UpdateBiographicDataRequest As OASIS.BIAS.V2.UpdateBiographicDataRequest) As OASIS.BIAS.V2.UpdateBiographicDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.UpdateBiographicData
             Return MyBase.Channel.UpdateBiographicData(UpdateBiographicDataRequest)
         End Function
 
-        Public Function UpdateBiometricData(ByVal UpdateBiometricDataRequest As OASIS.BIAS.V2.UpdateBiometricDataRequest) As OASIS.BIAS.V2.UpdateBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.UpdateBiometricData
+        Public Function UpdateBiometricData(ByVal UpdateBiometricDataRequest As OASIS.BIAS.V2.UpdateBiometricDataRequest) As OASIS.BIAS.V2.UpdateBiometricDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.UpdateBiometricData
             Return MyBase.Channel.UpdateBiometricData(UpdateBiometricDataRequest)
         End Function
 
-        Public Function VerifySubject(ByVal VerifySubjectRequest As OASIS.BIAS.V2.VerifySubjectRequest) As OASIS.BIAS.V2.VerifySubjectResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.VerifySubject
+        Public Function VerifySubject(ByVal VerifySubjectRequest As OASIS.BIAS.V2.VerifySubjectRequest) As OASIS.BIAS.V2.VerifySubjectResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.VerifySubject
             Return MyBase.Channel.VerifySubject(VerifySubjectRequest)
         End Function
 
-        Public Function Enroll(ByVal EnrollRequest As OASIS.BIAS.V2.EnrollRequest) As OASIS.BIAS.V2.EnrollResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.Enroll
+        Public Function Enroll(ByVal EnrollRequest As OASIS.BIAS.V2.EnrollRequest) As OASIS.BIAS.V2.EnrollResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.Enroll
             Return MyBase.Channel.Enroll(EnrollRequest)
         End Function
 
-        Public Function GetEnrollResults(ByVal GetEnrollResultsRequest As OASIS.BIAS.V2.GetEnrollResultsRequest) As OASIS.BIAS.V2.GetEnrollResultsResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.GetEnrollResults
+        Public Function GetEnrollResults(ByVal GetEnrollResultsRequest As OASIS.BIAS.V2.GetEnrollResultsRequest) As OASIS.BIAS.V2.GetEnrollResultsResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.GetEnrollResults
             Return MyBase.Channel.GetEnrollResults(GetEnrollResultsRequest)
         End Function
 
-        Public Function GetIdentifyResults(ByVal GetIdentifyResultsRequest As OASIS.BIAS.V2.GetIdentifyResultsRequest) As OASIS.BIAS.V2.GetIdentifyResultsResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.GetIdentifyResults
+        Public Function GetIdentifyResults(ByVal GetIdentifyResultsRequest As OASIS.BIAS.V2.GetIdentifyResultsRequest) As OASIS.BIAS.V2.GetIdentifyResultsResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.GetIdentifyResults
             Return MyBase.Channel.GetIdentifyResults(GetIdentifyResultsRequest)
         End Function
 
-        Public Function GetVerifyResults(ByVal GetVerifyResultsRequest As OASIS.BIAS.V2.GetVerifyResultsRequest) As OASIS.BIAS.V2.GetVerifyResultsResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.GetVerifyResults
+        Public Function GetVerifyResults(ByVal GetVerifyResultsRequest As OASIS.BIAS.V2.GetVerifyResultsRequest) As OASIS.BIAS.V2.GetVerifyResultsResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.GetVerifyResults
             Return MyBase.Channel.GetVerifyResults(GetVerifyResultsRequest)
         End Function
 
-        Public Function Identify(ByVal IdentifyRequest As OASIS.BIAS.V2.IdentifyRequest) As OASIS.BIAS.V2.IdentifyResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.Identify
+        Public Function Identify(ByVal IdentifyRequest As OASIS.BIAS.V2.IdentifyRequest) As OASIS.BIAS.V2.IdentifyResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.Identify
             Return MyBase.Channel.Identify(IdentifyRequest)
         End Function
 
-        Public Function RetrieveData(ByVal RetrieveDataRequest As OASIS.BIAS.V2.RetrieveDataRequest) As OASIS.BIAS.V2.RetrieveDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.RetrieveData
+        Public Function RetrieveData(ByVal RetrieveDataRequest As OASIS.BIAS.V2.RetrieveDataRequest) As OASIS.BIAS.V2.RetrieveDataResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.RetrieveData
             Return MyBase.Channel.RetrieveData(RetrieveDataRequest)
         End Function
 
-        Public Function Verify(ByVal VerifyRequest As OASIS.BIAS.V2.VerifyRequest) As OASIS.BIAS.V2.VerifyResponsePackage Implements OASIS.BIAS.V2.BIAS_v1.Verify
+        Public Function Verify(ByVal VerifyRequest As OASIS.BIAS.V2.VerifyRequest) As OASIS.BIAS.V2.VerifyResponsePackage Implements OASIS.BIAS.V2.BIAS_v2.Verify
             Return MyBase.Channel.Verify(VerifyRequest)
         End Function
     End Class
