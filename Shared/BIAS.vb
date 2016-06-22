@@ -1309,25 +1309,29 @@ Namespace OASIS.BIAS.V2
 
         Private ContentTypeField As String
 
-        Private SkinToneField As String
+        Private EyebrowDistanceField As String
 
-        Private RightEyeColorField As String
+        Private LEyebrowWidthField As String
 
-        Private LeftEyeColorField As String
+        Private REyebrowWidthField As String
+
+        Private REyeHeightField As String
+
+        Private LEyeHeightField As String
 
         Private EyeDistanceField As String
 
+        Private PupilDistanceField As String
+
         Private BridgeWidthField As String
 
-        Private NoseTipWidthField As String
+        Private NoseAlarWidthField As String
 
         Private NostrilWidthField As String
 
-        Private LipWidthField As String
+        Private UpperLipHeightField As String
 
-        Private LipHeightField As String
-
-        Private JawLengthField As String
+        Private LowerLipHeightField As String
 
         Private ImageDataField() As Byte
 
@@ -1350,33 +1354,53 @@ Namespace OASIS.BIAS.V2
             End Set
         End Property
 
-        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
-        Public Property SkinTone() As String
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=1)> _
+        Public Property EyebrowDistance() As String
             Get
-                Return Me.SkinToneField
+                Return Me.EyebrowDistanceField
             End Get
             Set(value As String)
-                Me.SkinToneField = value
+                Me.EyebrowDistanceField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=2)> _
-        Public Property RightEyeColor() As String
+        Public Property LEyebrowWidth() As String
             Get
-                Return Me.RightEyeColorField
+                Return Me.LEyebrowWidthField
             End Get
             Set(value As String)
-                Me.RightEyeColorField = value
+                Me.LEyebrowWidthField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=3)> _
-        Public Property LeftEyeColor() As String
+        Public Property REyebrowWidth() As String
             Get
-                Return Me.LeftEyeColorField
+                Return Me.REyebrowWidthField
             End Get
             Set(value As String)
-                Me.LeftEyeColorField = value
+                Me.REyebrowWidthField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=4)> _
+        Public Property LEyeHeight() As String
+            Get
+                Return Me.LEyeHeightField
+            End Get
+            Set(value As String)
+                Me.LEyeHeightField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=4)> _
+        Public Property REyeHeight() As String
+            Get
+                Return Me.REyeHeightField
+            End Get
+            Set(value As String)
+                Me.REyeHeightField = value
             End Set
         End Property
 
@@ -1400,13 +1424,13 @@ Namespace OASIS.BIAS.V2
             End Set
         End Property
 
-        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=6)> _
-        Public Property NoseTipWidth() As String
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=7)> _
+        Public Property NoseAlarWidth() As String
             Get
-                Return Me.NoseTipWidthField
+                Return Me.NoseAlarWidthField
             End Get
             Set(value As String)
-                Me.NoseTipWidthField = value
+                Me.NoseAlarWidthField = value
             End Set
         End Property
 
@@ -1421,32 +1445,22 @@ Namespace OASIS.BIAS.V2
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=8)> _
-        Public Property LipWidth() As String
+        Public Property UpperLipHeight() As String
             Get
-                Return Me.LipWidthField
+                Return Me.UpperLipHeightField
             End Get
             Set(value As String)
-                Me.LipWidthField = value
+                Me.UpperLipHeightField = value
             End Set
         End Property
 
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=9)> _
-        Public Property LipHeight() As String
+        Public Property LowerLipHeight() As String
             Get
-                Return Me.LipHeightField
+                Return Me.LowerLipHeightField
             End Get
             Set(value As String)
-                Me.LipHeightField = value
-            End Set
-        End Property
-
-        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=10)> _
-        Public Property JawLength() As String
-            Get
-                Return Me.JawLengthField
-            End Get
-            Set(value As String)
-                Me.JawLengthField = value
+                Me.LowerLipHeightField = value
             End Set
         End Property
 
