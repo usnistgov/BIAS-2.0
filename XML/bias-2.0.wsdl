@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
      Biometric Identity Assurance Services (BIAS) SOAP Profile Version 2.0
-     28 April 2016
+     30 March 2016
      Copyright (c) OASIS Open 2016.  All Rights Reserved.
 -->
 <!--
-    Document   : bias-2.0.wsdl
+    Document   : BIAS.xml
     Created on : December 17, 2009, 9:31 AM
-    Last Edit  : April 28, 2016 by Kevin Mangold, National Institute of Standards and Technology
+    Last Edit  : April 14, 2016 by Karen Marshall, National Institute of Standards and Technology
     Description:
         This document represents the WSDL definitions of BIAS Profile.
 -->
@@ -25,7 +25,7 @@
 	
 	<wsdl:types>
 		<xsd:schema elementFormDefault="qualified" targetNamespace="http://docs.oasis-open.org/bias/ns/bias-2.0/">
-			<xsd:import namespace="http://standards.iso.org/iso-iec/19785/-3/ed-2/" schemaLocation="cbeff_ed2.xsd"/>
+			<xsd:import namespace="http://standards.iso.org/iso-iec/19785/-3/ed-2/" schemaLocation="cbeff.xsd"/>
 			<xsd:import namespace="http://standards.iso.org/iso/3166/-1/ed-3/" schemaLocation="iso_country_codes.xsd"/>
 			
 			<xsd:complexType name="AggregateRequestTemplate">
@@ -945,7 +945,7 @@
 				</xsd:annotation>
 				<!-- THE FOLLOWING COMMENTED SECTION IS PROVIDED AS AN INFORMATIVE
 					     EXAMPLE OF WHAT 'InformationType'S CONTENT COULD BE -->
-				<xsd:sequence>
+				<!-- xsd:sequence>
 					<xsd:element name="GUID" type="xsd:string" minOccurs="0" />
 					<xsd:element name="GivenName" type="xsd:string" minOccurs="0" />
 					<xsd:element name="FamilyName" type="xsd:string" minOccurs="0" />
@@ -959,16 +959,8 @@
 									<xsd:complexType>
 										<xsd:sequence>
 											<xsd:element name="ContentType" type="xsd:string" minOccurs="0" />
-											<xsd:element name="SkinTone" type="xsd:string" minOccurs="0" />
-											<xsd:element name="RightEyeColor" type="xsd:string" minOccurs="0" />
-											<xsd:element name="LeftEyeColor" type="xsd:string" minOccurs="0" />
-											<xsd:element name="EyeDistance" type="xsd:string" minOccurs="0" />
-											<xsd:element name="BridgeWidth" type="xsd:string" minOccurs="0" />
-											<xsd:element name="NoseTipWidth" type="xsd:string" minOccurs="0" />
-											<xsd:element name="NostrilWidth" type="xsd:string" minOccurs="0" />
-											<xsd:element name="LipWidth" type="xsd:string" minOccurs="0" />
-											<xsd:element name="LipHeight" type="xsd:string" minOccurs="0" />
-											<xsd:element name="JawLength" type="xsd:string" minOccurs="0" />
+											<xsd:element name="FingerPosition" type="xsd:string" minOccurs="0" />
+											<xsd:element name="HandPosition" type="xsd:string" minOccurs="0" />
 											<xsd:element name="ImageData" type="xsd:base64Binary" minOccurs="0" />
 										</xsd:sequence>
 									</xsd:complexType>
@@ -983,7 +975,7 @@
 							</xsd:sequence>
 						</xsd:complexType>
 					</xsd:element>
-				</xsd:sequence>
+				</xsd:sequence-->
 			</xsd:complexType>
 			<xsd:complexType name="ListFilterType">
 				<xsd:annotation>
@@ -4167,7 +4159,7 @@
 	</wsdl:binding>
 	<wsdl:service name="BIAS_v2">
 		<wsdl:port name="BIAS_v2HttpBindingPort" binding="tns:BIAS_v2HttpBinding">
-			<soap:address location="http://localhost:12345"/>
+			<soap:address location="http://your_URI/IRI_to_your_BIAS_implementation"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
