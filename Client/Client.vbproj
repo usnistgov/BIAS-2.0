@@ -79,6 +79,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Service\Service.vbproj">
+      <Project>{f399aee5-6c7e-4e5f-bbd6-7d182b8d1914}</Project>
+      <Name>Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.vbproj">
       <Project>{bbdd8ceb-3531-4efb-bd67-695c663b0b98}</Project>
       <Name>Shared</Name>

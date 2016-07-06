@@ -1,9 +1,0 @@
-c:\users\pyl\documents\visual studio 2013\Projects\Service\Service\obj\Debug\Service.Resources.resources
-c:\users\pyl\documents\visual studio 2013\Projects\Service\Service\obj\Debug\Service.vbproj.GenerateResource.Cache
-c:\users\pyl\documents\visual studio 2013\Projects\Service\Service\bin\Service.dll.config
-c:\users\pyl\documents\visual studio 2013\Projects\Service\Service\bin\Service.dll
-c:\users\pyl\documents\visual studio 2013\Projects\Service\Service\bin\Service.pdb
-c:\users\pyl\documents\visual studio 2013\Projects\Service\Service\bin\Service.xml
-c:\users\pyl\documents\visual studio 2013\Projects\Service\Service\obj\Debug\Service.dll
-c:\users\pyl\documents\visual studio 2013\Projects\Service\Service\obj\Debug\Service.xml
-c:\users\pyl\documents\visual studio 2013\Projects\Service\Service\obj\Debug\Service.pdb

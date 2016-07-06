@@ -6,10 +6,29 @@ Imports System.ServiceModel.Web
 
 Imports OASIS.BIAS.V2
 
+'netsh http add urlacl url=http://+:12345/ user=nist\pyl
+
+
+''BIAS.vb line 4120 ---- "_v1" -----  System.ServiceModel.ServiceContractAttribute([Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ConfigurationName:="OASIS.BIAS.V2.BIAS_v1")> _
+
+
 
 Module EntryPoint
     Sub Main()
+        StartService()
+        'Dim client As BIAS_v2Client = New BIAS_v2Client()
+        ' Use the 'client' variable to call operations on the service.
 
+        'Dim request1 As New QueryCapabilitiesRequest()
+        'Dim response1 As New QueryCapabilitiesResponsePackage()
+
+        'response1 = client.QueryCapabilities(request1)
+
+
+
+
+        ' Always close the client.
+        'client.Close()
     End Sub
 
     Sub StartService()
@@ -28,7 +47,7 @@ Module EntryPoint
         Dim b As New WebHttpBehavior()
         b.FaultExceptionEnabled = True
 
-        host.AddServiceEndpoint(GetType(BIAS_v1), binding, "bias")
+        host.AddServiceEndpoint(GetType(BIAS_v2), binding, "bias")
         'host.AddServiceEndpoint(GetType(IPolicyRetriever), New WebHttpBinding(), "").Behaviors.Add(b)
 
 

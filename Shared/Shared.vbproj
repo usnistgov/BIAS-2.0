@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Notes.md" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
