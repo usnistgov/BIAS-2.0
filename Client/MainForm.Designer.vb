@@ -24,26 +24,27 @@ Partial Class MainForm
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.grpbxResult_Enroll = New System.Windows.Forms.GroupBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.grpbox2_Enroll = New System.Windows.Forms.GroupBox()
+        Me.btnEnroll = New System.Windows.Forms.Button()
+        Me.btnClear_Enroll = New System.Windows.Forms.Button()
+        Me.panel1_Enroll = New System.Windows.Forms.Panel()
+        Me.DateOfBirthPicker_Enroll = New System.Windows.Forms.DateTimePicker()
+        Me.lblCitizenship_Enroll = New System.Windows.Forms.Label()
+        Me.lblSex_Enroll = New System.Windows.Forms.Label()
+        Me.lblDOB_Enroll = New System.Windows.Forms.Label()
+        Me.lblFamilyName_Enroll = New System.Windows.Forms.Label()
+        Me.lblGivenName_Enroll = New System.Windows.Forms.Label()
+        Me.lblGUID_Enroll = New System.Windows.Forms.Label()
+        Me.txtbxCitizenship_Enroll = New System.Windows.Forms.TextBox()
+        Me.txtbxSex_Enroll = New System.Windows.Forms.TextBox()
+        Me.txtbxFamily_Enroll = New System.Windows.Forms.TextBox()
+        Me.txtbxGiven_Enroll = New System.Windows.Forms.TextBox()
+        Me.txtbxGUID_Enroll = New System.Windows.Forms.TextBox()
+        Me.grpbox1_Enroll = New System.Windows.Forms.GroupBox()
+        Me.txtbxBioImage_Enroll = New System.Windows.Forms.TextBox()
+        Me.picbx1_Enroll = New System.Windows.Forms.PictureBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
@@ -64,23 +65,36 @@ Partial Class MainForm
         Me.TextBox12 = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.TextBox17 = New System.Windows.Forms.TextBox()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
-        Me.Button6 = New System.Windows.Forms.Button()
+        Me.grpbox9_Identify = New System.Windows.Forms.GroupBox()
+        Me.btnIdentify_Identify = New System.Windows.Forms.Button()
+        Me.txtbxBioImage_Identify = New System.Windows.Forms.TextBox()
+        Me.picbx3_Identify = New System.Windows.Forms.PictureBox()
+        Me.btnClear_Identify = New System.Windows.Forms.Button()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
-        Me.TextBox13 = New System.Windows.Forms.TextBox()
-        Me.Button7 = New System.Windows.Forms.Button()
+        Me.grpbox_QueryCapabilities = New System.Windows.Forms.GroupBox()
+        Me.lblAdditionalInfo_QueryCap = New System.Windows.Forms.Label()
+        Me.lblSupportingValue_QueryCap = New System.Windows.Forms.Label()
+        Me.lblValue_QueryCap = New System.Windows.Forms.Label()
+        Me.lblDescription_QueryCap = New System.Windows.Forms.Label()
+        Me.lblId_QueryCap = New System.Windows.Forms.Label()
+        Me.lblName_QueryCap = New System.Windows.Forms.Label()
+        Me.lstbx_CapabilitiesList = New System.Windows.Forms.ListBox()
+        Me.txtbxAdditionalInfo_QueryCap = New System.Windows.Forms.TextBox()
+        Me.txtbxSupportingValue_QueryCap = New System.Windows.Forms.TextBox()
+        Me.txtbxValue_QueryCap = New System.Windows.Forms.TextBox()
+        Me.txtbxDesc_QueryCap = New System.Windows.Forms.TextBox()
+        Me.txtbxId_QueryCap = New System.Windows.Forms.TextBox()
+        Me.txtbxName_QueryCap = New System.Windows.Forms.TextBox()
+        Me.QueryCapabilitiesBtn = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpbxResult_Enroll.SuspendLayout()
+        Me.grpbox2_Enroll.SuspendLayout()
+        Me.panel1_Enroll.SuspendLayout()
+        Me.grpbox1_Enroll.SuspendLayout()
+        CType(Me.picbx1_Enroll, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -88,11 +102,11 @@ Partial Class MainForm
         Me.GroupBox5.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
-        Me.GroupBox9.SuspendLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpbox9_Identify.SuspendLayout()
+        CType(Me.picbx3_Identify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox8.SuspendLayout()
         Me.TabPage4.SuspendLayout()
-        Me.GroupBox11.SuspendLayout()
+        Me.grpbox_QueryCapabilities.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -110,9 +124,9 @@ Partial Class MainForm
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.GroupBox3)
-        Me.TabPage1.Controls.Add(Me.GroupBox2)
-        Me.TabPage1.Controls.Add(Me.GroupBox1)
+        Me.TabPage1.Controls.Add(Me.grpbxResult_Enroll)
+        Me.TabPage1.Controls.Add(Me.grpbox2_Enroll)
+        Me.TabPage1.Controls.Add(Me.grpbox1_Enroll)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
@@ -121,186 +135,195 @@ Partial Class MainForm
         Me.TabPage1.Text = "Enroll"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'GroupBox3
+        'grpbxResult_Enroll
         '
-        Me.GroupBox3.Location = New System.Drawing.Point(27, 302)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(579, 119)
-        Me.GroupBox3.TabIndex = 2
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Result"
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.Button2)
-        Me.GroupBox2.Controls.Add(Me.Button1)
-        Me.GroupBox2.Controls.Add(Me.Panel1)
-        Me.GroupBox2.Location = New System.Drawing.Point(276, 40)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(330, 256)
-        Me.GroupBox2.TabIndex = 1
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Biographic Data"
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(115, 216)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 2
-        Me.Button2.Text = "Enroll"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(6, 217)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Clear"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.Label6)
-        Me.Panel1.Controls.Add(Me.Label5)
-        Me.Panel1.Controls.Add(Me.Label4)
-        Me.Panel1.Controls.Add(Me.Label3)
-        Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Controls.Add(Me.TextBox6)
-        Me.Panel1.Controls.Add(Me.TextBox5)
-        Me.Panel1.Controls.Add(Me.TextBox4)
-        Me.Panel1.Controls.Add(Me.TextBox3)
-        Me.Panel1.Controls.Add(Me.TextBox2)
-        Me.Panel1.Controls.Add(Me.TextBox1)
-        Me.Panel1.Location = New System.Drawing.Point(6, 19)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(306, 191)
-        Me.Panel1.TabIndex = 0
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(13, 142)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(57, 13)
-        Me.Label6.TabIndex = 11
-        Me.Label6.Text = "Citizenship"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(13, 116)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(25, 13)
-        Me.Label5.TabIndex = 10
-        Me.Label5.Text = "Sex"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(13, 90)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(66, 13)
-        Me.Label4.TabIndex = 9
-        Me.Label4.Text = "Date of Birth"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(13, 67)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(67, 13)
-        Me.Label3.TabIndex = 8
-        Me.Label3.Text = "Family Name"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(13, 45)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(66, 13)
-        Me.Label2.TabIndex = 7
-        Me.Label2.Text = "Given Name"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(13, 18)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(34, 13)
-        Me.Label1.TabIndex = 6
-        Me.Label1.Text = "GUID"
-        '
-        'TextBox6
-        '
-        Me.TextBox6.Location = New System.Drawing.Point(164, 142)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(139, 20)
-        Me.TextBox6.TabIndex = 5
-        '
-        'TextBox5
-        '
-        Me.TextBox5.Location = New System.Drawing.Point(164, 116)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(139, 20)
-        Me.TextBox5.TabIndex = 4
+        Me.grpbxResult_Enroll.Controls.Add(Me.TextBox4)
+        Me.grpbxResult_Enroll.Location = New System.Drawing.Point(27, 302)
+        Me.grpbxResult_Enroll.Name = "grpbxResult_Enroll"
+        Me.grpbxResult_Enroll.Size = New System.Drawing.Size(579, 119)
+        Me.grpbxResult_Enroll.TabIndex = 2
+        Me.grpbxResult_Enroll.TabStop = False
+        Me.grpbxResult_Enroll.Text = "Result"
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(164, 90)
+        Me.TextBox4.Location = New System.Drawing.Point(433, 40)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(97, 20)
         Me.TextBox4.TabIndex = 3
         '
-        'TextBox3
+        'grpbox2_Enroll
         '
-        Me.TextBox3.Location = New System.Drawing.Point(164, 64)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(139, 20)
-        Me.TextBox3.TabIndex = 2
+        Me.grpbox2_Enroll.Controls.Add(Me.btnEnroll)
+        Me.grpbox2_Enroll.Controls.Add(Me.btnClear_Enroll)
+        Me.grpbox2_Enroll.Controls.Add(Me.panel1_Enroll)
+        Me.grpbox2_Enroll.Location = New System.Drawing.Point(276, 40)
+        Me.grpbox2_Enroll.Name = "grpbox2_Enroll"
+        Me.grpbox2_Enroll.Size = New System.Drawing.Size(330, 256)
+        Me.grpbox2_Enroll.TabIndex = 1
+        Me.grpbox2_Enroll.TabStop = False
+        Me.grpbox2_Enroll.Text = "Biographic Data"
         '
-        'TextBox2
+        'btnEnroll
         '
-        Me.TextBox2.Location = New System.Drawing.Point(164, 38)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(139, 20)
-        Me.TextBox2.TabIndex = 1
+        Me.btnEnroll.Location = New System.Drawing.Point(115, 216)
+        Me.btnEnroll.Name = "btnEnroll"
+        Me.btnEnroll.Size = New System.Drawing.Size(75, 23)
+        Me.btnEnroll.TabIndex = 2
+        Me.btnEnroll.Text = "Enroll"
+        Me.btnEnroll.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'btnClear_Enroll
         '
-        Me.TextBox1.Location = New System.Drawing.Point(164, 12)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(139, 20)
-        Me.TextBox1.TabIndex = 0
+        Me.btnClear_Enroll.Location = New System.Drawing.Point(6, 217)
+        Me.btnClear_Enroll.Name = "btnClear_Enroll"
+        Me.btnClear_Enroll.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear_Enroll.TabIndex = 1
+        Me.btnClear_Enroll.Text = "Clear"
+        Me.btnClear_Enroll.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'panel1_Enroll
         '
-        Me.GroupBox1.Controls.Add(Me.TextBox7)
-        Me.GroupBox1.Controls.Add(Me.PictureBox1)
-        Me.GroupBox1.Location = New System.Drawing.Point(27, 40)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(196, 256)
-        Me.GroupBox1.TabIndex = 0
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Biometric Data"
+        Me.panel1_Enroll.Controls.Add(Me.DateOfBirthPicker_Enroll)
+        Me.panel1_Enroll.Controls.Add(Me.lblCitizenship_Enroll)
+        Me.panel1_Enroll.Controls.Add(Me.lblSex_Enroll)
+        Me.panel1_Enroll.Controls.Add(Me.lblDOB_Enroll)
+        Me.panel1_Enroll.Controls.Add(Me.lblFamilyName_Enroll)
+        Me.panel1_Enroll.Controls.Add(Me.lblGivenName_Enroll)
+        Me.panel1_Enroll.Controls.Add(Me.lblGUID_Enroll)
+        Me.panel1_Enroll.Controls.Add(Me.txtbxCitizenship_Enroll)
+        Me.panel1_Enroll.Controls.Add(Me.txtbxSex_Enroll)
+        Me.panel1_Enroll.Controls.Add(Me.txtbxFamily_Enroll)
+        Me.panel1_Enroll.Controls.Add(Me.txtbxGiven_Enroll)
+        Me.panel1_Enroll.Controls.Add(Me.txtbxGUID_Enroll)
+        Me.panel1_Enroll.Location = New System.Drawing.Point(6, 19)
+        Me.panel1_Enroll.Name = "panel1_Enroll"
+        Me.panel1_Enroll.Size = New System.Drawing.Size(306, 191)
+        Me.panel1_Enroll.TabIndex = 0
         '
-        'TextBox7
+        'DateOfBirthPicker_Enroll
         '
-        Me.TextBox7.Location = New System.Drawing.Point(6, 216)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(146, 20)
-        Me.TextBox7.TabIndex = 1
-        Me.TextBox7.Text = "filename"
+        Me.DateOfBirthPicker_Enroll.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DateOfBirthPicker_Enroll.Location = New System.Drawing.Point(164, 90)
+        Me.DateOfBirthPicker_Enroll.Name = "DateOfBirthPicker_Enroll"
+        Me.DateOfBirthPicker_Enroll.Size = New System.Drawing.Size(142, 20)
+        Me.DateOfBirthPicker_Enroll.TabIndex = 12
         '
-        'PictureBox1
+        'lblCitizenship_Enroll
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(6, 19)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(146, 191)
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
+        Me.lblCitizenship_Enroll.AutoSize = True
+        Me.lblCitizenship_Enroll.Location = New System.Drawing.Point(13, 142)
+        Me.lblCitizenship_Enroll.Name = "lblCitizenship_Enroll"
+        Me.lblCitizenship_Enroll.Size = New System.Drawing.Size(57, 13)
+        Me.lblCitizenship_Enroll.TabIndex = 11
+        Me.lblCitizenship_Enroll.Text = "Citizenship"
+        '
+        'lblSex_Enroll
+        '
+        Me.lblSex_Enroll.AutoSize = True
+        Me.lblSex_Enroll.Location = New System.Drawing.Point(13, 116)
+        Me.lblSex_Enroll.Name = "lblSex_Enroll"
+        Me.lblSex_Enroll.Size = New System.Drawing.Size(25, 13)
+        Me.lblSex_Enroll.TabIndex = 10
+        Me.lblSex_Enroll.Text = "Sex"
+        '
+        'lblDOB_Enroll
+        '
+        Me.lblDOB_Enroll.AutoSize = True
+        Me.lblDOB_Enroll.Location = New System.Drawing.Point(13, 90)
+        Me.lblDOB_Enroll.Name = "lblDOB_Enroll"
+        Me.lblDOB_Enroll.Size = New System.Drawing.Size(66, 13)
+        Me.lblDOB_Enroll.TabIndex = 9
+        Me.lblDOB_Enroll.Text = "Date of Birth"
+        '
+        'lblFamilyName_Enroll
+        '
+        Me.lblFamilyName_Enroll.AutoSize = True
+        Me.lblFamilyName_Enroll.Location = New System.Drawing.Point(13, 67)
+        Me.lblFamilyName_Enroll.Name = "lblFamilyName_Enroll"
+        Me.lblFamilyName_Enroll.Size = New System.Drawing.Size(67, 13)
+        Me.lblFamilyName_Enroll.TabIndex = 8
+        Me.lblFamilyName_Enroll.Text = "Family Name"
+        '
+        'lblGivenName_Enroll
+        '
+        Me.lblGivenName_Enroll.AutoSize = True
+        Me.lblGivenName_Enroll.Location = New System.Drawing.Point(13, 45)
+        Me.lblGivenName_Enroll.Name = "lblGivenName_Enroll"
+        Me.lblGivenName_Enroll.Size = New System.Drawing.Size(66, 13)
+        Me.lblGivenName_Enroll.TabIndex = 7
+        Me.lblGivenName_Enroll.Text = "Given Name"
+        '
+        'lblGUID_Enroll
+        '
+        Me.lblGUID_Enroll.AutoSize = True
+        Me.lblGUID_Enroll.Location = New System.Drawing.Point(13, 18)
+        Me.lblGUID_Enroll.Name = "lblGUID_Enroll"
+        Me.lblGUID_Enroll.Size = New System.Drawing.Size(34, 13)
+        Me.lblGUID_Enroll.TabIndex = 6
+        Me.lblGUID_Enroll.Text = "GUID"
+        '
+        'txtbxCitizenship_Enroll
+        '
+        Me.txtbxCitizenship_Enroll.Location = New System.Drawing.Point(164, 142)
+        Me.txtbxCitizenship_Enroll.Name = "txtbxCitizenship_Enroll"
+        Me.txtbxCitizenship_Enroll.Size = New System.Drawing.Size(139, 20)
+        Me.txtbxCitizenship_Enroll.TabIndex = 5
+        '
+        'txtbxSex_Enroll
+        '
+        Me.txtbxSex_Enroll.Location = New System.Drawing.Point(164, 116)
+        Me.txtbxSex_Enroll.Name = "txtbxSex_Enroll"
+        Me.txtbxSex_Enroll.Size = New System.Drawing.Size(139, 20)
+        Me.txtbxSex_Enroll.TabIndex = 4
+        '
+        'txtbxFamily_Enroll
+        '
+        Me.txtbxFamily_Enroll.Location = New System.Drawing.Point(164, 64)
+        Me.txtbxFamily_Enroll.Name = "txtbxFamily_Enroll"
+        Me.txtbxFamily_Enroll.Size = New System.Drawing.Size(139, 20)
+        Me.txtbxFamily_Enroll.TabIndex = 2
+        '
+        'txtbxGiven_Enroll
+        '
+        Me.txtbxGiven_Enroll.Location = New System.Drawing.Point(164, 38)
+        Me.txtbxGiven_Enroll.Name = "txtbxGiven_Enroll"
+        Me.txtbxGiven_Enroll.Size = New System.Drawing.Size(139, 20)
+        Me.txtbxGiven_Enroll.TabIndex = 1
+        '
+        'txtbxGUID_Enroll
+        '
+        Me.txtbxGUID_Enroll.Location = New System.Drawing.Point(164, 12)
+        Me.txtbxGUID_Enroll.Name = "txtbxGUID_Enroll"
+        Me.txtbxGUID_Enroll.Size = New System.Drawing.Size(139, 20)
+        Me.txtbxGUID_Enroll.TabIndex = 0
+        '
+        'grpbox1_Enroll
+        '
+        Me.grpbox1_Enroll.Controls.Add(Me.txtbxBioImage_Enroll)
+        Me.grpbox1_Enroll.Controls.Add(Me.picbx1_Enroll)
+        Me.grpbox1_Enroll.Location = New System.Drawing.Point(27, 40)
+        Me.grpbox1_Enroll.Name = "grpbox1_Enroll"
+        Me.grpbox1_Enroll.Size = New System.Drawing.Size(196, 256)
+        Me.grpbox1_Enroll.TabIndex = 0
+        Me.grpbox1_Enroll.TabStop = False
+        Me.grpbox1_Enroll.Text = "Biometric Data"
+        '
+        'txtbxBioImage_Enroll
+        '
+        Me.txtbxBioImage_Enroll.Location = New System.Drawing.Point(6, 216)
+        Me.txtbxBioImage_Enroll.Name = "txtbxBioImage_Enroll"
+        Me.txtbxBioImage_Enroll.Size = New System.Drawing.Size(146, 20)
+        Me.txtbxBioImage_Enroll.TabIndex = 1
+        Me.txtbxBioImage_Enroll.Text = "click here to select a file.."
+        '
+        'picbx1_Enroll
+        '
+        Me.picbx1_Enroll.Location = New System.Drawing.Point(6, 19)
+        Me.picbx1_Enroll.Name = "picbx1_Enroll"
+        Me.picbx1_Enroll.Size = New System.Drawing.Size(146, 191)
+        Me.picbx1_Enroll.TabIndex = 0
+        Me.picbx1_Enroll.TabStop = False
         '
         'TabPage2
         '
@@ -475,7 +498,7 @@ Partial Class MainForm
         'TabPage3
         '
         Me.TabPage3.Controls.Add(Me.GroupBox10)
-        Me.TabPage3.Controls.Add(Me.GroupBox9)
+        Me.TabPage3.Controls.Add(Me.grpbox9_Identify)
         Me.TabPage3.Controls.Add(Me.GroupBox8)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
@@ -494,52 +517,52 @@ Partial Class MainForm
         Me.GroupBox10.TabStop = False
         Me.GroupBox10.Text = "Messages"
         '
-        'GroupBox9
+        'grpbox9_Identify
         '
-        Me.GroupBox9.Controls.Add(Me.Button5)
-        Me.GroupBox9.Controls.Add(Me.TextBox17)
-        Me.GroupBox9.Controls.Add(Me.PictureBox3)
-        Me.GroupBox9.Controls.Add(Me.Button6)
-        Me.GroupBox9.Location = New System.Drawing.Point(50, 25)
-        Me.GroupBox9.Name = "GroupBox9"
-        Me.GroupBox9.Size = New System.Drawing.Size(218, 289)
-        Me.GroupBox9.TabIndex = 4
-        Me.GroupBox9.TabStop = False
-        Me.GroupBox9.Text = "Biometric Data"
+        Me.grpbox9_Identify.Controls.Add(Me.btnIdentify_Identify)
+        Me.grpbox9_Identify.Controls.Add(Me.txtbxBioImage_Identify)
+        Me.grpbox9_Identify.Controls.Add(Me.picbx3_Identify)
+        Me.grpbox9_Identify.Controls.Add(Me.btnClear_Identify)
+        Me.grpbox9_Identify.Location = New System.Drawing.Point(50, 25)
+        Me.grpbox9_Identify.Name = "grpbox9_Identify"
+        Me.grpbox9_Identify.Size = New System.Drawing.Size(218, 289)
+        Me.grpbox9_Identify.TabIndex = 4
+        Me.grpbox9_Identify.TabStop = False
+        Me.grpbox9_Identify.Text = "Biometric Data"
         '
-        'Button5
+        'btnIdentify_Identify
         '
-        Me.Button5.Location = New System.Drawing.Point(98, 260)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(75, 23)
-        Me.Button5.TabIndex = 2
-        Me.Button5.Text = "Identify"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.btnIdentify_Identify.Location = New System.Drawing.Point(98, 260)
+        Me.btnIdentify_Identify.Name = "btnIdentify_Identify"
+        Me.btnIdentify_Identify.Size = New System.Drawing.Size(75, 23)
+        Me.btnIdentify_Identify.TabIndex = 2
+        Me.btnIdentify_Identify.Text = "Identify"
+        Me.btnIdentify_Identify.UseVisualStyleBackColor = True
         '
-        'TextBox17
+        'txtbxBioImage_Identify
         '
-        Me.TextBox17.Location = New System.Drawing.Point(7, 218)
-        Me.TextBox17.Name = "TextBox17"
-        Me.TextBox17.Size = New System.Drawing.Size(166, 20)
-        Me.TextBox17.TabIndex = 1
-        Me.TextBox17.Text = "filename"
+        Me.txtbxBioImage_Identify.Location = New System.Drawing.Point(7, 218)
+        Me.txtbxBioImage_Identify.Name = "txtbxBioImage_Identify"
+        Me.txtbxBioImage_Identify.Size = New System.Drawing.Size(166, 20)
+        Me.txtbxBioImage_Identify.TabIndex = 1
+        Me.txtbxBioImage_Identify.Text = "click here to select a file..."
         '
-        'PictureBox3
+        'picbx3_Identify
         '
-        Me.PictureBox3.Location = New System.Drawing.Point(6, 19)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(167, 191)
-        Me.PictureBox3.TabIndex = 0
-        Me.PictureBox3.TabStop = False
+        Me.picbx3_Identify.Location = New System.Drawing.Point(6, 19)
+        Me.picbx3_Identify.Name = "picbx3_Identify"
+        Me.picbx3_Identify.Size = New System.Drawing.Size(167, 191)
+        Me.picbx3_Identify.TabIndex = 0
+        Me.picbx3_Identify.TabStop = False
         '
-        'Button6
+        'btnClear_Identify
         '
-        Me.Button6.Location = New System.Drawing.Point(6, 260)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(75, 23)
-        Me.Button6.TabIndex = 1
-        Me.Button6.Text = "Clear"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.btnClear_Identify.Location = New System.Drawing.Point(6, 260)
+        Me.btnClear_Identify.Name = "btnClear_Identify"
+        Me.btnClear_Identify.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear_Identify.TabIndex = 1
+        Me.btnClear_Identify.Text = "Clear"
+        Me.btnClear_Identify.UseVisualStyleBackColor = True
         '
         'GroupBox8
         '
@@ -561,7 +584,7 @@ Partial Class MainForm
         '
         'TabPage4
         '
-        Me.TabPage4.Controls.Add(Me.GroupBox11)
+        Me.TabPage4.Controls.Add(Me.grpbox_QueryCapabilities)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
@@ -570,33 +593,142 @@ Partial Class MainForm
         Me.TabPage4.Text = "QueryCapabilities"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
-        'GroupBox11
+        'grpbox_QueryCapabilities
         '
-        Me.GroupBox11.Controls.Add(Me.Button7)
-        Me.GroupBox11.Controls.Add(Me.TextBox13)
-        Me.GroupBox11.Location = New System.Drawing.Point(26, 30)
-        Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.Size = New System.Drawing.Size(196, 378)
-        Me.GroupBox11.TabIndex = 1
-        Me.GroupBox11.TabStop = False
-        Me.GroupBox11.Text = "Query Capability Results"
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.lblAdditionalInfo_QueryCap)
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.lblSupportingValue_QueryCap)
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.lblValue_QueryCap)
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.lblDescription_QueryCap)
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.lblId_QueryCap)
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.lblName_QueryCap)
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.lstbx_CapabilitiesList)
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.txtbxAdditionalInfo_QueryCap)
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.txtbxSupportingValue_QueryCap)
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.txtbxValue_QueryCap)
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.txtbxDesc_QueryCap)
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.txtbxId_QueryCap)
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.txtbxName_QueryCap)
+        Me.grpbox_QueryCapabilities.Controls.Add(Me.QueryCapabilitiesBtn)
+        Me.grpbox_QueryCapabilities.Location = New System.Drawing.Point(26, 30)
+        Me.grpbox_QueryCapabilities.Name = "grpbox_QueryCapabilities"
+        Me.grpbox_QueryCapabilities.Size = New System.Drawing.Size(594, 378)
+        Me.grpbox_QueryCapabilities.TabIndex = 1
+        Me.grpbox_QueryCapabilities.TabStop = False
+        Me.grpbox_QueryCapabilities.Text = "Query Capability Results"
         '
-        'TextBox13
+        'lblAdditionalInfo_QueryCap
         '
-        Me.TextBox13.Location = New System.Drawing.Point(17, 113)
-        Me.TextBox13.Multiline = True
-        Me.TextBox13.Name = "TextBox13"
-        Me.TextBox13.Size = New System.Drawing.Size(148, 237)
-        Me.TextBox13.TabIndex = 0
+        Me.lblAdditionalInfo_QueryCap.AutoSize = True
+        Me.lblAdditionalInfo_QueryCap.Location = New System.Drawing.Point(269, 273)
+        Me.lblAdditionalInfo_QueryCap.Name = "lblAdditionalInfo_QueryCap"
+        Me.lblAdditionalInfo_QueryCap.Size = New System.Drawing.Size(74, 13)
+        Me.lblAdditionalInfo_QueryCap.TabIndex = 14
+        Me.lblAdditionalInfo_QueryCap.Text = "Additional Info"
         '
-        'Button7
+        'lblSupportingValue_QueryCap
         '
-        Me.Button7.Location = New System.Drawing.Point(17, 43)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(148, 23)
-        Me.Button7.TabIndex = 1
-        Me.Button7.Text = "QueryCapabilities"
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.lblSupportingValue_QueryCap.AutoSize = True
+        Me.lblSupportingValue_QueryCap.Location = New System.Drawing.Point(255, 230)
+        Me.lblSupportingValue_QueryCap.Name = "lblSupportingValue_QueryCap"
+        Me.lblSupportingValue_QueryCap.Size = New System.Drawing.Size(88, 13)
+        Me.lblSupportingValue_QueryCap.TabIndex = 13
+        Me.lblSupportingValue_QueryCap.Text = "Supporting Value"
+        '
+        'lblValue_QueryCap
+        '
+        Me.lblValue_QueryCap.AutoSize = True
+        Me.lblValue_QueryCap.Location = New System.Drawing.Point(308, 190)
+        Me.lblValue_QueryCap.Name = "lblValue_QueryCap"
+        Me.lblValue_QueryCap.Size = New System.Drawing.Size(34, 13)
+        Me.lblValue_QueryCap.TabIndex = 12
+        Me.lblValue_QueryCap.Text = "Value"
+        '
+        'lblDescription_QueryCap
+        '
+        Me.lblDescription_QueryCap.AutoSize = True
+        Me.lblDescription_QueryCap.Location = New System.Drawing.Point(283, 151)
+        Me.lblDescription_QueryCap.Name = "lblDescription_QueryCap"
+        Me.lblDescription_QueryCap.Size = New System.Drawing.Size(60, 13)
+        Me.lblDescription_QueryCap.TabIndex = 11
+        Me.lblDescription_QueryCap.Text = "Description"
+        '
+        'lblId_QueryCap
+        '
+        Me.lblId_QueryCap.AutoSize = True
+        Me.lblId_QueryCap.Location = New System.Drawing.Point(325, 106)
+        Me.lblId_QueryCap.Name = "lblId_QueryCap"
+        Me.lblId_QueryCap.Size = New System.Drawing.Size(18, 13)
+        Me.lblId_QueryCap.TabIndex = 10
+        Me.lblId_QueryCap.Text = "ID"
+        '
+        'lblName_QueryCap
+        '
+        Me.lblName_QueryCap.AutoSize = True
+        Me.lblName_QueryCap.Location = New System.Drawing.Point(308, 66)
+        Me.lblName_QueryCap.Name = "lblName_QueryCap"
+        Me.lblName_QueryCap.Size = New System.Drawing.Size(35, 13)
+        Me.lblName_QueryCap.TabIndex = 9
+        Me.lblName_QueryCap.Text = "Name"
+        '
+        'lstbx_CapabilitiesList
+        '
+        Me.lstbx_CapabilitiesList.DisplayMember = "capabilityName"
+        Me.lstbx_CapabilitiesList.FormattingEnabled = True
+        Me.lstbx_CapabilitiesList.Location = New System.Drawing.Point(17, 84)
+        Me.lstbx_CapabilitiesList.Name = "lstbx_CapabilitiesList"
+        Me.lstbx_CapabilitiesList.Size = New System.Drawing.Size(192, 277)
+        Me.lstbx_CapabilitiesList.TabIndex = 8
+        '
+        'txtbxAdditionalInfo_QueryCap
+        '
+        Me.txtbxAdditionalInfo_QueryCap.Location = New System.Drawing.Point(359, 266)
+        Me.txtbxAdditionalInfo_QueryCap.Name = "txtbxAdditionalInfo_QueryCap"
+        Me.txtbxAdditionalInfo_QueryCap.Size = New System.Drawing.Size(191, 20)
+        Me.txtbxAdditionalInfo_QueryCap.TabIndex = 7
+        '
+        'txtbxSupportingValue_QueryCap
+        '
+        Me.txtbxSupportingValue_QueryCap.Location = New System.Drawing.Point(359, 223)
+        Me.txtbxSupportingValue_QueryCap.Name = "txtbxSupportingValue_QueryCap"
+        Me.txtbxSupportingValue_QueryCap.Size = New System.Drawing.Size(191, 20)
+        Me.txtbxSupportingValue_QueryCap.TabIndex = 6
+        '
+        'txtbxValue_QueryCap
+        '
+        Me.txtbxValue_QueryCap.Location = New System.Drawing.Point(359, 187)
+        Me.txtbxValue_QueryCap.Name = "txtbxValue_QueryCap"
+        Me.txtbxValue_QueryCap.Size = New System.Drawing.Size(191, 20)
+        Me.txtbxValue_QueryCap.TabIndex = 5
+        '
+        'txtbxDesc_QueryCap
+        '
+        Me.txtbxDesc_QueryCap.Location = New System.Drawing.Point(359, 151)
+        Me.txtbxDesc_QueryCap.Name = "txtbxDesc_QueryCap"
+        Me.txtbxDesc_QueryCap.Size = New System.Drawing.Size(191, 20)
+        Me.txtbxDesc_QueryCap.TabIndex = 4
+        '
+        'txtbxId_QueryCap
+        '
+        Me.txtbxId_QueryCap.Location = New System.Drawing.Point(359, 106)
+        Me.txtbxId_QueryCap.Name = "txtbxId_QueryCap"
+        Me.txtbxId_QueryCap.Size = New System.Drawing.Size(191, 20)
+        Me.txtbxId_QueryCap.TabIndex = 3
+        '
+        'txtbxName_QueryCap
+        '
+        Me.txtbxName_QueryCap.Location = New System.Drawing.Point(359, 63)
+        Me.txtbxName_QueryCap.Name = "txtbxName_QueryCap"
+        Me.txtbxName_QueryCap.Size = New System.Drawing.Size(191, 20)
+        Me.txtbxName_QueryCap.TabIndex = 2
+        '
+        'QueryCapabilitiesBtn
+        '
+        Me.QueryCapabilitiesBtn.Location = New System.Drawing.Point(17, 43)
+        Me.QueryCapabilitiesBtn.Name = "QueryCapabilitiesBtn"
+        Me.QueryCapabilitiesBtn.Size = New System.Drawing.Size(192, 23)
+        Me.QueryCapabilitiesBtn.TabIndex = 1
+        Me.QueryCapabilitiesBtn.Text = "QueryCapabilities"
+        Me.QueryCapabilitiesBtn.UseVisualStyleBackColor = True
         '
         'MainForm
         '
@@ -608,12 +740,14 @@ Partial Class MainForm
         Me.Text = "Biometric Identity Assurance Service"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpbxResult_Enroll.ResumeLayout(False)
+        Me.grpbxResult_Enroll.PerformLayout()
+        Me.grpbox2_Enroll.ResumeLayout(False)
+        Me.panel1_Enroll.ResumeLayout(False)
+        Me.panel1_Enroll.PerformLayout()
+        Me.grpbox1_Enroll.ResumeLayout(False)
+        Me.grpbox1_Enroll.PerformLayout()
+        CType(Me.picbx1_Enroll, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
@@ -625,13 +759,13 @@ Partial Class MainForm
         Me.Panel2.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
-        Me.GroupBox9.ResumeLayout(False)
-        Me.GroupBox9.PerformLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpbox9_Identify.ResumeLayout(False)
+        Me.grpbox9_Identify.PerformLayout()
+        CType(Me.picbx3_Identify, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox8.ResumeLayout(False)
         Me.TabPage4.ResumeLayout(False)
-        Me.GroupBox11.ResumeLayout(False)
-        Me.GroupBox11.PerformLayout()
+        Me.grpbox_QueryCapabilities.ResumeLayout(False)
+        Me.grpbox_QueryCapabilities.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -639,25 +773,25 @@ Partial Class MainForm
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
+    Friend WithEvents grpbox2_Enroll As System.Windows.Forms.GroupBox
+    Friend WithEvents btnClear_Enroll As System.Windows.Forms.Button
+    Friend WithEvents panel1_Enroll As System.Windows.Forms.Panel
+    Friend WithEvents grpbox1_Enroll As System.Windows.Forms.GroupBox
+    Friend WithEvents grpbxResult_Enroll As System.Windows.Forms.GroupBox
+    Friend WithEvents btnEnroll As System.Windows.Forms.Button
+    Friend WithEvents lblCitizenship_Enroll As System.Windows.Forms.Label
+    Friend WithEvents lblSex_Enroll As System.Windows.Forms.Label
+    Friend WithEvents lblDOB_Enroll As System.Windows.Forms.Label
+    Friend WithEvents lblFamilyName_Enroll As System.Windows.Forms.Label
+    Friend WithEvents lblGivenName_Enroll As System.Windows.Forms.Label
+    Friend WithEvents lblGUID_Enroll As System.Windows.Forms.Label
+    Friend WithEvents txtbxCitizenship_Enroll As System.Windows.Forms.TextBox
+    Friend WithEvents txtbxSex_Enroll As System.Windows.Forms.TextBox
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents txtbxFamily_Enroll As System.Windows.Forms.TextBox
+    Friend WithEvents txtbxGiven_Enroll As System.Windows.Forms.TextBox
+    Friend WithEvents txtbxGUID_Enroll As System.Windows.Forms.TextBox
+    Friend WithEvents picbx1_Enroll As System.Windows.Forms.PictureBox
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Friend WithEvents Button3 As System.Windows.Forms.Button
@@ -670,22 +804,35 @@ Partial Class MainForm
     Friend WithEvents TextBox9 As System.Windows.Forms.TextBox
     Friend WithEvents TextBox10 As System.Windows.Forms.TextBox
     Friend WithEvents TextBox12 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox7 As System.Windows.Forms.TextBox
+    Friend WithEvents txtbxBioImage_Enroll As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents TextBox8 As System.Windows.Forms.TextBox
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents TextBox11 As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
-    Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
-    Friend WithEvents Button5 As System.Windows.Forms.Button
-    Friend WithEvents TextBox17 As System.Windows.Forms.TextBox
-    Friend WithEvents PictureBox3 As System.Windows.Forms.PictureBox
-    Friend WithEvents Button6 As System.Windows.Forms.Button
+    Friend WithEvents grpbox9_Identify As System.Windows.Forms.GroupBox
+    Friend WithEvents btnIdentify_Identify As System.Windows.Forms.Button
+    Friend WithEvents txtbxBioImage_Identify As System.Windows.Forms.TextBox
+    Friend WithEvents picbx3_Identify As System.Windows.Forms.PictureBox
+    Friend WithEvents btnClear_Identify As System.Windows.Forms.Button
     Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
     Friend WithEvents Panel3 As System.Windows.Forms.Panel
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
-    Friend WithEvents GroupBox11 As System.Windows.Forms.GroupBox
-    Friend WithEvents Button7 As System.Windows.Forms.Button
-    Friend WithEvents TextBox13 As System.Windows.Forms.TextBox
+    Friend WithEvents grpbox_QueryCapabilities As System.Windows.Forms.GroupBox
+    Friend WithEvents QueryCapabilitiesBtn As System.Windows.Forms.Button
+    Friend WithEvents DateOfBirthPicker_Enroll As System.Windows.Forms.DateTimePicker
+    Friend WithEvents txtbxAdditionalInfo_QueryCap As System.Windows.Forms.TextBox
+    Friend WithEvents txtbxSupportingValue_QueryCap As System.Windows.Forms.TextBox
+    Friend WithEvents txtbxValue_QueryCap As System.Windows.Forms.TextBox
+    Friend WithEvents txtbxDesc_QueryCap As System.Windows.Forms.TextBox
+    Friend WithEvents txtbxId_QueryCap As System.Windows.Forms.TextBox
+    Friend WithEvents txtbxName_QueryCap As System.Windows.Forms.TextBox
+    Friend WithEvents lstbx_CapabilitiesList As System.Windows.Forms.ListBox
+    Friend WithEvents lblAdditionalInfo_QueryCap As System.Windows.Forms.Label
+    Friend WithEvents lblSupportingValue_QueryCap As System.Windows.Forms.Label
+    Friend WithEvents lblValue_QueryCap As System.Windows.Forms.Label
+    Friend WithEvents lblDescription_QueryCap As System.Windows.Forms.Label
+    Friend WithEvents lblId_QueryCap As System.Windows.Forms.Label
+    Friend WithEvents lblName_QueryCap As System.Windows.Forms.Label
 End Class

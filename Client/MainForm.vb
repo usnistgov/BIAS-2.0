@@ -1,6 +1,7 @@
 ﻿Imports System
 Imports System.Windows.Forms
 Imports System.Drawing
+Imports System.Drawing.Image
 Imports OASIS.BIAS.V2
 
 
@@ -9,37 +10,105 @@ Public Class MainForm
 
     Dim client As BIAS_v2Client
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub btnClear_Enroll_Click(sender As Object, e As EventArgs) Handles btnClear_Enroll.Click
         MessageBox.Show("Clear button was clicked")
     End Sub
 
-    Private Sub Button2Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub btnEnroll_Click(sender As Object, e As EventArgs) Handles btnEnroll.Click
         MessageBox.Show("Enroll button was clicked")
-        Dim request As New EnrollRequest
-        request.InputData.
 
+
+        Dim request As New EnrollRequest()
+        Dim params As New GenericRequestParameters()
+        params.Application = "clientApp1"
+        params.ApplicationUser = "user1"
+        params.BIASOperationName = "enrol"
+        request.GenericRequestParameters = New GenericRequestParameters()
+        request.GenericRequestParameters = params
+
+        Dim procOptn As New ProcessingOptionsType
+        Dim opt As New OptionType
+        opt.Key = "null"
+        opt.Value = "null"
+        procOptn.Add(opt)
+        request.ProcessingOptions = procOptn
+
+        request.InputData = New InformationType()
+        request.InputData.GUID = txtbxGUID_Enroll.Text
+        request.InputData.GivenName = txtbxGiven_Enroll.Text
+        request.InputData.FamilyName = txtbxFamily_Enroll.Text
+        request.InputData.DateOfBirth = DateOfBirthPicker_Enroll.Text
+        request.InputData.Sex = txtbxSex_Enroll.Text
+        request.InputData.Citizenship = txtbxCitizenship_Enroll.Text
 
         Dim response As EnrollResponsePackage
         'response = client.Enroll(request)
-
+        'Console.WriteLine(response.ResponseStatus.Return.ToString) 'did the enrol succeed or fail
 
     End Sub
 
-
-    Private Sub Button7Click(sender As Object, e As EventArgs) Handles Button7.Click
+    Private Sub QueryCapabilities_Click(sender As Object, e As EventArgs) Handles QueryCapabilitiesBtn.Click
         client = New BIAS_v2Client()
-        Dim response1 As QueryCapabilitiesResponsePackage
+        Dim queryCapabilitiesResponse As QueryCapabilitiesResponsePackage
         Dim queryCapabilitiesRequest As New QueryCapabilitiesRequest()
+        'MessageBox.Show("QueryCapabilities button was clicked")
+        lstbx_CapabilitiesList.Items.Clear()
 
-        'response1 = client.QueryCapabilities(queryCapabilitiesRequest)
-
-        MessageBox.Show("QueryCapabilities button was clicked")
-
+        queryCapabilitiesResponse = client.QueryCapabilities(queryCapabilitiesRequest)
+        For Each ob As Object In queryCapabilitiesResponse.CapabilityList
+            lstbx_CapabilitiesList.Items.Add(ob)
+        Next
         Return
-
-
     End Sub
 
-    
-    
+    Private Sub updateCapabilityAttributes(ByVal aCapabilty As Object)
+        txtbxName_QueryCap.Text = aCapabilty.CapabilityName.ToString
+        'txtbxId_QueryCap.Text = aCapabilty.CapabilityID.ToString
+        'txtbxDesc_QueryCap.Text = aCapabilty.CapabilityDescription.ToString
+        'txtbxValue_QueryCap.Text = aCapabilty.CapabilityValue.ToString
+        'txtbxSupportingValue_QueryCap.Text = aCapabilty.CapabilitySupportingValue.ToString
+        'txtbxAdditionalInfo_QueryCap.Text = aCapabilty.CapabilityAdditionalInfo.ToString
+    End Sub
+
+    'Dim b As BiographicDataType = New BiographicDataType()
+
+
+
+    Private Sub CapabilityClicked_MouseClick(sender As Object, e As MouseEventArgs) Handles lstbx_CapabilitiesList.MouseClick
+        'MessageBox.Show("mouse click in capabilities text box")
+        If lstbx_CapabilitiesList.SelectedIndex = -1 Then
+            Return
+        End If
+        updateCapabilityAttributes(lstbx_CapabilitiesList.SelectedItem)
+    End Sub
+
+    Private Sub lstbx_CapabilitiesList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstbx_CapabilitiesList.SelectedIndexChanged
+        If lstbx_CapabilitiesList.SelectedIndex = -1 Then
+            Return
+        End If
+        updateCapabilityAttributes(lstbx_CapabilitiesList.SelectedItem)
+    End Sub
+
+    Private Sub BioImageTxtBx_MouseClick(sender As Object, e As EventArgs) Handles txtbxBioImage_Enroll.MouseClick
+        Dim OpenEnrolImage As New OpenFileDialog()
+
+        OpenEnrolImage.InitialDirectory = "C:/Temp/Samples"
+        OpenEnrolImage.Filter = "All files (*.*)|*.*"
+        OpenEnrolImage.RestoreDirectory = True
+        'OpenEnrolImage.FilterIndex = 1
+        If OpenEnrolImage.ShowDialog() = Windows.Forms.DialogResult.OK Then
+            Try
+                txtbxBioImage_Enroll.Text = OpenEnrolImage.FileName.ToString
+                picbx1_Enroll.Image = Drawing.Image.FromFile(OpenEnrolImage.FileName.ToString)
+            Catch ex As Exception
+                MessageBox.Show("Error opening Enrol Biometric image")
+
+            End Try
+
+        End If
+
+        'Dim imageString As String = "c:/temp/IMG_5306.JPG"
+        'PictureBox1.Image = Drawing.Image.FromFile(imageString)
+        'TextBox7.Text = imageString
+    End Sub
 End Class

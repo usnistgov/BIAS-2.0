@@ -100,6 +100,22 @@ Public Class BIASService
 
     Public Function QueryCapabilities(QueryCapabilitiesRequest As QueryCapabilitiesRequest) As QueryCapabilitiesResponsePackage Implements BIAS_v2.QueryCapabilities
         Dim queryCapabilitiesResponse As New QueryCapabilitiesResponsePackage()
+
+        System.Console.WriteLine("QueryCapabilities()")
+        queryCapabilitiesResponse.ResponseStatus = New ResponseStatus
+        queryCapabilitiesResponse.ResponseStatus.Return = 0
+
+        queryCapabilitiesResponse.CapabilityList = New CapabilityListType()
+        Dim cap As New CapabilityType()
+        cap.CapabilityName = CapabilityName.AggregateInputDataOptional
+        queryCapabilitiesResponse.CapabilityList.Add(cap)
+        cap = New CapabilityType()
+        cap.CapabilityName = CapabilityName.AggregateInputDataRequired
+        queryCapabilitiesResponse.CapabilityList.Add(cap)
+        cap = New CapabilityType()
+        cap.CapabilityName = CapabilityName.AggregateProcessingOption
+        queryCapabilitiesResponse.CapabilityList.Add(cap)
+
         Return queryCapabilitiesResponse
     End Function
 
