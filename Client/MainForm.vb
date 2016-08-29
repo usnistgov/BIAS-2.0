@@ -6,6 +6,7 @@ Imports OASIS.BIAS.V2
 
 
 
+
 Public Class MainForm
 
     Dim client As BIAS_v2Client
@@ -23,7 +24,7 @@ Public Class MainForm
         params.Application = "clientApp1"
         params.ApplicationUser = "user1"
         params.BIASOperationName = "enrol"
-        request.GenericRequestParameters = New GenericRequestParameters()
+        'request.GenericRequestParameters = New GenericRequestParameters()
         request.GenericRequestParameters = params
 
         Dim procOptn As New ProcessingOptionsType
@@ -33,13 +34,25 @@ Public Class MainForm
         procOptn.Add(opt)
         request.ProcessingOptions = procOptn
 
-        request.InputData = New InformationType()
-        request.InputData.GUID = txtbxGUID_Enroll.Text
-        request.InputData.GivenName = txtbxGiven_Enroll.Text
-        request.InputData.FamilyName = txtbxFamily_Enroll.Text
-        request.InputData.DateOfBirth = DateOfBirthPicker_Enroll.Text
-        request.InputData.Sex = txtbxSex_Enroll.Text
-        request.InputData.Citizenship = txtbxCitizenship_Enroll.Text
+        request.Identity.SubjectID = txtbxGUID_Enroll.Text
+        request.Identity.BiographicData.FirstName = txtbxGiven_Enroll.Text
+        request.Identity.BiographicData.LastName = txtbxFamily_Enroll.Text
+
+        With request.Identity.BiographicData.BiographicDataItemList
+            .Insert(0, New BiographicDataItemType())
+            .Item(0).Name = "DOB"
+            .Item(0).Type = DateString
+            .Item(0).Value = DateOfBirthPicker_Enroll.Text
+        End With
+
+
+        'request.InputData = New InformationType()
+        'request.InputData.GUID = txtbxGUID_Enroll.Text
+        'request.InputData.GivenName = txtbxGiven_Enroll.Text
+        'request.InputData.FamilyName = txtbxFamily_Enroll.Text
+        'request.InputData.DateOfBirth = DateOfBirthPicker_Enroll.Text
+        'request.InputData.Sex = txtbxSex_Enroll.Text
+        'request.InputData.Citizenship = txtbxCitizenship_Enroll.Text
 
         Dim response As EnrollResponsePackage
         'response = client.Enroll(request)
@@ -69,10 +82,6 @@ Public Class MainForm
         'txtbxSupportingValue_QueryCap.Text = aCapabilty.CapabilitySupportingValue.ToString
         'txtbxAdditionalInfo_QueryCap.Text = aCapabilty.CapabilityAdditionalInfo.ToString
     End Sub
-
-    'Dim b As BiographicDataType = New BiographicDataType()
-
-
 
     Private Sub CapabilityClicked_MouseClick(sender As Object, e As MouseEventArgs) Handles lstbx_CapabilitiesList.MouseClick
         'MessageBox.Show("mouse click in capabilities text box")
@@ -110,5 +119,17 @@ Public Class MainForm
         'Dim imageString As String = "c:/temp/IMG_5306.JPG"
         'PictureBox1.Image = Drawing.Image.FromFile(imageString)
         'TextBox7.Text = imageString
+    End Sub
+
+
+    Private Sub btnIdentify_Identify_Click(sender As Object, e As EventArgs) Handles btnIdentify_Identify.Click
+        client = New BIAS_v2Client()
+        Dim identifyResponse As New IdentifyResponsePackage()
+        Dim identifyRequest As New IdentifyRequest()
+
+
+        identifyResponse = client.Identify(identifyRequest)
+
+
     End Sub
 End Class
