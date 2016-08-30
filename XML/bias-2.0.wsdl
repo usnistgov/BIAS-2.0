@@ -922,7 +922,7 @@
 				</xsd:annotation>
 				<!-- THE FOLLOWING COMMENTED SECTION IS PROVIDED AS AN INFORMATIVE
 					     EXAMPLE OF WHAT 'InformationType'S CONTENT COULD BE -->
-				<!-- xsd:sequence>
+				<xsd:sequence>
 					<xsd:element name="GUID" type="xsd:string" minOccurs="0" />
 					<xsd:element name="GivenName" type="xsd:string" minOccurs="0" />
 					<xsd:element name="FamilyName" type="xsd:string" minOccurs="0" />
@@ -936,8 +936,18 @@
 									<xsd:complexType>
 										<xsd:sequence>
 											<xsd:element name="ContentType" type="xsd:string" minOccurs="0" />
-											<xsd:element name="FingerPosition" type="xsd:string" minOccurs="0" />
-											<xsd:element name="HandPosition" type="xsd:string" minOccurs="0" />
+											<xsd:element name="EyebrowDistance" type="xsd:string" minOccurs="0" />
+											<xsd:element name="LEyebrowWidth" type="xsd:string" minOccurs="0" />
+											<xsd:element name="REyebrowWidth" type="xsd:string" minOccurs="0" />
+											<xsd:element name="REyeHeight" type="xsd:string" minOccurs="0" />
+											<xsd:element name="LEyeHeight" type="xsd:string" minOccurs="0" />
+											<xsd:element name="EyeDistance" type="xsd:string" minOccurs="0" />
+											<xsd:element name="PupilDistance" type="xsd:string" minOccurs="0" />
+											<xsd:element name="BridgeWidth" type="xsd:string" minOccurs="0" />
+											<xsd:element name="NoseAlarWidth" type="xsd:string" minOccurs="0" />
+											<xsd:element name="NostrilWidth" type="xsd:D" minOccurs="0" />
+											<xsd:element name="UpperLipHeight" type="xsd:string" minOccurs="0" />
+											<xsd:element name="LowerLipHeight" type="xsd:string" minOccurs="0" />
 											<xsd:element name="ImageData" type="xsd:base64Binary" minOccurs="0" />
 										</xsd:sequence>
 									</xsd:complexType>
@@ -952,7 +962,7 @@
 							</xsd:sequence>
 						</xsd:complexType>
 					</xsd:element>
-				</xsd:sequence-->
+				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="ListFilterType">
 				<xsd:annotation>
