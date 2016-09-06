@@ -11,23 +11,11 @@
     Description:
         This document represents the WSDL definitions of BIAS Profile.
 -->
-<wsdl:definitions 
-	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
-	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
-	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
-	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
-	xmlns:cbeff="http://standards.iso.org/iso-iec/19785/-3/ed-2/" 
-	xmlns:iso_3166_1="http://standards.iso.org/iso/3166/-1/ed-3/" 
-	xmlns:tns="http://docs.oasis-open.org/bias/ns/bias-2.0/" 
-	targetNamespace="http://docs.oasis-open.org/bias/ns/bias-2.0/">
-	
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:cbeff="http://standards.iso.org/iso-iec/19785/-3/ed-2/" xmlns:iso_3166_1="http://standards.iso.org/iso/3166/-1/ed-3/" xmlns:tns="http://docs.oasis-open.org/bias/ns/bias-2.0/" targetNamespace="http://docs.oasis-open.org/bias/ns/bias-2.0/">
 	<wsdl:types>
 		<xsd:schema elementFormDefault="qualified" targetNamespace="http://docs.oasis-open.org/bias/ns/bias-2.0/">
 			<xsd:import namespace="http://standards.iso.org/iso-iec/19785/-3/ed-2/" schemaLocation="cbeff.xsd"/>
 			<xsd:import namespace="http://standards.iso.org/iso/3166/-1/ed-3/" schemaLocation="iso_country_codes.xsd"/>
-			
 			<xsd:complexType name="AggregateRequestTemplate">
 				<xsd:annotation>
 					<xsd:documentation>Base template for BIAS aggregate service requests.</xsd:documentation>
@@ -65,7 +53,6 @@
 					</xsd:extension>
 				</xsd:complexContent>
 			</xsd:complexType>
-			
 			<xsd:simpleType name="ApplicationIdentifier">
 				<xsd:annotation>
 					<xsd:documentation>Identifies an application.</xsd:documentation>
@@ -260,7 +247,7 @@
 						</xsd:annotation>
 					</xsd:element>
 					<!--<xsd:element name="BiographicDataElements" type="tns:BiographicDataType" minOccurs="0" maxOccurs="1">-->
-						<!--<xsd:annotation>
+					<!--<xsd:annotation>
 							<xsd:documentation>An Identity's biographic data elements that are stored in the implementing system.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>-->
@@ -287,7 +274,7 @@
 							<xsd:documentation>Data structure containing information about a biographic record.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
-			</xsd:sequence>
+				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="BiographicDataItemType">
 				<xsd:annotation>
@@ -321,8 +308,8 @@
 							<xsd:documentation>Data structure containing information about a biographic record.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
-			</xsd:sequence>
-			</xsd:complexType>			
+				</xsd:sequence>
+			</xsd:complexType>
 			<xsd:complexType name="BiographicDataSetType">
 				<xsd:annotation>
 					<xsd:documentation>Defines a set of biographic data that is formatted according to the specified format.</xsd:documentation>
@@ -378,11 +365,6 @@
 					<xsd:element name="BiographicDataItemList" type="tns:BiographicDataItemListType" minOccurs="0" maxOccurs="1">
 						<xsd:annotation>
 							<xsd:documentation>A list of biographic data elements.</xsd:documentation>
-						</xsd:annotation>
-					</xsd:element>
-					<xsd:element name="BiographicDataItem" type="tns:BiographicDataItemType" minOccurs="1" maxOccurs="unbounded">
-						<xsd:annotation>
-							<xsd:documentation>A single biographic data element.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
 					<xsd:element name="BiographicDataSet" type="tns:BiographicDataSetType" minOccurs="0" maxOccurs="1">
@@ -463,24 +445,20 @@
           </xsd:documentation>
 				</xsd:annotation>
 				<xsd:sequence>
-					<xsd:element name="ScoreList"  minOccurs="0" >
+					<xsd:element name="ScoreList" minOccurs="0">
 						<xsd:complexType>
-						<xsd:sequence>
-							<xsd:element name="Score" type="tns:ScoreType"/>
-						</xsd:sequence>
+							<xsd:sequence>
+								<xsd:element name="Score" type="tns:ScoreType"/>
+							</xsd:sequence>
 						</xsd:complexType>
-						
-					
-					
-						
 					</xsd:element>
-					<xsd:element name="Identity" type="tns:BIASIdentity" />
-					<xsd:element name="Rank" type="xsd:integer" minOccurs="1" maxOccurs="1" >
+					<xsd:element name="Identity" type="tns:BIASIdentity"/>
+					<xsd:element name="Rank" type="xsd:integer" minOccurs="1" maxOccurs="1">
 						<xsd:annotation>
 							<xsd:documentation>The rank of the candidate in relation to other candidates for the same biometric identification operation.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
-					<xsd:element name="BiographicData" type="tns:BiographicDataType" minOccurs="0" >
+					<xsd:element name="BiographicData" type="tns:BiographicDataType" minOccurs="0">
 						<xsd:annotation>
 							<xsd:documentation>Biographic data associated with the candidate match.</xsd:documentation>
 						</xsd:annotation>
@@ -887,7 +865,6 @@
 			<xsd:complexType name="FusionResult">
 				<xsd:sequence/>
 			</xsd:complexType>
-			
 			<xsd:complexType name="FusionScore">
 				<xsd:complexContent>
 					<xsd:extension base="tns:FusionResult">
@@ -945,7 +922,7 @@
 				</xsd:annotation>
 				<!-- THE FOLLOWING COMMENTED SECTION IS PROVIDED AS AN INFORMATIVE
 					     EXAMPLE OF WHAT 'InformationType'S CONTENT COULD BE -->
-				<!-- xsd:sequence>
+				<xsd:sequence>
 					<xsd:element name="GUID" type="xsd:string" minOccurs="0" />
 					<xsd:element name="GivenName" type="xsd:string" minOccurs="0" />
 					<xsd:element name="FamilyName" type="xsd:string" minOccurs="0" />
@@ -959,8 +936,18 @@
 									<xsd:complexType>
 										<xsd:sequence>
 											<xsd:element name="ContentType" type="xsd:string" minOccurs="0" />
-											<xsd:element name="FingerPosition" type="xsd:string" minOccurs="0" />
-											<xsd:element name="HandPosition" type="xsd:string" minOccurs="0" />
+											<xsd:element name="EyebrowDistance" type="xsd:string" minOccurs="0" />
+											<xsd:element name="LEyebrowWidth" type="xsd:string" minOccurs="0" />
+											<xsd:element name="REyebrowWidth" type="xsd:string" minOccurs="0" />
+											<xsd:element name="REyeHeight" type="xsd:string" minOccurs="0" />
+											<xsd:element name="LEyeHeight" type="xsd:string" minOccurs="0" />
+											<xsd:element name="EyeDistance" type="xsd:string" minOccurs="0" />
+											<xsd:element name="PupilDistance" type="xsd:string" minOccurs="0" />
+											<xsd:element name="BridgeWidth" type="xsd:string" minOccurs="0" />
+											<xsd:element name="NoseAlarWidth" type="xsd:string" minOccurs="0" />
+											<xsd:element name="NostrilWidth" type="xsd:D" minOccurs="0" />
+											<xsd:element name="UpperLipHeight" type="xsd:string" minOccurs="0" />
+											<xsd:element name="LowerLipHeight" type="xsd:string" minOccurs="0" />
 											<xsd:element name="ImageData" type="xsd:base64Binary" minOccurs="0" />
 										</xsd:sequence>
 									</xsd:complexType>
@@ -975,7 +962,7 @@
 							</xsd:sequence>
 						</xsd:complexType>
 					</xsd:element>
-				</xsd:sequence-->
+				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="ListFilterType">
 				<xsd:annotation>
@@ -1014,19 +1001,18 @@
           </xsd:documentation>
 				</xsd:annotation>
 				<xsd:sequence>
-					<xsd:element name="Key" type="xsd:string" >
+					<xsd:element name="Key" type="xsd:string">
 						<xsd:annotation>
 							<xsd:documentation>The identifier of an option supported by the implementing system.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
-					<xsd:element name="Value" type="xsd:string" minOccurs="0" >
+					<xsd:element name="Value" type="xsd:string" minOccurs="0">
 						<xsd:annotation>
 							<xsd:documentation>The value for an option supported by the implementing system.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
 				</xsd:sequence>
 			</xsd:complexType>
-			
 			<xsd:complexType name="ProcessingOptionsType">
 				<xsd:annotation>
 					<xsd:documentation>
@@ -1135,9 +1121,9 @@
 					<xsd:documentation>Match result or quality score.</xsd:documentation>
 				</xsd:annotation>
 				<xsd:sequence>
-				<xsd:element name="Value" type="xsd:float"/>
-				<xsd:element name="BiometricType" type="cbeff:MultipleTypesType" minOccurs="0"/>
-				<xsd:element name="BiometricSubType" type="cbeff:SubtypeType" minOccurs="0"/>
+					<xsd:element name="Value" type="xsd:float"/>
+					<xsd:element name="BiometricType" type="cbeff:MultipleTypesType" minOccurs="0"/>
+					<xsd:element name="BiometricSubType" type="cbeff:SubtypeType" minOccurs="0"/>
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="TokenType">
@@ -2869,7 +2855,6 @@
 								<xsd:complexContent>
 									<xsd:extension base="tns:AggregateRequestTemplate">
 										<xsd:sequence>
-											
 											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="0" maxOccurs="1">
 												<xsd:annotation>
 													<xsd:documentation>The identifier for the subject, or in encounter-centric model the encounter to be 
@@ -3039,7 +3024,6 @@
 													<xsd:documentation>A value used to retrieve the results of the Enroll request.</xsd:documentation>
 												</xsd:annotation>
 											</xsd:element>
-											
 										</xsd:sequence>
 									</xsd:extension>
 								</xsd:complexContent>
@@ -3249,19 +3233,19 @@
 							<xsd:complexType>
 								<xsd:complexContent>
 									<xsd:extension base="tns:AggregateRequestTemplate">
-									<xsd:sequence>
-										<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
+										<xsd:sequence>
+											<xsd:element name="GalleryID" type="tns:BIASIDType" minOccurs="0" maxOccurs="1">
 												<xsd:annotation>
 													<xsd:documentation>The identifier of the gallery or population group which will be searched.</xsd:documentation>
 												</xsd:annotation>
 											</xsd:element>
-										<xsd:element name="MaxListSize" type="xsd:positiveInteger" minOccurs="1" maxOccurs="1">
+											<xsd:element name="MaxListSize" type="xsd:positiveInteger" minOccurs="1" maxOccurs="1">
 												<xsd:annotation>
 													<xsd:documentation>The maximum size of the candidate list that should be returned.</xsd:documentation>
 												</xsd:annotation>
 											</xsd:element>
-									</xsd:sequence>
-								</xsd:extension>
+										</xsd:sequence>
+									</xsd:extension>
 								</xsd:complexContent>
 							</xsd:complexType>
 						</xsd:element>
@@ -3367,7 +3351,7 @@
 								<xsd:complexContent>
 									<xsd:extension base="tns:AggregateRequestTemplate">
 										<xsd:sequence>
-												<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
 												<xsd:annotation>
 													<xsd:documentation>Includes the identifier of the subject or encounter.</xsd:documentation>
 												</xsd:annotation>
@@ -3390,13 +3374,13 @@
 							<xsd:complexType>
 								<xsd:complexContent>
 									<xsd:extension base="tns:AggregateResponseTemplate">
-									<xsd:sequence>
-										<xsd:element name="Token" type="tns:TokenType" minOccurs="0" maxOccurs="1">
+										<xsd:sequence>
+											<xsd:element name="Token" type="tns:TokenType" minOccurs="0" maxOccurs="1">
 												<xsd:annotation>
 													<xsd:documentation>A value used to retrieve the results of the Update request.</xsd:documentation>
 												</xsd:annotation>
 											</xsd:element>
-									</xsd:sequence>
+										</xsd:sequence>
 									</xsd:extension>
 								</xsd:complexContent>
 							</xsd:complexType>
@@ -3730,7 +3714,6 @@
 			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
 		</wsdl:operation>
 		<wsdl:operation name="RetrieveBiographicData">
-			
 			<wsdl:input name="RetrieveBiographicData" message="tns:RetrieveBiographicDataRequestMessage"/>
 			<wsdl:output name="RetrieveBiographicDataResponse" message="tns:RetrieveBiographicDataResponseMessage"/>
 			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>

@@ -1,0 +1,2 @@
+SubjectID=1,SkinTone=White
+SubjectID=2,SkinTone=Black

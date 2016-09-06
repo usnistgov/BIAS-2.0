@@ -1,0 +1,15 @@
+C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS-2.0-master\Shared\bin\Debug\Shared.dll.config
+C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS-2.0-master\Shared\bin\Debug\Shared.dll
+C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS-2.0-master\Shared\bin\Debug\Shared.pdb
+C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS-2.0-master\Shared\obj\Debug\Shared.dll
+C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS-2.0-master\Shared\obj\Debug\Shared.pdb
+C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS Tester\Shared\bin\Debug\Shared.dll.config
+C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS Tester\Shared\bin\Debug\Shared.dll
+C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS Tester\Shared\bin\Debug\Shared.pdb
+C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS Tester\Shared\obj\Debug\Shared.dll
+C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS Tester\Shared\obj\Debug\Shared.pdb
+G:\NIST\BIAS Tester\Shared\bin\Debug\Shared.dll.config
+G:\NIST\BIAS Tester\Shared\bin\Debug\Shared.dll
+G:\NIST\BIAS Tester\Shared\bin\Debug\Shared.pdb
+G:\NIST\BIAS Tester\Shared\obj\Debug\Shared.dll
+G:\NIST\BIAS Tester\Shared\obj\Debug\Shared.pdb

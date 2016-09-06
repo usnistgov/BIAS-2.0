@@ -1,7 +1,7 @@
 ﻿Option Strict On
 Public Class Constants
     Private Shared m_ServiceBaseAddress As String = "http://localhost:12345"
-
+    Public GalleryBaseDirectory As String = "C:\Temp\BIAS"
     Public Shared ReadOnly Property BindingMaxReceivedMessageSize As Integer
         Get
             Return Integer.MaxValue

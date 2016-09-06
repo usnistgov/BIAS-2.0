@@ -1,0 +1,9 @@
+G:\NIST\BIAS Tester\Client\bin\Debug\Client.exe.config
+G:\NIST\BIAS Tester\Client\bin\Debug\Client.exe
+G:\NIST\BIAS Tester\Client\bin\Debug\Client.pdb
+G:\NIST\BIAS Tester\Client\bin\Debug\Shared.dll
+G:\NIST\BIAS Tester\Client\bin\Debug\Shared.pdb
+G:\NIST\BIAS Tester\Client\obj\Debug\MainForm.resources
+G:\NIST\BIAS Tester\Client\obj\Debug\Client.vbproj.GenerateResource.Cache
+G:\NIST\BIAS Tester\Client\obj\Debug\Client.exe
+G:\NIST\BIAS Tester\Client\obj\Debug\Client.pdb
