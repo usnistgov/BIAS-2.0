@@ -15,7 +15,7 @@ Public Class MainForm
         MessageBox.Show("Clear button was clicked")
     End Sub
 
-    Private Sub btnEnroll_Click(sender As Object, e As EventArgs) Handles btnEnroll.Click
+    Private Sub btnEnroll_Click(sender As Object, e As EventArgs) Handles btnEnroll_Enroll.Click
         MessageBox.Show("Enroll button was clicked")
 
 
@@ -113,8 +113,9 @@ Public Class MainForm
                 MessageBox.Show("Error opening Enrol Biometric image")
 
             End Try
-
         End If
+
+
 
         'Dim imageString As String = "c:/temp/IMG_5306.JPG"
         'PictureBox1.Image = Drawing.Image.FromFile(imageString)
@@ -122,14 +123,42 @@ Public Class MainForm
     End Sub
 
 
+
+
+
+
+
     Private Sub btnIdentify_Identify_Click(sender As Object, e As EventArgs) Handles btnIdentify_Identify.Click
         client = New BIAS_v2Client()
         Dim identifyResponse As New IdentifyResponsePackage()
         Dim identifyRequest As New IdentifyRequest()
-
+        ' i need to identify an image.  identifyRequest.inputData.binary = image
+        'i need identifyRequest.inputData.processingOption = ??
+        'identifyRequest.InputData.galleryID = ??
+        'identifyRequest.InputData.maxlistsize = 1
 
         identifyResponse = client.Identify(identifyRequest)
+        'identifyResponse.ReturnData.
 
+    End Sub
+
+    
+    Private Sub btnRetrieveInformation_RetrieveInformation_Click(sender As Object, e As EventArgs) Handles btnRetrieveInformation_RetrieveInformation.Click
+        Dim client As New BIAS_v2Client()
+        Dim getDataRequest As New RetrieveDataRequest()
+        Dim getDataResponse As New RetrieveDataResponsePackage()
+        getDataResponse = client.RetrieveData(getDataRequest)
+
+        getDataRequest.Identity.BiographicData.
+
+
+
+        Dim personInfo As New InformationType()
+        personInfo = getDataResponse.ReturnData
+        txtbxGiven_RetrieveInformation.Text = personInfo.ToString
+
+
+        'txtbxGiven_RetrieveInformation.Text = getDataResponse.ReturnData 'INCOORRECT -- i need the Given name?
 
     End Sub
 End Class

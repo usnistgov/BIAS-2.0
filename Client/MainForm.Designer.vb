@@ -27,7 +27,7 @@ Partial Class MainForm
         Me.grpbxResult_Enroll = New System.Windows.Forms.GroupBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.grpbox2_Enroll = New System.Windows.Forms.GroupBox()
-        Me.btnEnroll = New System.Windows.Forms.Button()
+        Me.btnEnroll_Enroll = New System.Windows.Forms.Button()
         Me.btnClear_Enroll = New System.Windows.Forms.Button()
         Me.panel1_Enroll = New System.Windows.Forms.Panel()
         Me.DateOfBirthPicker_Enroll = New System.Windows.Forms.DateTimePicker()
@@ -55,6 +55,10 @@ Partial Class MainForm
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -88,6 +92,24 @@ Partial Class MainForm
         Me.txtbxId_QueryCap = New System.Windows.Forms.TextBox()
         Me.txtbxName_QueryCap = New System.Windows.Forms.TextBox()
         Me.QueryCapabilitiesBtn = New System.Windows.Forms.Button()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.GroupBox2_RetrieveInformation = New System.Windows.Forms.GroupBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtbxDOB_RetrieveInformation = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtbxCitizenship_RetrieveInformation = New System.Windows.Forms.TextBox()
+        Me.txtbxSex_RetrieveInformation = New System.Windows.Forms.TextBox()
+        Me.txtbxFamily_RetrieveInformation = New System.Windows.Forms.TextBox()
+        Me.txtbxGiven_RetrieveInformation = New System.Windows.Forms.TextBox()
+        Me.GroupBox1_RetrieveInformation = New System.Windows.Forms.GroupBox()
+        Me.txtbxGUID_RetrieveInformation = New System.Windows.Forms.TextBox()
+        Me.lblGUID_RetrieveInformation = New System.Windows.Forms.Label()
+        Me.btnRetrieveInformation_RetrieveInformation = New System.Windows.Forms.Button()
+        Me.btnClear_RetrieveInformation = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.grpbxResult_Enroll.SuspendLayout()
@@ -107,6 +129,10 @@ Partial Class MainForm
         Me.GroupBox8.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.grpbox_QueryCapabilities.SuspendLayout()
+        Me.TabPage5.SuspendLayout()
+        Me.GroupBox2_RetrieveInformation.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.GroupBox1_RetrieveInformation.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -115,6 +141,7 @@ Partial Class MainForm
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -154,7 +181,7 @@ Partial Class MainForm
         '
         'grpbox2_Enroll
         '
-        Me.grpbox2_Enroll.Controls.Add(Me.btnEnroll)
+        Me.grpbox2_Enroll.Controls.Add(Me.btnEnroll_Enroll)
         Me.grpbox2_Enroll.Controls.Add(Me.btnClear_Enroll)
         Me.grpbox2_Enroll.Controls.Add(Me.panel1_Enroll)
         Me.grpbox2_Enroll.Location = New System.Drawing.Point(276, 40)
@@ -164,14 +191,14 @@ Partial Class MainForm
         Me.grpbox2_Enroll.TabStop = False
         Me.grpbox2_Enroll.Text = "Biographic Data"
         '
-        'btnEnroll
+        'btnEnroll_Enroll
         '
-        Me.btnEnroll.Location = New System.Drawing.Point(115, 216)
-        Me.btnEnroll.Name = "btnEnroll"
-        Me.btnEnroll.Size = New System.Drawing.Size(75, 23)
-        Me.btnEnroll.TabIndex = 2
-        Me.btnEnroll.Text = "Enroll"
-        Me.btnEnroll.UseVisualStyleBackColor = True
+        Me.btnEnroll_Enroll.Location = New System.Drawing.Point(115, 216)
+        Me.btnEnroll_Enroll.Name = "btnEnroll_Enroll"
+        Me.btnEnroll_Enroll.Size = New System.Drawing.Size(75, 23)
+        Me.btnEnroll_Enroll.TabIndex = 2
+        Me.btnEnroll_Enroll.Text = "Enroll"
+        Me.btnEnroll_Enroll.UseVisualStyleBackColor = True
         '
         'btnClear_Enroll
         '
@@ -204,9 +231,9 @@ Partial Class MainForm
         'DateOfBirthPicker_Enroll
         '
         Me.DateOfBirthPicker_Enroll.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateOfBirthPicker_Enroll.Location = New System.Drawing.Point(164, 90)
+        Me.DateOfBirthPicker_Enroll.Location = New System.Drawing.Point(94, 90)
         Me.DateOfBirthPicker_Enroll.Name = "DateOfBirthPicker_Enroll"
-        Me.DateOfBirthPicker_Enroll.Size = New System.Drawing.Size(142, 20)
+        Me.DateOfBirthPicker_Enroll.Size = New System.Drawing.Size(212, 20)
         Me.DateOfBirthPicker_Enroll.TabIndex = 12
         '
         'lblCitizenship_Enroll
@@ -265,37 +292,37 @@ Partial Class MainForm
         '
         'txtbxCitizenship_Enroll
         '
-        Me.txtbxCitizenship_Enroll.Location = New System.Drawing.Point(164, 142)
+        Me.txtbxCitizenship_Enroll.Location = New System.Drawing.Point(94, 142)
         Me.txtbxCitizenship_Enroll.Name = "txtbxCitizenship_Enroll"
-        Me.txtbxCitizenship_Enroll.Size = New System.Drawing.Size(139, 20)
+        Me.txtbxCitizenship_Enroll.Size = New System.Drawing.Size(209, 20)
         Me.txtbxCitizenship_Enroll.TabIndex = 5
         '
         'txtbxSex_Enroll
         '
-        Me.txtbxSex_Enroll.Location = New System.Drawing.Point(164, 116)
+        Me.txtbxSex_Enroll.Location = New System.Drawing.Point(94, 116)
         Me.txtbxSex_Enroll.Name = "txtbxSex_Enroll"
-        Me.txtbxSex_Enroll.Size = New System.Drawing.Size(139, 20)
+        Me.txtbxSex_Enroll.Size = New System.Drawing.Size(209, 20)
         Me.txtbxSex_Enroll.TabIndex = 4
         '
         'txtbxFamily_Enroll
         '
-        Me.txtbxFamily_Enroll.Location = New System.Drawing.Point(164, 64)
+        Me.txtbxFamily_Enroll.Location = New System.Drawing.Point(94, 64)
         Me.txtbxFamily_Enroll.Name = "txtbxFamily_Enroll"
-        Me.txtbxFamily_Enroll.Size = New System.Drawing.Size(139, 20)
+        Me.txtbxFamily_Enroll.Size = New System.Drawing.Size(209, 20)
         Me.txtbxFamily_Enroll.TabIndex = 2
         '
         'txtbxGiven_Enroll
         '
-        Me.txtbxGiven_Enroll.Location = New System.Drawing.Point(164, 38)
+        Me.txtbxGiven_Enroll.Location = New System.Drawing.Point(94, 38)
         Me.txtbxGiven_Enroll.Name = "txtbxGiven_Enroll"
-        Me.txtbxGiven_Enroll.Size = New System.Drawing.Size(139, 20)
+        Me.txtbxGiven_Enroll.Size = New System.Drawing.Size(209, 20)
         Me.txtbxGiven_Enroll.TabIndex = 1
         '
         'txtbxGUID_Enroll
         '
-        Me.txtbxGUID_Enroll.Location = New System.Drawing.Point(164, 12)
+        Me.txtbxGUID_Enroll.Location = New System.Drawing.Point(94, 12)
         Me.txtbxGUID_Enroll.Name = "txtbxGUID_Enroll"
-        Me.txtbxGUID_Enroll.Size = New System.Drawing.Size(139, 20)
+        Me.txtbxGUID_Enroll.Size = New System.Drawing.Size(209, 20)
         Me.txtbxGUID_Enroll.TabIndex = 0
         '
         'grpbox1_Enroll
@@ -418,6 +445,10 @@ Partial Class MainForm
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.Label6)
+        Me.Panel2.Controls.Add(Me.Label7)
+        Me.Panel2.Controls.Add(Me.TextBox1)
+        Me.Panel2.Controls.Add(Me.TextBox2)
         Me.Panel2.Controls.Add(Me.Label9)
         Me.Panel2.Controls.Add(Me.Label10)
         Me.Panel2.Controls.Add(Me.Label11)
@@ -430,6 +461,38 @@ Partial Class MainForm
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(306, 191)
         Me.Panel2.TabIndex = 0
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(21, 149)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(57, 13)
+        Me.Label6.TabIndex = 15
+        Me.Label6.Text = "Citizenship"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(52, 123)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(25, 13)
+        Me.Label7.TabIndex = 14
+        Me.Label7.Text = "Sex"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(85, 142)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(199, 20)
+        Me.TextBox1.TabIndex = 13
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(85, 116)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(199, 20)
+        Me.TextBox2.TabIndex = 12
         '
         'Label9
         '
@@ -469,30 +532,30 @@ Partial Class MainForm
         '
         'TextBox9
         '
-        Me.TextBox9.Location = New System.Drawing.Point(164, 90)
+        Me.TextBox9.Location = New System.Drawing.Point(85, 90)
         Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(97, 20)
+        Me.TextBox9.Size = New System.Drawing.Size(176, 20)
         Me.TextBox9.TabIndex = 3
         '
         'TextBox10
         '
-        Me.TextBox10.Location = New System.Drawing.Point(164, 64)
+        Me.TextBox10.Location = New System.Drawing.Point(86, 64)
         Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.Size = New System.Drawing.Size(139, 20)
+        Me.TextBox10.Size = New System.Drawing.Size(217, 20)
         Me.TextBox10.TabIndex = 2
         '
         'TextBox11
         '
-        Me.TextBox11.Location = New System.Drawing.Point(164, 38)
+        Me.TextBox11.Location = New System.Drawing.Point(86, 38)
         Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.Size = New System.Drawing.Size(139, 20)
+        Me.TextBox11.Size = New System.Drawing.Size(217, 20)
         Me.TextBox11.TabIndex = 1
         '
         'TextBox12
         '
-        Me.TextBox12.Location = New System.Drawing.Point(164, 12)
+        Me.TextBox12.Location = New System.Drawing.Point(86, 12)
         Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.Size = New System.Drawing.Size(139, 20)
+        Me.TextBox12.Size = New System.Drawing.Size(217, 20)
         Me.TextBox12.TabIndex = 0
         '
         'TabPage3
@@ -730,6 +793,172 @@ Partial Class MainForm
         Me.QueryCapabilitiesBtn.Text = "QueryCapabilities"
         Me.QueryCapabilitiesBtn.UseVisualStyleBackColor = True
         '
+        'TabPage5
+        '
+        Me.TabPage5.Controls.Add(Me.GroupBox2_RetrieveInformation)
+        Me.TabPage5.Controls.Add(Me.GroupBox1_RetrieveInformation)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage5.Size = New System.Drawing.Size(647, 462)
+        Me.TabPage5.TabIndex = 4
+        Me.TabPage5.Text = "Retrieve Information"
+        Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'GroupBox2_RetrieveInformation
+        '
+        Me.GroupBox2_RetrieveInformation.Controls.Add(Me.Panel1)
+        Me.GroupBox2_RetrieveInformation.Location = New System.Drawing.Point(305, 32)
+        Me.GroupBox2_RetrieveInformation.Name = "GroupBox2_RetrieveInformation"
+        Me.GroupBox2_RetrieveInformation.Size = New System.Drawing.Size(324, 289)
+        Me.GroupBox2_RetrieveInformation.TabIndex = 6
+        Me.GroupBox2_RetrieveInformation.TabStop = False
+        Me.GroupBox2_RetrieveInformation.Text = "Retrieve Information Results"
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.txtbxDOB_RetrieveInformation)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.Label3)
+        Me.Panel1.Controls.Add(Me.Label4)
+        Me.Panel1.Controls.Add(Me.Label5)
+        Me.Panel1.Controls.Add(Me.txtbxCitizenship_RetrieveInformation)
+        Me.Panel1.Controls.Add(Me.txtbxSex_RetrieveInformation)
+        Me.Panel1.Controls.Add(Me.txtbxFamily_RetrieveInformation)
+        Me.Panel1.Controls.Add(Me.txtbxGiven_RetrieveInformation)
+        Me.Panel1.Location = New System.Drawing.Point(6, 19)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(306, 234)
+        Me.Panel1.TabIndex = 0
+        '
+        'txtbxDOB_RetrieveInformation
+        '
+        Me.txtbxDOB_RetrieveInformation.Location = New System.Drawing.Point(104, 90)
+        Me.txtbxDOB_RetrieveInformation.Name = "txtbxDOB_RetrieveInformation"
+        Me.txtbxDOB_RetrieveInformation.Size = New System.Drawing.Size(199, 20)
+        Me.txtbxDOB_RetrieveInformation.TabIndex = 13
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(40, 149)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(57, 13)
+        Me.Label1.TabIndex = 11
+        Me.Label1.Text = "Citizenship"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(71, 123)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(25, 13)
+        Me.Label2.TabIndex = 10
+        Me.Label2.Text = "Sex"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(32, 97)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(66, 13)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "Date of Birth"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(30, 71)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(67, 13)
+        Me.Label4.TabIndex = 8
+        Me.Label4.Text = "Family Name"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(30, 45)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(66, 13)
+        Me.Label5.TabIndex = 7
+        Me.Label5.Text = "Given Name"
+        '
+        'txtbxCitizenship_RetrieveInformation
+        '
+        Me.txtbxCitizenship_RetrieveInformation.Location = New System.Drawing.Point(104, 142)
+        Me.txtbxCitizenship_RetrieveInformation.Name = "txtbxCitizenship_RetrieveInformation"
+        Me.txtbxCitizenship_RetrieveInformation.Size = New System.Drawing.Size(199, 20)
+        Me.txtbxCitizenship_RetrieveInformation.TabIndex = 5
+        '
+        'txtbxSex_RetrieveInformation
+        '
+        Me.txtbxSex_RetrieveInformation.Location = New System.Drawing.Point(104, 116)
+        Me.txtbxSex_RetrieveInformation.Name = "txtbxSex_RetrieveInformation"
+        Me.txtbxSex_RetrieveInformation.Size = New System.Drawing.Size(199, 20)
+        Me.txtbxSex_RetrieveInformation.TabIndex = 4
+        '
+        'txtbxFamily_RetrieveInformation
+        '
+        Me.txtbxFamily_RetrieveInformation.Location = New System.Drawing.Point(104, 64)
+        Me.txtbxFamily_RetrieveInformation.Name = "txtbxFamily_RetrieveInformation"
+        Me.txtbxFamily_RetrieveInformation.Size = New System.Drawing.Size(199, 20)
+        Me.txtbxFamily_RetrieveInformation.TabIndex = 2
+        '
+        'txtbxGiven_RetrieveInformation
+        '
+        Me.txtbxGiven_RetrieveInformation.Location = New System.Drawing.Point(104, 38)
+        Me.txtbxGiven_RetrieveInformation.Name = "txtbxGiven_RetrieveInformation"
+        Me.txtbxGiven_RetrieveInformation.Size = New System.Drawing.Size(199, 20)
+        Me.txtbxGiven_RetrieveInformation.TabIndex = 1
+        '
+        'GroupBox1_RetrieveInformation
+        '
+        Me.GroupBox1_RetrieveInformation.Controls.Add(Me.txtbxGUID_RetrieveInformation)
+        Me.GroupBox1_RetrieveInformation.Controls.Add(Me.lblGUID_RetrieveInformation)
+        Me.GroupBox1_RetrieveInformation.Controls.Add(Me.btnRetrieveInformation_RetrieveInformation)
+        Me.GroupBox1_RetrieveInformation.Controls.Add(Me.btnClear_RetrieveInformation)
+        Me.GroupBox1_RetrieveInformation.Location = New System.Drawing.Point(23, 32)
+        Me.GroupBox1_RetrieveInformation.Name = "GroupBox1_RetrieveInformation"
+        Me.GroupBox1_RetrieveInformation.Size = New System.Drawing.Size(276, 289)
+        Me.GroupBox1_RetrieveInformation.TabIndex = 5
+        Me.GroupBox1_RetrieveInformation.TabStop = False
+        Me.GroupBox1_RetrieveInformation.Text = "Subject ID"
+        '
+        'txtbxGUID_RetrieveInformation
+        '
+        Me.txtbxGUID_RetrieveInformation.Location = New System.Drawing.Point(46, 31)
+        Me.txtbxGUID_RetrieveInformation.Name = "txtbxGUID_RetrieveInformation"
+        Me.txtbxGUID_RetrieveInformation.Size = New System.Drawing.Size(214, 20)
+        Me.txtbxGUID_RetrieveInformation.TabIndex = 8
+        '
+        'lblGUID_RetrieveInformation
+        '
+        Me.lblGUID_RetrieveInformation.AutoSize = True
+        Me.lblGUID_RetrieveInformation.Location = New System.Drawing.Point(6, 31)
+        Me.lblGUID_RetrieveInformation.Name = "lblGUID_RetrieveInformation"
+        Me.lblGUID_RetrieveInformation.Size = New System.Drawing.Size(34, 13)
+        Me.lblGUID_RetrieveInformation.TabIndex = 7
+        Me.lblGUID_RetrieveInformation.Text = "GUID"
+        '
+        'btnRetrieveInformation_RetrieveInformation
+        '
+        Me.btnRetrieveInformation_RetrieveInformation.Location = New System.Drawing.Point(98, 260)
+        Me.btnRetrieveInformation_RetrieveInformation.Name = "btnRetrieveInformation_RetrieveInformation"
+        Me.btnRetrieveInformation_RetrieveInformation.Size = New System.Drawing.Size(120, 23)
+        Me.btnRetrieveInformation_RetrieveInformation.TabIndex = 2
+        Me.btnRetrieveInformation_RetrieveInformation.Text = "Retrieve Information"
+        Me.btnRetrieveInformation_RetrieveInformation.UseVisualStyleBackColor = True
+        '
+        'btnClear_RetrieveInformation
+        '
+        Me.btnClear_RetrieveInformation.Location = New System.Drawing.Point(6, 260)
+        Me.btnClear_RetrieveInformation.Name = "btnClear_RetrieveInformation"
+        Me.btnClear_RetrieveInformation.Size = New System.Drawing.Size(75, 23)
+        Me.btnClear_RetrieveInformation.TabIndex = 1
+        Me.btnClear_RetrieveInformation.Text = "Clear"
+        Me.btnClear_RetrieveInformation.UseVisualStyleBackColor = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -766,6 +995,12 @@ Partial Class MainForm
         Me.TabPage4.ResumeLayout(False)
         Me.grpbox_QueryCapabilities.ResumeLayout(False)
         Me.grpbox_QueryCapabilities.PerformLayout()
+        Me.TabPage5.ResumeLayout(False)
+        Me.GroupBox2_RetrieveInformation.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.GroupBox1_RetrieveInformation.ResumeLayout(False)
+        Me.GroupBox1_RetrieveInformation.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -778,7 +1013,7 @@ Partial Class MainForm
     Friend WithEvents panel1_Enroll As System.Windows.Forms.Panel
     Friend WithEvents grpbox1_Enroll As System.Windows.Forms.GroupBox
     Friend WithEvents grpbxResult_Enroll As System.Windows.Forms.GroupBox
-    Friend WithEvents btnEnroll As System.Windows.Forms.Button
+    Friend WithEvents btnEnroll_Enroll As System.Windows.Forms.Button
     Friend WithEvents lblCitizenship_Enroll As System.Windows.Forms.Label
     Friend WithEvents lblSex_Enroll As System.Windows.Forms.Label
     Friend WithEvents lblDOB_Enroll As System.Windows.Forms.Label
@@ -835,4 +1070,26 @@ Partial Class MainForm
     Friend WithEvents lblDescription_QueryCap As System.Windows.Forms.Label
     Friend WithEvents lblId_QueryCap As System.Windows.Forms.Label
     Friend WithEvents lblName_QueryCap As System.Windows.Forms.Label
+    Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
+    Friend WithEvents GroupBox2_RetrieveInformation As System.Windows.Forms.GroupBox
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents txtbxCitizenship_RetrieveInformation As System.Windows.Forms.TextBox
+    Friend WithEvents txtbxSex_RetrieveInformation As System.Windows.Forms.TextBox
+    Friend WithEvents txtbxFamily_RetrieveInformation As System.Windows.Forms.TextBox
+    Friend WithEvents txtbxGiven_RetrieveInformation As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBox1_RetrieveInformation As System.Windows.Forms.GroupBox
+    Friend WithEvents lblGUID_RetrieveInformation As System.Windows.Forms.Label
+    Friend WithEvents btnRetrieveInformation_RetrieveInformation As System.Windows.Forms.Button
+    Friend WithEvents btnClear_RetrieveInformation As System.Windows.Forms.Button
+    Friend WithEvents txtbxGUID_RetrieveInformation As System.Windows.Forms.TextBox
+    Friend WithEvents txtbxDOB_RetrieveInformation As System.Windows.Forms.TextBox
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
 End Class
