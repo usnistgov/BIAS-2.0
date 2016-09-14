@@ -15,6 +15,9 @@ Module mainModule
     Sub Main()
         Dim bias1 As New BIASService()
 
+        'Dim query As New QueryCapabilitiesRequest
+        'bias1.QueryCapabilities(query)
+
         Dim sampleInfo As New InformationType
         sampleInfo.GUID = "Tester"
         sampleInfo.GivenName = "John"
@@ -697,41 +700,81 @@ Public Class BIASService
 
         Dim capabilityList As List(Of CapabilityType) = New CapabilityListType
 
+        Dim AggregateInputDataOptional As New CapabilityType
+        AggregateInputDataOptional.CapabilityName = 0
+        AggregateInputDataOptional.CapabilityID = "0"
+        AggregateInputDataOptional.CapabilityDescription = "AggregateInputDataOptional: Names of the data elements returned by aggregate services. This implementation does not use aggregate services, so the capability value and supporting value will be an empty string"
+        AggregateInputDataOptional.CapabilityValue = ""
+        AggregateInputDataOptional.CapabilitySupportingValue = ""
+        capabilityList.Add(AggregateInputDataOptional)
+
+        Dim AggregateInputDataRequired As New CapabilityType
+        AggregateInputDataRequired.CapabilityName = 1
+        AggregateInputDataRequired.CapabilityID = "1"
+        AggregateInputDataRequired.CapabilityDescription = "AggregateInputDataRequired: Names of the input data elements required bf the aggregate services. This implementation does not use aggregate services, so the capability value and supporting value will be an empty string"
+        AggregateInputDataRequired.CapabilityValue = ""
+        AggregateInputDataRequired.CapabilitySupportingValue = ""
+        capabilityList.Add(AggregateInputDataRequired)
+
+        Dim AggregateProcessingOption As New CapabilityType
+        AggregateProcessingOption.CapabilityName = 2
+        AggregateProcessingOption.CapabilityID = "2"
+        AggregateProcessingOption.CapabilityDescription = "AggregateProcessingOption: Description of the key/value pairs in the Processing Option parameter in the aggregate services. This implementation does not use aggregate services, so the capability value and supporting value will be an empty string"
+        AggregateProcessingOption.CapabilityValue = ""
+        AggregateProcessingOption.CapabilitySupportingValue = ""
+        capabilityList.Add(AggregateProcessingOption)
+
+        Dim AggregateReturnData As New CapabilityType
+        AggregateReturnData.CapabilityName = 3
+        AggregateReturnData.CapabilityID = "3"
+        AggregateReturnData.CapabilityDescription = "AggregateReturnData: Names of the data element returned by the aggregate services. This implementation does not use aggregate services, so the capability value and supporting value will be an empty string"
+        AggregateReturnData.CapabilityValue = ""
+        AggregateReturnData.CapabilitySupportingValue = ""
+        capabilityList.Add(AggregateReturnData)
+
+        Dim AggregateServiceDescription As New CapabilityType
+        AggregateServiceDescription.CapabilityName = 4
+        AggregateServiceDescription.CapabilityID = "4"
+        AggregateServiceDescription.CapabilityDescription = "AggregateServiceDescription: Description of the processing logic of the aggregate services. This implementation does not use aggregate services, so the capability value and supporting value will be an empty string"
+        AggregateServiceDescription.CapabilityValue = ""
+        AggregateServiceDescription.CapabilitySupportingValue = ""
+        capabilityList.Add(AggregateServiceDescription)
+
         Dim biographicDataSet As New CapabilityType
-        biographicDataSet.CapabilityName = "Biographic Data Set"
-        biographicDataSet.CapabilityID = "6"
-        biographicDataSet.CapabilityDescription = "Information about the biographic data sets supported by the system"
+        biographicDataSet.CapabilityName = 5
+        biographicDataSet.CapabilityID = "5"
+        biographicDataSet.CapabilityDescription = "BiographicDataSet: Information about the biographic data sets supported by the system"
         biographicDataSet.CapabilityValue = "EFTS"
         biographicDataSet.CapabilitySupportingValue = "Unknown"
         biographicDataSet.CapabilityAdditionalInfo = "ASCII"
         capabilityList.Add(biographicDataSet)
 
         Dim cbeffPatronFormat As New CapabilityType
-        cbeffPatronFormat.CapabilityName = "CBEFFPatronFormat"
-        cbeffPatronFormat.CapabilityID = "7"
-        cbeffPatronFormat.CapabilityDescription = "Information about the patron format used for biometric data"
+        cbeffPatronFormat.CapabilityName = 6
+        cbeffPatronFormat.CapabilityID = "6"
+        cbeffPatronFormat.CapabilityDescription = "CBEFFPatronFormat: Information about the patron format used for biometric data"
         cbeffPatronFormat.CapabilityValue = "ISO/IEC"
         cbeffPatronFormat.CapabilitySupportingValue = ""
         capabilityList.Add(cbeffPatronFormat)
 
         Dim classificationAlgorithm As New CapabilityType
-        classificationAlgorithm.CapabilityName = "ClassificationAlgorithmType"
-        classificationAlgorithm.CapabilityID = "8"
-        classificationAlgorithm.CapabilityDescription = "Classifying facial data is not done. Instead, biometric classification defaults to 'face' "
+        classificationAlgorithm.CapabilityName = 7
+        classificationAlgorithm.CapabilityID = "7"
+        classificationAlgorithm.CapabilityDescription = "ClassificationAlgorithmType: Classifying facial data is not done. Instead, biometric classification defaults to 'face' "
         classificationAlgorithm.CapabilityValue = "None"
         capabilityList.Add(classificationAlgorithm)
 
         Dim conformanceClass As New CapabilityType
-        conformanceClass.CapabilityName = "ConformanceClass"
-        conformanceClass.CapabilityID = "9"
+        conformanceClass.CapabilityName = 8
+        conformanceClass.CapabilityID = "8"
         conformanceClass.CapabilityDescription = "Class Conformance"
         conformanceClass.CapabilityValue = "1"
         capabilityList.Add(conformanceClass)
 
         Dim Gallery As New CapabilityType
-        Gallery.CapabilityName = "Gallery"
-        Gallery.CapabilityID = "10"
-        Gallery.CapabilityDescription = "Galleries supported by the implementing system"
+        Gallery.CapabilityName = 9
+        Gallery.CapabilityID = "9"
+        Gallery.CapabilityDescription = "Gallery: Galleries supported by the implementing system"
         Dim galleryDir As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Galleries"
         Dim galleries = ""
         For Each Dir As String In System.IO.Directory.GetDirectories(galleryDir)
@@ -742,52 +785,53 @@ Public Class BIASService
         capabilityList.Add(Gallery)
 
         Dim identityModel As New CapabilityType
-        identityModel.CapabilityName = "IdentityModel"
+        identityModel.CapabilityName = 10
         identityModel.CapabilityID = "10"
-        identityModel.CapabilityDescription = "Identification of person-centric or encounter-centric model."
+        identityModel.CapabilityDescription = "IdentityModel: Identification of person-centric or encounter-centric model."
         identityModel.CapabilityValue = "person"
         capabilityList.Add(identityModel)
 
         Dim comparisonAlgorithm As New CapabilityType 'Relevant to fusion, which isn't implemented yet.
-        comparisonAlgorithm.CapabilityName = "ComparisonAlgorithm"
+        comparisonAlgorithm.CapabilityName = 11
         comparisonAlgorithm.CapabilityID = "11"
-        comparisonAlgorithm.CapabilityDescription = ""
+        comparisonAlgorithm.CapabilityDescription = "ComparisonAlgorithm"
         comparisonAlgorithm.CapabilityValue = ""
         comparisonAlgorithm.CapabilitySupportingValue = ""
         capabilityList.Add(comparisonAlgorithm)
 
         Dim comparisonScore As New CapabilityType
-        comparisonScore.CapabilityName = "ComparisonScore"
+        comparisonScore.CapabilityName = 12
         comparisonScore.CapabilityID = "12"
-        comparisonScore.CapabilityDescription = "Score threshold for successful identification"
+        comparisonScore.CapabilityDescription = "ComparisonScore: Score threshold for successful identification"
         comparisonScore.CapabilityValue = "(10:100)"
         comparisonScore.CapabilitySupportingValue = "(0:9.999)"
         capabilityList.Add(comparisonScore)
 
         Dim qualityAlgorithm As New CapabilityType
-        qualityAlgorithm.CapabilityName = "QualityAlgorithm"
+        qualityAlgorithm.CapabilityName = 13
         qualityAlgorithm.CapabilityID = "13"
-        qualityAlgorithm.CapabilityDescription = "No software version. Check Quality always returns 1, unless subjectID is not found."
+        qualityAlgorithm.CapabilityDescription = "QualityAlgorithm: No software version. Check Quality always returns 1, unless subjectID is not found."
         qualityAlgorithm.CapabilityValue = "None"
         qualityAlgorithm.CapabilitySupportingValue = "None"
         qualityAlgorithm.CapabilityAdditionalInfo = "None"
         capabilityList.Add(qualityAlgorithm)
 
         Dim supportedBiometric As New CapabilityType
-        supportedBiometric.CapabilityName = "SupportedBiometric"
+        supportedBiometric.CapabilityName = 14
         supportedBiometric.CapabilityID = "14"
-        supportedBiometric.CapabilityDescription = "Information about supported biometric capabilities. In this model, identification and verification are supported."
+        supportedBiometric.CapabilityDescription = "SupportedBiometric: Information about supported biometric capabilities. In this model, identification and verification are supported."
         supportedBiometric.CapabilityValue = "face"
         supportedBiometric.CapabilitySupportingValue = "3" 'Identification + verification supported
         capabilityList.Add(supportedBiometric)
 
         Dim transformOperation As New CapabilityType
-        transformOperation.CapabilityName = "TransformOperation"
+        transformOperation.CapabilityName = 15
         transformOperation.CapabilityID = "15"
-        transformOperation.CapabilityDescription = "Supported Transform Biometric Data Operations"
+        transformOperation.CapabilityDescription = "TransformOperation: Supported Transform Biometric Data Operations"
         transformOperation.CapabilityValue = "{1,2,3}"
         transformOperation.CapabilitySupportingValue = "{1,2,3}" 'Feature extraction, centring/cropping, biometric data format conversion
         capabilityList.Add(transformOperation)
+
 
         Dim queryCapabilitiesResponse As New QueryCapabilitiesResponsePackage()
         queryCapabilitiesResponse.ResponseStatus = New ResponseStatus
@@ -795,6 +839,7 @@ Public Class BIASService
         queryCapabilitiesResponse.ResponseStatus.Message = "Capability list returned."
         queryCapabilitiesResponse.CapabilityList = capabilityList
         Return queryCapabilitiesResponse
+
     End Function
 
     Public Function RetrieveBiographicData(RetrieveBiographicDataRequest As RetrieveBiographicDataRequest) As RetrieveBiographicDataResponsePackage Implements BIAS_v2.RetrieveBiographicData
