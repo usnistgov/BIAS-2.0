@@ -76,11 +76,11 @@ Public Class MainForm
 
     Private Sub updateCapabilityAttributes(ByVal aCapabilty As Object)
         txtbxName_QueryCap.Text = aCapabilty.CapabilityName.ToString
-        'txtbxId_QueryCap.Text = aCapabilty.CapabilityID.ToString
-        'txtbxDesc_QueryCap.Text = aCapabilty.CapabilityDescription.ToString
-        'txtbxValue_QueryCap.Text = aCapabilty.CapabilityValue.ToString
-        'txtbxSupportingValue_QueryCap.Text = aCapabilty.CapabilitySupportingValue.ToString
-        'txtbxAdditionalInfo_QueryCap.Text = aCapabilty.CapabilityAdditionalInfo.ToString
+        txtbxId_QueryCap.Text = aCapabilty.CapabilityID.ToString
+        txtbxDesc_QueryCap.Text = aCapabilty.CapabilityDescription.ToString
+        txtbxValue_QueryCap.Text = aCapabilty.CapabilityValue.ToString
+        txtbxSupportingValue_QueryCap.Text = aCapabilty.CapabilitySupportingValue.ToString
+        txtbxAdditionalInfo_QueryCap.Text = aCapabilty.CapabilityAdditionalInfo.ToString
     End Sub
 
     Private Sub CapabilityClicked_MouseClick(sender As Object, e As MouseEventArgs) Handles lstbx_CapabilitiesList.MouseClick
@@ -147,18 +147,22 @@ Public Class MainForm
         Dim client As New BIAS_v2Client()
         Dim getDataRequest As New RetrieveDataRequest()
         Dim getDataResponse As New RetrieveDataResponsePackage()
+        Dim first As String
+        first = "01"
+
+
+        getDataRequest.Identity.SubjectID = first
         getDataResponse = client.RetrieveData(getDataRequest)
 
-        getDataRequest.Identity.BiographicData.
+        txtbxGiven_RetrieveInformation.Text = getDataResponse.ReturnData.GivenName
+        txtbxFamily_RetrieveInformation.Text = getDataResponse.ReturnData.FamilyName
+        txtbxDOB_RetrieveInformation.Text = getDataResponse.ReturnData.DateOfBirth
+        txtbxSex_RetrieveInformation.Text = getDataResponse.ReturnData.Sex
+        txtbxCitizenship_RetrieveInformation.Text = getDataResponse.ReturnData.Citizenship
 
 
 
-        Dim personInfo As New InformationType()
-        personInfo = getDataResponse.ReturnData
-        txtbxGiven_RetrieveInformation.Text = personInfo.ToString
 
-
-        'txtbxGiven_RetrieveInformation.Text = getDataResponse.ReturnData 'INCOORRECT -- i need the Given name?
 
     End Sub
 End Class

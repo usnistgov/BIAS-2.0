@@ -923,13 +923,13 @@ Partial Class MainForm
         Me.GroupBox1_RetrieveInformation.Size = New System.Drawing.Size(276, 289)
         Me.GroupBox1_RetrieveInformation.TabIndex = 5
         Me.GroupBox1_RetrieveInformation.TabStop = False
-        Me.GroupBox1_RetrieveInformation.Text = "Subject ID"
+        Me.GroupBox1_RetrieveInformation.Text = "Subject"
         '
         'txtbxGUID_RetrieveInformation
         '
-        Me.txtbxGUID_RetrieveInformation.Location = New System.Drawing.Point(46, 31)
+        Me.txtbxGUID_RetrieveInformation.Location = New System.Drawing.Point(69, 31)
         Me.txtbxGUID_RetrieveInformation.Name = "txtbxGUID_RetrieveInformation"
-        Me.txtbxGUID_RetrieveInformation.Size = New System.Drawing.Size(214, 20)
+        Me.txtbxGUID_RetrieveInformation.Size = New System.Drawing.Size(191, 20)
         Me.txtbxGUID_RetrieveInformation.TabIndex = 8
         '
         'lblGUID_RetrieveInformation
@@ -937,9 +937,9 @@ Partial Class MainForm
         Me.lblGUID_RetrieveInformation.AutoSize = True
         Me.lblGUID_RetrieveInformation.Location = New System.Drawing.Point(6, 31)
         Me.lblGUID_RetrieveInformation.Name = "lblGUID_RetrieveInformation"
-        Me.lblGUID_RetrieveInformation.Size = New System.Drawing.Size(34, 13)
+        Me.lblGUID_RetrieveInformation.Size = New System.Drawing.Size(57, 13)
         Me.lblGUID_RetrieveInformation.TabIndex = 7
-        Me.lblGUID_RetrieveInformation.Text = "GUID"
+        Me.lblGUID_RetrieveInformation.Text = "Subject ID"
         '
         'btnRetrieveInformation_RetrieveInformation
         '
