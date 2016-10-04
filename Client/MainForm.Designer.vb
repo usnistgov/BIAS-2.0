@@ -682,7 +682,7 @@ Partial Class MainForm
         'lblAdditionalInfo_QueryCap
         '
         Me.lblAdditionalInfo_QueryCap.AutoSize = True
-        Me.lblAdditionalInfo_QueryCap.Location = New System.Drawing.Point(269, 273)
+        Me.lblAdditionalInfo_QueryCap.Location = New System.Drawing.Point(279, 348)
         Me.lblAdditionalInfo_QueryCap.Name = "lblAdditionalInfo_QueryCap"
         Me.lblAdditionalInfo_QueryCap.Size = New System.Drawing.Size(74, 13)
         Me.lblAdditionalInfo_QueryCap.TabIndex = 14
@@ -691,7 +691,7 @@ Partial Class MainForm
         'lblSupportingValue_QueryCap
         '
         Me.lblSupportingValue_QueryCap.AutoSize = True
-        Me.lblSupportingValue_QueryCap.Location = New System.Drawing.Point(255, 230)
+        Me.lblSupportingValue_QueryCap.Location = New System.Drawing.Point(255, 301)
         Me.lblSupportingValue_QueryCap.Name = "lblSupportingValue_QueryCap"
         Me.lblSupportingValue_QueryCap.Size = New System.Drawing.Size(88, 13)
         Me.lblSupportingValue_QueryCap.TabIndex = 13
@@ -700,7 +700,7 @@ Partial Class MainForm
         'lblValue_QueryCap
         '
         Me.lblValue_QueryCap.AutoSize = True
-        Me.lblValue_QueryCap.Location = New System.Drawing.Point(308, 190)
+        Me.lblValue_QueryCap.Location = New System.Drawing.Point(308, 266)
         Me.lblValue_QueryCap.Name = "lblValue_QueryCap"
         Me.lblValue_QueryCap.Size = New System.Drawing.Size(34, 13)
         Me.lblValue_QueryCap.TabIndex = 12
@@ -744,21 +744,21 @@ Partial Class MainForm
         '
         'txtbxAdditionalInfo_QueryCap
         '
-        Me.txtbxAdditionalInfo_QueryCap.Location = New System.Drawing.Point(359, 266)
+        Me.txtbxAdditionalInfo_QueryCap.Location = New System.Drawing.Point(359, 341)
         Me.txtbxAdditionalInfo_QueryCap.Name = "txtbxAdditionalInfo_QueryCap"
         Me.txtbxAdditionalInfo_QueryCap.Size = New System.Drawing.Size(191, 20)
         Me.txtbxAdditionalInfo_QueryCap.TabIndex = 7
         '
         'txtbxSupportingValue_QueryCap
         '
-        Me.txtbxSupportingValue_QueryCap.Location = New System.Drawing.Point(359, 223)
+        Me.txtbxSupportingValue_QueryCap.Location = New System.Drawing.Point(359, 294)
         Me.txtbxSupportingValue_QueryCap.Name = "txtbxSupportingValue_QueryCap"
         Me.txtbxSupportingValue_QueryCap.Size = New System.Drawing.Size(191, 20)
         Me.txtbxSupportingValue_QueryCap.TabIndex = 6
         '
         'txtbxValue_QueryCap
         '
-        Me.txtbxValue_QueryCap.Location = New System.Drawing.Point(359, 187)
+        Me.txtbxValue_QueryCap.Location = New System.Drawing.Point(359, 259)
         Me.txtbxValue_QueryCap.Name = "txtbxValue_QueryCap"
         Me.txtbxValue_QueryCap.Size = New System.Drawing.Size(191, 20)
         Me.txtbxValue_QueryCap.TabIndex = 5
@@ -766,8 +766,9 @@ Partial Class MainForm
         'txtbxDesc_QueryCap
         '
         Me.txtbxDesc_QueryCap.Location = New System.Drawing.Point(359, 151)
+        Me.txtbxDesc_QueryCap.Multiline = True
         Me.txtbxDesc_QueryCap.Name = "txtbxDesc_QueryCap"
-        Me.txtbxDesc_QueryCap.Size = New System.Drawing.Size(191, 20)
+        Me.txtbxDesc_QueryCap.Size = New System.Drawing.Size(191, 89)
         Me.txtbxDesc_QueryCap.TabIndex = 4
         '
         'txtbxId_QueryCap

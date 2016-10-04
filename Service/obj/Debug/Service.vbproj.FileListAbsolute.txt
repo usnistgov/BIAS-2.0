@@ -25,3 +25,11 @@ G:\NIST\BIAS Tester\Service\bin\Debug\Service.pdb
 G:\NIST\BIAS Tester\Service\bin\Debug\Shared.dll
 G:\NIST\BIAS Tester\Service\bin\Debug\Shared.pdb
 G:\NIST\BIAS Tester\Service\obj\Debug\Service.vbprojResolveAssemblyReference.cache
+C:\Users\karenm.XE\Documents\BIAS_Client\BIAS-2.0\Service\bin\Debug\Service.exe.config
+C:\Users\karenm.XE\Documents\BIAS_Client\BIAS-2.0\Service\bin\Debug\Service.exe
+C:\Users\karenm.XE\Documents\BIAS_Client\BIAS-2.0\Service\bin\Debug\Service.pdb
+C:\Users\karenm.XE\Documents\BIAS_Client\BIAS-2.0\Service\bin\Debug\Shared.dll
+C:\Users\karenm.XE\Documents\BIAS_Client\BIAS-2.0\Service\bin\Debug\Shared.pdb
+C:\Users\karenm.XE\Documents\BIAS_Client\BIAS-2.0\Service\obj\Debug\Service.vbprojResolveAssemblyReference.cache
+C:\Users\karenm.XE\Documents\BIAS_Client\BIAS-2.0\Service\obj\Debug\Service.exe
+C:\Users\karenm.XE\Documents\BIAS_Client\BIAS-2.0\Service\obj\Debug\Service.pdb

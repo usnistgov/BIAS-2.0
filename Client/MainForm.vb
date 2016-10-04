@@ -78,9 +78,9 @@ Public Class MainForm
         txtbxName_QueryCap.Text = aCapabilty.CapabilityName.ToString
         txtbxId_QueryCap.Text = aCapabilty.CapabilityID.ToString
         txtbxDesc_QueryCap.Text = aCapabilty.CapabilityDescription.ToString
-        txtbxValue_QueryCap.Text = aCapabilty.CapabilityValue.ToString
-        txtbxSupportingValue_QueryCap.Text = aCapabilty.CapabilitySupportingValue.ToString
-        txtbxAdditionalInfo_QueryCap.Text = aCapabilty.CapabilityAdditionalInfo.ToString
+        'txtbxValue_QueryCap.Text = aCapabilty.CapabilityValue.ToString
+        'txtbxSupportingValue_QueryCap.Text = aCapabilty.CapabilitySupportingValue.ToString
+        'txtbxAdditionalInfo_QueryCap.Text = aCapabilty.CapabilityAdditionalInfo.ToString
     End Sub
 
     Private Sub CapabilityClicked_MouseClick(sender As Object, e As MouseEventArgs) Handles lstbx_CapabilitiesList.MouseClick
