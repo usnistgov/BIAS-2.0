@@ -4211,119 +4211,119 @@ Namespace OASIS.BIAS.V2
      System.ServiceModel.ServiceContractAttribute([Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/", ConfigurationName:="OASIS.BIAS.V2.BIAS_v2")> _
     Public Interface BIAS_v2
 
-        <System.ServiceModel.OperationContractAttribute(Action:="AddSubjectToGallery", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="AddSubjectToGallery", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="AddSubjectToGallery", Name:="BIASFault")> _
         Function AddSubjectToGallery(ByVal AddSubjectToGalleryRequest As OASIS.BIAS.V2.AddSubjectToGalleryRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="AddSubjectToGalleryResponsePackage")> OASIS.BIAS.V2.AddSubjectToGalleryResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="CheckQuality", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="CheckQuality", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="CheckQuality", Name:="BIASFault")> _
         Function CheckQuality(ByVal CheckQualityRequest As OASIS.BIAS.V2.CheckQualityRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="CheckQualityResponsePackage")> OASIS.BIAS.V2.CheckQualityResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="ClassifyBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="ClassifyBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="ClassifyBiometricData", Name:="BIASFault")> _
         Function ClassifyBiometricData(ByVal ClassifyBiometricDataRequest As OASIS.BIAS.V2.ClassifyBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="ClassifyBiometricDataResponsePackage")> OASIS.BIAS.V2.ClassifyBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="CreateSubject", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="CreateSubject", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="CreateSubject", Name:="BIASFault")> _
         Function CreateSubject(ByVal CreateSubjectRequest As OASIS.BIAS.V2.CreateSubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="CreateSubjectResponsePackage")> OASIS.BIAS.V2.CreateSubjectResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="DeleteBiographicData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="DeleteBiographicData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="DeleteBiographicData", Name:="BIASFault")> _
         Function DeleteBiographicData(ByVal DeleteBiographicDataRequest As OASIS.BIAS.V2.DeleteBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteBiographicDataResponsePackage")> OASIS.BIAS.V2.DeleteBiographicDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="DeleteBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="DeleteBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="DeleteBiometricData", Name:="BIASFault")> _
         Function DeleteBiometricData(ByVal DeleteBiometricDataRequest As OASIS.BIAS.V2.DeleteBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteBiometricDataResponsePackage")> OASIS.BIAS.V2.DeleteBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="DeleteSubject", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="DeleteSubject", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="DeleteSubject", Name:="BIASFault")> _
         Function DeleteSubject(ByVal DeleteSubjectRequest As OASIS.BIAS.V2.DeleteSubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteSubjectResponsePackage")> OASIS.BIAS.V2.DeleteSubjectResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="DeleteSubjectFromGallery", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="DeleteSubjectFromGallery", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="DeleteSubjectFromGallery", Name:="BIASFault")> _
         Function DeleteSubjectFromGallery(ByVal DeleteSubjectFromGalleryRequest As OASIS.BIAS.V2.DeleteSubjectFromGalleryRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="DeleteSubjectFromGalleryResponsePackage")> OASIS.BIAS.V2.DeleteSubjectFromGalleryResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="GetIdentifySubjectResults", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="GetIdentifySubjectResults", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="GetIdentifySubjectResults", Name:="BIASFault")> _
         Function GetIdentifySubjectResults(ByVal GetIdentifySubjectResultsRequest As OASIS.BIAS.V2.GetIdentifySubjectResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetIdentifySubjectResultsResponsePackage")> OASIS.BIAS.V2.GetIdentifySubjectResultsResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="IdentifySubject", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="IdentifySubject", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="IdentifySubject", Name:="BIASFault")> _
         Function IdentifySubject(ByVal IdentifySubjectRequest As OASIS.BIAS.V2.IdentifySubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="IdentifySubjectResponsePackage")> OASIS.BIAS.V2.IdentifySubjectResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="ListBiographicData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="ListBiographicData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="ListBiographicData", Name:="BIASFault")> _
         Function ListBiographicData(ByVal ListBiographicDataRequest As OASIS.BIAS.V2.ListBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="ListBiographicDataResponsePackage")> OASIS.BIAS.V2.ListBiographicDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="ListBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="ListBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="ListBiometricData", Name:="BIASFault")> _
         Function ListBiometricData(ByVal ListBiometricDataRequest As OASIS.BIAS.V2.ListBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="ListBiometricDataResponsePackage")> OASIS.BIAS.V2.ListBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="PerformFusion", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="PerformFusion", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="PerformFusion", Name:="BIASFault")> _
         Function PerformFusion(ByVal PerformFusionRequest As OASIS.BIAS.V2.PerformFusionRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="PerformFusionResponsePackage")> OASIS.BIAS.V2.PerformFusionResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="QueryCapabilities", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="QueryCapabilities", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="QueryCapabilities", Name:="BIASFault")> _
         Function QueryCapabilities(ByVal QueryCapabilitiesRequest As OASIS.BIAS.V2.QueryCapabilitiesRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="QueryCapabilitiesResponsePackage")> OASIS.BIAS.V2.QueryCapabilitiesResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="RetrieveBiographicData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="RetrieveBiographicData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="RetrieveBiographicData", Name:="BIASFault")> _
         Function RetrieveBiographicData(ByVal RetrieveBiographicDataRequest As OASIS.BIAS.V2.RetrieveBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="RetrieveBiographicDataResponsePackage")> OASIS.BIAS.V2.RetrieveBiographicDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="RetrieveBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="RetrieveBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="RetrieveBiometricData", Name:="BIASFault")> _
         Function RetrieveBiometricData(ByVal RetrieveBiometricDataRequest As OASIS.BIAS.V2.RetrieveBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="RetrieveBiometricDataResponsePackage")> OASIS.BIAS.V2.RetrieveBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="SetBiographicData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="SetBiographicData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="SetBiographicData", Name:="BIASFault")> _
         Function SetBiographicData(ByVal SetBiographicDataRequest As OASIS.BIAS.V2.SetBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="SetBiographicDataResponsePackage")> OASIS.BIAS.V2.SetBiographicDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="SetBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="SetBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="SetBiometricData", Name:="BIASFault")> _
         Function SetBiometricData(ByVal SetBiometricDataRequest As OASIS.BIAS.V2.SetBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="SetBiometricDataResponsePackage")> OASIS.BIAS.V2.SetBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="TransformBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="TransformBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="TransformBiometricData", Name:="BIASFault")> _
         Function TransformBiometricData(ByVal TransformBiometricDataRequest As OASIS.BIAS.V2.TransformBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="TransformBiometricDataResponsePackage")> OASIS.BIAS.V2.TransformBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="UpdateBiographicData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="UpdateBiographicData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="UpdateBiographicData", Name:="BIASFault")> _
         Function UpdateBiographicData(ByVal UpdateBiographicDataRequest As OASIS.BIAS.V2.UpdateBiographicDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="UpdateBiographicDataResponsePackage")> OASIS.BIAS.V2.UpdateBiographicDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="UpdateBiometricData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="UpdateBiometricData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="UpdateBiometricData", Name:="BIASFault")> _
         Function UpdateBiometricData(ByVal UpdateBiometricDataRequest As OASIS.BIAS.V2.UpdateBiometricDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="UpdateBiometricDataResponsePackage")> OASIS.BIAS.V2.UpdateBiometricDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="VerifySubject", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="VerifySubject", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="VerifySubject", Name:="BIASFault")> _
         Function VerifySubject(ByVal VerifySubjectRequest As OASIS.BIAS.V2.VerifySubjectRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="VerifySubjectResponsePackage")> OASIS.BIAS.V2.VerifySubjectResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="Enroll", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="Enroll", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="Enroll", Name:="BIASFault")> _
         Function Enroll(ByVal EnrollRequest As OASIS.BIAS.V2.EnrollRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="EnrollResponsePackage")> OASIS.BIAS.V2.EnrollResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="GetEnrollResults", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="GetEnrollResults", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="GetEnrollResults", Name:="BIASFault")> _
         Function GetEnrollResults(ByVal GetEnrollResultsRequest As OASIS.BIAS.V2.GetEnrollResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetEnrollResultsResponsePackage")> OASIS.BIAS.V2.GetEnrollResultsResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="GetIdentifyResults", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="GetIdentifyResults", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="GetIdentifyResults", Name:="BIASFault")> _
         Function GetIdentifyResults(ByVal GetIdentifyResultsRequest As OASIS.BIAS.V2.GetIdentifyResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetIdentifyResultsResponsePackage")> OASIS.BIAS.V2.GetIdentifyResultsResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="GetVerifyResults", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="GetVerifyResults", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="GetVerifyResults", Name:="BIASFault")> _
         Function GetVerifyResults(ByVal GetVerifyResultsRequest As OASIS.BIAS.V2.GetVerifyResultsRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="GetVerifyResultsResponsePackage")> OASIS.BIAS.V2.GetVerifyResultsResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="Identify", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="Identify", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="Identify", Name:="BIASFault")> _
         Function Identify(ByVal IdentifyRequest As OASIS.BIAS.V2.IdentifyRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="IdentifyResponsePackage")> OASIS.BIAS.V2.IdentifyResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="RetrieveData", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="RetrieveData", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="RetrieveData", Name:="BIASFault")> _
         Function RetrieveData(ByVal RetrieveDataRequest As OASIS.BIAS.V2.RetrieveDataRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="RetrieveDataResponsePackage")> OASIS.BIAS.V2.RetrieveDataResponsePackage
 
-        <System.ServiceModel.OperationContractAttribute(Action:="Verify", ReplyAction:="*"), _
+        <System.ServiceModel.OperationContractAttribute(Action:="Verify", ReplyAction:=""), _
          System.ServiceModel.FaultContractAttribute(GetType(OASIS.BIAS.V2.BIASFaultDetail), Action:="Verify", Name:="BIASFault")> _
         Function Verify(ByVal VerifyRequest As OASIS.BIAS.V2.VerifyRequest) As <System.ServiceModel.MessageParameterAttribute(Name:="VerifyResponsePackage")> OASIS.BIAS.V2.VerifyResponsePackage
     End Interface

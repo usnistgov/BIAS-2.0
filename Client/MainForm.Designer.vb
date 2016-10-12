@@ -27,21 +27,21 @@ Partial Class MainForm
         Me.grpbxResult_Enroll = New System.Windows.Forms.GroupBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.grpbox2_Enroll = New System.Windows.Forms.GroupBox()
-        Me.btnEnroll_Enroll = New System.Windows.Forms.Button()
-        Me.btnClear_Enroll = New System.Windows.Forms.Button()
-        Me.panel1_Enroll = New System.Windows.Forms.Panel()
-        Me.DateOfBirthPicker_Enroll = New System.Windows.Forms.DateTimePicker()
-        Me.lblCitizenship_Enroll = New System.Windows.Forms.Label()
-        Me.lblSex_Enroll = New System.Windows.Forms.Label()
-        Me.lblDOB_Enroll = New System.Windows.Forms.Label()
-        Me.lblFamilyName_Enroll = New System.Windows.Forms.Label()
-        Me.lblGivenName_Enroll = New System.Windows.Forms.Label()
-        Me.lblGUID_Enroll = New System.Windows.Forms.Label()
-        Me.txtbxCitizenship_Enroll = New System.Windows.Forms.TextBox()
-        Me.txtbxSex_Enroll = New System.Windows.Forms.TextBox()
-        Me.txtbxFamily_Enroll = New System.Windows.Forms.TextBox()
-        Me.txtbxGiven_Enroll = New System.Windows.Forms.TextBox()
-        Me.txtbxGUID_Enroll = New System.Windows.Forms.TextBox()
+        Me.EnrollButton_Enroll = New System.Windows.Forms.Button()
+        Me.ClearButton_Enroll = New System.Windows.Forms.Button()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.DOBDateTimePicker_Enroll = New System.Windows.Forms.DateTimePicker()
+        Me.CitizenshipLabel_Enroll = New System.Windows.Forms.Label()
+        Me.SexLabel_Enroll = New System.Windows.Forms.Label()
+        Me.DOBLabel_Enroll = New System.Windows.Forms.Label()
+        Me.FamilyNameLabel_Enroll = New System.Windows.Forms.Label()
+        Me.GivenNameLabel_Enroll = New System.Windows.Forms.Label()
+        Me.GUIDLabel_Enroll = New System.Windows.Forms.Label()
+        Me.CitizenshipTextBox_Enroll = New System.Windows.Forms.TextBox()
+        Me.SexTextBox_Enroll = New System.Windows.Forms.TextBox()
+        Me.FamilyNameTextBox_Enroll = New System.Windows.Forms.TextBox()
+        Me.GivenNameTextBox_Enroll = New System.Windows.Forms.TextBox()
+        Me.GUIDTextBox_Enroll = New System.Windows.Forms.TextBox()
         Me.grpbox1_Enroll = New System.Windows.Forms.GroupBox()
         Me.txtbxBioImage_Enroll = New System.Windows.Forms.TextBox()
         Me.picbx1_Enroll = New System.Windows.Forms.PictureBox()
@@ -114,7 +114,7 @@ Partial Class MainForm
         Me.TabPage1.SuspendLayout()
         Me.grpbxResult_Enroll.SuspendLayout()
         Me.grpbox2_Enroll.SuspendLayout()
-        Me.panel1_Enroll.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.grpbox1_Enroll.SuspendLayout()
         CType(Me.picbx1_Enroll, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
@@ -146,7 +146,7 @@ Partial Class MainForm
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(655, 488)
+        Me.TabControl1.Size = New System.Drawing.Size(818, 585)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
@@ -157,7 +157,7 @@ Partial Class MainForm
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(647, 462)
+        Me.TabPage1.Size = New System.Drawing.Size(810, 559)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Enroll"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -165,9 +165,9 @@ Partial Class MainForm
         'grpbxResult_Enroll
         '
         Me.grpbxResult_Enroll.Controls.Add(Me.TextBox4)
-        Me.grpbxResult_Enroll.Location = New System.Drawing.Point(27, 302)
+        Me.grpbxResult_Enroll.Location = New System.Drawing.Point(27, 419)
         Me.grpbxResult_Enroll.Name = "grpbxResult_Enroll"
-        Me.grpbxResult_Enroll.Size = New System.Drawing.Size(579, 119)
+        Me.grpbxResult_Enroll.Size = New System.Drawing.Size(628, 119)
         Me.grpbxResult_Enroll.TabIndex = 2
         Me.grpbxResult_Enroll.TabStop = False
         Me.grpbxResult_Enroll.Text = "Result"
@@ -181,149 +181,149 @@ Partial Class MainForm
         '
         'grpbox2_Enroll
         '
-        Me.grpbox2_Enroll.Controls.Add(Me.btnEnroll_Enroll)
-        Me.grpbox2_Enroll.Controls.Add(Me.btnClear_Enroll)
-        Me.grpbox2_Enroll.Controls.Add(Me.panel1_Enroll)
+        Me.grpbox2_Enroll.Controls.Add(Me.EnrollButton_Enroll)
+        Me.grpbox2_Enroll.Controls.Add(Me.ClearButton_Enroll)
+        Me.grpbox2_Enroll.Controls.Add(Me.Panel4)
         Me.grpbox2_Enroll.Location = New System.Drawing.Point(276, 40)
         Me.grpbox2_Enroll.Name = "grpbox2_Enroll"
-        Me.grpbox2_Enroll.Size = New System.Drawing.Size(330, 256)
+        Me.grpbox2_Enroll.Size = New System.Drawing.Size(379, 373)
         Me.grpbox2_Enroll.TabIndex = 1
         Me.grpbox2_Enroll.TabStop = False
         Me.grpbox2_Enroll.Text = "Biographic Data"
         '
-        'btnEnroll_Enroll
+        'EnrollButton_Enroll
         '
-        Me.btnEnroll_Enroll.Location = New System.Drawing.Point(115, 216)
-        Me.btnEnroll_Enroll.Name = "btnEnroll_Enroll"
-        Me.btnEnroll_Enroll.Size = New System.Drawing.Size(75, 23)
-        Me.btnEnroll_Enroll.TabIndex = 2
-        Me.btnEnroll_Enroll.Text = "Enroll"
-        Me.btnEnroll_Enroll.UseVisualStyleBackColor = True
+        Me.EnrollButton_Enroll.Location = New System.Drawing.Point(115, 216)
+        Me.EnrollButton_Enroll.Name = "EnrollButton_Enroll"
+        Me.EnrollButton_Enroll.Size = New System.Drawing.Size(75, 23)
+        Me.EnrollButton_Enroll.TabIndex = 2
+        Me.EnrollButton_Enroll.Text = "Enroll"
+        Me.EnrollButton_Enroll.UseVisualStyleBackColor = True
         '
-        'btnClear_Enroll
+        'ClearButton_Enroll
         '
-        Me.btnClear_Enroll.Location = New System.Drawing.Point(6, 217)
-        Me.btnClear_Enroll.Name = "btnClear_Enroll"
-        Me.btnClear_Enroll.Size = New System.Drawing.Size(75, 23)
-        Me.btnClear_Enroll.TabIndex = 1
-        Me.btnClear_Enroll.Text = "Clear"
-        Me.btnClear_Enroll.UseVisualStyleBackColor = True
+        Me.ClearButton_Enroll.Location = New System.Drawing.Point(6, 217)
+        Me.ClearButton_Enroll.Name = "ClearButton_Enroll"
+        Me.ClearButton_Enroll.Size = New System.Drawing.Size(75, 23)
+        Me.ClearButton_Enroll.TabIndex = 1
+        Me.ClearButton_Enroll.Text = "Clear"
+        Me.ClearButton_Enroll.UseVisualStyleBackColor = True
         '
-        'panel1_Enroll
+        'Panel4
         '
-        Me.panel1_Enroll.Controls.Add(Me.DateOfBirthPicker_Enroll)
-        Me.panel1_Enroll.Controls.Add(Me.lblCitizenship_Enroll)
-        Me.panel1_Enroll.Controls.Add(Me.lblSex_Enroll)
-        Me.panel1_Enroll.Controls.Add(Me.lblDOB_Enroll)
-        Me.panel1_Enroll.Controls.Add(Me.lblFamilyName_Enroll)
-        Me.panel1_Enroll.Controls.Add(Me.lblGivenName_Enroll)
-        Me.panel1_Enroll.Controls.Add(Me.lblGUID_Enroll)
-        Me.panel1_Enroll.Controls.Add(Me.txtbxCitizenship_Enroll)
-        Me.panel1_Enroll.Controls.Add(Me.txtbxSex_Enroll)
-        Me.panel1_Enroll.Controls.Add(Me.txtbxFamily_Enroll)
-        Me.panel1_Enroll.Controls.Add(Me.txtbxGiven_Enroll)
-        Me.panel1_Enroll.Controls.Add(Me.txtbxGUID_Enroll)
-        Me.panel1_Enroll.Location = New System.Drawing.Point(6, 19)
-        Me.panel1_Enroll.Name = "panel1_Enroll"
-        Me.panel1_Enroll.Size = New System.Drawing.Size(306, 191)
-        Me.panel1_Enroll.TabIndex = 0
+        Me.Panel4.Controls.Add(Me.DOBDateTimePicker_Enroll)
+        Me.Panel4.Controls.Add(Me.CitizenshipLabel_Enroll)
+        Me.Panel4.Controls.Add(Me.SexLabel_Enroll)
+        Me.Panel4.Controls.Add(Me.DOBLabel_Enroll)
+        Me.Panel4.Controls.Add(Me.FamilyNameLabel_Enroll)
+        Me.Panel4.Controls.Add(Me.GivenNameLabel_Enroll)
+        Me.Panel4.Controls.Add(Me.GUIDLabel_Enroll)
+        Me.Panel4.Controls.Add(Me.CitizenshipTextBox_Enroll)
+        Me.Panel4.Controls.Add(Me.SexTextBox_Enroll)
+        Me.Panel4.Controls.Add(Me.FamilyNameTextBox_Enroll)
+        Me.Panel4.Controls.Add(Me.GivenNameTextBox_Enroll)
+        Me.Panel4.Controls.Add(Me.GUIDTextBox_Enroll)
+        Me.Panel4.Location = New System.Drawing.Point(6, 20)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(357, 191)
+        Me.Panel4.TabIndex = 0
         '
-        'DateOfBirthPicker_Enroll
+        'DOBDateTimePicker_Enroll
         '
-        Me.DateOfBirthPicker_Enroll.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateOfBirthPicker_Enroll.Location = New System.Drawing.Point(94, 90)
-        Me.DateOfBirthPicker_Enroll.Name = "DateOfBirthPicker_Enroll"
-        Me.DateOfBirthPicker_Enroll.Size = New System.Drawing.Size(212, 20)
-        Me.DateOfBirthPicker_Enroll.TabIndex = 12
+        Me.DOBDateTimePicker_Enroll.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DOBDateTimePicker_Enroll.Location = New System.Drawing.Point(94, 90)
+        Me.DOBDateTimePicker_Enroll.Name = "DOBDateTimePicker_Enroll"
+        Me.DOBDateTimePicker_Enroll.Size = New System.Drawing.Size(212, 20)
+        Me.DOBDateTimePicker_Enroll.TabIndex = 12
         '
-        'lblCitizenship_Enroll
+        'CitizenshipLabel_Enroll
         '
-        Me.lblCitizenship_Enroll.AutoSize = True
-        Me.lblCitizenship_Enroll.Location = New System.Drawing.Point(13, 142)
-        Me.lblCitizenship_Enroll.Name = "lblCitizenship_Enroll"
-        Me.lblCitizenship_Enroll.Size = New System.Drawing.Size(57, 13)
-        Me.lblCitizenship_Enroll.TabIndex = 11
-        Me.lblCitizenship_Enroll.Text = "Citizenship"
+        Me.CitizenshipLabel_Enroll.AutoSize = True
+        Me.CitizenshipLabel_Enroll.Location = New System.Drawing.Point(13, 142)
+        Me.CitizenshipLabel_Enroll.Name = "CitizenshipLabel_Enroll"
+        Me.CitizenshipLabel_Enroll.Size = New System.Drawing.Size(57, 13)
+        Me.CitizenshipLabel_Enroll.TabIndex = 11
+        Me.CitizenshipLabel_Enroll.Text = "Citizenship"
         '
-        'lblSex_Enroll
+        'SexLabel_Enroll
         '
-        Me.lblSex_Enroll.AutoSize = True
-        Me.lblSex_Enroll.Location = New System.Drawing.Point(13, 116)
-        Me.lblSex_Enroll.Name = "lblSex_Enroll"
-        Me.lblSex_Enroll.Size = New System.Drawing.Size(25, 13)
-        Me.lblSex_Enroll.TabIndex = 10
-        Me.lblSex_Enroll.Text = "Sex"
+        Me.SexLabel_Enroll.AutoSize = True
+        Me.SexLabel_Enroll.Location = New System.Drawing.Point(13, 116)
+        Me.SexLabel_Enroll.Name = "SexLabel_Enroll"
+        Me.SexLabel_Enroll.Size = New System.Drawing.Size(25, 13)
+        Me.SexLabel_Enroll.TabIndex = 10
+        Me.SexLabel_Enroll.Text = "Sex"
         '
-        'lblDOB_Enroll
+        'DOBLabel_Enroll
         '
-        Me.lblDOB_Enroll.AutoSize = True
-        Me.lblDOB_Enroll.Location = New System.Drawing.Point(13, 90)
-        Me.lblDOB_Enroll.Name = "lblDOB_Enroll"
-        Me.lblDOB_Enroll.Size = New System.Drawing.Size(66, 13)
-        Me.lblDOB_Enroll.TabIndex = 9
-        Me.lblDOB_Enroll.Text = "Date of Birth"
+        Me.DOBLabel_Enroll.AutoSize = True
+        Me.DOBLabel_Enroll.Location = New System.Drawing.Point(13, 90)
+        Me.DOBLabel_Enroll.Name = "DOBLabel_Enroll"
+        Me.DOBLabel_Enroll.Size = New System.Drawing.Size(66, 13)
+        Me.DOBLabel_Enroll.TabIndex = 9
+        Me.DOBLabel_Enroll.Text = "Date of Birth"
         '
-        'lblFamilyName_Enroll
+        'FamilyNameLabel_Enroll
         '
-        Me.lblFamilyName_Enroll.AutoSize = True
-        Me.lblFamilyName_Enroll.Location = New System.Drawing.Point(13, 67)
-        Me.lblFamilyName_Enroll.Name = "lblFamilyName_Enroll"
-        Me.lblFamilyName_Enroll.Size = New System.Drawing.Size(67, 13)
-        Me.lblFamilyName_Enroll.TabIndex = 8
-        Me.lblFamilyName_Enroll.Text = "Family Name"
+        Me.FamilyNameLabel_Enroll.AutoSize = True
+        Me.FamilyNameLabel_Enroll.Location = New System.Drawing.Point(13, 67)
+        Me.FamilyNameLabel_Enroll.Name = "FamilyNameLabel_Enroll"
+        Me.FamilyNameLabel_Enroll.Size = New System.Drawing.Size(67, 13)
+        Me.FamilyNameLabel_Enroll.TabIndex = 8
+        Me.FamilyNameLabel_Enroll.Text = "Family Name"
         '
-        'lblGivenName_Enroll
+        'GivenNameLabel_Enroll
         '
-        Me.lblGivenName_Enroll.AutoSize = True
-        Me.lblGivenName_Enroll.Location = New System.Drawing.Point(13, 45)
-        Me.lblGivenName_Enroll.Name = "lblGivenName_Enroll"
-        Me.lblGivenName_Enroll.Size = New System.Drawing.Size(66, 13)
-        Me.lblGivenName_Enroll.TabIndex = 7
-        Me.lblGivenName_Enroll.Text = "Given Name"
+        Me.GivenNameLabel_Enroll.AutoSize = True
+        Me.GivenNameLabel_Enroll.Location = New System.Drawing.Point(13, 45)
+        Me.GivenNameLabel_Enroll.Name = "GivenNameLabel_Enroll"
+        Me.GivenNameLabel_Enroll.Size = New System.Drawing.Size(66, 13)
+        Me.GivenNameLabel_Enroll.TabIndex = 7
+        Me.GivenNameLabel_Enroll.Text = "Given Name"
         '
-        'lblGUID_Enroll
+        'GUIDLabel_Enroll
         '
-        Me.lblGUID_Enroll.AutoSize = True
-        Me.lblGUID_Enroll.Location = New System.Drawing.Point(13, 18)
-        Me.lblGUID_Enroll.Name = "lblGUID_Enroll"
-        Me.lblGUID_Enroll.Size = New System.Drawing.Size(34, 13)
-        Me.lblGUID_Enroll.TabIndex = 6
-        Me.lblGUID_Enroll.Text = "GUID"
+        Me.GUIDLabel_Enroll.AutoSize = True
+        Me.GUIDLabel_Enroll.Location = New System.Drawing.Point(13, 18)
+        Me.GUIDLabel_Enroll.Name = "GUIDLabel_Enroll"
+        Me.GUIDLabel_Enroll.Size = New System.Drawing.Size(34, 13)
+        Me.GUIDLabel_Enroll.TabIndex = 6
+        Me.GUIDLabel_Enroll.Text = "GUID"
         '
-        'txtbxCitizenship_Enroll
+        'CitizenshipTextBox_Enroll
         '
-        Me.txtbxCitizenship_Enroll.Location = New System.Drawing.Point(94, 142)
-        Me.txtbxCitizenship_Enroll.Name = "txtbxCitizenship_Enroll"
-        Me.txtbxCitizenship_Enroll.Size = New System.Drawing.Size(209, 20)
-        Me.txtbxCitizenship_Enroll.TabIndex = 5
+        Me.CitizenshipTextBox_Enroll.Location = New System.Drawing.Point(94, 142)
+        Me.CitizenshipTextBox_Enroll.Name = "CitizenshipTextBox_Enroll"
+        Me.CitizenshipTextBox_Enroll.Size = New System.Drawing.Size(209, 20)
+        Me.CitizenshipTextBox_Enroll.TabIndex = 5
         '
-        'txtbxSex_Enroll
+        'SexTextBox_Enroll
         '
-        Me.txtbxSex_Enroll.Location = New System.Drawing.Point(94, 116)
-        Me.txtbxSex_Enroll.Name = "txtbxSex_Enroll"
-        Me.txtbxSex_Enroll.Size = New System.Drawing.Size(209, 20)
-        Me.txtbxSex_Enroll.TabIndex = 4
+        Me.SexTextBox_Enroll.Location = New System.Drawing.Point(94, 116)
+        Me.SexTextBox_Enroll.Name = "SexTextBox_Enroll"
+        Me.SexTextBox_Enroll.Size = New System.Drawing.Size(209, 20)
+        Me.SexTextBox_Enroll.TabIndex = 4
         '
-        'txtbxFamily_Enroll
+        'FamilyNameTextBox_Enroll
         '
-        Me.txtbxFamily_Enroll.Location = New System.Drawing.Point(94, 64)
-        Me.txtbxFamily_Enroll.Name = "txtbxFamily_Enroll"
-        Me.txtbxFamily_Enroll.Size = New System.Drawing.Size(209, 20)
-        Me.txtbxFamily_Enroll.TabIndex = 2
+        Me.FamilyNameTextBox_Enroll.Location = New System.Drawing.Point(94, 64)
+        Me.FamilyNameTextBox_Enroll.Name = "FamilyNameTextBox_Enroll"
+        Me.FamilyNameTextBox_Enroll.Size = New System.Drawing.Size(209, 20)
+        Me.FamilyNameTextBox_Enroll.TabIndex = 2
         '
-        'txtbxGiven_Enroll
+        'GivenNameTextBox_Enroll
         '
-        Me.txtbxGiven_Enroll.Location = New System.Drawing.Point(94, 38)
-        Me.txtbxGiven_Enroll.Name = "txtbxGiven_Enroll"
-        Me.txtbxGiven_Enroll.Size = New System.Drawing.Size(209, 20)
-        Me.txtbxGiven_Enroll.TabIndex = 1
+        Me.GivenNameTextBox_Enroll.Location = New System.Drawing.Point(94, 38)
+        Me.GivenNameTextBox_Enroll.Name = "GivenNameTextBox_Enroll"
+        Me.GivenNameTextBox_Enroll.Size = New System.Drawing.Size(209, 20)
+        Me.GivenNameTextBox_Enroll.TabIndex = 1
         '
-        'txtbxGUID_Enroll
+        'GUIDTextBox_Enroll
         '
-        Me.txtbxGUID_Enroll.Location = New System.Drawing.Point(94, 12)
-        Me.txtbxGUID_Enroll.Name = "txtbxGUID_Enroll"
-        Me.txtbxGUID_Enroll.Size = New System.Drawing.Size(209, 20)
-        Me.txtbxGUID_Enroll.TabIndex = 0
+        Me.GUIDTextBox_Enroll.Location = New System.Drawing.Point(94, 12)
+        Me.GUIDTextBox_Enroll.Name = "GUIDTextBox_Enroll"
+        Me.GUIDTextBox_Enroll.Size = New System.Drawing.Size(209, 20)
+        Me.GUIDTextBox_Enroll.TabIndex = 0
         '
         'grpbox1_Enroll
         '
@@ -331,14 +331,14 @@ Partial Class MainForm
         Me.grpbox1_Enroll.Controls.Add(Me.picbx1_Enroll)
         Me.grpbox1_Enroll.Location = New System.Drawing.Point(27, 40)
         Me.grpbox1_Enroll.Name = "grpbox1_Enroll"
-        Me.grpbox1_Enroll.Size = New System.Drawing.Size(196, 256)
+        Me.grpbox1_Enroll.Size = New System.Drawing.Size(243, 373)
         Me.grpbox1_Enroll.TabIndex = 0
         Me.grpbox1_Enroll.TabStop = False
         Me.grpbox1_Enroll.Text = "Biometric Data"
         '
         'txtbxBioImage_Enroll
         '
-        Me.txtbxBioImage_Enroll.Location = New System.Drawing.Point(6, 216)
+        Me.txtbxBioImage_Enroll.Location = New System.Drawing.Point(6, 347)
         Me.txtbxBioImage_Enroll.Name = "txtbxBioImage_Enroll"
         Me.txtbxBioImage_Enroll.Size = New System.Drawing.Size(146, 20)
         Me.txtbxBioImage_Enroll.TabIndex = 1
@@ -346,9 +346,9 @@ Partial Class MainForm
         '
         'picbx1_Enroll
         '
-        Me.picbx1_Enroll.Location = New System.Drawing.Point(6, 19)
+        Me.picbx1_Enroll.Location = New System.Drawing.Point(15, 19)
         Me.picbx1_Enroll.Name = "picbx1_Enroll"
-        Me.picbx1_Enroll.Size = New System.Drawing.Size(146, 191)
+        Me.picbx1_Enroll.Size = New System.Drawing.Size(222, 322)
         Me.picbx1_Enroll.TabIndex = 0
         Me.picbx1_Enroll.TabStop = False
         '
@@ -358,7 +358,7 @@ Partial Class MainForm
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(647, 462)
+        Me.TabPage2.Size = New System.Drawing.Size(810, 559)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Verify"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -371,7 +371,7 @@ Partial Class MainForm
         Me.GroupBox4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox4.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(641, 456)
+        Me.GroupBox4.Size = New System.Drawing.Size(804, 553)
         Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "GroupBox4"
@@ -566,14 +566,14 @@ Partial Class MainForm
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(647, 462)
+        Me.TabPage3.Size = New System.Drawing.Size(810, 559)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Identify"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'GroupBox10
         '
-        Me.GroupBox10.Location = New System.Drawing.Point(50, 320)
+        Me.GroupBox10.Location = New System.Drawing.Point(50, 406)
         Me.GroupBox10.Name = "GroupBox10"
         Me.GroupBox10.Size = New System.Drawing.Size(579, 119)
         Me.GroupBox10.TabIndex = 5
@@ -588,14 +588,14 @@ Partial Class MainForm
         Me.grpbox9_Identify.Controls.Add(Me.btnClear_Identify)
         Me.grpbox9_Identify.Location = New System.Drawing.Point(50, 25)
         Me.grpbox9_Identify.Name = "grpbox9_Identify"
-        Me.grpbox9_Identify.Size = New System.Drawing.Size(218, 289)
+        Me.grpbox9_Identify.Size = New System.Drawing.Size(255, 375)
         Me.grpbox9_Identify.TabIndex = 4
         Me.grpbox9_Identify.TabStop = False
         Me.grpbox9_Identify.Text = "Biometric Data"
         '
         'btnIdentify_Identify
         '
-        Me.btnIdentify_Identify.Location = New System.Drawing.Point(98, 260)
+        Me.btnIdentify_Identify.Location = New System.Drawing.Point(98, 328)
         Me.btnIdentify_Identify.Name = "btnIdentify_Identify"
         Me.btnIdentify_Identify.Size = New System.Drawing.Size(75, 23)
         Me.btnIdentify_Identify.TabIndex = 2
@@ -604,7 +604,7 @@ Partial Class MainForm
         '
         'txtbxBioImage_Identify
         '
-        Me.txtbxBioImage_Identify.Location = New System.Drawing.Point(7, 218)
+        Me.txtbxBioImage_Identify.Location = New System.Drawing.Point(7, 302)
         Me.txtbxBioImage_Identify.Name = "txtbxBioImage_Identify"
         Me.txtbxBioImage_Identify.Size = New System.Drawing.Size(166, 20)
         Me.txtbxBioImage_Identify.TabIndex = 1
@@ -614,13 +614,13 @@ Partial Class MainForm
         '
         Me.picbx3_Identify.Location = New System.Drawing.Point(6, 19)
         Me.picbx3_Identify.Name = "picbx3_Identify"
-        Me.picbx3_Identify.Size = New System.Drawing.Size(167, 191)
+        Me.picbx3_Identify.Size = New System.Drawing.Size(243, 277)
         Me.picbx3_Identify.TabIndex = 0
         Me.picbx3_Identify.TabStop = False
         '
         'btnClear_Identify
         '
-        Me.btnClear_Identify.Location = New System.Drawing.Point(6, 260)
+        Me.btnClear_Identify.Location = New System.Drawing.Point(7, 328)
         Me.btnClear_Identify.Name = "btnClear_Identify"
         Me.btnClear_Identify.Size = New System.Drawing.Size(75, 23)
         Me.btnClear_Identify.TabIndex = 1
@@ -633,7 +633,7 @@ Partial Class MainForm
         Me.GroupBox8.Controls.Add(Me.Panel3)
         Me.GroupBox8.Location = New System.Drawing.Point(311, 22)
         Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(318, 291)
+        Me.GroupBox8.Size = New System.Drawing.Size(318, 378)
         Me.GroupBox8.TabIndex = 3
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "Identity Results"
@@ -642,7 +642,7 @@ Partial Class MainForm
         '
         Me.Panel3.Location = New System.Drawing.Point(6, 19)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(306, 253)
+        Me.Panel3.Size = New System.Drawing.Size(306, 280)
         Me.Panel3.TabIndex = 0
         '
         'TabPage4
@@ -651,7 +651,7 @@ Partial Class MainForm
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(647, 462)
+        Me.TabPage4.Size = New System.Drawing.Size(810, 559)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "QueryCapabilities"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -801,7 +801,7 @@ Partial Class MainForm
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage5.Size = New System.Drawing.Size(647, 462)
+        Me.TabPage5.Size = New System.Drawing.Size(810, 559)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "Retrieve Information"
         Me.TabPage5.UseVisualStyleBackColor = True
@@ -964,7 +964,7 @@ Partial Class MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(655, 488)
+        Me.ClientSize = New System.Drawing.Size(818, 585)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "MainForm"
         Me.Text = "Biometric Identity Assurance Service"
@@ -973,8 +973,8 @@ Partial Class MainForm
         Me.grpbxResult_Enroll.ResumeLayout(False)
         Me.grpbxResult_Enroll.PerformLayout()
         Me.grpbox2_Enroll.ResumeLayout(False)
-        Me.panel1_Enroll.ResumeLayout(False)
-        Me.panel1_Enroll.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.grpbox1_Enroll.ResumeLayout(False)
         Me.grpbox1_Enroll.PerformLayout()
         CType(Me.picbx1_Enroll, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1010,23 +1010,11 @@ Partial Class MainForm
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents grpbox2_Enroll As System.Windows.Forms.GroupBox
-    Friend WithEvents btnClear_Enroll As System.Windows.Forms.Button
-    Friend WithEvents panel1_Enroll As System.Windows.Forms.Panel
+    Friend WithEvents ClearButton_Enroll As System.Windows.Forms.Button
     Friend WithEvents grpbox1_Enroll As System.Windows.Forms.GroupBox
     Friend WithEvents grpbxResult_Enroll As System.Windows.Forms.GroupBox
-    Friend WithEvents btnEnroll_Enroll As System.Windows.Forms.Button
-    Friend WithEvents lblCitizenship_Enroll As System.Windows.Forms.Label
-    Friend WithEvents lblSex_Enroll As System.Windows.Forms.Label
-    Friend WithEvents lblDOB_Enroll As System.Windows.Forms.Label
-    Friend WithEvents lblFamilyName_Enroll As System.Windows.Forms.Label
-    Friend WithEvents lblGivenName_Enroll As System.Windows.Forms.Label
-    Friend WithEvents lblGUID_Enroll As System.Windows.Forms.Label
-    Friend WithEvents txtbxCitizenship_Enroll As System.Windows.Forms.TextBox
-    Friend WithEvents txtbxSex_Enroll As System.Windows.Forms.TextBox
+    Friend WithEvents EnrollButton_Enroll As System.Windows.Forms.Button
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents txtbxFamily_Enroll As System.Windows.Forms.TextBox
-    Friend WithEvents txtbxGiven_Enroll As System.Windows.Forms.TextBox
-    Friend WithEvents txtbxGUID_Enroll As System.Windows.Forms.TextBox
     Friend WithEvents picbx1_Enroll As System.Windows.Forms.PictureBox
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
@@ -1057,7 +1045,6 @@ Partial Class MainForm
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
     Friend WithEvents grpbox_QueryCapabilities As System.Windows.Forms.GroupBox
     Friend WithEvents QueryCapabilitiesBtn As System.Windows.Forms.Button
-    Friend WithEvents DateOfBirthPicker_Enroll As System.Windows.Forms.DateTimePicker
     Friend WithEvents txtbxAdditionalInfo_QueryCap As System.Windows.Forms.TextBox
     Friend WithEvents txtbxSupportingValue_QueryCap As System.Windows.Forms.TextBox
     Friend WithEvents txtbxValue_QueryCap As System.Windows.Forms.TextBox
@@ -1093,4 +1080,17 @@ Partial Class MainForm
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents Panel4 As System.Windows.Forms.Panel
+    Friend WithEvents DOBDateTimePicker_Enroll As System.Windows.Forms.DateTimePicker
+    Friend WithEvents CitizenshipLabel_Enroll As System.Windows.Forms.Label
+    Friend WithEvents SexLabel_Enroll As System.Windows.Forms.Label
+    Friend WithEvents DOBLabel_Enroll As System.Windows.Forms.Label
+    Friend WithEvents FamilyNameLabel_Enroll As System.Windows.Forms.Label
+    Friend WithEvents GivenNameLabel_Enroll As System.Windows.Forms.Label
+    Friend WithEvents GUIDLabel_Enroll As System.Windows.Forms.Label
+    Friend WithEvents CitizenshipTextBox_Enroll As System.Windows.Forms.TextBox
+    Friend WithEvents SexTextBox_Enroll As System.Windows.Forms.TextBox
+    Friend WithEvents FamilyNameTextBox_Enroll As System.Windows.Forms.TextBox
+    Friend WithEvents GivenNameTextBox_Enroll As System.Windows.Forms.TextBox
+    Friend WithEvents GUIDTextBox_Enroll As System.Windows.Forms.TextBox
 End Class

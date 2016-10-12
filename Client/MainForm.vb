@@ -9,54 +9,64 @@ Imports OASIS.BIAS.V2
 
 Public Class MainForm
 
-    Dim client As BIAS_v2Client
+    Dim client As New BIAS_v2Client()
 
-    Private Sub btnClear_Enroll_Click(sender As Object, e As EventArgs) Handles btnClear_Enroll.Click
+    Private Sub btnClear_Enroll_Click(sender As Object, e As EventArgs) Handles ClearButton_Enroll.Click
         MessageBox.Show("Clear button was clicked")
     End Sub
 
-    Private Sub btnEnroll_Click(sender As Object, e As EventArgs) Handles btnEnroll_Enroll.Click
-        MessageBox.Show("Enroll button was clicked")
-
-
+    Private Sub btnEnroll_Click(sender As Object, e As EventArgs) Handles EnrollButton_Enroll.Click
+        'MessageBox.Show("Enroll button was clicked")
         Dim request As New EnrollRequest()
-        Dim params As New GenericRequestParameters()
-        params.Application = "clientApp1"
-        params.ApplicationUser = "user1"
-        params.BIASOperationName = "enrol"
-        'request.GenericRequestParameters = New GenericRequestParameters()
-        request.GenericRequestParameters = params
+        Dim response As New EnrollResponsePackage()
+        'Dim genericReq As New GenericRequestParameters
 
         Dim procOptn As New ProcessingOptionsType
         Dim opt As New OptionType
-        opt.Key = "null"
-        opt.Value = "null"
+        opt.Key = "test"
+        opt.Value = "test"
         procOptn.Add(opt)
         request.ProcessingOptions = procOptn
 
-        request.Identity.SubjectID = txtbxGUID_Enroll.Text
-        request.Identity.BiographicData.FirstName = txtbxGiven_Enroll.Text
-        request.Identity.BiographicData.LastName = txtbxFamily_Enroll.Text
 
-        With request.Identity.BiographicData.BiographicDataItemList
-            .Insert(0, New BiographicDataItemType())
-            .Item(0).Name = "DOB"
-            .Item(0).Type = DateString
-            .Item(0).Value = DateOfBirthPicker_Enroll.Text
-        End With
+        Dim userInput As InformationType = New InformationType
+        userInput.GUID = Guid.NewGuid.ToString
+        userInput.GivenName = GivenNameTextBox_Enroll.Text
+        userInput.FamilyName = FamilyNameTextBox_Enroll.Text
+        userInput.DateOfBirth = DOBDateTimePicker_Enroll.Text
+        userInput.Sex = SexTextBox_Enroll.Text
+        userInput.Citizenship = CitizenshipTextBox_Enroll.Text
+        request.InputData = userInput
 
+        'Dim s As String
+        's = "f30fab8d-8b0a-47fb-ba72-d088e93ca414"
+        'request.InputData.GivenName = GivenNameTextBox_Enroll.Text
+        'request.InputData.FamilyName = FamilyNameTextBox_Enroll.Text
+        'request.InputData.DateOfBirth = DOBDateTimePicker_Enroll.Text
+        'request.InputData.Sex = SexTextBox_Enroll.Text
+        'request.InputData.Citizenship = CitizenshipTextBox_Enroll.Text
 
-        'request.InputData = New InformationType()
-        'request.InputData.GUID = txtbxGUID_Enroll.Text
-        'request.InputData.GivenName = txtbxGiven_Enroll.Text
-        'request.InputData.FamilyName = txtbxFamily_Enroll.Text
-        'request.InputData.DateOfBirth = DateOfBirthPicker_Enroll.Text
-        'request.InputData.Sex = txtbxSex_Enroll.Text
-        'request.InputData.Citizenship = txtbxCitizenship_Enroll.Text
+        'Dim img As OASIS.BIAS.V2.Image = New OASIS.BIAS.V2.Image
+        'Dim byteArray As Byte() = Nothing
 
-        Dim response As EnrollResponsePackage
-        'response = client.Enroll(request)
-        'Console.WriteLine(response.ResponseStatus.Return.ToString) 'did the enrol succeed or fail
+        'img.ImageData = subject01.gif  'convert to byte array
+        'request.InputData.Images.Add(img)
+
+        'request.InputData.Images.Item(0).ImageData() = Byte()
+        'request.InputData.Images(0) = personImage
+
+        'Dim response As New EnrollResponsePackage()
+        If (request IsNot Nothing) Then
+            Console.WriteLine("object is not null")
+        End If
+        Try
+
+            response = client.Enroll(request)
+
+        Catch ex As Exception
+            MessageBox.Show("exception: " & ex.Message.ToString & "return value-")'& response.ResponseStatus.Return.ToString)
+        End Try
+        
 
     End Sub
 
@@ -121,11 +131,6 @@ Public Class MainForm
         'PictureBox1.Image = Drawing.Image.FromFile(imageString)
         'TextBox7.Text = imageString
     End Sub
-
-
-
-
-
 
 
     Private Sub btnIdentify_Identify_Click(sender As Object, e As EventArgs) Handles btnIdentify_Identify.Click

@@ -3,7 +3,7 @@ Imports Microsoft.VisualBasic
 Imports System.Text
 Imports System.IO
 Imports System.Data
-Imports System.Windows.Forms
+'Imports System.Windows.Forms
 Imports System.Configuration
 Imports System.ServiceModel.Web
 Imports Microsoft.VisualBasic.Interaction
@@ -13,7 +13,7 @@ Imports System.Reflection
 
 Module mainModule
     Sub Main()
-        Dim bias1 As New BIASService()
+        Dim bias1 As New BIAS_v2Client()
 
         'Dim query As New QueryCapabilitiesRequest
         'bias1.QueryCapabilities(query)
@@ -28,7 +28,9 @@ Module mainModule
 
         Dim enrol As New EnrollRequest()
         enrol.InputData = sampleInfo
-        bias1.Enroll(enrol)
+        Dim es As EnrollResponsePackage = bias1.Enroll(enrol)
+
+        Dim i As Integer = 0
 
     End Sub
 End Module
@@ -63,6 +65,8 @@ Public Class BIASService
     End Function
 
     Public Function AddSubjectToGallery(AddSubjectToGalleryRequest As AddSubjectToGalleryRequest) As AddSubjectToGalleryResponsePackage Implements BIAS_v2.AddSubjectToGallery
+
+        Console.WriteLine("In AddSubjectToGallery")
 
         Dim galleryResponse As New AddSubjectToGalleryResponsePackage()
         galleryResponse.ResponseStatus = New ResponseStatus
@@ -184,6 +188,8 @@ Public Class BIASService
 
     Public Function CheckQuality(CheckQualityRequest As CheckQualityRequest) As CheckQualityResponsePackage Implements BIAS_v2.CheckQuality
 
+        Console.WriteLine("In CheckQuality")
+
         Dim AlgorithmVersion = "1"
         Dim QualityScore As QualityType 'none yet
         Dim [Return] 'value indicating success or a specific error condition. 0 = Unsucesseful, 1 = Sucessful
@@ -223,6 +229,8 @@ Public Class BIASService
 
     Public Function ClassifyBiometricData(ClassifyBiometricDataRequest As ClassifyBiometricDataRequest) As ClassifyBiometricDataResponsePackage Implements BIAS_v2.ClassifyBiometricData
 
+        Console.WriteLine("In ClassifyBiometricData")
+
         'Hard coded to just return "Face"
         'Previously could be used to classify fingerprints, but with not necessary with faces.
         Dim classifyBioDataResponse As New ClassifyBiometricDataResponsePackage()
@@ -234,6 +242,9 @@ Public Class BIASService
     End Function
 
     Public Function CreateSubject(CreateSubjectRequest As CreateSubjectRequest) As CreateSubjectResponsePackage Implements BIAS_v2.CreateSubject
+
+        Console.WriteLine("In CreateSubject")
+
         'Creates a model-neutral subject record
         Dim createSubjectResponse As New CreateSubjectResponsePackage()
         createSubjectResponse.Identity = New BIASIdentity
@@ -292,6 +303,9 @@ Public Class BIASService
     End Function
 
     Public Function DeleteBiographicData(DeleteBiographicDataRequest As DeleteBiographicDataRequest) As DeleteBiographicDataResponsePackage Implements BIAS_v2.DeleteBiographicData
+
+        Console.WriteLine("In DeleteBiographicData")
+
         Dim SubjectID = DeleteBiographicDataRequest.Identity.SubjectID
         Dim GalleryID = DeleteBiographicDataRequest.GalleryID
         Dim deleteBiogDataResponse As New DeleteBiographicDataResponsePackage()
@@ -347,6 +361,9 @@ Public Class BIASService
     End Function
 
     Public Function DeleteBiometricData(DeleteBiometricDataRequest As DeleteBiometricDataRequest) As DeleteBiometricDataResponsePackage Implements BIAS_v2.DeleteBiometricData
+
+        Console.WriteLine("In DeleteBiometricData")
+
         Dim deleteBiomDataResponse As New DeleteBiometricDataResponsePackage()
         Dim SubjectID = "XXW3IZA0"
         Dim GalleryID = "1"
@@ -500,6 +517,9 @@ Public Class BIASService
     End Function
 
     Public Function Enroll(EnrollRequest As EnrollRequest) As EnrollResponsePackage Implements BIAS_v2.Enroll
+
+        Console.WriteLine("In Enroll")
+
         Dim enrollResponse As New EnrollResponsePackage()
         enrollResponse.ResponseStatus = New ResponseStatus
 
@@ -983,6 +1003,8 @@ Public Class BIASService
     End Function
 
     Public Function SetBiographicData(SetBiographicDataRequest As SetBiographicDataRequest) As SetBiographicDataResponsePackage Implements BIAS_v2.SetBiographicData
+
+        Console.WriteLine("In SetBiographicData")
 
         Dim setBiogDataResponse As New SetBiographicDataResponsePackage()
         setBiogDataResponse.ResponseStatus = New ResponseStatus
