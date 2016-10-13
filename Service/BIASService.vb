@@ -10,6 +10,7 @@ Imports Microsoft.VisualBasic.Interaction
 Imports System.Collections.Generic
 Imports System.Linq
 Imports System.Reflection
+Imports System.Windows.Forms
 
 Module mainModule
     Sub Main()
@@ -37,7 +38,7 @@ End Module
 
 
 <ServiceModel.ServiceBehavior(IncludeExceptionDetailInFaults:=True, Namespace:="http://docs.oasis-open.org/bias/ns/bias-2.0/")>
-Public Class BIASService
+Public Class BIAS_v2Client
     Implements BIAS_v2
 
     Private Property bir As BIASBiometricDataType
@@ -166,7 +167,7 @@ Public Class BIASService
                                                        & "\MasterDB\Galleries\" & GalleryID & "\" & SubjectID & "\" & SubjectID & ".txt"
                     Dim overwriteSubjectFilePath As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
                                                        & "\MasterDB\Subject Records\" & SubjectID & "\" & SubjectID & ".txt"
-                    
+
                     System.IO.File.WriteAllLines(subjectFileGalPath, readTextArray2)
                     System.IO.File.WriteAllText(overwriteSubjectFilePath, "")
                     System.IO.File.WriteAllLines(overwriteSubjectFilePath, readTextArray2)
@@ -347,6 +348,9 @@ Public Class BIASService
             If (Directory.Exists(galleriesPath & "\" & GalleryID)) Then
                 Dim subjectFilePath = galleriesPath & "\" & GalleryID & "\" & SubjectID & ".txt"
                 System.IO.File.WriteAllLines(subjectFilePath, readText)
+                deleteBiogDataResponse.ResponseStatus.Return = 0
+                deleteBiogDataResponse.ResponseStatus.Message = "Biographic data sucessfully deleted."
+                Return deleteBiogDataResponse
             Else
                 deleteBiogDataResponse.ResponseStatus.Return = 11
                 deleteBiogDataResponse.ResponseStatus.Message = "The gallery referenced by the input gallery ID does not exist."
@@ -523,7 +527,7 @@ Public Class BIASService
         Dim enrollResponse As New EnrollResponsePackage()
         enrollResponse.ResponseStatus = New ResponseStatus
 
-        Dim bias As New BIASService()
+        Dim bias As New BIAS_v2Client()
 
         Dim processingOptions As New ProcessingOptionsType
         processingOptions = EnrollRequest.ProcessingOptions
@@ -599,6 +603,8 @@ Public Class BIASService
 
         'If it is known, then update bio/biog data in a person centric model, or initiate set Biog/Biom data in an encounter-centric model
 
+        enrollResponse.Identity = newIdentity
+        MessageBox.Show(enrollResponse.Identity.SubjectID)
         enrollResponse.ResponseStatus.Return = 0
         enrollResponse.ResponseStatus.Message = "Participant Enrolled"
         Return enrollResponse
@@ -1173,7 +1179,7 @@ Public Class BIASService
         For Each item In biographicData
             If item.Name = "GUID" Then
                 GUID = item.Value
-            ElseIf item.Name = "GivenName" Then 
+            ElseIf item.Name = "GivenName" Then
                 givenName = item.Value
             ElseIf item.Name = "FamilyName" Then
                 familyName = item.Value
