@@ -48,7 +48,7 @@ Module EntryPoint
         b.FaultExceptionEnabled = True
 
         host.AddServiceEndpoint(GetType(BIAS_v2), binding, "bias")
-        'host.AddServiceEndpoint(GetType(IPolicyRetriever), New WebHttpBinding(), "").Behaviors.Add(b)
+        'host.AddServiceEndpoint(GetType(IPolicyRetriever), New WebHttpBinding(), "").Behaviors.Add(b) PolicyRetriever.vb gives permission for domain other than this machine to make service calls to this service. will implement later.
 
 
         Dim metadataBehavior As ServiceMetadataBehavior = If(host.Description.Behaviors.Find(Of ServiceMetadataBehavior)() Is Nothing, New ServiceMetadataBehavior(), host.Description.Behaviors.Find(Of ServiceMetadataBehavior)())
@@ -56,13 +56,9 @@ Module EntryPoint
         host.Description.Behaviors.Add(metadataBehavior)
         host.AddServiceEndpoint(ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexHttpBinding(), "mex")
 
-
-
         For Each endpoint As ServiceEndpoint In host.Description.Endpoints()
             Console.WriteLine("Binding: {0}, address: {1}", endpoint.Binding.GetType().Name, endpoint.Address.Uri)
         Next
-
-
 
         host.Open()
         Console.ReadLine()

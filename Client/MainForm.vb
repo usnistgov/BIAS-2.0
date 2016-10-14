@@ -3,6 +3,7 @@ Imports System.Windows.Forms
 Imports System.Drawing
 Imports System.Drawing.Image
 Imports OASIS.BIAS.V2
+Imports System.IO
 
 
 
@@ -64,9 +65,8 @@ Public Class MainForm
             response = client.Enroll(request)
 
         Catch ex As Exception
-            MessageBox.Show("exception: " & ex.Message.ToString & "return value-")'& response.ResponseStatus.Return.ToString)
+            MessageBox.Show("exception: " & ex.Message.ToString & "return value-") '& response.ResponseStatus.Return.ToString)
         End Try
-        
 
     End Sub
 
@@ -81,6 +81,7 @@ Public Class MainForm
         For Each ob As Object In queryCapabilitiesResponse.CapabilityList
             lstbx_CapabilitiesList.Items.Add(ob)
         Next
+
         Return
     End Sub
 
@@ -147,7 +148,7 @@ Public Class MainForm
 
     End Sub
 
-    
+
     Private Sub btnRetrieveInformation_RetrieveInformation_Click(sender As Object, e As EventArgs) Handles btnRetrieveInformation_RetrieveInformation.Click
         Dim client As New BIAS_v2Client()
         Dim getDataRequest As New RetrieveDataRequest()

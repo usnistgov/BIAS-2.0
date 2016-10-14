@@ -30,7 +30,6 @@ Module mainModule
         enrol.InputData = sampleInfo
         Dim es As EnrollResponsePackage = bias1.Enroll(enrol)
 
-        Dim i As Integer = 0
 
     End Sub
 End Module
@@ -166,7 +165,7 @@ Public Class BIASService
                                                        & "\MasterDB\Galleries\" & GalleryID & "\" & SubjectID & "\" & SubjectID & ".txt"
                     Dim overwriteSubjectFilePath As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
                                                        & "\MasterDB\Subject Records\" & SubjectID & "\" & SubjectID & ".txt"
-                    
+
                     System.IO.File.WriteAllLines(subjectFileGalPath, readTextArray2)
                     System.IO.File.WriteAllText(overwriteSubjectFilePath, "")
                     System.IO.File.WriteAllLines(overwriteSubjectFilePath, readTextArray2)
@@ -184,6 +183,8 @@ Public Class BIASService
         End If
 
         Return galleryResponse
+
+        Console.WriteLine("exiting AddSubjectToGallery")
     End Function
 
     Public Function CheckQuality(CheckQualityRequest As CheckQualityRequest) As CheckQualityResponsePackage Implements BIAS_v2.CheckQuality
@@ -602,6 +603,8 @@ Public Class BIASService
         enrollResponse.ResponseStatus.Return = 0
         enrollResponse.ResponseStatus.Message = "Participant Enrolled"
         Return enrollResponse
+        Console.WriteLine("enroll operation completed")
+
     End Function
 
     Public Function GetEnrollResults(GetEnrollResultsRequest As GetEnrollResultsRequest) As GetEnrollResultsResponsePackage Implements BIAS_v2.GetEnrollResults
@@ -717,6 +720,7 @@ Public Class BIASService
     End Function
 
     Public Function QueryCapabilities(QueryCapabilitiesRequest As QueryCapabilitiesRequest) As QueryCapabilitiesResponsePackage Implements BIAS_v2.QueryCapabilities
+        Console.WriteLine("queryCapabilities operation completed")
 
         Dim capabilityList As List(Of CapabilityType) = New CapabilityListType
 
@@ -860,6 +864,7 @@ Public Class BIASService
         queryCapabilitiesResponse.CapabilityList = capabilityList
         Return queryCapabilitiesResponse
 
+        Console.WriteLine("queryCapabilities operation completed")
     End Function
 
     Public Function RetrieveBiographicData(RetrieveBiographicDataRequest As RetrieveBiographicDataRequest) As RetrieveBiographicDataResponsePackage Implements BIAS_v2.RetrieveBiographicData
@@ -1173,7 +1178,7 @@ Public Class BIASService
         For Each item In biographicData
             If item.Name = "GUID" Then
                 GUID = item.Value
-            ElseIf item.Name = "GivenName" Then 
+            ElseIf item.Name = "GivenName" Then
                 givenName = item.Value
             ElseIf item.Name = "FamilyName" Then
                 familyName = item.Value
