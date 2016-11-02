@@ -156,3 +156,11 @@ $RECYCLE.BIN/
 .DS_Store
 /Service/bin
 /Service/obj
+/Service/obj
+/Service/OpenCV.ffmpeg.overlay-Win32_v110.2.4.8
+/Service/OpenCV.overlay-Win32_v110_Release.2.4.8
+/Service/bin
+/Shared/OpenCV.ffmpeg.overlay-Win32_v110.2.4.8
+/Shared/OpenCV.overlay-Win32_v110_Release.2.4.8
+/Client/OpenCV.ffmpeg.overlay-Win32_v110.2.4.8
+/Client/OpenCV.overlay-Win32_v110_Release.2.4.8
