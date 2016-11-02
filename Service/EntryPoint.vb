@@ -34,7 +34,7 @@ Module EntryPoint
     Sub StartService()
         Console.WriteLine("BaseURI: {0}", Constants.ServiceBaseAddress)
 
-        Dim host As New ServiceHost(GetType(BIASService), New Uri(Constants.ServiceBaseAddress))
+        Dim host As New ServiceHost(GetType(BIAS_v2Client), New Uri(Constants.ServiceBaseAddress))
 
         Dim binding = New BasicHttpBinding()
         binding.Namespace = "http://docs.oasis-open.org/bias/ns/bias-2.0/"

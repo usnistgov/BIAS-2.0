@@ -3,14 +3,14 @@ Imports Microsoft.VisualBasic
 Imports System.Text
 Imports System.IO
 Imports System.Data
-'Imports System.Windows.Forms
+Imports System.Windows.Forms
 Imports System.Configuration
 Imports System.ServiceModel.Web
 Imports Microsoft.VisualBasic.Interaction
 Imports System.Collections.Generic
 Imports System.Linq
 Imports System.Reflection
-Imports System.Windows.Forms
+
 
 Module mainModule
     Sub Main()
@@ -182,10 +182,10 @@ Public Class BIAS_v2Client
             galleryResponse.ResponseStatus.Message = "The gallery referenced by the input gallery ID does not exist."
             Return galleryResponse
         End If
-
+        Console.WriteLine("exiting AddSubjectToGallery")
         Return galleryResponse
 
-        Console.WriteLine("exiting AddSubjectToGallery")
+
     End Function
 
     Public Function CheckQuality(CheckQualityRequest As CheckQualityRequest) As CheckQualityResponsePackage Implements BIAS_v2.CheckQuality

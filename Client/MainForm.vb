@@ -4,73 +4,79 @@ Imports System.Drawing
 Imports System.Drawing.Image
 Imports OASIS.BIAS.V2
 Imports System.IO
-
-
+Imports System.Diagnostics
 
 
 Public Class MainForm
 
     Dim client As New BIAS_v2Client()
 
+
     Private Sub btnClear_Enroll_Click(sender As Object, e As EventArgs) Handles ClearButton_Enroll.Click
         MessageBox.Show("Clear button was clicked")
+        GivenNameTextBox_Enroll.Text = ""
+        FamilyNameTextBox_Enroll.Text = ""
+        SexComboBox_Enroll.SelectedIndex = -1
+        CitizenshipComboBox_Enroll.SelectedIndex = -1
+        DoBDateTimePicker_Enroll.Text = DateTime.Now
     End Sub
 
     Private Sub btnEnroll_Click(sender As Object, e As EventArgs) Handles EnrollButton_Enroll.Click
-        'MessageBox.Show("Enroll button was clicked")
+        Debug.Print("enroll button clicked")
         Dim request As New EnrollRequest()
         Dim response As New EnrollResponsePackage()
-        'Dim genericReq As New GenericRequestParameters
-
         Dim procOptn As New ProcessingOptionsType
-        Dim opt As New OptionType
-        opt.Key = "test"
-        opt.Value = "test"
-        procOptn.Add(opt)
+        'Dim opt As New OptionType
+        'opt.Key = "test"
+        'opt.Value = "test"
+        'procOptn.Add(opt)
         request.ProcessingOptions = procOptn
 
+        '<request>
+        '<p1>Karen</p1>
+        '<ProcessingOptions></ProcessingOptions>  'example (in XML) of -null OptionType but -empty ProcessingOptions 
+        '</request>
 
         Dim userInput As InformationType = New InformationType
-        userInput.GUID = Guid.NewGuid.ToString
+        'userInput.GUID = Guid.NewGuid.ToString
         userInput.GivenName = GivenNameTextBox_Enroll.Text
         userInput.FamilyName = FamilyNameTextBox_Enroll.Text
-        userInput.DateOfBirth = DOBDateTimePicker_Enroll.Text
-        userInput.Sex = SexTextBox_Enroll.Text
-        userInput.Citizenship = CitizenshipTextBox_Enroll.Text
+        userInput.DateOfBirth = DoBDateTimePicker_Enroll.Text
+        userInput.Sex = SexComboBox_Enroll.SelectedItem
+        userInput.Citizenship = CitizenshipComboBox_Enroll.SelectedItem
         request.InputData = userInput
 
-        'Dim s As String
-        's = "f30fab8d-8b0a-47fb-ba72-d088e93ca414"
-        'request.InputData.GivenName = GivenNameTextBox_Enroll.Text
-        'request.InputData.FamilyName = FamilyNameTextBox_Enroll.Text
-        'request.InputData.DateOfBirth = DOBDateTimePicker_Enroll.Text
-        'request.InputData.Sex = SexTextBox_Enroll.Text
-        'request.InputData.Citizenship = CitizenshipTextBox_Enroll.Text
-
+        'will have to take enrollment image..1-convert to byte array, load into enroll request,inoutdata.images
         'Dim img As OASIS.BIAS.V2.Image = New OASIS.BIAS.V2.Image
         'Dim byteArray As Byte() = Nothing
-
         'img.ImageData = subject01.gif  'convert to byte array
         'request.InputData.Images.Add(img)
-
         'request.InputData.Images.Item(0).ImageData() = Byte()
         'request.InputData.Images(0) = personImage
 
-        'Dim response As New EnrollResponsePackage()
-        If (request IsNot Nothing) Then
-            Console.WriteLine("object is not null")
-        End If
         Try
-
             response = client.Enroll(request)
-
         Catch ex As Exception
             MessageBox.Show("exception: " & ex.Message.ToString & "return value-") '& response.ResponseStatus.Return.ToString)
         End Try
 
+        'If response.ResponseStatus.Return = 0 Then
+        '    MessageBox.Show("success:" & response.ResponseStatus.Message)
+        'Else
+        '    MessageBox.Show("failed:" & response.ResponseStatus.Message)
+        'End If
+
+        ResultsTextBox_Enroll.Text = response.ResponseStatus.Message
+        If response.ResponseStatus.Return = 0 Then
+            NewIDTextBox_Enroll.Text = response.Identity.SubjectID
+        Else
+            NewIDTextBox_Enroll.Text = "N/A"
+        End If
+
+
     End Sub
 
-    Private Sub QueryCapabilities_Click(sender As Object, e As EventArgs) Handles QueryCapabilitiesBtn.Click
+    Private Sub QueryCapabilities_Click(sender As Object, e As EventArgs) Handles QueryCapabilitiesButton_QueryCapabilities.Click
         client = New BIAS_v2Client()
         Dim queryCapabilitiesResponse As QueryCapabilitiesResponsePackage
         Dim queryCapabilitiesRequest As New QueryCapabilitiesRequest()
@@ -135,15 +141,15 @@ Public Class MainForm
 
 
     Private Sub btnIdentify_Identify_Click(sender As Object, e As EventArgs) Handles btnIdentify_Identify.Click
-        client = New BIAS_v2Client()
-        Dim identifyResponse As New IdentifyResponsePackage()
-        Dim identifyRequest As New IdentifyRequest()
+        'client = New BIAS_v2Client()
+        'Dim identifyResponse As New IdentifyResponsePackage()
+        ' Dim identifyRequest As New IdentifyRequest()
         ' i need to identify an image.  identifyRequest.inputData.binary = image
         'i need identifyRequest.inputData.processingOption = ??
         'identifyRequest.InputData.galleryID = ??
         'identifyRequest.InputData.maxlistsize = 1
 
-        identifyResponse = client.Identify(identifyRequest)
+        'identifyResponse = client.Identify(identifyRequest)
         'identifyResponse.ReturnData.
 
     End Sub
@@ -171,4 +177,79 @@ Public Class MainForm
 
 
     End Sub
+
+
+    Private Sub VerifyButton_Verify_Click(sender As Object, e As EventArgs) Handles VerifyButton_Verify.Click
+
+        Debug.Print("verify button clicked")
+        Dim request As New VerifyRequest()
+        Dim response As New VerifyResponsePackage()
+        Dim procOptn As New ProcessingOptionsType
+        request.ProcessingOptions = procOptn
+        request.GalleryID = "1"
+
+        'A51DU0R6()
+        Dim strg As BIASIdentity = New BIASIdentity
+        strg.IdentityClaim = "A51DU0R6"
+
+        Dim vUserInput As InformationType = New InformationType
+        request.Identity = strg
+        'request.Identity.IdentityClaim = SubjectIDTextbox_Verify.Text
+        vUserInput.GivenName = GivenNameTextbox_Verify.Text
+        vUserInput.FamilyName = FamilyNameTextbox_Verify.Text
+        vUserInput.DateOfBirth = DoBDateTimePicker_Verify.Text
+        vUserInput.Sex = SexComboBox_Verify.SelectedItem
+        vUserInput.Citizenship = CitizenshipComboBox_Verify.SelectedItem
+
+        'reference an image subject01.png
+        'convert it to a byte array
+        'load it into vUserInput.Images(0).imagedata
+
+        Dim myImage As System.Drawing.Bitmap = New System.Drawing.Bitmap(My.Resources.subject01)
+        Dim myImgByteArray As Byte() = Nothing
+        Dim myImgMemStream As System.IO.MemoryStream = New System.IO.MemoryStream
+        myImage.Save(myImgMemStream, System.Drawing.Imaging.ImageFormat.Jpeg)
+        myImgByteArray = myImgMemStream.GetBuffer()
+
+        vUserInput.Images = New InformationType.ImagesType
+        Dim clientImg As OASIS.BIAS.V2.Image = New OASIS.BIAS.V2.Image
+        clientImg.ImageData = myImgMemStream.GetBuffer()
+        vUserInput.Images.Add(clientImg)
+
+        request.InputData = vUserInput
+        Try
+            response = client.Verify(request)
+
+        Catch ex As Exception
+            MessageBox.Show("generic exception: " & ex.Message)
+            MessageBox.Show("service exception: " & response.ResponseStatus.Return & response.ResponseStatus.Message)
+        End Try
+
+        'If response.ResponseStatus.Return = 0 Then
+        '    MessageBox.Show("success")
+        'Else
+        '    MessageBox.Show("exception: ")
+
+        'End If
+    End Sub
+
+    Private Sub ClearButton_Verify_Click(sender As Object, e As EventArgs) Handles ClearButton_Verify.Click
+        MessageBox.Show("Clear button was clicked")
+        SubjectIDTextbox_Verify.Text = ""
+        GivenNameTextbox_Verify.Text = ""
+        FamilyNameTextbox_Verify.Text = ""
+        SexComboBox_Verify.SelectedIndex = -1
+        CitizenshipComboBox_Verify.SelectedIndex = -1
+        DoBDateTimePicker_Verify.Text = DateTime.Now
+    End Sub
+
+    
+
+    
+
+    
+
+
+    
+    
 End Class

@@ -3155,7 +3155,7 @@ Namespace OASIS.BIAS.V2
 
         Private TokenField As OASIS.BIAS.V2.TokenType
 
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=False, EmitDefaultValue:=False)> _
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
         Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
