@@ -12,6 +12,7 @@ Option Strict Off
 Option Explicit On
 
 Imports System.Runtime.Serialization
+Imports System.Collections.Generic
 
 Namespace OASIS.BIAS.V2
 
@@ -1483,6 +1484,11 @@ Namespace OASIS.BIAS.V2
                 Me.ImageDataField = value
             End Set
         End Property
+
+        Shared Function FromFile(p1 As String) As Image
+            Throw New NotImplementedException
+        End Function
+
     End Class
 
     <System.Diagnostics.DebuggerStepThroughAttribute(), _
@@ -1886,6 +1892,26 @@ Namespace OASIS.BIAS.V2
         Implements System.Runtime.Serialization.IExtensibleDataObject
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        Private biometricImageField As System.Drawing.Image
+        Private biometricImageTypeField As String
+
+        Public Property biometricImage() As System.Drawing.Image
+            Get
+                Return Me.biometricImageField
+            End Get
+            Set(value As System.Drawing.Image)
+                Me.biometricImageField = value
+            End Set
+        End Property
+
+        Public Property biometricImageType() As String
+            Get
+                Return Me.biometricImageTypeField
+            End Get
+            Set(value As String)
+                Me.biometricImageTypeField = value
+            End Set
+        End Property
 
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
