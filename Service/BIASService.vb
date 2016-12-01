@@ -115,8 +115,6 @@ Module mainModule
         'sampleBDB.Quality =
 
         'Create SB_Info
-        'Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        'Private FormatField As OASIS.BIAS.V2.RegistryIDType
         Dim sampleSB As New SBInfoType
         sampleSB.Format = testFormat
 
@@ -1504,7 +1502,7 @@ Public Class BIAS_v2Client
 
         setBiogDataResponse.ResponseStatus.Return = 0
         setBiogDataResponse.ResponseStatus.Message = "Biographic Data sucessfully set."
-        Return (setBiogDataResponse)
+        Return setBiogDataResponse
     End Function
 
     Public Function SetBiometricData(SetBiometricDataRequest As SetBiometricDataRequest) As SetBiometricDataResponsePackage Implements BIAS_v2.SetBiometricData
@@ -1529,12 +1527,13 @@ Public Class BIAS_v2Client
         Dim subjectDirectory = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & SubjectID & "\"
         For Each record In biomList
 
-            Dim biomImage = record.BIR.biometricImage
-            Dim biomImageType = record.BIR.biometricImageType
+            Dim biomImage As System.Drawing.Image = record.BIR.biometricImage
+            Dim biomImageType As String = record.BIR.biometricImageType
+
+            Console.WriteLine(subjectDirectory)
             'save this image in the subjectID record
             biomImage.Save(subjectDirectory & SubjectID & biomImageType & ".gif")
             Dim imageName = SubjectID & biomImageType & ".gif"
-
 
             'Open the text file
             Dim subjectFile = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & SubjectID & "\" & SubjectID & ".txt"
@@ -1548,6 +1547,7 @@ Public Class BIAS_v2Client
             'Create dictionary from the 3 information DBs + formatOwner and formatType
             Dim biomDataDictionary As New Dictionary(Of String, String)
             biomDataDictionary.Add("ImageName:", imageName)
+
             biomDataDictionary.Add("FormatOwner:", formatOwner)
             biomDataDictionary.Add("FormatType:", formatType)
             biomDataDictionary.Add("Creator:", record.BIR_Information.BIR_Info.Creator)

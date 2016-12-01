@@ -27,8 +27,8 @@ Public Class MainForm
         Dim response As New EnrollResponsePackage()
         Dim procOptn As New ProcessingOptionsType
         'Dim opt As New OptionType
-        'opt.Key = "test"
-        'opt.Value = "test"
+        'opt.Key = "complete"
+        'opt.Value = "partial"
         'procOptn.Add(opt)
         request.ProcessingOptions = procOptn
 
@@ -37,34 +37,108 @@ Public Class MainForm
         '<ProcessingOptions></ProcessingOptions>  'example (in XML) of -null OptionType but -empty ProcessingOptions 
         '</request>
 
-        Dim userInput As InformationType = New InformationType
+        Dim userbiographicalInput As InformationType = New InformationType
         'userInput.GUID = Guid.NewGuid.ToString
-        userInput.GivenName = GivenNameTextBox_Enroll.Text
-        userInput.FamilyName = FamilyNameTextBox_Enroll.Text
-        userInput.DateOfBirth = DoBDateTimePicker_Enroll.Text
-        userInput.Sex = SexComboBox_Enroll.SelectedItem
-        userInput.Citizenship = CitizenshipComboBox_Enroll.SelectedItem
-        request.InputData = userInput
+        userbiographicalInput.GivenName = GivenNameTextBox_Enroll.Text
+        userbiographicalInput.FamilyName = FamilyNameTextBox_Enroll.Text
+        userbiographicalInput.DateOfBirth = DoBDateTimePicker_Enroll.Text
+        userbiographicalInput.Sex = SexComboBox_Enroll.SelectedItem
+        userbiographicalInput.Citizenship = CitizenshipComboBox_Enroll.SelectedItem
 
-        'will have to take enrollment image..1-convert to byte array, load into enroll request,inoutdata.images
-        'Dim img As OASIS.BIAS.V2.Image = New OASIS.BIAS.V2.Image
-        'Dim byteArray As Byte() = Nothing
-        'img.ImageData = subject01.gif  'convert to byte array
-        'request.InputData.Images.Add(img)
-        'request.InputData.Images.Item(0).ImageData() = Byte()
-        'request.InputData.Images(0) = personImage
+        Dim userBiomRecord As New CBEFF_BIR_Type
+        'Create image
+        userBiomRecord.BIR = New BaseBIRType
+        Dim testImage As System.Drawing.Image = System.Drawing.Image.FromFile("C:\Users\karenm.XE\Documents\BIAS_Client\BIAS-2.0\Client\Resources\subject01.gif")
+        userBiomRecord.BIR.biometricImage = testImage 'will soon come from a webcam
+        userBiomRecord.BIR.biometricImageType = "Front"
 
-        Try
-            response = client.Enroll(request)
-        Catch ex As Exception
-            MessageBox.Show("exception: " & ex.Message.ToString & "return value-") '& response.ResponseStatus.Return.ToString)
-        End Try
 
-        'If response.ResponseStatus.Return = 0 Then
-        '    MessageBox.Show("success:" & response.ResponseStatus.Message)
-        'Else
-        '    MessageBox.Show("failed:" & response.ResponseStatus.Message)
-        'End If
+        '*********************************
+        'Dim img1 As New OASIS.BIAS.V2.Image 'add this to list(of T) - infomationType.ImagesType
+        ''convert the image to byte array
+        'Dim bmpImg As System.Drawing.Bitmap = My.Resources.subject01
+        'Dim ms As New MemoryStream
+        'Dim byteArray As Byte()
+        ''save image to memorystream, then to bytearray
+        'bmpImg.Save(ms, bmpImg.RawFormat)
+        'byteArray = ms.ToArray
+        'img1.ImageData = byteArray
+        ''img1.BridgeWidth = "bridgWidth"
+        ''img1.ContentType = "gif"
+        ''img1.EyebrowDistance
+        'Dim ImgsList As New InformationType.ImagesType
+        'ImgsList.Add(img1)
+        'userbiographicalInput.Images = ImgsList
+        '*************
+
+        Dim userIdentity As New BIASIdentity
+        userIdentity.BiometricData = New BIASBiometricDataType
+        userIdentity.BiometricData.BIRList = New CBEFF_BIR_ListType
+
+        'Create BIR_Info
+        Dim userBIR As New BIRInfoType
+        userBIR.Creator = "userTestCreator"
+        userBIR.Index = "userTestIndex"
+        userBIR.Integrity = True
+        Dim payArray = New Byte() {0}
+        userBIR.Payload = payArray
+        Dim currentDate1 As Date = Date.Now
+        userBIR.CreationDate = currentDate1
+        userBIR.NotValidBefore = currentDate1
+        userBIR.NotValidAfter = currentDate1
+
+        'Create BDB_Info
+        Dim userBDB As New BDBInfoType
+        'sampleBDB.ChallengeResponseField = 
+        userBDB.Index = "userTestIndex"
+        Dim userTestFormat = New RegistryIDType
+        userTestFormat.Organization = "userTestOrganization"
+        userTestFormat.Type = "userTestType"
+        userBDB.Format = userTestFormat
+        userBDB.Encryption = False
+        Dim currentDate2 As Date = Date.Now
+        userBDB.CreationDate = currentDate2
+        userBDB.NotValidBefore = currentDate2
+        userBDB.NotValidAfter = currentDate2
+        'sampleBDB.Type = 
+        'sampleBDB.Subtype = 
+        userBDB.Level = 0
+        userBDB.Product = userTestFormat
+        userBDB.CaptureDevice = userTestFormat
+        userBDB.FeatureExtractionAlgorithm = userTestFormat
+        userBDB.ComparisonAlgorithm = userTestFormat
+        userBDB.CompressionAlgorithm = userTestFormat
+        userBDB.Purpose = 2
+        'sampleBDB.Quality =
+
+        'Create SB_Info
+        Dim userSB As New SBInfoType
+        userSB.Format = userTestFormat
+
+        userBiomRecord.BIR_Information = New CBEFF_BIR_Type.BIR_InformationType
+        userBiomRecord.BIR_Information.BIR_Info = userBIR
+        userBiomRecord.BIR_Information.BDB_Info = userBDB
+        userBiomRecord.BIR_Information.SB_Info = userSB
+
+        userBiomRecord.FormatOwner = 1
+        userBiomRecord.FormatType = 1
+        userIdentity.BiometricData.BIRList.Add(userBiomRecord)
+
+        request.InputData = userbiographicalInput
+        request.Identity = userIdentity
+        response = client.Enroll(request)
+
+        'Try
+        '    response = client.Enroll(request)
+        'Catch ex As Exception
+        '    MessageBox.Show("exception: " & ex.Message.ToString & "return value-" & response.ResponseStatus.Return.ToString)
+        'End Try
+
+        If response.ResponseStatus.Return = 0 Then
+            MessageBox.Show("success:" & response.ResponseStatus.Message)
+        Else
+            MessageBox.Show("failed:" & response.ResponseStatus.Message)
+        End If
 
         ResultsTextBox_Enroll.Text = response.ResponseStatus.Message
         If response.ResponseStatus.Return = 0 Then
@@ -159,21 +233,31 @@ Public Class MainForm
         Dim client As New BIAS_v2Client()
         Dim getDataRequest As New RetrieveDataRequest()
         Dim getDataResponse As New RetrieveDataResponsePackage()
-        Dim first As String
-        first = "01"
+
+        Dim procOptn As New ProcessingOptionsType
+        Dim newOption As New OptionType
+        newOption.Key = "biographic"
+        newOption.Value = "full"
+        procOptn.Add(newOption)
+        getDataRequest.ProcessingOptions = procOptn
+
+        getDataRequest.Identity = New BIASIdentity()
+        getDataRequest.Identity.SubjectID = txtbxGUID_RetrieveInformation.Text
 
 
-        getDataRequest.Identity.SubjectID = first
-        getDataResponse = client.RetrieveData(getDataRequest)
+        'A51DU0R6
+        Try
+            getDataResponse = client.RetrieveData(getDataRequest)
+        Catch ex As Exception
+            Console.WriteLine("error: " & ex.Message)
+        End Try
+        MessageBox.Show("RetrieveData ResponseStatus-" & getDataResponse.ResponseStatus.Return & vbTab & getDataResponse.ResponseStatus.Message)
 
-        txtbxGiven_RetrieveInformation.Text = getDataResponse.ReturnData.GivenName
-        txtbxFamily_RetrieveInformation.Text = getDataResponse.ReturnData.FamilyName
-        txtbxDOB_RetrieveInformation.Text = getDataResponse.ReturnData.DateOfBirth
-        txtbxSex_RetrieveInformation.Text = getDataResponse.ReturnData.Sex
-        txtbxCitizenship_RetrieveInformation.Text = getDataResponse.ReturnData.Citizenship
-
-
-
+        'txtbxGiven_RetrieveInformation.Text = getDataResponse.ReturnData.GivenName
+        'txtbxFamily_RetrieveInformation.Text = getDataResponse.ReturnData.FamilyName
+        'txtbxDOB_RetrieveInformation.Text = getDataResponse.ReturnData.DateOfBirth
+        'txtbxSex_RetrieveInformation.Text = getDataResponse.ReturnData.Sex
+        'txtbxCitizenship_RetrieveInformation.Text = getDataResponse.ReturnData.Citizenship
 
 
     End Sub
@@ -208,12 +292,16 @@ Public Class MainForm
         Dim myImage As System.Drawing.Bitmap = New System.Drawing.Bitmap(My.Resources.subject01)
         Dim myImgByteArray As Byte() = Nothing
         Dim myImgMemStream As System.IO.MemoryStream = New System.IO.MemoryStream
-        myImage.Save(myImgMemStream, System.Drawing.Imaging.ImageFormat.Jpeg)
-        myImgByteArray = myImgMemStream.GetBuffer()
+        'myImage.Save(myImgMemStream, System.Drawing.Imaging.ImageFormat.Jpeg)
+        myImage.Save(myImgMemStream, myImage.RawFormat)
+        'myImgByteArray = myImgMemStream.GetBuffer()
+        myImgByteArray = myImgMemStream.ToArray
+
 
         vUserInput.Images = New InformationType.ImagesType
         Dim clientImg As OASIS.BIAS.V2.Image = New OASIS.BIAS.V2.Image
-        clientImg.ImageData = myImgMemStream.GetBuffer()
+        'clientImg.ImageData = myImgMemStream.GetBuffer()
+        clientImg.ImageData = myImgMemStream.ToArray
         vUserInput.Images.Add(clientImg)
 
         request.InputData = vUserInput

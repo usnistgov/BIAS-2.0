@@ -13,6 +13,8 @@ Option Explicit On
 
 Imports System.Runtime.Serialization
 Imports System.Collections.Generic
+Imports System.Drawing
+
 
 Namespace OASIS.BIAS.V2
 
