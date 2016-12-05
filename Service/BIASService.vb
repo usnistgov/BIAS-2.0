@@ -12,6 +12,10 @@ Imports System.Linq
 Imports System.Reflection
 Imports System.Windows.Forms
 Imports System.Drawing
+Imports Emgu.CV
+Imports Emgu.Util
+Imports Emgu.CV.Structure
+Imports Emgu.CV.Util
 
 Module mainModule
     Sub testRetrieve()
@@ -48,7 +52,7 @@ Module mainModule
 
     Sub testEnroll()
         Dim bias1 As New BIAS_v2Client()
-        Console.WriteLine("Hello")
+        MessageBox.Show("Hello")
 
         Dim retrieveBiomData As New RetrieveBiometricDataRequest
         retrieveBiomData.Identity = New BIASIdentity
@@ -71,7 +75,7 @@ Module mainModule
         Dim biomRecord = New CBEFF_BIR_Type
 
         ' Create image.
-        Dim testImage As System.Drawing.Image = System.Drawing.Image.FromFile("C:\Users\pyl\Pictures\Obama1.gif")
+        Dim testImage As System.Drawing.Image = System.Drawing.Image.FromFile("C:\Users\pyl\Pictures\Obama1.png")
         biomRecord.BIR = New BaseBIRType
         biomRecord.BIR.biometricImage = testImage
         biomRecord.BIR.biometricImageType = "Front"
@@ -115,6 +119,8 @@ Module mainModule
         'sampleBDB.Quality =
 
         'Create SB_Info
+        'Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        'Private FormatField As OASIS.BIAS.V2.RegistryIDType
         Dim sampleSB As New SBInfoType
         sampleSB.Format = testFormat
 
@@ -165,7 +171,7 @@ Module mainModule
         Dim biomRecord = New CBEFF_BIR_Type
 
         ' Create image.
-        Dim testImage As System.Drawing.Image = System.Drawing.Image.FromFile("C:\Users\pyl\Pictures\Obama2.gif")
+        Dim testImage As System.Drawing.Image = System.Drawing.Image.FromFile("C:\Users\pyl\Pictures\Obama2.png")
         biomRecord.BIR = New BaseBIRType
         biomRecord.BIR.biometricImage = testImage
         biomRecord.BIR.biometricImageType = "Front"
@@ -224,10 +230,16 @@ Module mainModule
 
     End Sub
 
+    Sub testFacial()
+        Dim bias1 As New BIAS_v2Client()
+        bias1.facialRecMain()
+    End Sub
     Sub Main()
 
         'testEnroll()
         'testUpdateBiom()
+        testFacial()
+        'testEnroll()
 
     End Sub
 End Module
@@ -242,7 +254,7 @@ Public Class BIAS_v2Client
 
         For Each currentFile In path.EnumerateFiles("*.*", SearchOption.AllDirectories)
             Dim fileName As String = currentFile.Name
-            If Not fileName.EndsWith(".txt") And Not fileName.EndsWith(".sad") Then
+            If Not fileName.EndsWith(".txt") And Not fileName.EndsWith(".jpg") Then
                 Console.WriteLine(currentFile.FullName)
                 imagePathList.Add(currentFile.FullName)
             End If
@@ -251,39 +263,133 @@ Public Class BIAS_v2Client
         Return imagePathList
     End Function
 
-    Public Function getImageAndSubjectIDs(imagePathList As List(Of String)) As Tuple(Of List(Of String), List(Of String))
-        Dim imageList As List(Of String) = New List(Of String)
-        Dim subjectIDList As List(Of String) = New List(Of String)
-
-        For Each Path In imagePathList
-
+    Public Function getTestImagePaths(path As DirectoryInfo)
+        Dim image_paths = New List(Of String)
+        For Each currentFile In path.EnumerateFiles("*.*", SearchOption.AllDirectories)
+            Dim fileName As String = currentFile.Name
+            If fileName.EndsWith(".jpg") Then
+                image_paths.Add(currentFile.FullName)
+            End If
         Next
+        Return image_paths
+    End Function
 
-        'Return New Tuple(Of List(Of String), List(Of String))(imageList, subjectIDList)
+    Public Function prediction(test_paths As List(Of String), recognizer As Face.LBPHFaceRecognizer, faceCascade As CascadeClassifier)
+
+        For Each Path In test_paths
+
+            'so now we have a list of all image filepaths needing identification
+            'get image as variable
+            Dim originalImage As New Image(Of Gray, Byte)(Path)
+
+            'get the face area as a rectangle and create a new rectangle using the dimensions of the face rectangle
+            Dim faceRegion As Rectangle() = faceCascade.DetectMultiScale(originalImage)
+            Dim CropRect As New Rectangle(faceRegion(0).X, faceRegion(0).Y, faceRegion(0).Width, faceRegion(0).Height)
+            'get the image from path, save in a new image variable. Also create a bitmap to save the cropped image in.
+            Dim originalImage2 = System.Drawing.Image.FromFile(Path)
+            Dim CropImage = New Bitmap(CropRect.Width, CropRect.Height)
+
+            'take the original image and crop it, using the CropRect dimensions.
+            Using grp = Graphics.FromImage(CropImage)
+                grp.DrawImage(originalImage2, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
+            End Using
+
+            Dim croppedImage As New Image(Of Gray, Byte)(CropImage)
+
+            'save it as the same filepath, but with 'cropped' added to it. 
+            Dim croppedPath = Path.Substring(0, Path.LastIndexOf(".")) & "crop.jpg"
+            croppedImage.Save(croppedPath)
+
+            'then the below executes, doing the same thing, but now with a cropped, grayscale version of the original image. 
+            'read in each image we want to identify, then convert it to grayscale
+            Dim predict_image_pilC As Mat = CvInvoke.Imread(croppedPath, CvEnum.LoadImageType.Color)
+            Dim predict_image_pilG As New Mat()
+            CvInvoke.CvtColor(predict_image_pilC, predict_image_pilG, CvEnum.ColorConversion.Bgr2Gray)
+
+            'Detect the face in the image
+            Dim nbr_predicted = recognizer.Predict(predict_image_pilG)
+            CvInvoke.Imshow("test", predict_image_pilG)
+
+            Dim nbr_actual = Path.Substring(Path.LastIndexOf("\") + 1, 6)
+
+            Dim confirmString = nbr_actual & " identified as Subject " & nbr_predicted.Label
+            MessageBox.Show(nbr_predicted.Distance)
+            MessageBox.Show(nbr_predicted.Label)
+        Next
 
     End Function
 
+    Public Function testTrain(imagePathList As List(Of String), faceCascade As CascadeClassifier)
+
+        'need to return array of images and array of integers
+        Dim images = New Emgu.CV.Image(Of Gray, Byte)() {}
+        Dim labels = New Integer() {}
+
+        For Each Path In imagePathList
+            'Get image from the path
+            Dim img1 As New Image(Of Gray, Byte)(Path)
+
+            'get the face area as a rectangle and create a new rectangle using the dimensions of the face rectangle
+            Dim faceRegion As Rectangle() = faceCascade.DetectMultiScale(img1)
+            Dim CropRect As New Rectangle(faceRegion(0).X, faceRegion(0).Y, faceRegion(0).Width, faceRegion(0).Height)
+            'get the image from path, save in a new image variable. Also create a bitmap to save the cropped image in.
+            Dim OriginalImage = System.Drawing.Image.FromFile(Path)
+            Dim CropImage = New Bitmap(CropRect.Width, CropRect.Height)
+
+            'take the original image and crop it, using the CropRect dimensions.
+            Using grp = Graphics.FromImage(CropImage)
+                grp.DrawImage(OriginalImage, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
+            End Using
+
+            Dim img2 As New Image(Of Gray, Byte)(CropImage)
+            'add cropped image to the array of images. 
+            Array.Resize(images, images.Length + 1)
+            images(images.Length - 1) = img2
+
+            'Get the label/subjectID of the image
+            Dim subjectID = Convert.ToInt32(Path.Substring(Path.LastIndexOf("\") + 1, 6))
+            Array.Resize(labels, labels.Length + 1)
+            labels(labels.Length - 1) = subjectID
+        Next
+
+        Return New Tuple(Of Emgu.CV.Image(Of Gray, Byte)(), Integer())(images, labels)
+    End Function
+
     Public Function facialRecMain()
-        Console.WriteLine("Hello")
-        'Dataset Filepath
+
+        'load the classifier file and create the Local Binary Patterns Histograms Face Recognizer
+        Dim faceCascade = New CascadeClassifier("C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS-2.0-master\Service\haarcascade_frontalface_default.xml")
+        Dim recognizer = New Face.LBPHFaceRecognizer
+
+        'Append all the absolute image paths in imagePathList
         Dim path As New IO.DirectoryInfo("C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS-2.0-master\Service\MasterDB\Subject Records")
-        Dim imagePathList = getImagePaths(path)
-        Dim imageAndSubjectIDs As Tuple(Of List(Of String), List(Of String)) = getImageAndSubjectIDs(imagePathList)
+        Dim imagePathList As List(Of String) = getImagePaths(path)
 
-        Dim images As List(Of String) = imageAndSubjectIDs.Item1
-        Dim subjectIDs As List(Of String) = imageAndSubjectIDs.Item2
+        'get list of images and subject IDs
+        Dim imageAndSubjectIDs As Tuple(Of Emgu.CV.Image(Of Gray, Byte)(), Integer()) = testTrain(imagePathList, faceCascade)
+        Dim images = imageAndSubjectIDs.Item1
+        Dim subjectIDs = imageAndSubjectIDs.Item2
 
+        'Perform training of the recognizer
+        recognizer.Train(images, subjectIDs)
+
+        'Append the images we want to recognize to image_path. Currently just .jgps instead of .pngs, need to come up with a naming system later. 
+        Dim identifyImageFolder As New IO.DirectoryInfo("C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS-2.0-master\Service\MasterDB\New folder")
+        Dim test_paths = getTestImagePaths(identifyImageFolder)
+
+        'Perform prediction. Currently has messageboxes containing matching information. Not doing anything with the result right now.
+        prediction(test_paths, recognizer, faceCascade)
 
         Return 1
     End Function
 
     Public Function generateRandomID() As String
 
-        Dim characters As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        Dim characters As String = "0123456789"
         Dim rand As New Random
         Dim sb As New StringBuilder
         For charPos As Integer = 1 To 8
-            Dim idx As Integer = rand.Next(0, 35)
+            Dim idx As Integer = rand.Next(0, 10)
             sb.Append(characters.Substring(idx, 1))
         Next
         Return sb.ToString()
@@ -418,7 +524,7 @@ Public Class BIAS_v2Client
         'Biometric Data
 
         'Check if biometric images in the subject folder
-        Dim imageList = Directory.GetFiles(subjectPath, "*.gif")
+        Dim imageList = Directory.GetFiles(subjectPath, "*.png")
         'put images into a list
         Dim biomImageList As New List(Of System.Drawing.Image)
         For Each biomImage In imageList
@@ -431,7 +537,7 @@ Public Class BIAS_v2Client
         Dim numImages = Directory.GetFiles(subjectFileGalPath2).Length - 1
 
         For Each biomImage In biomImageList
-            biomImage.Save(subjectFileGalPath2 & SubjectID & "photo" & numImages + 1 & ".gif")
+            biomImage.Save(subjectFileGalPath2 & SubjectID & "photo" & numImages + 1 & ".png")
             numImages = numImages + 1
         Next
 
@@ -667,7 +773,7 @@ Public Class BIAS_v2Client
                 System.IO.File.WriteAllLines(subjectFile, readText)
 
                 'Delete images from subject record
-                Dim iList = Directory.GetFiles(subjectPath, "*.gif")
+                Dim iList = Directory.GetFiles(subjectPath, "*.png")
                 For Each imagePath In iList
                     File.Delete(imagePath)
                 Next
@@ -681,7 +787,7 @@ Public Class BIAS_v2Client
                     System.IO.File.WriteAllLines(subjectGalFile, readText)
 
                     'Delete Image
-                    Dim imGalList = Directory.GetFiles(subjectGalFilepath, "*.gif")
+                    Dim imGalList = Directory.GetFiles(subjectGalFilepath, "*.png")
                     For Each imagePath In imGalList
                         File.Delete(imagePath)
                     Next
@@ -701,7 +807,7 @@ Public Class BIAS_v2Client
                 System.IO.File.WriteAllLines(subjectGalFile, readText)
 
                 'Delete Image
-                Dim imGalList = Directory.GetFiles(subjectGalFilepath, "*.gif")
+                Dim imGalList = Directory.GetFiles(subjectGalFilepath, "*.png")
                 For Each imagePath In imGalList
                     File.Delete(imagePath)
                 Next
@@ -880,7 +986,7 @@ Public Class BIAS_v2Client
 
         'set biometric data
         Dim setBiom As New SetBiometricDataRequest
-        setBiom.Identity = newIdentity
+        setBiom.Identity = EnrollRequest.Identity 'used to be newIdentity, but this was erasing the image within BIR for some reason. Not sure why?
         bias.SetBiometricData(setBiom)
 
         'add subject to gallery
@@ -1396,7 +1502,7 @@ Public Class BIAS_v2Client
 
             'Options
             If dataSelection = "basic" Then
-                returnInfoType.GUID = Guid
+                returnInfoType.GUID = GUID
                 returnInfoType.GivenName = givenName
                 returnInfoType.FamilyName = familyName
             End If
@@ -1502,7 +1608,7 @@ Public Class BIAS_v2Client
 
         setBiogDataResponse.ResponseStatus.Return = 0
         setBiogDataResponse.ResponseStatus.Message = "Biographic Data sucessfully set."
-        Return setBiogDataResponse
+        Return (setBiogDataResponse)
     End Function
 
     Public Function SetBiometricData(SetBiometricDataRequest As SetBiometricDataRequest) As SetBiometricDataResponsePackage Implements BIAS_v2.SetBiometricData
@@ -1527,13 +1633,11 @@ Public Class BIAS_v2Client
         Dim subjectDirectory = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & SubjectID & "\"
         For Each record In biomList
 
-            Dim biomImage As System.Drawing.Image = record.BIR.biometricImage
-            Dim biomImageType As String = record.BIR.biometricImageType
-
-            Console.WriteLine(subjectDirectory)
+            Dim biomImage = record.BIR.biometricImage
+            Dim biomImageType = record.BIR.biometricImageType
             'save this image in the subjectID record
-            biomImage.Save(subjectDirectory & SubjectID & biomImageType & ".gif")
-            Dim imageName = SubjectID & biomImageType & ".gif"
+            biomImage.Save(subjectDirectory & SubjectID & biomImageType & ".png")
+            Dim imageName = SubjectID & biomImageType & ".png"
 
             'Open the text file
             Dim subjectFile = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & SubjectID & "\" & SubjectID & ".txt"
@@ -1547,7 +1651,6 @@ Public Class BIAS_v2Client
             'Create dictionary from the 3 information DBs + formatOwner and formatType
             Dim biomDataDictionary As New Dictionary(Of String, String)
             biomDataDictionary.Add("ImageName:", imageName)
-
             biomDataDictionary.Add("FormatOwner:", formatOwner)
             biomDataDictionary.Add("FormatType:", formatType)
             biomDataDictionary.Add("Creator:", record.BIR_Information.BIR_Info.Creator)
@@ -1740,8 +1843,8 @@ Public Class BIAS_v2Client
         Dim subjectDirectory = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & subjectID
         Dim subjectFile = subjectDirectory & "\" & subjectID & ".txt"
         'replace image
-        biomImage.Save(subjectDirectory & "\" & subjectID & biomImageType & ".gif")
-        Dim imageName = subjectID & biomImageType & ".gif"
+        biomImage.Save(subjectDirectory & "\" & subjectID & biomImageType & ".png")
+        Dim imageName = subjectID & biomImageType & ".png"
 
         'Create CBEFF_BIR_TYPE attributes
         Dim formatOwner = 257
@@ -1821,7 +1924,7 @@ Public Class BIAS_v2Client
             System.IO.File.WriteAllLines(subjectGalFile, readText)
 
             'Update Image
-            biomImage.Save(subjectGalFilepath & "\" & subjectID & biomImageType & ".gif")
+            biomImage.Save(subjectGalFilepath & "\" & subjectID & biomImageType & ".png")
 
         Next
 
