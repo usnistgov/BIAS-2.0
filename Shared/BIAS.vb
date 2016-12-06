@@ -13,7 +13,6 @@ Option Explicit On
 
 Imports System.Runtime.Serialization
 Imports System.Collections.Generic
-Imports System.Drawing
 
 
 Namespace OASIS.BIAS.V2
@@ -1894,18 +1893,20 @@ Namespace OASIS.BIAS.V2
         Implements System.Runtime.Serialization.IExtensibleDataObject
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        Private biometricImageField As System.Drawing.Image
+        Private biometricImageField As String
         Private biometricImageTypeField As String
 
-        Public Property biometricImage() As System.Drawing.Image
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
+        Public Property biometricImage() As String
             Get
                 Return Me.biometricImageField
             End Get
-            Set(value As System.Drawing.Image)
+            Set(value As String)
                 Me.biometricImageField = value
             End Set
         End Property
 
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
         Public Property biometricImageType() As String
             Get
                 Return Me.biometricImageTypeField
