@@ -112,6 +112,9 @@ Partial Class MainForm
         Me.btnRetrieveInformation_RetrieveInformation = New System.Windows.Forms.Button()
         Me.btnClear_RetrieveInformation = New System.Windows.Forms.Button()
         Me.OpenFileDialog1_Verify = New System.Windows.Forms.OpenFileDialog()
+        Me.startCameraButton = New System.Windows.Forms.Button()
+        Me.takeSnapshotButton = New System.Windows.Forms.Button()
+        Me.clearSnapshotButton = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.grpbxResult_Enroll.SuspendLayout()
@@ -345,6 +348,9 @@ Partial Class MainForm
         '
         'grpbox1_Enroll
         '
+        Me.grpbox1_Enroll.Controls.Add(Me.clearSnapshotButton)
+        Me.grpbox1_Enroll.Controls.Add(Me.takeSnapshotButton)
+        Me.grpbox1_Enroll.Controls.Add(Me.startCameraButton)
         Me.grpbox1_Enroll.Controls.Add(Me.txtbxBioImage_Enroll)
         Me.grpbox1_Enroll.Controls.Add(Me.picbx1_Enroll)
         Me.grpbox1_Enroll.Location = New System.Drawing.Point(27, 40)
@@ -358,7 +364,7 @@ Partial Class MainForm
         '
         Me.txtbxBioImage_Enroll.Location = New System.Drawing.Point(15, 347)
         Me.txtbxBioImage_Enroll.Name = "txtbxBioImage_Enroll"
-        Me.txtbxBioImage_Enroll.Size = New System.Drawing.Size(146, 20)
+        Me.txtbxBioImage_Enroll.Size = New System.Drawing.Size(222, 20)
         Me.txtbxBioImage_Enroll.TabIndex = 1
         Me.txtbxBioImage_Enroll.Text = "click here to select a file.."
         '
@@ -366,7 +372,7 @@ Partial Class MainForm
         '
         Me.picbx1_Enroll.Location = New System.Drawing.Point(15, 19)
         Me.picbx1_Enroll.Name = "picbx1_Enroll"
-        Me.picbx1_Enroll.Size = New System.Drawing.Size(222, 322)
+        Me.picbx1_Enroll.Size = New System.Drawing.Size(222, 234)
         Me.picbx1_Enroll.TabIndex = 0
         Me.picbx1_Enroll.TabStop = False
         '
@@ -989,6 +995,33 @@ Partial Class MainForm
         '
         Me.OpenFileDialog1_Verify.FileName = "OpenFileDialog1"
         '
+        'startCameraButton
+        '
+        Me.startCameraButton.Location = New System.Drawing.Point(15, 259)
+        Me.startCameraButton.Name = "startCameraButton"
+        Me.startCameraButton.Size = New System.Drawing.Size(222, 21)
+        Me.startCameraButton.TabIndex = 2
+        Me.startCameraButton.Text = "Start Camera"
+        Me.startCameraButton.UseVisualStyleBackColor = True
+        '
+        'takeSnapshotButton
+        '
+        Me.takeSnapshotButton.Location = New System.Drawing.Point(15, 286)
+        Me.takeSnapshotButton.Name = "takeSnapshotButton"
+        Me.takeSnapshotButton.Size = New System.Drawing.Size(222, 23)
+        Me.takeSnapshotButton.TabIndex = 3
+        Me.takeSnapshotButton.Text = "TakeSnapshot"
+        Me.takeSnapshotButton.UseVisualStyleBackColor = True
+        '
+        'clearSnapshotButton
+        '
+        Me.clearSnapshotButton.Location = New System.Drawing.Point(15, 315)
+        Me.clearSnapshotButton.Name = "clearSnapshotButton"
+        Me.clearSnapshotButton.Size = New System.Drawing.Size(222, 23)
+        Me.clearSnapshotButton.TabIndex = 4
+        Me.clearSnapshotButton.Text = "Clear Snapshot"
+        Me.clearSnapshotButton.UseVisualStyleBackColor = True
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1124,4 +1157,7 @@ Partial Class MainForm
     Friend WithEvents SexComboBox_Verify As System.Windows.Forms.ComboBox
     Friend WithEvents CitizenshipComboBox_Verify As System.Windows.Forms.ComboBox
     Friend WithEvents OpenFileDialog1_Verify As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents clearSnapshotButton As System.Windows.Forms.Button
+    Friend WithEvents takeSnapshotButton As System.Windows.Forms.Button
+    Friend WithEvents startCameraButton As System.Windows.Forms.Button
 End Class

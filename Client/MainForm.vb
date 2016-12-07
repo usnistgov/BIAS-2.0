@@ -5,11 +5,22 @@ Imports System.Drawing.Image
 Imports OASIS.BIAS.V2
 Imports System.IO
 Imports System.Diagnostics
+Imports Nist.Bcl.Wsbd.Streaming
 
 
 Public Class MainForm
 
     Dim client As New BIAS_v2Client()
+    'Dim m_ActiveCamera As WebCamera = New WebCamera("Microsoft LifeCam Cinema", picbx1_Enroll)
+    Dim m_ActiveCamera As WebCamera
+
+
+    Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+        m_ActiveCamera = New WebCamera("Microsoft LifeCam Cinema", picbx1_Enroll) 'what if not on enrol but on identify tab? send feed to identify picbox?
+        Dim WebCameraPool As StreamPool
+        WebCameraPool = New StreamPool(m_ActiveCamera)
+        m_ActiveCamera.RegisterTargetPool(WebCameraPool)
+    End Sub
 
 
     Private Sub btnClear_Enroll_Click(sender As Object, e As EventArgs) Handles ClearButton_Enroll.Click
@@ -44,6 +55,12 @@ Public Class MainForm
         userbiographicalInput.DateOfBirth = DoBDateTimePicker_Enroll.Text
         userbiographicalInput.Sex = SexComboBox_Enroll.SelectedItem
         userbiographicalInput.Citizenship = CitizenshipComboBox_Enroll.SelectedItem
+
+        'webcam
+
+
+        
+
 
         Dim userBiomRecord As New CBEFF_BIR_Type
         'Create image
@@ -150,6 +167,24 @@ Public Class MainForm
 
     End Sub
 
+    Private Sub startCameraButton_Click(sender As Object, e As EventArgs) Handles startCameraButton.Click
+        m_ActiveCamera.StartCapture()
+    End Sub
+
+    Private Sub takeSnapshotButton_Click(sender As Object, e As EventArgs) Handles takeSnapshotButton.Click
+        Dim snapshotImg As Bitmap = m_ActiveCamera.TakeSnapshot()
+        m_ActiveCamera.StopCapture()
+        picbx1_Enroll.Image = snapshotImg
+    End Sub
+
+    Private Sub clearSnapshotButton_Click(sender As Object, e As EventArgs) Handles clearSnapshotButton.Click
+        m_ActiveCamera.StartCapture()
+    End Sub
+
+
+
+
+
     Private Sub QueryCapabilities_Click(sender As Object, e As EventArgs) Handles QueryCapabilitiesButton_QueryCapabilities.Click
         client = New BIAS_v2Client()
         Dim queryCapabilitiesResponse As QueryCapabilitiesResponsePackage
@@ -189,29 +224,29 @@ Public Class MainForm
         updateCapabilityAttributes(lstbx_CapabilitiesList.SelectedItem)
     End Sub
 
-    Private Sub BioImageTxtBx_MouseClick(sender As Object, e As EventArgs) Handles txtbxBioImage_Enroll.MouseClick
-        Dim OpenEnrolImage As New OpenFileDialog()
+    'Private Sub BioImageTxtBx_MouseClick(sender As Object, e As EventArgs) Handles txtbxBioImage_Enroll.MouseClick
 
-        OpenEnrolImage.InitialDirectory = "C:/Temp/Samples"
-        OpenEnrolImage.Filter = "All files (*.*)|*.*"
-        OpenEnrolImage.RestoreDirectory = True
-        'OpenEnrolImage.FilterIndex = 1
-        If OpenEnrolImage.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            Try
-                txtbxBioImage_Enroll.Text = OpenEnrolImage.FileName.ToString
-                picbx1_Enroll.Image = Drawing.Image.FromFile(OpenEnrolImage.FileName.ToString)
-            Catch ex As Exception
-                MessageBox.Show("Error opening Enrol Biometric image")
+    'this code is for choosing an image from a local directory. keep off while acquiring a snapshot from a webcam feed.
 
-            End Try
-        End If
+    '    Dim OpenEnrolImage As New OpenFileDialog()
+    '    OpenEnrolImage.InitialDirectory = "C:/Temp/Samples"
+    '    OpenEnrolImage.Filter = "All files (*.*)|*.*"
+    '    OpenEnrolImage.RestoreDirectory = True
+    '    'OpenEnrolImage.FilterIndex = 1
+    '    If OpenEnrolImage.ShowDialog() = Windows.Forms.DialogResult.OK Then
+    '        Try
+    '            txtbxBioImage_Enroll.Text = OpenEnrolImage.FileName.ToString
+    '            picbx1_Enroll.Image = Drawing.Image.FromFile(OpenEnrolImage.FileName.ToString)
+    '        Catch ex As Exception
+    '            MessageBox.Show("Error opening Enrol Biometric image")
 
+    '        End Try
+    '    End If
 
-
-        'Dim imageString As String = "c:/temp/IMG_5306.JPG"
-        'PictureBox1.Image = Drawing.Image.FromFile(imageString)
-        'TextBox7.Text = imageString
-    End Sub
+    'Dim imageString As String = "c:/temp/IMG_5306.JPG"
+    'PictureBox1.Image = Drawing.Image.FromFile(imageString)
+    'TextBox7.Text = imageString
+    'End Sub
 
 
     Private Sub btnIdentify_Identify_Click(sender As Object, e As EventArgs) Handles btnIdentify_Identify.Click
@@ -253,12 +288,14 @@ Public Class MainForm
         End Try
         MessageBox.Show("RetrieveData ResponseStatus-" & getDataResponse.ResponseStatus.Return & vbTab & getDataResponse.ResponseStatus.Message)
 
-        'txtbxGiven_RetrieveInformation.Text = getDataResponse.ReturnData.GivenName
-        'txtbxFamily_RetrieveInformation.Text = getDataResponse.ReturnData.FamilyName
+        txtbxGiven_RetrieveInformation.Text = getDataResponse.ReturnData.GivenName
+        txtbxFamily_RetrieveInformation.Text = getDataResponse.ReturnData.FamilyName
         'txtbxDOB_RetrieveInformation.Text = getDataResponse.ReturnData.DateOfBirth
-        'txtbxSex_RetrieveInformation.Text = getDataResponse.ReturnData.Sex
-        'txtbxCitizenship_RetrieveInformation.Text = getDataResponse.ReturnData.Citizenship
+        txtbxSex_RetrieveInformation.Text = getDataResponse.ReturnData.Sex
+        txtbxCitizenship_RetrieveInformation.Text = getDataResponse.ReturnData.Citizenship
 
+        'Dim emg As Byte()
+        'emg = getDataResponse.ReturnData.Images(0).ImageData
 
     End Sub
 
@@ -331,13 +368,8 @@ Public Class MainForm
         DoBDateTimePicker_Verify.Text = DateTime.Now
     End Sub
 
-    
-
-    
-
-    
 
 
-    
+
     
 End Class

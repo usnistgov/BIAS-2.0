@@ -96,6 +96,10 @@
       <Project>{bbdd8ceb-3531-4efb-bd67-695c663b0b98}</Project>
       <Name>Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebCamera\WebCamera.vbproj">
+      <Project>{020c380b-a545-4416-b336-3c00792315c3}</Project>
+      <Name>WebCamera</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\subject01.glasses.gif" />
