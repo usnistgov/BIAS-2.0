@@ -16,6 +16,7 @@ Imports Emgu.CV
 Imports Emgu.Util
 Imports Emgu.CV.Structure
 Imports Emgu.CV.Util
+Imports System.Drawing.Imaging
 
 Module mainModule
     Sub testRetrieve()
@@ -73,12 +74,6 @@ Module mainModule
         testIdentity.BiometricData.BIRList = New CBEFF_BIR_ListType
 
         Dim biomRecord = New CBEFF_BIR_Type
-
-        ' Create image.
-        Dim testImage As System.Drawing.Image = System.Drawing.Image.FromFile("C:\Users\pyl\Pictures\Obama1.png")
-        biomRecord.BIR = New BaseBIRType
-        biomRecord.BIR.biometricImage = testImage
-        biomRecord.BIR.biometricImageType = "Front"
 
         'Create BIR_Info
         Dim sampleBIR As New BIRInfoType
@@ -160,73 +155,6 @@ Module mainModule
 
     Sub testUpdateBiom()
 
-        Dim bias1 As New BIAS_v2Client()
-        Dim updateRequest = New UpdateBiometricDataRequest
-        updateRequest.Identity = New BIASIdentity
-        updateRequest.Identity.SubjectID = "KULGQWQA"
-        updateRequest.Merge = False
-        updateRequest.Identity.BiometricData = New BIASBiometricDataType
-
-
-        Dim biomRecord = New CBEFF_BIR_Type
-
-        ' Create image.
-        Dim testImage As System.Drawing.Image = System.Drawing.Image.FromFile("C:\Users\pyl\Pictures\Obama2.png")
-        biomRecord.BIR = New BaseBIRType
-        biomRecord.BIR.biometricImage = testImage
-        biomRecord.BIR.biometricImageType = "Front"
-
-        'Create BIR_Info
-        Dim sampleBIR As New BIRInfoType
-        sampleBIR.Creator = "updatedCreator"
-        sampleBIR.Index = "updatedIndex"
-        sampleBIR.Integrity = True
-        Dim payArray = New Byte() {0}
-        sampleBIR.Payload = payArray
-        Dim currentDate1 As Date = Date.Now
-        sampleBIR.CreationDate = currentDate1
-        sampleBIR.NotValidBefore = currentDate1
-        sampleBIR.NotValidAfter = currentDate1
-
-        'Create BDB_Info
-        'Private PurposeField As OASIS.BIAS.V2.PurposeType
-        'Private QualityField As OASIS.BIAS.V2.QualityType
-        Dim sampleBDB As New BDBInfoType
-        'sampleBDB.ChallengeResponseField = 
-        sampleBDB.Index = "updatedIndex"
-        Dim testFormat = New RegistryIDType
-        testFormat.Organization = "updatedOrganization"
-        testFormat.Type = "updatedType"
-        sampleBDB.Format = testFormat
-        sampleBDB.Encryption = False
-        Dim currentDate2 As Date = Date.Now
-        sampleBDB.CreationDate = currentDate2
-        sampleBDB.NotValidBefore = currentDate2
-        sampleBDB.NotValidAfter = currentDate2
-        'sampleBDB.Type = 
-        'sampleBDB.Subtype = 
-        sampleBDB.Level = 0
-        sampleBDB.Product = testFormat
-        sampleBDB.CaptureDevice = testFormat
-        sampleBDB.FeatureExtractionAlgorithm = testFormat
-        sampleBDB.ComparisonAlgorithm = testFormat
-        sampleBDB.CompressionAlgorithm = testFormat
-        sampleBDB.Purpose = 2
-        'sampleBDB.Quality =
-
-        'Create SB_Info
-        'Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        'Private FormatField As OASIS.BIAS.V2.RegistryIDType
-        Dim sampleSB As New SBInfoType
-        sampleSB.Format = testFormat
-
-        biomRecord.BIR_Information = New CBEFF_BIR_Type.BIR_InformationType
-        biomRecord.BIR_Information.BIR_Info = sampleBIR
-        biomRecord.BIR_Information.BDB_Info = sampleBDB
-        biomRecord.BIR_Information.SB_Info = sampleSB
-        updateRequest.Identity.BiometricData.BIR = biomRecord
-
-        Dim testReturn = bias1.UpdateBiometricData(updateRequest)
 
     End Sub
 
@@ -355,6 +283,7 @@ Public Class BIAS_v2Client
         Return New Tuple(Of Emgu.CV.Image(Of Gray, Byte)(), Integer())(images, labels)
     End Function
 
+    'for face registration and recognition
     Public Function facialRecMain()
 
         'load the classifier file and create the Local Binary Patterns Histograms Face Recognizer
@@ -383,8 +312,8 @@ Public Class BIAS_v2Client
         Return 1
     End Function
 
+    'creates a new Subject ID
     Public Function generateRandomID() As String
-
         Dim characters As String = "0123456789"
         Dim rand As New Random
         Dim sb As New StringBuilder
@@ -403,6 +332,25 @@ Public Class BIAS_v2Client
             End If
         Next
         Return False
+    End Function
+
+    'Used to convert 64byte items back to biometric images
+    Function ImageFromBase64String(ByVal base64 As String)
+        Using memStream As New MemoryStream(System.Convert.FromBase64String(base64))
+            Dim result As System.Drawing.Image = System.Drawing.Image.FromStream(memStream)
+            memStream.Close()
+            Return result
+        End Using
+    End Function
+
+    'Converts a biometric image to base64
+    Private Function ImageToBase64String(ByVal image As System.Drawing.Image, ByVal imageFormat As ImageFormat)
+        Using memStream As New MemoryStream
+            image.Save(memStream, imageFormat)
+            Dim result As String = Convert.ToBase64String(memStream.ToArray())
+            memStream.Close()
+            Return result
+        End Using
     End Function
 
     Public Function AddSubjectToGallery(AddSubjectToGalleryRequest As AddSubjectToGalleryRequest) As AddSubjectToGalleryResponsePackage Implements BIAS_v2.AddSubjectToGallery
@@ -920,6 +868,27 @@ Public Class BIAS_v2Client
 
         Console.WriteLine("In Enroll")
 
+        'Dim sent64Byte As String = EnrollRequest.Identity.BiometricData.BIRList(0).BIR.biometricImage
+        If EnrollRequest.Identity.BiometricData.BIRList(0).BIR_Information.BIR_Info.Creator Is Nothing Then
+            MessageBox.Show("The creator is dead Jim.")
+        Else
+            MessageBox.Show("The creator looks good")
+        End If
+        If EnrollRequest.Identity.BiometricData.BIRList(0).BIR.biometricImageType Is Nothing Then
+            MessageBox.Show("The image type is dead Jim.")
+        Else
+            MessageBox.Show("The image type looks good")
+        End If
+        If EnrollRequest.Identity.BiometricData.BIRList(0).BIR.biometricImage Is Nothing Then
+            MessageBox.Show("The image is dead Jim.")
+        Else
+            MessageBox.Show("The image looks good")
+        End If
+        'ImageFromBase64String(sent64Byte)
+        'Dim convertedImage = ImageFromBase64String(sent64Byte)
+
+
+
         Dim enrollResponse As New EnrollResponsePackage()
         enrollResponse.ResponseStatus = New ResponseStatus
 
@@ -987,6 +956,7 @@ Public Class BIAS_v2Client
         'set biometric data
         Dim setBiom As New SetBiometricDataRequest
         setBiom.Identity = EnrollRequest.Identity 'used to be newIdentity, but this was erasing the image within BIR for some reason. Not sure why?
+
         bias.SetBiometricData(setBiom)
 
         'add subject to gallery
@@ -1402,7 +1372,9 @@ Public Class BIAS_v2Client
             Dim imageName = readText(index).Substring(10)
             Dim subjectGalleryFolderPath As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
                                                        & "\MasterDB\Galleries\" & GalleryID & "\" & SubjectID & "\"
-            bir.BIR.biometricImage = System.Drawing.Image.FromFile(subjectGalleryFolderPath & imageName)
+
+            Dim biomImage = System.Drawing.Image.FromFile(subjectGalleryFolderPath & imageName)
+            bir.BIR.biometricImage = ImageToBase64String(biomImage, ImageFormat.Png)
             bir.FormatOwner = readText(index + 1).Substring(12)
             bir.FormatType = readText(index + 2).Substring(11)
             'BIR DB
@@ -1633,8 +1605,9 @@ Public Class BIAS_v2Client
         Dim subjectDirectory = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & SubjectID & "\"
         For Each record In biomList
 
-            Dim biomImage = record.BIR.biometricImage
+            Dim biomImage = ImageFromBase64String(record.BIR.biometricImage) 'convert base64 image string to reg image
             Dim biomImageType = record.BIR.biometricImageType
+
             'save this image in the subjectID record
             biomImage.Save(subjectDirectory & SubjectID & biomImageType & ".png")
             Dim imageName = SubjectID & biomImageType & ".png"
@@ -1831,13 +1804,13 @@ Public Class BIAS_v2Client
 
     Public Function UpdateBiometricData(UpdateBiometricDataRequest As UpdateBiometricDataRequest) As UpdateBiometricDataResponsePackage Implements BIAS_v2.UpdateBiometricData
         'Used in person centric models
+        'Used in person centric models
         Dim updateBiomDataResponse As New UpdateBiometricDataResponsePackage()
 
         Dim subjectID = UpdateBiometricDataRequest.Identity.SubjectID
         Dim record = UpdateBiometricDataRequest.Identity.BiometricData.BIR
-        Dim biomImage = record.BIR.biometricImage
+        Dim biomImage = ImageFromBase64String(record.BIR.biometricImage)
         Dim biomImageType = record.BIR.biometricImageType
-
 
         'Go into subject record
         Dim subjectDirectory = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & subjectID
@@ -1929,7 +1902,9 @@ Public Class BIAS_v2Client
         Next
 
 
-
+        updateBiomDataResponse.ResponseStatus = New ResponseStatus
+        updateBiomDataResponse.ResponseStatus.Message = "Biometric Data Updated"
+        updateBiomDataResponse.ResponseStatus.Return = 0
         Return updateBiomDataResponse
     End Function
 
