@@ -44,8 +44,10 @@ Partial Class MainForm
         Me.FamilyNameTextBox_Enroll = New System.Windows.Forms.TextBox()
         Me.GivenNameTextBox_Enroll = New System.Windows.Forms.TextBox()
         Me.grpbox1_Enroll = New System.Windows.Forms.GroupBox()
+        Me.clearSnapshotButton = New System.Windows.Forms.Button()
+        Me.takeSnapshotButton = New System.Windows.Forms.Button()
+        Me.startCameraButton = New System.Windows.Forms.Button()
         Me.txtbxBioImage_Enroll = New System.Windows.Forms.TextBox()
-        Me.picbx1_Enroll = New System.Windows.Forms.PictureBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
@@ -112,16 +114,13 @@ Partial Class MainForm
         Me.btnRetrieveInformation_RetrieveInformation = New System.Windows.Forms.Button()
         Me.btnClear_RetrieveInformation = New System.Windows.Forms.Button()
         Me.OpenFileDialog1_Verify = New System.Windows.Forms.OpenFileDialog()
-        Me.startCameraButton = New System.Windows.Forms.Button()
-        Me.takeSnapshotButton = New System.Windows.Forms.Button()
-        Me.clearSnapshotButton = New System.Windows.Forms.Button()
+        Me.picbx1_Enroll = New System.Windows.Forms.PictureBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.grpbxResult_Enroll.SuspendLayout()
         Me.grpbox2_Enroll.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.grpbox1_Enroll.SuspendLayout()
-        CType(Me.picbx1_Enroll, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
@@ -138,6 +137,7 @@ Partial Class MainForm
         Me.GroupBox2_RetrieveInformation.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1_RetrieveInformation.SuspendLayout()
+        CType(Me.picbx1_Enroll, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -151,7 +151,7 @@ Partial Class MainForm
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(818, 585)
+        Me.TabControl1.Size = New System.Drawing.Size(1247, 934)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
@@ -162,7 +162,7 @@ Partial Class MainForm
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(810, 559)
+        Me.TabPage1.Size = New System.Drawing.Size(1239, 908)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Enroll"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -348,17 +348,44 @@ Partial Class MainForm
         '
         'grpbox1_Enroll
         '
+        Me.grpbox1_Enroll.Controls.Add(Me.picbx1_Enroll)
         Me.grpbox1_Enroll.Controls.Add(Me.clearSnapshotButton)
         Me.grpbox1_Enroll.Controls.Add(Me.takeSnapshotButton)
         Me.grpbox1_Enroll.Controls.Add(Me.startCameraButton)
         Me.grpbox1_Enroll.Controls.Add(Me.txtbxBioImage_Enroll)
-        Me.grpbox1_Enroll.Controls.Add(Me.picbx1_Enroll)
         Me.grpbox1_Enroll.Location = New System.Drawing.Point(27, 40)
         Me.grpbox1_Enroll.Name = "grpbox1_Enroll"
         Me.grpbox1_Enroll.Size = New System.Drawing.Size(243, 373)
         Me.grpbox1_Enroll.TabIndex = 0
         Me.grpbox1_Enroll.TabStop = False
         Me.grpbox1_Enroll.Text = "Biometric Data"
+        '
+        'clearSnapshotButton
+        '
+        Me.clearSnapshotButton.Location = New System.Drawing.Point(15, 315)
+        Me.clearSnapshotButton.Name = "clearSnapshotButton"
+        Me.clearSnapshotButton.Size = New System.Drawing.Size(222, 23)
+        Me.clearSnapshotButton.TabIndex = 4
+        Me.clearSnapshotButton.Text = "Clear Snapshot"
+        Me.clearSnapshotButton.UseVisualStyleBackColor = True
+        '
+        'takeSnapshotButton
+        '
+        Me.takeSnapshotButton.Location = New System.Drawing.Point(15, 286)
+        Me.takeSnapshotButton.Name = "takeSnapshotButton"
+        Me.takeSnapshotButton.Size = New System.Drawing.Size(222, 23)
+        Me.takeSnapshotButton.TabIndex = 3
+        Me.takeSnapshotButton.Text = "TakeSnapshot"
+        Me.takeSnapshotButton.UseVisualStyleBackColor = True
+        '
+        'startCameraButton
+        '
+        Me.startCameraButton.Location = New System.Drawing.Point(15, 259)
+        Me.startCameraButton.Name = "startCameraButton"
+        Me.startCameraButton.Size = New System.Drawing.Size(222, 21)
+        Me.startCameraButton.TabIndex = 2
+        Me.startCameraButton.Text = "Start Camera"
+        Me.startCameraButton.UseVisualStyleBackColor = True
         '
         'txtbxBioImage_Enroll
         '
@@ -367,14 +394,6 @@ Partial Class MainForm
         Me.txtbxBioImage_Enroll.Size = New System.Drawing.Size(222, 20)
         Me.txtbxBioImage_Enroll.TabIndex = 1
         Me.txtbxBioImage_Enroll.Text = "click here to select a file.."
-        '
-        'picbx1_Enroll
-        '
-        Me.picbx1_Enroll.Location = New System.Drawing.Point(15, 19)
-        Me.picbx1_Enroll.Name = "picbx1_Enroll"
-        Me.picbx1_Enroll.Size = New System.Drawing.Size(222, 234)
-        Me.picbx1_Enroll.TabIndex = 0
-        Me.picbx1_Enroll.TabStop = False
         '
         'TabPage2
         '
@@ -995,38 +1014,19 @@ Partial Class MainForm
         '
         Me.OpenFileDialog1_Verify.FileName = "OpenFileDialog1"
         '
-        'startCameraButton
+        'picbx1_Enroll
         '
-        Me.startCameraButton.Location = New System.Drawing.Point(15, 259)
-        Me.startCameraButton.Name = "startCameraButton"
-        Me.startCameraButton.Size = New System.Drawing.Size(222, 21)
-        Me.startCameraButton.TabIndex = 2
-        Me.startCameraButton.Text = "Start Camera"
-        Me.startCameraButton.UseVisualStyleBackColor = True
-        '
-        'takeSnapshotButton
-        '
-        Me.takeSnapshotButton.Location = New System.Drawing.Point(15, 286)
-        Me.takeSnapshotButton.Name = "takeSnapshotButton"
-        Me.takeSnapshotButton.Size = New System.Drawing.Size(222, 23)
-        Me.takeSnapshotButton.TabIndex = 3
-        Me.takeSnapshotButton.Text = "TakeSnapshot"
-        Me.takeSnapshotButton.UseVisualStyleBackColor = True
-        '
-        'clearSnapshotButton
-        '
-        Me.clearSnapshotButton.Location = New System.Drawing.Point(15, 315)
-        Me.clearSnapshotButton.Name = "clearSnapshotButton"
-        Me.clearSnapshotButton.Size = New System.Drawing.Size(222, 23)
-        Me.clearSnapshotButton.TabIndex = 4
-        Me.clearSnapshotButton.Text = "Clear Snapshot"
-        Me.clearSnapshotButton.UseVisualStyleBackColor = True
+        Me.picbx1_Enroll.Location = New System.Drawing.Point(6, 19)
+        Me.picbx1_Enroll.Name = "picbx1_Enroll"
+        Me.picbx1_Enroll.Size = New System.Drawing.Size(231, 234)
+        Me.picbx1_Enroll.TabIndex = 3
+        Me.picbx1_Enroll.TabStop = False
         '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(818, 585)
+        Me.ClientSize = New System.Drawing.Size(1247, 934)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "MainForm"
         Me.Text = "Biometric Identity Assurance Service"
@@ -1039,7 +1039,6 @@ Partial Class MainForm
         Me.Panel4.PerformLayout()
         Me.grpbox1_Enroll.ResumeLayout(False)
         Me.grpbox1_Enroll.PerformLayout()
-        CType(Me.picbx1_Enroll, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
@@ -1064,6 +1063,7 @@ Partial Class MainForm
         Me.Panel1.PerformLayout()
         Me.GroupBox1_RetrieveInformation.ResumeLayout(False)
         Me.GroupBox1_RetrieveInformation.PerformLayout()
+        CType(Me.picbx1_Enroll, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1077,7 +1077,6 @@ Partial Class MainForm
     Friend WithEvents grpbxResult_Enroll As System.Windows.Forms.GroupBox
     Friend WithEvents EnrollButton_Enroll As System.Windows.Forms.Button
     Friend WithEvents ResultsTextBox_Enroll As System.Windows.Forms.TextBox
-    Friend WithEvents picbx1_Enroll As System.Windows.Forms.PictureBox
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
     Friend WithEvents VerifyButton_Verify As System.Windows.Forms.Button
@@ -1160,4 +1159,5 @@ Partial Class MainForm
     Friend WithEvents clearSnapshotButton As System.Windows.Forms.Button
     Friend WithEvents takeSnapshotButton As System.Windows.Forms.Button
     Friend WithEvents startCameraButton As System.Windows.Forms.Button
+    Friend WithEvents picbx1_Enroll As System.Windows.Forms.PictureBox
 End Class

@@ -66,7 +66,7 @@ Public Class MainForm
         'Create image
         userBiomRecord.BIR = New BaseBIRType
         Dim testImage As System.Drawing.Image = System.Drawing.Image.FromFile("C:\Users\karenm.XE\Documents\BIAS_Client\BIAS-2.0\Client\Resources\subject01.gif")
-        userBiomRecord.BIR.biometricImage = testImage 'will soon come from a webcam
+        'userBiomRecord.BIR.biometricImage = testImage 'will soon come from a webcam
         userBiomRecord.BIR.biometricImageType = "Front"
 
 
