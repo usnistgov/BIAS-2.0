@@ -456,7 +456,7 @@ Namespace OASIS.BIAS.V2
             End Set
         End Property
 
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False, Order:=2)> _
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=False, EmitDefaultValue:=False, Order:=2)> _
         Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
@@ -942,6 +942,8 @@ Namespace OASIS.BIAS.V2
      System.Runtime.Serialization.DataContractAttribute(Name:="IdentifyRequest", [Namespace]:="http://docs.oasis-open.org/bias/ns/bias-2.0/")> _
     Partial Public Class IdentifyRequest
         Inherits OASIS.BIAS.V2.AggregateRequestTemplate
+
+        Public Trainer As Emgu.CV.Face.LBPHFaceRecognizer
 
         Private GalleryIDField As String
 
