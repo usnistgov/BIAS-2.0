@@ -840,6 +840,10 @@ Namespace OASIS.BIAS.V2
 
         Private IdentityField As OASIS.BIAS.V2.BIASIdentity
 
+        Private IdentityClaimField As String
+
+        Private InputDataField As OASIS.BIAS.V2.InformationType
+
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
         Public Property GalleryID() As String
             Get
@@ -857,6 +861,26 @@ Namespace OASIS.BIAS.V2
             End Get
             Set(value As OASIS.BIAS.V2.BIASIdentity)
                 Me.IdentityField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=False, EmitDefaultValue:=False, Order:=1)> _
+        Public Property InputData() As OASIS.BIAS.V2.InformationType
+            Get
+                Return Me.InputDataField
+            End Get
+            Set(value As OASIS.BIAS.V2.InformationType)
+                Me.InputDataField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
+        Public Property IdentityClaim() As String
+            Get
+                Return Me.IdentityClaimField
+            End Get
+            Set(value As String)
+                Me.IdentityClaimField = value
             End Set
         End Property
     End Class
@@ -1011,6 +1035,8 @@ Namespace OASIS.BIAS.V2
 
         Private GalleryIDField As String
 
+        Private IdentityClaimField As String
+
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=True, EmitDefaultValue:=False)> _
         Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
@@ -1028,6 +1054,16 @@ Namespace OASIS.BIAS.V2
             End Get
             Set(value As String)
                 Me.GalleryIDField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False, Order:=2)> _
+        Public Property IdentityClaim() As String
+            Get
+                Return Me.IdentityClaimField
+            End Get
+            Set(value As String)
+                Me.IdentityClaimField = value
             End Set
         End Property
     End Class
@@ -3729,12 +3765,24 @@ Namespace OASIS.BIAS.V2
 
         Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
 
+        Private CandidateListField As OASIS.BIAS.V2.CandidateListType
+
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
                 Return Me.extensionDataField
             End Get
             Set(value As System.Runtime.Serialization.ExtensionDataObject)
                 Me.extensionDataField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
+        Public Property CandidateList() As OASIS.BIAS.V2.CandidateListType
+            Get
+                Return Me.CandidateListField
+            End Get
+            Set(value As OASIS.BIAS.V2.CandidateListType)
+                Me.CandidateListField = value
             End Set
         End Property
     End Class
