@@ -1000,6 +1000,11 @@ Public Class BIAS_v2Client
     Public Function Identify(IdentifyRequest As IdentifyRequest) As IdentifyResponsePackage Implements BIAS_v2.Identify
         'Dim d1 = IdentifyRequest.InputData.ExtensionData.
         Dim identifyResponse As New IdentifyResponsePackage()
+
+        'added until Identify is finalized by Paul.
+        Dim newIdentity As New BIASIdentity
+        identifyResponse.Identity = newIdentity
+
         identifyResponse.ResponseStatus = New ResponseStatus
         identifyResponse.ResponseStatus.Return = 99
         identifyResponse.ResponseStatus.Message = "Not implemented yet"
