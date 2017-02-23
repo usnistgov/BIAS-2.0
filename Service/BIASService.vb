@@ -24,22 +24,15 @@ Module mainModule
 
         Dim retrieveData As New RetrieveDataRequest
         retrieveData.Identity = New BIASIdentity
-        retrieveData.Identity.SubjectID = "TTPC5TMG"
+        retrieveData.Identity.SubjectID = "66622315"
         retrieveData.ProcessingOptions = New ProcessingOptionsType
         Dim testOption As New OptionType
-        testOption.Key = "biometricData"
-        testOption.Value = "basic"
+        testOption.Key = "allData"
+        testOption.Value = "full"
         retrieveData.ProcessingOptions.Add(testOption)
         Dim a As RetrieveDataResponsePackage = bias1.RetrieveData(retrieveData)
+        MessageBox.Show(a.ReturnData.Sex)
 
-    End Sub
-
-    Sub testIdentification()
-        Dim bias1 As New BIAS_v2Client()
-        Console.WriteLine("Hello")
-        'bias1.facialRecMain()
-        ''Dim query As New QueryCapabilitiesRequest
-        ''bias1.QueryCapabilities(query)
     End Sub
 
     Sub testRetrieveBiomData()
@@ -53,7 +46,6 @@ Module mainModule
 
     Sub testEnroll()
         Dim bias1 As New BIAS_v2Client()
-        MessageBox.Show("Hello")
 
         Dim retrieveBiomData As New RetrieveBiometricDataRequest
         retrieveBiomData.Identity = New BIASIdentity
@@ -63,7 +55,7 @@ Module mainModule
 
         Dim sampleInfo As New InformationType
         sampleInfo.GUID = "Tester"
-        sampleInfo.GivenName = "John"
+        sampleInfo.GivenName = "Paul"
         sampleInfo.FamilyName = "Doe"
         sampleInfo.DateOfBirth = "09/27/1990"
         sampleInfo.Sex = "M"
@@ -123,6 +115,13 @@ Module mainModule
         biomRecord.BIR_Information.BIR_Info = sampleBIR
         biomRecord.BIR_Information.BDB_Info = sampleBDB
         biomRecord.BIR_Information.SB_Info = sampleSB
+
+        biomRecord.BIR = New BaseBIRType
+        Dim inputImage = System.Drawing.Image.FromFile("C:\Users\pyl\Pictures\Obama.jpg")
+        Dim inputImageString = ImageToBase64String(inputImage, ImageFormat.Jpeg)
+        biomRecord.BIR.biometricImage = inputImageString
+        biomRecord.BIR.biometricImageType = "Face"
+
         testIdentity.BiometricData.BIRList.Add(biomRecord)
 
         Dim enrol1 As New EnrollRequest()
@@ -134,7 +133,7 @@ Module mainModule
     Sub testDeleteBiom()
         Dim bias1 As New BIAS_v2Client()
         Dim deleteRequest = New DeleteBiometricDataRequest
-        deleteRequest.GalleryID = "1"
+        deleteRequest.GalleryID = "4"
         deleteRequest.Identity = New BIASIdentity
         deleteRequest.Identity.SubjectID = "QJ1QOHQZ"
 
@@ -158,16 +157,60 @@ Module mainModule
 
     End Sub
 
-    Sub testFacial()
-        Dim bias1 As New BIAS_v2Client()
-        bias1.facialRecMain()
+    Private Function ImageToBase64String(ByVal image As System.Drawing.Image, ByVal imageFormat As ImageFormat)
+        Using memStream As New MemoryStream
+            image.Save(memStream, imageFormat)
+            Dim result As String = Convert.ToBase64String(memStream.ToArray())
+            memStream.Close()
+            Return result
+        End Using
+    End Function
+
+    Sub testIdentify()
+        Dim bias1 = New BIAS_v2Client
+        Dim IdentifyRequest As IdentifyRequest = New IdentifyRequest
+        IdentifyRequest.GalleryID = "1"
+        IdentifyRequest.MaxListSize = 2
+        IdentifyRequest.InputData = New InformationType
+        IdentifyRequest.InputData.Images = New InformationType.ImagesType
+        Dim inputImage = System.Drawing.Image.FromFile("C:\Users\pyl\Pictures\Obama.jpg")
+
+        'Turn image into byte
+        Dim mybytearray As Byte()
+        Dim ms As System.IO.MemoryStream = New System.IO.MemoryStream
+        inputImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg)
+        mybytearray = ms.ToArray()
+
+        'create image data to go into list
+        Dim oasisImage = New OASIS.BIAS.V2.Image
+        oasisImage.ImageData = mybytearray
+
+        IdentifyRequest.InputData.Images.Add(oasisImage)
+
+        'MessageBox.Show(base64Image.Length)
+
+        Dim IdentifyResponse = New IdentifyResponsePackage
+        IdentifyResponse = bias1.Identify(IdentifyRequest)
+
+
     End Sub
+
     Sub Main()
 
+        Dim bias1 = New BIAS_v2Client
+        'MessageBox.Show("Hello")
+        'testRetrieve()
         'testEnroll()
         'testUpdateBiom()
-        testFacial()
-        'testEnroll()
+        'testFacial()
+        testEnroll()
+        'testIdentify()
+        'Enroll someone
+        'Identify request with a picture
+        'Send the picture and the recognizer object
+        'get them identified
+        'testDeleteBiom()
+
 
     End Sub
 End Module
@@ -177,76 +220,54 @@ End Module
 Public Class BIAS_v2Client
     Implements BIAS_v2
 
-    Public Function getImagePaths(path As DirectoryInfo)
-        Dim imagePathList As List(Of String) = New List(Of String)
-
-        For Each currentFile In path.EnumerateFiles("*.*", SearchOption.AllDirectories)
-            Dim fileName As String = currentFile.Name
-            If Not fileName.EndsWith(".txt") And Not fileName.EndsWith(".jpg") Then
-                Console.WriteLine(currentFile.FullName)
-                imagePathList.Add(currentFile.FullName)
-            End If
+    ''' <summary>
+    ''' Creates a new subjectID, made up of 8 numbers, from 1-9
+    ''' Used within Enroll while creating a new subject record from an input identity.
+    ''' </summary>
+    ''' <returns>sb.ToString() - The generated subjectID</returns>
+    Public Function generateRandomID() As String
+        Dim characters As String = "123456789"
+        Dim rand As New Random
+        Dim sb As New StringBuilder
+        For charPos As Integer = 1 To 8
+            Dim idx As Integer = rand.Next(0, 9)
+            sb.Append(characters.Substring(idx, 1))
         Next
-
-        Return imagePathList
+        Return sb.ToString()
     End Function
 
-    Public Function getTestImagePaths(path As DirectoryInfo)
-        Dim image_paths = New List(Of String)
-        For Each currentFile In path.EnumerateFiles("*.*", SearchOption.AllDirectories)
-            Dim fileName As String = currentFile.Name
-            If fileName.EndsWith(".jpg") Then
-                image_paths.Add(currentFile.FullName)
-            End If
-        Next
-        Return image_paths
+    ''' <summary>
+    ''' Converts base64 strings back to images
+    ''' </summary>
+    ''' <returns>result - The transformed biometric sample image</returns>
+    Function ImageFromBase64String(ByVal base64 As String)
+        Using memStream As New MemoryStream(System.Convert.FromBase64String(base64))
+            Dim result As System.Drawing.Image = System.Drawing.Image.FromStream(memStream)
+            memStream.Close()
+            Return result
+        End Using
     End Function
 
-    Public Function prediction(test_paths As List(Of String), recognizer As Face.LBPHFaceRecognizer, faceCascade As CascadeClassifier)
-
-        For Each Path In test_paths
-
-            'so now we have a list of all image filepaths needing identification
-            'get image as variable
-            Dim originalImage As New Image(Of Gray, Byte)(Path)
-
-            'get the face area as a rectangle and create a new rectangle using the dimensions of the face rectangle
-            Dim faceRegion As Rectangle() = faceCascade.DetectMultiScale(originalImage)
-            Dim CropRect As New Rectangle(faceRegion(0).X, faceRegion(0).Y, faceRegion(0).Width, faceRegion(0).Height)
-            'get the image from path, save in a new image variable. Also create a bitmap to save the cropped image in.
-            Dim originalImage2 = System.Drawing.Image.FromFile(Path)
-            Dim CropImage = New Bitmap(CropRect.Width, CropRect.Height)
-
-            'take the original image and crop it, using the CropRect dimensions.
-            Using grp = Graphics.FromImage(CropImage)
-                grp.DrawImage(originalImage2, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
-            End Using
-
-            Dim croppedImage As New Image(Of Gray, Byte)(CropImage)
-
-            'save it as the same filepath, but with 'cropped' added to it. 
-            Dim croppedPath = Path.Substring(0, Path.LastIndexOf(".")) & "crop.jpg"
-            croppedImage.Save(croppedPath)
-
-            'then the below executes, doing the same thing, but now with a cropped, grayscale version of the original image. 
-            'read in each image we want to identify, then convert it to grayscale
-            Dim predict_image_pilC As Mat = CvInvoke.Imread(croppedPath, CvEnum.LoadImageType.Color)
-            Dim predict_image_pilG As New Mat()
-            CvInvoke.CvtColor(predict_image_pilC, predict_image_pilG, CvEnum.ColorConversion.Bgr2Gray)
-
-            'Detect the face in the image
-            Dim nbr_predicted = recognizer.Predict(predict_image_pilG)
-            CvInvoke.Imshow("test", predict_image_pilG)
-
-            Dim nbr_actual = Path.Substring(Path.LastIndexOf("\") + 1, 6)
-
-            Dim confirmString = nbr_actual & " identified as Subject " & nbr_predicted.Label
-            MessageBox.Show(nbr_predicted.Distance)
-            MessageBox.Show(nbr_predicted.Label)
-        Next
-
+    ''' <summary>
+    ''' Converts a biometric image to base64
+    ''' </summary>
+    ''' <returns>result - The transformed biometric sample string</returns>
+    Private Function ImageToBase64String(ByVal image As System.Drawing.Image, ByVal imageFormat As ImageFormat)
+        Using memStream As New MemoryStream
+            image.Save(memStream, imageFormat)
+            Dim result As String = Convert.ToBase64String(memStream.ToArray())
+            memStream.Close()
+            Return result
+        End Using
     End Function
 
+    ''' <summary>
+    ''' Detects the face in each image, crops around that region, adds it to a list of image
+    ''' Detects the subjectID of each image, sends back a tuple of the paired images and subject IDs.
+    ''' </summary>
+    ''' <param name="imagePathList">List of image paths</param>
+    ''' <param name="faceCascade">Used to detect face locations</param>
+    ''' <returns>Tuple(Of Emgu.CV.Image(Of Gray, Byte)(), Integer())(images, labels) - Tuple containing cropped face images and the corresponding subjectIDs</returns>
     Public Function testTrain(imagePathList As List(Of String), faceCascade As CascadeClassifier)
 
         'need to return array of images and array of integers
@@ -275,7 +296,7 @@ Public Class BIAS_v2Client
             images(images.Length - 1) = img2
 
             'Get the label/subjectID of the image
-            Dim subjectID = Convert.ToInt32(Path.Substring(Path.LastIndexOf("\") + 1, 6))
+            Dim subjectID = Convert.ToInt32(Path.Substring(Path.LastIndexOf("\") + 1, 8))
             Array.Resize(labels, labels.Length + 1)
             labels(labels.Length - 1) = subjectID
         Next
@@ -283,15 +304,86 @@ Public Class BIAS_v2Client
         Return New Tuple(Of Emgu.CV.Image(Of Gray, Byte)(), Integer())(images, labels)
     End Function
 
-    'for face registration and recognition
-    Public Function facialRecMain()
+    ''' <summary>
+    ''' Takes an input image, crops it around the face, then compares it against the stored images in the trainer. Returns the match with the best distance score.
+    ''' </summary>
+    ''' <param name="trainer">The previously created/updated trainer, holding all subject record images and subjectIDs</param>
+    ''' <param name="faceCascade">Used to detect face locations</param>
+    ''' <param name="identificationImage">Image that needs to be identified. Sent over via a client request.</param>
+    ''' <param name="maxListSize">The number of candiates to be retured. NOTE: LBPHFaceRecognizer does not natively support returning multiple canidate distance figures.
+    '''                           prediction() will only return either 0 or 1 matches, with the 1 match being the match with the largest distance figure. Future implementations
+    '''                           should use identification methods that support multiple candidate match figure returns.</param>
+    ''' <returns>nbr_predicted - the most likely match, with attributes for the subjectID and the distance score.</returns>
+    Public Function prediction(trainer As Face.LBPHFaceRecognizer, faceCascade As CascadeClassifier, identificationImage As System.Drawing.Image, maxListSize As Long) As Emgu.CV.Face.LBPHFaceRecognizer.PredictionResult
+
+        Dim originalImage As New Image(Of Gray, Byte)(identificationImage)
+
+        'get the face area as a rectangle and create a new rectangle using the dimensions of the face rectangle
+        Dim faceRegion As Rectangle() = faceCascade.DetectMultiScale(originalImage)
+        Dim CropRect As New Rectangle(faceRegion(0).X, faceRegion(0).Y, faceRegion(0).Width, faceRegion(0).Height)
+
+        'get the image from path, save in a new image variable. Also create a bitmap to save the cropped image in.
+        Dim originalImage2 = identificationImage
+        Dim CropImage = New Bitmap(CropRect.Width, CropRect.Height)
+
+        'take the original image and crop it, using the CropRect dimensions.
+        Using grp = Graphics.FromImage(CropImage)
+            grp.DrawImage(originalImage2, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
+        End Using
+
+        Dim croppedImage As New Image(Of Gray, Byte)(CropImage)
+
+        'save the image
+        Dim croppedPath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Images\" & "crop.jpg"
+        croppedImage.Save(croppedPath)
+
+        'then the below executes, doing the same thing, but now with a cropped, grayscale version of the original image. 
+        'read in each image we want to identify, then convert it to grayscale
+        Dim predict_image_pilC As Mat = CvInvoke.Imread(croppedPath, CvEnum.LoadImageType.Color)
+        Dim predict_image_pilG As New Mat()
+        CvInvoke.CvtColor(predict_image_pilC, predict_image_pilG, CvEnum.ColorConversion.Bgr2Gray)
+
+        'Detect the face in the image
+        Dim nbr_predicted = trainer.Predict(predict_image_pilG)
+        CvInvoke.Imshow("test", predict_image_pilG)
+
+        Return nbr_predicted
+
+    End Function
+
+    ''' <summary>
+    ''' Iterates through all subject records and appends the path of each image found to imagePathList
+    ''' </summary>
+    ''' <param name="path">The path of the subject records folder</param>
+    ''' <returns>imagePathList - the list of all image paths in the subject record folder</returns>
+    Public Function getImagePaths(path As DirectoryInfo)
+        Dim imagePathList As List(Of String) = New List(Of String)
+
+        For Each currentFile In path.EnumerateFiles("*.*", SearchOption.AllDirectories)
+            Dim fileName As String = currentFile.Name
+            If Not fileName.EndsWith(".txt") Then
+                Console.WriteLine(currentFile.FullName)
+                imagePathList.Add(currentFile.FullName)
+            End If
+        Next
+
+        Return imagePathList
+    End Function
+
+    ''' <summary>
+    ''' Updates the existing trainer with the subject record database in case of changes after the trainer is created. 
+    ''' Used every time that identification/verification functions are called. 
+    ''' </summary>
+    ''' <param name="trainer">The previously created trainer that needs to be updated</param>
+    ''' <returns>trainer - the up to date trainer</returns>
+    Public Function updateTrainer(trainer As Emgu.CV.Face.LBPHFaceRecognizer) As Emgu.CV.Face.LBPHFaceRecognizer
 
         'load the classifier file and create the Local Binary Patterns Histograms Face Recognizer
-        Dim faceCascade = New CascadeClassifier("C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS-2.0-master\Service\haarcascade_frontalface_default.xml")
-        Dim recognizer = New Face.LBPHFaceRecognizer
+        Dim classifierFileDirectory = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\haarcascade_frontalface_default.xml"
+        Dim faceCascade = New CascadeClassifier(classifierFileDirectory)
 
-        'Append all the absolute image paths in imagePathList
-        Dim path As New IO.DirectoryInfo("C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS-2.0-master\Service\MasterDB\Subject Records")
+        Dim subjectRecordsPath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\"
+        Dim path As New IO.DirectoryInfo(subjectRecordsPath)
         Dim imagePathList As List(Of String) = getImagePaths(path)
 
         'get list of images and subject IDs
@@ -299,60 +391,17 @@ Public Class BIAS_v2Client
         Dim images = imageAndSubjectIDs.Item1
         Dim subjectIDs = imageAndSubjectIDs.Item2
 
-        'Perform training of the recognizer
-        recognizer.Train(images, subjectIDs)
+        trainer.Update(images, subjectIDs)
 
-        'Append the images we want to recognize to image_path. Currently just .jgps instead of .pngs, need to come up with a naming system later. 
-        Dim identifyImageFolder As New IO.DirectoryInfo("C:\Users\pyl\Documents\NIST\BIAS Web Service Project\BIAS-2.0-master\Service\MasterDB\New folder")
-        Dim test_paths = getTestImagePaths(identifyImageFolder)
+        Return trainer
 
-        'Perform prediction. Currently has messageboxes containing matching information. Not doing anything with the result right now.
-        prediction(test_paths, recognizer, faceCascade)
-
-        Return 1
     End Function
 
-    'creates a new Subject ID
-    Public Function generateRandomID() As String
-        Dim characters As String = "0123456789"
-        Dim rand As New Random
-        Dim sb As New StringBuilder
-        For charPos As Integer = 1 To 8
-            Dim idx As Integer = rand.Next(0, 10)
-            sb.Append(characters.Substring(idx, 1))
-        Next
-        Return sb.ToString()
-    End Function
-
-    'Used in deleteBiographicData
-    Function CheckForAlphaCharacters(ByVal StringToCheck As String)
-        For i = 0 To StringToCheck.Length - 1
-            If Char.IsLetter(StringToCheck.Chars(i)) Then
-                Return True
-            End If
-        Next
-        Return False
-    End Function
-
-    'Used to convert 64byte items back to biometric images
-    Function ImageFromBase64String(ByVal base64 As String)
-        Using memStream As New MemoryStream(System.Convert.FromBase64String(base64))
-            Dim result As System.Drawing.Image = System.Drawing.Image.FromStream(memStream)
-            memStream.Close()
-            Return result
-        End Using
-    End Function
-
-    'Converts a biometric image to base64
-    Private Function ImageToBase64String(ByVal image As System.Drawing.Image, ByVal imageFormat As ImageFormat)
-        Using memStream As New MemoryStream
-            image.Save(memStream, imageFormat)
-            Dim result As String = Convert.ToBase64String(memStream.ToArray())
-            memStream.Close()
-            Return result
-        End Using
-    End Function
-
+    ''' <summary>
+    ''' Adds a subject record to a specific gallery.
+    ''' </summary>
+    ''' <param name="AddSubjectToGalleryRequest">Request parameter containing subject record and gallery ID information</param>
+    ''' <returns name="galleryResponse">Contains a response status with a return code and message</returns>
     Public Function AddSubjectToGallery(AddSubjectToGalleryRequest As AddSubjectToGalleryRequest) As AddSubjectToGalleryResponsePackage Implements BIAS_v2.AddSubjectToGallery
 
         Console.WriteLine("In AddSubjectToGallery")
@@ -404,7 +453,7 @@ Public Class BIAS_v2Client
                 'readinalllines
                 'if galleryinfo doesn't exist, it hasn't been added to a gallery before and we can add the four lines to the top, and copy the entire contents to the existing subject file
                 'if it does, we need to re-write the gallery line, save that to the gallery file.
-                'then we need to save the original read in text, but replace the existing galleryID lien with it + the new galleryID. Then save that over the existing subject record folder subject file.
+                'then we need to save the original read in text, but replace the existing galleryID line with it + the new galleryID. Then save that over the existing subject record folder subject file.
 
                 Dim readText As List(Of String) = System.IO.File.ReadAllLines(subjectFile).ToList
                 If readText(1).Contains("GalleryID:") Then
@@ -435,6 +484,17 @@ Public Class BIAS_v2Client
                     'create the file and writes to it.
                     System.IO.File.WriteAllLines(subjectFileGalPath, readTextArray2)
 
+                    'add the biometric image
+                    Dim biomImageType = AddSubjectToGalleryRequest.Identity.BiometricData.BIRList(0).BIR.biometricImageType
+                    Dim subjectGalFolder As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
+                                                       & "\MasterDB\Galleries\" & GalleryID & "\" & SubjectID & "\"
+                    Dim bytes As Byte() = Convert.FromBase64String(AddSubjectToGalleryRequest.Identity.BiometricData.BIRList(0).BIR.biometricImageType)
+                    Dim biomImageJPG As System.Drawing.Image
+                    Using ms As New MemoryStream(bytes)
+                        biomImageJPG = System.Drawing.Image.FromStream(ms)
+                        biomImageJPG.Save(subjectGalFolder & SubjectID & biomImageType & ".jpg", ImageFormat.Jpeg)
+                    End Using
+
                 Else
                     'create the strings
                     Dim galleryIDString = "GalleryID:" & GalleryID
@@ -456,6 +516,18 @@ Public Class BIAS_v2Client
                     System.IO.File.WriteAllLines(subjectFileGalPath, readTextArray2)
                     System.IO.File.WriteAllText(overwriteSubjectFilePath, "")
                     System.IO.File.WriteAllLines(overwriteSubjectFilePath, readTextArray2)
+
+                    'add the biometric image
+                    Dim biomImageType = AddSubjectToGalleryRequest.Identity.BiometricData.BIRList(0).BIR.biometricImageType
+                    Dim subjectGalFolder As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
+                                                       & "\MasterDB\Galleries\" & GalleryID & "\" & SubjectID & "\"
+                    Dim bytes As Byte() = Convert.FromBase64String(AddSubjectToGalleryRequest.Identity.BiometricData.BIRList(0).BIR.biometricImage)
+                    Dim biomImageJPG As System.Drawing.Image
+                    Using ms As New MemoryStream(bytes)
+                        biomImageJPG = System.Drawing.Image.FromStream(ms)
+                        biomImageJPG.Save(subjectGalFolder & SubjectID & biomImageType & ".jpg", ImageFormat.Jpeg)
+                    End Using
+
                 End If
 
             Else
@@ -494,6 +566,13 @@ Public Class BIAS_v2Client
         Return galleryResponse
     End Function
 
+    ''' <summary>
+    ''' Returns a quality score for a given biometric or specified subject.
+    ''' NOTE: This implementation only provides basic structure and is not meant to be fully functional. At this point, it returns sucessful quality
+    '''       checks if either a subjectID or a BIR is part of the CheckQualityRequest. Full implementation will look much different.
+    ''' </summary>
+    ''' <param name="CheckQualityRequest">Request parameter containing a subjectID or a BIR record</param>
+    ''' <returns name="qualityResponse">Contains a response status with return value of 0 or 1 indicating sucess, a quality score, the algorithm version, and a response message.</returns>
     Public Function CheckQuality(CheckQualityRequest As CheckQualityRequest) As CheckQualityResponsePackage Implements BIAS_v2.CheckQuality
 
         Console.WriteLine("In CheckQuality")
@@ -535,6 +614,12 @@ Public Class BIAS_v2Client
         Return qualityResponse
     End Function
 
+    ''' <summary>
+    ''' Classifies a biometric sample. For example, a fingerprint biometric sample may be classified as a whorl, loop, or arch.
+    ''' NOTE: For this example implementation, this function always returns face due to the nature of our biometric samples.
+    ''' </summary>
+    ''' <param name="ClassifyBiometricDataRequest">Request parameter that contains a biometric sample</param>
+    ''' <returns name="classifyBioDataResponse">Response that contains a return code and a message containing the type of biometric</returns>
     Public Function ClassifyBiometricData(ClassifyBiometricDataRequest As ClassifyBiometricDataRequest) As ClassifyBiometricDataResponsePackage Implements BIAS_v2.ClassifyBiometricData
 
         Console.WriteLine("In ClassifyBiometricData")
@@ -549,6 +634,11 @@ Public Class BIAS_v2Client
         Return classifyBioDataResponse
     End Function
 
+    ''' <summary>
+    ''' Creates a model-neutral subject record
+    ''' </summary>
+    ''' <param name="CreateSubjectRequest">Request parameter. Does not hold anything. </param>
+    ''' <returns name="createSubjectResponse">Contains the generated subjectID, a status code, and a message pertaining to the status code.</returns>
     Public Function CreateSubject(CreateSubjectRequest As CreateSubjectRequest) As CreateSubjectResponsePackage Implements BIAS_v2.CreateSubject
 
         Console.WriteLine("In CreateSubject")
@@ -610,6 +700,11 @@ Public Class BIAS_v2Client
 
     End Function
 
+    ''' <summary>
+    ''' Erases all biographic data associated with a subject. If a galleryID is specified, only biographic data from the specified gallery for the subject will be erased.
+    ''' </summary>
+    ''' <param name="DeleteBiographicDataRequest">Request parameter that holds a subject ID. Can hold a gallery ID.</param>
+    ''' <returns name="deleteBiogDataResponse">Contains a return code and a message that pertains to the return code.</returns>
     Public Function DeleteBiographicData(DeleteBiographicDataRequest As DeleteBiographicDataRequest) As DeleteBiographicDataResponsePackage Implements BIAS_v2.DeleteBiographicData
 
         Console.WriteLine("In DeleteBiographicData")
@@ -620,7 +715,7 @@ Public Class BIAS_v2Client
         deleteBiogDataResponse.ResponseStatus = New ResponseStatus()
 
 
-        'Check to see if all inputs are valid
+        'Check to see if inputs are valid
         If (DeleteBiographicDataRequest.GalleryID Is Nothing) Then
             deleteBiogDataResponse.ResponseStatus.Return = 3
             deleteBiogDataResponse.ResponseStatus.Message = "The gallery field for the AddSubjectToGalleryRequest is empty"
@@ -631,9 +726,6 @@ Public Class BIAS_v2Client
             deleteBiogDataResponse.ResponseStatus.Message = "The input subject ID is empty or in an invalid format."
             Return deleteBiogDataResponse
         End If
-
-        'If encounter ID...
-        'else
 
         Dim subjectFile = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records" & "\" & SubjectID & "\" & SubjectID & ".txt"
 
@@ -671,6 +763,12 @@ Public Class BIAS_v2Client
 
     End Function
 
+    ''' <summary>
+    ''' Erases all biometric data associated with a subject. If a galleryID is specified, only biometric data from the specified gallery for the subject will be erased. Does not support
+    ''' the biometric type specification functionality, as biometric data will be front facing facial images.
+    ''' </summary>
+    ''' <param name="DeleteBiometricDataRequest">Request parameter that holds a subject ID. Can hold a gallery ID.</param>
+    ''' <returns name="deleteBiomDataResponse">Contains a return code and a message that pertains to the return code.</returns>
     Public Function DeleteBiometricData(DeleteBiometricDataRequest As DeleteBiometricDataRequest) As DeleteBiometricDataResponsePackage Implements BIAS_v2.DeleteBiometricData
 
         Console.WriteLine("In DeleteBiometricData")
@@ -680,13 +778,14 @@ Public Class BIAS_v2Client
         Dim SubjectID = ""
         Dim opt = DeleteBiometricDataRequest.BiometricType
 
-        'Check to see if all inputs are valid
+        'Check to see if inputs exist.
         If (DeleteBiometricDataRequest.GalleryID IsNot Nothing) Then
             GalleryID = DeleteBiometricDataRequest.GalleryID
         End If
         If (DeleteBiometricDataRequest.Identity.SubjectID IsNot Nothing) Then
             SubjectID = DeleteBiometricDataRequest.Identity.SubjectID
         Else
+            'INVALID_SUBJECT_ID=9
             deleteBiomDataResponse.ResponseStatus.Return = 9
             deleteBiomDataResponse.ResponseStatus.Message = "The input subject ID is empty or in an invalid format."
             Return deleteBiomDataResponse
@@ -695,6 +794,15 @@ Public Class BIAS_v2Client
         'Define file paths
         Dim subjectPath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & SubjectID
         Dim subjectFile As String = subjectPath & "\" & SubjectID & ".txt"
+
+        'Check if the subject record exists
+        If (Directory.Exists(subjectPath) = False) Then
+            'UNKNOWN_SUBJECT=10
+            deleteBiomDataResponse.ResponseStatus.Return = 9
+            deleteBiomDataResponse.ResponseStatus.Message = "The subject referenced by the input subject ID does not exist."
+            Return deleteBiomDataResponse
+        End If
+
 
         'Check if there are biometricType inputs
         If opt Is Nothing Then
@@ -740,7 +848,6 @@ Public Class BIAS_v2Client
                         File.Delete(imagePath)
                     Next
                 Next
-
             Else 'Delete just from the gallery provided
                 Dim subjectGalFilepath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Galleries\" & GalleryID & "\" & SubjectID
                 Dim subjectGalFile = subjectGalFilepath & "\" & SubjectID & ".txt"
@@ -759,17 +866,23 @@ Public Class BIAS_v2Client
                 For Each imagePath In imGalList
                     File.Delete(imagePath)
                 Next
-
             End If
 
         Else
-            MessageBox.Show("In DeleteBiometricData, with a BiometricType. Still need to implement.")
+            'UNSUPPORTED_CAPABILITY=2
+            deleteBiomDataResponse.ResponseStatus.Return = 24
+            deleteBiomDataResponse.ResponseStatus.Message = "The biometric type capability is not supported by the service implementation, as all images are front facing facial images."
+            Return deleteBiomDataResponse
         End If
 
-        MessageBox.Show("Stop")
         Return deleteBiomDataResponse
     End Function
 
+    ''' <summary>
+    ''' Deletes an existing subject record from the subject records folder, as well as all galleries.
+    ''' </summary>
+    ''' <param name="DeleteSubjectRequest">Request parameter that holds a subject ID.</param>
+    ''' <returns name="deleteSubjectResponse">Contains a return code and a message that pertains to the return code.</returns>
     Public Function DeleteSubject(DeleteSubjectRequest As DeleteSubjectRequest) As DeleteSubjectResponsePackage Implements BIAS_v2.DeleteSubject
         Dim deleteSubjectResponse As New DeleteSubjectResponsePackage()
         deleteSubjectResponse.ResponseStatus = New ResponseStatus
@@ -823,6 +936,11 @@ Public Class BIAS_v2Client
         Return deleteSubjectResponse
     End Function
 
+    ''' <summary>
+    ''' Deletes an existing subject record from a gallery using a subjectID or an identity claim. NOTE: In this implementation, subjectIDs and identity claims are the same.
+    ''' </summary>
+    ''' <param name="DeleteSubjectFromGalleryRequest">Request parameter that holds a subject ID or a identity claim, and a gallery ID.</param>
+    ''' <returns name="deleteSubjectGalleryResponse">Contains a return code and a message that pertains to the return code.</returns>
     Public Function DeleteSubjectFromGallery(DeleteSubjectFromGalleryRequest As DeleteSubjectFromGalleryRequest) As DeleteSubjectFromGalleryResponsePackage Implements BIAS_v2.DeleteSubjectFromGallery
         Dim deleteSubjectGalleryResponse As New DeleteSubjectFromGalleryResponsePackage()
         deleteSubjectGalleryResponse.ResponseStatus = New ResponseStatus
@@ -864,6 +982,12 @@ Public Class BIAS_v2Client
         Return deleteSubjectGalleryResponse
     End Function
 
+    ''' <summary>
+    ''' Enroll identifies the input subject, and if it exists, it updates the existing record. 
+    ''' If the subject does not exist, it generates a new subject record using the attributes within the information type using various BIAS functions.
+    ''' </summary>
+    ''' <param name="EnrollRequest">Request parameter containing processing options and an information type. </param>
+    ''' <returns name="enrollResponse">Response parameter holding the generated identity, a code indicating success, and a cooresponding message.</returns>
     Public Function Enroll(EnrollRequest As EnrollRequest) As EnrollResponsePackage Implements BIAS_v2.Enroll
 
         Console.WriteLine("In Enroll")
@@ -884,10 +1008,6 @@ Public Class BIAS_v2Client
         Else
             MessageBox.Show("The image looks good")
         End If
-        'ImageFromBase64String(sent64Byte)
-        'Dim convertedImage = ImageFromBase64String(sent64Byte)
-
-
 
         Dim enrollResponse As New EnrollResponsePackage()
         enrollResponse.ResponseStatus = New ResponseStatus
@@ -955,8 +1075,8 @@ Public Class BIAS_v2Client
 
         'set biometric data
         Dim setBiom As New SetBiometricDataRequest
-        setBiom.Identity = EnrollRequest.Identity 'used to be newIdentity, but this was erasing the image within BIR for some reason. Not sure why?
-
+        setBiom.Identity = EnrollRequest.Identity
+        setBiom.Identity.SubjectID = subjectID
         bias.SetBiometricData(setBiom)
 
         'add subject to gallery
@@ -971,34 +1091,87 @@ Public Class BIAS_v2Client
         'If it is known, then update bio/biog data in a person centric model, or initiate set Biog/Biom data in an encounter-centric model
 
         enrollResponse.Identity = newIdentity
-        'MessageBox.Show(enrollResponse.Identity.SubjectID)
         enrollResponse.ResponseStatus.Return = 0
         enrollResponse.ResponseStatus.Message = "Participant Enrolled"
         Return enrollResponse
     End Function
 
+    ''' <summary>
+    ''' Retrieves the enrolment results for the specified token. This service is used in conjunction with the Enroll aggregate service. If the Enrol aggregate service is
+    ''' implemented as an asynchronous service, the implementing system returns a token, and the Get Enroll Results service is used to poll for the results of the original Enrol request.
+    ''' NOTE: Because this example is implemented as a synchronous system, this service is not supported.
+    ''' </summary>
+    ''' <param name="GetEnrollResultsRequest">Request parameter that contains the token - the value used to retrieve the results of an Enroll request.</param>
+    ''' <returns name="enrollResultsResponse">Return parameter that contains the code and message signifying that the service is not implemented.</returns>
     Public Function GetEnrollResults(GetEnrollResultsRequest As GetEnrollResultsRequest) As GetEnrollResultsResponsePackage Implements BIAS_v2.GetEnrollResults
         Dim enrollResultsResponse As New GetEnrollResultsResponsePackage()
+        enrollResultsResponse.ResponseStatus = New ResponseStatus
+        enrollResultsResponse.ResponseStatus.Return = 24
+        enrollResultsResponse.ResponseStatus.Message = "The requested service/function is not implemented due to the synchronous implementation of the system."
         Return enrollResultsResponse
     End Function
 
+    ''' <summary>
+    ''' Retrieves the identification results for the specified token. This service is used in conjunction with the Identify aggregate service. 
+    ''' If the Identify aggregate service is implemented as an asynchronous service, the implementing system returns a non-zero token, and the 
+    ''' Get Identify Results service is used to poll for the results of the original Identify request.
+    ''' NOTE: Because this example is implemented as a synchronous system, this service is not supported.
+    ''' </summary>
+    ''' <param name="GetIdentifyResultsRequest">Request parameter that contains the token - the value used to retrieve the results of an Identify request.</param>
+    ''' <returns name="identityResultsResponse">Return parameter that contains the code and message signifying that the service is not implemented.</returns>
     Public Function GetIdentifyResults(GetIdentifyResultsRequest As GetIdentifyResultsRequest) As GetIdentifyResultsResponsePackage Implements BIAS_v2.GetIdentifyResults
         Dim identityResultsResponse As New GetIdentifyResultsResponsePackage()
+        identityResultsResponse.ResponseStatus = New ResponseStatus
+        identityResultsResponse.ResponseStatus.Return = 24
+        identityResultsResponse.ResponseStatus.Message = "The requested service/function is not implemented due to the synchronous implementation of the system."
         Return identityResultsResponse
     End Function
 
+    ''' <summary>
+    ''' Retrieves the identification results for the specified token. This service is used in conjunction with the Identify Subject service. 
+    ''' If the Identify Subject service is implemented as an asynchronous service, the implementing system returns a token, and the 
+    ''' Get Identify Subject Results service is used to poll for the results of the original Identify Subject request.
+    ''' NOTE: Because this example is implemented as a synchronous system, this service is not supported.
+    ''' </summary>
+    ''' <param name="GetIdentifySubjectResultsRequest">Request parameter that contains the token - the value used to retrieve the results of an Identify Subject request.</param>
+    ''' <returns name="identitySubjectResultsResponse">Return parameter that contains the code and message signifying that the service is not implemented.</returns>
     Public Function GetIdentifySubjectResults(GetIdentifySubjectResultsRequest As GetIdentifySubjectResultsRequest) As GetIdentifySubjectResultsResponsePackage Implements BIAS_v2.GetIdentifySubjectResults
         Dim identitySubjectResultsResponse As New GetIdentifySubjectResultsResponsePackage()
+        identitySubjectResultsResponse.ResponseStatus = New ResponseStatus
+        identitySubjectResultsResponse.ResponseStatus.Return = 24
+        identitySubjectResultsResponse.ResponseStatus.Message = "The requested service/function is not implemented due to the synchronous implementation of the system."
         Return identitySubjectResultsResponse
     End Function
 
+    ''' <summary>
+    ''' Retrieves the verification results for the specified token. This service is used in conjunction with the Verify aggregate service. If the Verify aggregate service is
+    ''' implemented as an asynchronous service, the implementing system returns a non-zero token, and the Get Verify Results service is used to poll for the results of the original Verify request.
+    ''' NOTE: Because this example is implemented as a synchronous system, this service is not supported.
+    ''' </summary>
+    ''' <param name="GetVerifyResultsRequest">Request parameter that contains the token - the value used to retrieve the results of an Verify request.</param>
+    ''' <returns name="verifyResultsResponse">Return parameter that contains the code and message signifying that the service is not implemented.</returns>
     Public Function GetVerifyResults(GetVerifyResultsRequest As GetVerifyResultsRequest) As GetVerifyResultsResponsePackage Implements BIAS_v2.GetVerifyResults
-        Dim Result As New GetVerifyResultsResponsePackage
-        Return Result
+        Dim verifyResultsResponse As New GetVerifyResultsResponsePackage
+        verifyResultsResponse.ResponseStatus = New ResponseStatus
+        verifyResultsResponse.ResponseStatus.Return = 24
+        verifyResultsResponse.ResponseStatus.Message = "The requested service/function is not implemented due to the synchronous implementation of the system."
+        Return verifyResultsResponse
     End Function
 
+    ''' <summary>
+    ''' Uses LBPHFaceRecognizer of OpenCV to do subject identification of an input biometric image. Returns a BIASIdentity of the most likely subject match.
+    ''' NOTE: Due to the limitations of LBPHFaceRecognizer, specifying the number of candidates in the input maxListSize attribute is not supported. Instead,
+    ''' only the most likely match is returned.
+    ''' </summary>
+    ''' <param name="ProcessingOptions"></param>
+    ''' <param name="GalleryID">OPTIONAL - The identifier of the gallery which will be searched.</param>
+    ''' <param name="maxListSize">The maximum size of the candidate list that should be returned. NOTE: Not supported due to limitations of LBPHFaceRecognizer.</param>
+    ''' <param name="InputData">contains an input data record, which at a minimum must include biometric data</param>
+    ''' <returns name="candidateList">A rank-ordered list of candidates(limited to 1 in this implementation) that have a likelihood of matchingthe input biometric sample</returns>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes. </returns>
+    ''' <returns name="candidateList">Message cooresponding to the Return parameter</returns>
     Public Function Identify(IdentifyRequest As IdentifyRequest) As IdentifyResponsePackage Implements BIAS_v2.Identify
-        'Dim d1 = IdentifyRequest.InputData.ExtensionData.
+
         Dim identifyResponse As New IdentifyResponsePackage()
 
         'added until Identify is finalized by Paul.
@@ -1006,21 +1179,213 @@ Public Class BIAS_v2Client
         identifyResponse.Identity = newIdentity
 
         identifyResponse.ResponseStatus = New ResponseStatus
-        identifyResponse.ResponseStatus.Return = 99
-        identifyResponse.ResponseStatus.Message = "Not implemented yet"
+
+        'Since synchronous, limited processing options to specifying which galleries to look at. 0 = All galleries, Otherwise need the folder/gallery name
+        'May cross over with GalleryID, check if GalleryID is nothing, if so, use processing options value as galleryID
+        Dim galleryID As String = IdentifyRequest.GalleryID
+        If galleryID Is Nothing Then
+            galleryID = "1" 'default for demonstration purposes
+        End If
+
+        'check if gallery exists.
+        Dim galleriesPath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Galleries"
+        If (Directory.Exists(galleriesPath & "\" & galleryID) = False) Then
+            identifyResponse.ResponseStatus.Return = 11
+            identifyResponse.ResponseStatus.Message = "The gallery referenced by the input gallery ID does not exist."
+            Return identifyResponse
+        End If
+
+        'Create the trainer. Need to create each time Identify is done due to variability of galleryID
+        Dim trainer = New IdentifyTrainer()
+        trainer.setGalleryID(galleryID)
+        Dim identifyTrainer = trainer.createTrainer()
+
+        'In our case, inputData will only include the image. No other information will be used for identifcation
+        'Load and convert byte() to image.
+        Dim inputData As Byte() = IdentifyRequest.InputData.Images(0).ImageData
+        Dim inputImage As System.Drawing.Image
+
+        Dim ms As System.IO.MemoryStream = New System.IO.MemoryStream(inputData)
+        inputImage = System.Drawing.Image.FromStream(ms)
+
+        'create the faceCascade
+        Dim cascadeFilePath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\haarcascade_frontalface_default.xml"
+        Dim faceCascade = New CascadeClassifier(cascadeFilePath)
+
+        'get the max list size
+        Dim maxListSize As Long = IdentifyRequest.MaxListSize
+
+        Dim predictionResult = prediction(identifyTrainer, faceCascade, inputImage, maxListSize)
+        Dim predictSubjectID = predictionResult.Label
+        Dim predictDistance = predictionResult.Distance
+
+        Dim matchedIdentity As New BIASIdentity
+        Dim candidateList = New CandidateListType
+        'if the distance is above 5, probable match. If not, reject match, return empty identity
+        If (predictDistance > 5) Then
+
+            Dim candidate = New CandidateType
+            candidate.Identity = New BIASIdentity
+            candidate.Identity.SubjectID = predictSubjectID
+            candidate.Rank = 1
+            candidate.ScoreList = New CandidateType.ScoreListType
+            Dim matchScore = New ScoreType
+            matchScore.Value = predictDistance
+            candidate.ScoreList.Score = matchScore
+            candidateList.Add(candidate)
+
+            Dim predictionString = "Input image is most likely Subject " & predictionResult.Label & ", with a distance score of " & predictionResult.Distance
+            identifyResponse.ResponseStatus.Return = 0
+            identifyResponse.ResponseStatus.Message = predictionString
+        Else
+            identifyResponse.ResponseStatus.Return = 34
+            identifyResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
+        End If
+
+        identifyResponse.CandidateList = candidateList
         Return identifyResponse
     End Function
 
+    ''' <summary>
+    ''' Uses LBPHFaceRecognizer of OpenCV to do subject identification of an input biometric image. Returns a BIASIdentity of the most likely subject match.
+    ''' NOTE: Due to the limitations of LBPHFaceRecognizer, specifying the number of candidates in the input maxListSize attribute is not supported. Instead,
+    ''' only the most likely match is returned.
+    ''' </summary>
+    ''' <param name="ProcessingOptions"></param>
+    ''' <param name="GalleryID">OPTIONAL - The identifier of the gallery which will be searched.</param>
+    ''' <param name="maxListSize">The maximum size of the candidate list that should be returned. NOTE: Not supported due to limitations of LBPHFaceRecognizer.</param>
+    ''' <param name="biometricImage">The biometric image, stored as a base64 string.</param>
+    ''' <returns name="candidateList">A rank-ordered list of candidates(limited to 1 in this implementation) that have a likelihood of matchingthe input biometric sample</returns>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes. </returns>
+    ''' <returns name="candidateList">Message cooresponding to the Return parameter</returns>
     Public Function IdentifySubject(IdentifySubjectRequest As IdentifySubjectRequest) As IdentifySubjectResponsePackage Implements BIAS_v2.IdentifySubject
-        Dim identifySubjectResponse As New IdentifySubjectResponsePackage()
+        Dim identifySubjectResponse = New IdentifySubjectResponsePackage
         identifySubjectResponse.ResponseStatus = New ResponseStatus
-        identifySubjectResponse.ResponseStatus.Return = 99
-        identifySubjectResponse.ResponseStatus.Message = "Not implemented yet"
-        Return identifySubjectResponse
+
+        'Since synchronous, limited processing options to specifying which galleries to look at. 0 = All galleries, Otherwise need the folder/gallery name
+        'May cross over with GalleryID, check if GalleryID is nothing, if so, use processing options value as galleryID
+        Dim galleryID As String = IdentifySubjectRequest.GalleryID
+        If galleryID Is Nothing Then
+            'Do identification against the input gallery.
+            Dim inputGallery = IdentifySubjectRequest.Gallery
+
+            Dim trainer = New IdentifySubjectTrainer()
+            trainer.setGallery(inputGallery)
+            Dim ISTrainer = trainer.createTrainer()
+
+            'In our case, Identity will only hold the biometric image string. May be different in other implementations.
+            'Load and convert base64 string to image.
+            Dim inputData As String = IdentifySubjectRequest.Identity.BiometricData.BIR.BIR.biometricImage
+            Dim inputImage As System.Drawing.Image = ImageFromBase64String(inputData)
+
+            'create the faceCascade
+            Dim cascadeFilePath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\haarcascade_frontalface_default.xml"
+            Dim faceCascade = New CascadeClassifier(cascadeFilePath)
+
+            Dim maxListSize As Long = IdentifySubjectRequest.MaxListSize
+
+            Dim predictionResult = prediction(ISTrainer, faceCascade, inputImage, maxListSize)
+            Dim predictSubjectID = predictionResult.Label
+            Dim predictDistance = predictionResult.Distance
+
+            Dim matchedIdentity As New BIASIdentity
+            Dim candidateList = New CandidateListType
+
+            'if the distance is above 5, probable match. If not, reject match, return empty identity
+            If (predictDistance > 5) Then
+
+                Dim candidate = New CandidateType
+                candidate.Identity = New BIASIdentity
+                candidate.Identity.SubjectID = predictSubjectID
+                candidate.Rank = 1
+                candidate.ScoreList = New CandidateType.ScoreListType
+                Dim matchScore = New ScoreType
+                matchScore.Value = predictDistance
+                candidate.ScoreList.Score = matchScore
+                candidateList.Add(candidate)
+
+                Dim predictionString = "Input image is most likely Subject " & predictionResult.Label & ", with a distance score of " & predictionResult.Distance
+                identifySubjectResponse.ResponseStatus.Return = 0
+                identifySubjectResponse.ResponseStatus.Message = predictionString
+            Else
+                identifySubjectResponse.ResponseStatus.Return = 34
+                identifySubjectResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
+            End If
+
+            identifySubjectResponse.IdentifySubjectResult.CandidateList = candidateList
+            Return identifySubjectResponse
+
+        Else
+
+            'Do normal identification against the galleryID provided.
+
+            'check if gallery exists.
+            Dim galleriesPath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Galleries"
+            If (Directory.Exists(galleriesPath & "\" & galleryID) = False) Then
+                identifySubjectResponse.ResponseStatus.Return = 11
+                identifySubjectResponse.ResponseStatus.Message = "The gallery referenced by the input gallery ID does not exist."
+                Return identifySubjectResponse
+            End If
+
+            'Create the trainer. Need to create each time Identify is done due to variability of galleryID
+            Dim globalTrainer = New IdentifyTrainer()
+            globalTrainer.setGalleryID(galleryID)
+            Dim trainer = globalTrainer.createTrainer()
+
+            'In our case, Identity will only hold the biometric image string. May be different in other implementations.
+            'Load and convert base64 string to image.
+            Dim inputData As String = IdentifySubjectRequest.Identity.BiometricData.BIR.BIR.biometricImage
+            Dim inputImage As System.Drawing.Image = ImageFromBase64String(inputData)
+
+            'create the faceCascade
+            Dim cascadeFilePath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\haarcascade_frontalface_default.xml"
+            Dim faceCascade = New CascadeClassifier(cascadeFilePath)
+
+            Dim maxListSize As Long = IdentifySubjectRequest.MaxListSize
+
+            Dim predictionResult = prediction(trainer, faceCascade, inputImage, maxListSize)
+            Dim predictSubjectID = predictionResult.Label
+            Dim predictDistance = predictionResult.Distance
+
+            Dim matchedIdentity As New BIASIdentity
+            Dim candidateList = New CandidateListType
+            'if the distance is above 5, probable match. If not, reject match, return empty identity
+            If (predictDistance > 5) Then
+
+                Dim candidate = New CandidateType
+                candidate.Identity = New BIASIdentity
+                candidate.Identity.SubjectID = predictSubjectID
+                candidate.Rank = 1
+                candidate.ScoreList = New CandidateType.ScoreListType
+                Dim matchScore = New ScoreType
+                matchScore.Value = predictDistance
+                candidate.ScoreList.Score = matchScore
+                candidateList.Add(candidate)
+
+                Dim predictionString = "Input image is most likely Subject " & predictionResult.Label & ", with a distance score of " & predictionResult.Distance
+                identifySubjectResponse.ResponseStatus.Return = 0
+                identifySubjectResponse.ResponseStatus.Message = predictionString
+            Else
+                identifySubjectResponse.ResponseStatus.Return = 34
+                identifySubjectResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
+            End If
+
+            identifySubjectResponse.IdentifySubjectResult.CandidateList = candidateList
+            Return identifySubjectResponse
+
+        End If
+
     End Function
 
+    ''' <summary>
+    ''' Lists the biographic data elements stored for a subject using the Biographic Data Elements list. Does not return biographic data values, only the biographic data categories.
+    ''' For example, "Family Name", "Sex", "Citizenship"
+    ''' </summary>
+    ''' <param name="SubjectID">The identifier of the subject</param>
+    ''' <returns name="BiographicData">A list of biographic data item categories.</returns>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes. </returns>
+    ''' <returns name="candidateList">Message cooresponding to the Return parameter</returns>
     Public Function ListBiographicData(ListBiographicDataRequest As ListBiographicDataRequest) As ListBiographicDataResponsePackage Implements BIAS_v2.ListBiographicData
-
 
         Dim subjectID As String = ListBiographicDataRequest.Identity.SubjectID
         Dim encounterID As String = ListBiographicDataRequest.Identity.EncounterID
@@ -1068,8 +1433,19 @@ Public Class BIAS_v2Client
 
     End Function
 
+    ''' <summary>
+    ''' Lists the biometric data elements stored for a subject using the Biographic Data Elements list. Does not return biometric data values.
+    ''' NOTE: All biometric data in this implementation are facial images. Thus, it returns a list of elements cooresponding to the number of images in a subject record folder, with the values
+    ''' for Type, Subtype, FormatOwner, and FormatType all being the same ("Face", "Front", 257, 1)
+    ''' </summary>
+    ''' <param name="SubjectID">The identifier of the subject</param>
+    ''' <param name="ListFilter">An optional filter indicating what type of biometric information should be returned. Not supported in this implementation because of the singular nature of the biometric data.</param>
+    ''' <returns name="BiometricDataList">A list of biometric data item labels.</returns>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes. </returns>
+    ''' <returns name="Message">Message cooresponding to the Return parameter</returns>
     Public Function ListBiometricData(ListBiometricDataRequest As ListBiometricDataRequest) As ListBiometricDataResponsePackage Implements BIAS_v2.ListBiometricData
         Dim subjectID As String = ListBiometricDataRequest.Identity.SubjectID
+        Dim listFilter = ListBiometricDataRequest.ListFilter
 
         Dim listBiomDataResponse As New ListBiometricDataResponsePackage()
         listBiomDataResponse.ResponseStatus = New ResponseStatus()
@@ -1100,6 +1476,7 @@ Public Class BIAS_v2Client
             For Each index In imageNameIndexes
                 Dim bioType = New BiometricDataType
                 bioType.BiometricType.Nodes.SetValue("Face", 0)
+                bioType.BiometricSubType.Nodes.SetValue("Front", 0)
                 bioType.BDBFormatOwner = 257 'format owner and type are always these values
                 bioType.BDBFormatType = 1
                 bioDataTypeList.Add(bioType)
@@ -1119,11 +1496,42 @@ Public Class BIAS_v2Client
 
     End Function
 
+    ''' <summary>
+    ''' Shall accept either comparison score or comparison decision information and create a fused comparison result.
+    ''' <param name="FusionInput">Score or decision input information to the fusion method for each identity</param>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes. </returns>
+    ''' <returns name="Match">Indicates the result of the fusion method </returns>
+    ''' </summary>
     Public Function PerformFusion(PerformFusionRequest As PerformFusionRequest) As PerformFusionResponsePackage Implements BIAS_v2.PerformFusion
         Dim performFusionResponse As New PerformFusionResponsePackage()
+        performFusionResponse.ResponseStatus = New ResponseStatus
+
+
+        'Fusion input is a list of fusion identity lists
+        'These fusion identity lists contain multiple fusion information types
+        'These fusion information types are normally seperate, but with fusion, we compile them into the fusion identity list, creating a multiple source comparison result.
+
+        For Each fusionIdentity In PerformFusionRequest.FusionInput
+            For Each fusionInformation In fusionIdentity
+                'Going to do Multi-Sample Fusion
+                'fusion of multiple samples (images) acquired from the same source, such as multiple images of a single fingerprint, images of the same face, or recordings of a speaker
+                'Within this, we're going to do score level fusion - which takes the similarity scores and combines them. 
+                'Just average them together?
+                'Or we could do sample level fusion
+
+                
+            Next
+        Next
+
         Return performFusionResponse
     End Function
 
+    ''' <summary>
+    ''' Returns a list of the capabilities, options, galleries, etc. that are supported by the BIAS implementation.
+    ''' NOTE: Reference Table 1 in ISO/IEC 30108-1 to view a list of capabilities.
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes. </returns>
+    ''' <returns name="CapabilityList">A list of capabilities supported by the BIAS implementation</returns>
+    ''' </summary>
     Public Function QueryCapabilities(QueryCapabilitiesRequest As QueryCapabilitiesRequest) As QueryCapabilitiesResponsePackage Implements BIAS_v2.QueryCapabilities
 
         Dim capabilityList As List(Of CapabilityType) = New CapabilityListType
@@ -1260,7 +1668,6 @@ Public Class BIAS_v2Client
         transformOperation.CapabilitySupportingValue = "{1,2,3}" 'Feature extraction, centring/cropping, biometric data format conversion
         capabilityList.Add(transformOperation)
 
-
         Dim queryCapabilitiesResponse As New QueryCapabilitiesResponsePackage()
         queryCapabilitiesResponse.ResponseStatus = New ResponseStatus
         queryCapabilitiesResponse.ResponseStatus.Return = "0"
@@ -1270,6 +1677,15 @@ Public Class BIAS_v2Client
 
     End Function
 
+    ''' <summary>
+    ''' Retrieve the list of biographic data associated with a subjectID. Differes from listBiographicData in that it returns the stored values as well.
+    ''' If no galleryID is specified, a list of biographic data from all galleries shall be returned.
+    ''' <param name="SubjectID">the identifier of the subject</param>
+    ''' <param name="GalleryID">the identifier of the gallery or population group from which the biometric information will be retrieved</param>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes.</returns>
+    ''' <returns name="Message">Message cooresponding to the Return parameter</returns>
+    ''' <returns name="BiographicData">A list of biographic data associated with the subject</returns>
+    ''' </summary>
     Public Function RetrieveBiographicData(RetrieveBiographicDataRequest As RetrieveBiographicDataRequest) As RetrieveBiographicDataResponsePackage Implements BIAS_v2.RetrieveBiographicData
 
         Dim retrieveBiogDataResponse As New RetrieveBiographicDataResponsePackage()
@@ -1327,7 +1743,6 @@ Public Class BIAS_v2Client
             Next
         End If
 
-
         retrieveBiogDataResponse.Identity.BiographicData = biographicData
         retrieveBiogDataResponse.ResponseStatus.Return = 0
         retrieveBiogDataResponse.ResponseStatus.Message = "Biographic data sucessfully returned."
@@ -1335,6 +1750,15 @@ Public Class BIAS_v2Client
 
     End Function
 
+    ''' <summary>
+    ''' Retrieve the list of biometric data associated with a subjectID. Differes from listBiometricData in that it returns the stored values as well.
+    ''' If no galleryID is specified, a list of biometric data from all galleries shall be returned.
+    ''' <param name="SubjectID">the identifier of the subject</param>
+    ''' <param name="GalleryID">the identifier of the gallery or population group from which the biometric information will be retrieved</param>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes.</returns>
+    ''' <returns name="Message">Message cooresponding to the Return parameter</returns>
+    ''' <returns name="BiometricData">A list of biometric data associated with the subject</returns>
+    ''' </summary>
     Public Function RetrieveBiometricData(RetrieveBiometricDataRequest As RetrieveBiometricDataRequest) As RetrieveBiometricDataResponsePackage Implements BIAS_v2.RetrieveBiometricData
         Dim retrieveBiomDataResponse As New RetrieveBiometricDataResponsePackage()
 
@@ -1353,88 +1777,191 @@ Public Class BIAS_v2Client
         retrieveBiomDataResponse.Identity.BiometricData = New BIASBiometricDataType
         retrieveBiomDataResponse.Identity.BiometricData.BIRList = New CBEFF_BIR_ListType
 
-        'read lines from text file
-        Dim subjectFileGalPath As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
-                                                       & "\MasterDB\Galleries\" & GalleryID & "\" & SubjectID & "\" & SubjectID & ".txt"
-        Dim readText As List(Of String) = System.IO.File.ReadAllLines(subjectFileGalPath).ToList
 
-        'Go through list, find the line # of ImageName instances
-        Dim imageNameIndexes = New List(Of Integer)
-        Dim lineNum = 0
-        For Each line In readText
-            If line.IndexOf("ImageName") = 0 Then
-                imageNameIndexes.Add(lineNum)
-            End If
-            lineNum = lineNum + 1
-        Next
+        If GalleryID IsNot Nothing Then
 
-        'Create CBEFF_BIR types based off the start of each image grouping in readText
-        For Each index In imageNameIndexes
+            'read lines from text file
+            Dim subjectFileGalPath As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
+                                                           & "\MasterDB\Galleries\" & GalleryID & "\" & SubjectID & "\" & SubjectID & ".txt"
 
-            Dim bir = New CBEFF_BIR_Type
-            bir.BIR = New BaseBIRType
-            'Image and Format
-            Dim imageName = readText(index).Substring(10)
-            Dim subjectGalleryFolderPath As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
-                                                       & "\MasterDB\Galleries\" & GalleryID & "\" & SubjectID & "\"
+            Dim readText As List(Of String) = System.IO.File.ReadAllLines(subjectFileGalPath).ToList
 
-            Dim biomImage = System.Drawing.Image.FromFile(subjectGalleryFolderPath & imageName)
-            bir.BIR.biometricImage = ImageToBase64String(biomImage, ImageFormat.Png)
-            bir.FormatOwner = readText(index + 1).Substring(12)
-            bir.FormatType = readText(index + 2).Substring(11)
-            'BIR DB
-            bir.BIR_Information = New CBEFF_BIR_Type.BIR_InformationType
-            bir.BIR_Information.BIR_Info = New BIRInfoType
-            bir.BIR_Information.BIR_Info.Creator = readText(index + 3).Substring(8)
-            bir.BIR_Information.BIR_Info.Index = readText(index + 4).Substring(10)
-            Dim checkIntegrity As Boolean = readText(index + 5).Substring(10)
-            bir.BIR_Information.BIR_Info.Integrity = checkIntegrity
-            bir.BIR_Information.BIR_Info.Payload = New Byte() {readText(index + 6).Substring(8)}
-            bir.BIR_Information.BIR_Info.CreationDate = readText(index + 7).Substring(13)
-            bir.BIR_Information.BIR_Info.NotValidBefore = readText(index + 8).Substring(15)
-            bir.BIR_Information.BIR_Info.NotValidAfter = readText(index + 9).Substring(14)
-            'BDB DB
-            bir.BIR_Information.BDB_Info = New BDBInfoType
-            bir.BIR_Information.BDB_Info.Index = readText(index + 10).Substring(10)
-            bir.BIR_Information.BDB_Info.Format = New RegistryIDType
-            bir.BIR_Information.BDB_Info.Format.Organization = readText(index + 11).Substring(23)
-            bir.BIR_Information.BDB_Info.Format.Type = readText(index + 12).Substring(15)
-            bir.BIR_Information.BDB_Info.Encryption = readText(index + 13).Substring(11)
-            bir.BIR_Information.BDB_Info.CreationDate = readText(index + 14).Substring(17)
-            bir.BIR_Information.BDB_Info.NotValidBefore = readText(index + 15).Substring(19)
-            bir.BIR_Information.BDB_Info.NotValidAfter = readText(index + 16).Substring(18)
-            bir.BIR_Information.BDB_Info.Level = readText(index + 17).Substring(6)
-            bir.BIR_Information.BDB_Info.Product = New RegistryIDType
-            bir.BIR_Information.BDB_Info.Product.Organization = readText(index + 18).Substring(20)
-            bir.BIR_Information.BDB_Info.Product.Type = readText(index + 19).Substring(12)
-            bir.BIR_Information.BDB_Info.CaptureDevice = New RegistryIDType
-            bir.BIR_Information.BDB_Info.CaptureDevice.Organization = readText(index + 20).Substring(26)
-            bir.BIR_Information.BDB_Info.CaptureDevice.Type = readText(index + 21).Substring(18)
-            bir.BIR_Information.BDB_Info.FeatureExtractionAlgorithm = New RegistryIDType
-            bir.BIR_Information.BDB_Info.FeatureExtractionAlgorithm.Organization = readText(index + 22).Substring(39)
-            bir.BIR_Information.BDB_Info.FeatureExtractionAlgorithm.Type = readText(index + 23).Substring(31)
-            bir.BIR_Information.BDB_Info.ComparisonAlgorithm = New RegistryIDType
-            bir.BIR_Information.BDB_Info.ComparisonAlgorithm.Organization = readText(index + 24).Substring(32)
-            bir.BIR_Information.BDB_Info.ComparisonAlgorithm.Type = readText(index + 25).Substring(24)
-            bir.BIR_Information.BDB_Info.CompressionAlgorithm = New RegistryIDType
-            bir.BIR_Information.BDB_Info.CompressionAlgorithm.Organization = readText(index + 26).Substring(33)
-            bir.BIR_Information.BDB_Info.CompressionAlgorithm.Type = readText(index + 27).Substring(25)
-            bir.BIR_Information.BDB_Info.Purpose = readText(index + 28).Substring(8)
-            'SB DB
-            bir.BIR_Information.SB_Info = New SBInfoType
-            bir.BIR_Information.SB_Info.Format = New RegistryIDType
-            bir.BIR_Information.SB_Info.Format.Organization = readText(index + 29).Substring(22)
-            bir.BIR_Information.SB_Info.Format.Type = readText(index + 30).Substring(14)
+            'Go through list, find the line # of ImageName instances
+            Dim imageNameIndexes = New List(Of Integer)
+            Dim lineNum = 0
+            For Each line In readText
+                If line.IndexOf("ImageName") = 0 Then
+                    imageNameIndexes.Add(lineNum)
+                End If
+                lineNum = lineNum + 1
+            Next
 
-            'Add newly created CBEFF_BIR to CBEFF_BIR_LIST
-            retrieveBiomDataResponse.Identity.BiometricData.BIRList.Add(bir)
-        Next
+            'Create CBEFF_BIR types based off the start of each image grouping in readText
+            For Each index In imageNameIndexes
 
+                Dim bir = New CBEFF_BIR_Type
+                bir.BIR = New BaseBIRType
+                'Image and Format
+                Dim imageName = readText(index).Substring(10)
+                Dim subjectRecordFolderPath As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
+                                                           & "\MasterDB\Subject Records\" & SubjectID & "\"
+
+                Dim biomImage = System.Drawing.Image.FromFile(subjectRecordFolderPath & imageName)
+                bir.BIR.biometricImage = ImageToBase64String(biomImage, ImageFormat.Png)
+                bir.FormatOwner = readText(index + 1).Substring(12)
+                bir.FormatType = readText(index + 2).Substring(11)
+                'BIR DB
+                bir.BIR_Information = New CBEFF_BIR_Type.BIR_InformationType
+                bir.BIR_Information.BIR_Info = New BIRInfoType
+                bir.BIR_Information.BIR_Info.Creator = readText(index + 3).Substring(8)
+                bir.BIR_Information.BIR_Info.Index = readText(index + 4).Substring(10)
+                Dim checkIntegrity As Boolean = readText(index + 5).Substring(10)
+                bir.BIR_Information.BIR_Info.Integrity = checkIntegrity
+                bir.BIR_Information.BIR_Info.Payload = New Byte() {readText(index + 6).Substring(8)}
+                bir.BIR_Information.BIR_Info.CreationDate = readText(index + 7).Substring(13)
+                bir.BIR_Information.BIR_Info.NotValidBefore = readText(index + 8).Substring(15)
+                bir.BIR_Information.BIR_Info.NotValidAfter = readText(index + 9).Substring(14)
+                'BDB DB
+                bir.BIR_Information.BDB_Info = New BDBInfoType
+                bir.BIR_Information.BDB_Info.Index = readText(index + 10).Substring(10)
+                bir.BIR_Information.BDB_Info.Format = New RegistryIDType
+                bir.BIR_Information.BDB_Info.Format.Organization = readText(index + 11).Substring(23)
+                bir.BIR_Information.BDB_Info.Format.Type = readText(index + 12).Substring(15)
+                bir.BIR_Information.BDB_Info.Encryption = readText(index + 13).Substring(11)
+                bir.BIR_Information.BDB_Info.CreationDate = readText(index + 14).Substring(17)
+                bir.BIR_Information.BDB_Info.NotValidBefore = readText(index + 15).Substring(19)
+                bir.BIR_Information.BDB_Info.NotValidAfter = readText(index + 16).Substring(18)
+                bir.BIR_Information.BDB_Info.Level = readText(index + 17).Substring(6)
+                bir.BIR_Information.BDB_Info.Product = New RegistryIDType
+                bir.BIR_Information.BDB_Info.Product.Organization = readText(index + 18).Substring(20)
+                bir.BIR_Information.BDB_Info.Product.Type = readText(index + 19).Substring(12)
+                bir.BIR_Information.BDB_Info.CaptureDevice = New RegistryIDType
+                bir.BIR_Information.BDB_Info.CaptureDevice.Organization = readText(index + 20).Substring(26)
+                bir.BIR_Information.BDB_Info.CaptureDevice.Type = readText(index + 21).Substring(18)
+                bir.BIR_Information.BDB_Info.FeatureExtractionAlgorithm = New RegistryIDType
+                bir.BIR_Information.BDB_Info.FeatureExtractionAlgorithm.Organization = readText(index + 22).Substring(39)
+                bir.BIR_Information.BDB_Info.FeatureExtractionAlgorithm.Type = readText(index + 23).Substring(31)
+                bir.BIR_Information.BDB_Info.ComparisonAlgorithm = New RegistryIDType
+                bir.BIR_Information.BDB_Info.ComparisonAlgorithm.Organization = readText(index + 24).Substring(32)
+                bir.BIR_Information.BDB_Info.ComparisonAlgorithm.Type = readText(index + 25).Substring(24)
+                bir.BIR_Information.BDB_Info.CompressionAlgorithm = New RegistryIDType
+                bir.BIR_Information.BDB_Info.CompressionAlgorithm.Organization = readText(index + 26).Substring(33)
+                bir.BIR_Information.BDB_Info.CompressionAlgorithm.Type = readText(index + 27).Substring(25)
+                bir.BIR_Information.BDB_Info.Purpose = readText(index + 28).Substring(8)
+                'SB DB
+                bir.BIR_Information.SB_Info = New SBInfoType
+                bir.BIR_Information.SB_Info.Format = New RegistryIDType
+                bir.BIR_Information.SB_Info.Format.Organization = readText(index + 29).Substring(22)
+                bir.BIR_Information.SB_Info.Format.Type = readText(index + 30).Substring(14)
+
+                'Add newly created CBEFF_BIR to CBEFF_BIR_LIST
+                retrieveBiomDataResponse.Identity.BiometricData.BIRList.Add(bir)
+            Next
+        Else 'get all biom data for the subjectID in all galleries available
+            For Each Dir As String In Directory.GetDirectories(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
+                                                       & "\MasterDB\Galleries\")
+                GalleryID = Dir
+                If Directory.Exists(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
+                                                       & "\MasterDB\Galleries\" & GalleryID & "\" & SubjectID) Then 'check if the subject record exists in the gallery
+
+                    'read lines from text file
+                    Dim subjectFileGalPath As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
+                                                                   & "\MasterDB\Galleries\" & GalleryID & "\" & SubjectID & "\" & SubjectID & ".txt"
+
+                    Dim readText As List(Of String) = System.IO.File.ReadAllLines(subjectFileGalPath).ToList
+
+                    'Go through list, find the line # of ImageName instances
+                    Dim imageNameIndexes = New List(Of Integer)
+                    Dim lineNum = 0
+                    For Each line In readText
+                        If line.IndexOf("ImageName") = 0 Then
+                            imageNameIndexes.Add(lineNum)
+                        End If
+                        lineNum = lineNum + 1
+                    Next
+
+                    'Create CBEFF_BIR types based off the start of each image grouping in readText
+                    For Each index In imageNameIndexes
+
+                        Dim bir = New CBEFF_BIR_Type
+                        bir.BIR = New BaseBIRType
+                        'Image and Format
+                        Dim imageName = readText(index).Substring(10)
+                        Dim subjectRecordFolderPath As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
+                                                                   & "\MasterDB\Subject Records\" & SubjectID & "\"
+
+                        Dim biomImage = System.Drawing.Image.FromFile(subjectRecordFolderPath & imageName)
+                        bir.BIR.biometricImage = ImageToBase64String(biomImage, ImageFormat.Png)
+                        bir.FormatOwner = readText(index + 1).Substring(12)
+                        bir.FormatType = readText(index + 2).Substring(11)
+                        'BIR DB
+                        bir.BIR_Information = New CBEFF_BIR_Type.BIR_InformationType
+                        bir.BIR_Information.BIR_Info = New BIRInfoType
+                        bir.BIR_Information.BIR_Info.Creator = readText(index + 3).Substring(8)
+                        bir.BIR_Information.BIR_Info.Index = readText(index + 4).Substring(10)
+                        Dim checkIntegrity As Boolean = readText(index + 5).Substring(10)
+                        bir.BIR_Information.BIR_Info.Integrity = checkIntegrity
+                        bir.BIR_Information.BIR_Info.Payload = New Byte() {readText(index + 6).Substring(8)}
+                        bir.BIR_Information.BIR_Info.CreationDate = readText(index + 7).Substring(13)
+                        bir.BIR_Information.BIR_Info.NotValidBefore = readText(index + 8).Substring(15)
+                        bir.BIR_Information.BIR_Info.NotValidAfter = readText(index + 9).Substring(14)
+                        'BDB DB
+                        bir.BIR_Information.BDB_Info = New BDBInfoType
+                        bir.BIR_Information.BDB_Info.Index = readText(index + 10).Substring(10)
+                        bir.BIR_Information.BDB_Info.Format = New RegistryIDType
+                        bir.BIR_Information.BDB_Info.Format.Organization = readText(index + 11).Substring(23)
+                        bir.BIR_Information.BDB_Info.Format.Type = readText(index + 12).Substring(15)
+                        bir.BIR_Information.BDB_Info.Encryption = readText(index + 13).Substring(11)
+                        bir.BIR_Information.BDB_Info.CreationDate = readText(index + 14).Substring(17)
+                        bir.BIR_Information.BDB_Info.NotValidBefore = readText(index + 15).Substring(19)
+                        bir.BIR_Information.BDB_Info.NotValidAfter = readText(index + 16).Substring(18)
+                        bir.BIR_Information.BDB_Info.Level = readText(index + 17).Substring(6)
+                        bir.BIR_Information.BDB_Info.Product = New RegistryIDType
+                        bir.BIR_Information.BDB_Info.Product.Organization = readText(index + 18).Substring(20)
+                        bir.BIR_Information.BDB_Info.Product.Type = readText(index + 19).Substring(12)
+                        bir.BIR_Information.BDB_Info.CaptureDevice = New RegistryIDType
+                        bir.BIR_Information.BDB_Info.CaptureDevice.Organization = readText(index + 20).Substring(26)
+                        bir.BIR_Information.BDB_Info.CaptureDevice.Type = readText(index + 21).Substring(18)
+                        bir.BIR_Information.BDB_Info.FeatureExtractionAlgorithm = New RegistryIDType
+                        bir.BIR_Information.BDB_Info.FeatureExtractionAlgorithm.Organization = readText(index + 22).Substring(39)
+                        bir.BIR_Information.BDB_Info.FeatureExtractionAlgorithm.Type = readText(index + 23).Substring(31)
+                        bir.BIR_Information.BDB_Info.ComparisonAlgorithm = New RegistryIDType
+                        bir.BIR_Information.BDB_Info.ComparisonAlgorithm.Organization = readText(index + 24).Substring(32)
+                        bir.BIR_Information.BDB_Info.ComparisonAlgorithm.Type = readText(index + 25).Substring(24)
+                        bir.BIR_Information.BDB_Info.CompressionAlgorithm = New RegistryIDType
+                        bir.BIR_Information.BDB_Info.CompressionAlgorithm.Organization = readText(index + 26).Substring(33)
+                        bir.BIR_Information.BDB_Info.CompressionAlgorithm.Type = readText(index + 27).Substring(25)
+                        bir.BIR_Information.BDB_Info.Purpose = readText(index + 28).Substring(8)
+                        'SB DB
+                        bir.BIR_Information.SB_Info = New SBInfoType
+                        bir.BIR_Information.SB_Info.Format = New RegistryIDType
+                        bir.BIR_Information.SB_Info.Format.Organization = readText(index + 29).Substring(22)
+                        bir.BIR_Information.SB_Info.Format.Type = readText(index + 30).Substring(14)
+
+                        'Add newly created CBEFF_BIR to CBEFF_BIR_LIST
+                        retrieveBiomDataResponse.Identity.BiometricData.BIRList.Add(bir)
+                    Next
+                End If
+            Next
+        End If
+
+
+        
+
+        retrieveBiomDataResponse.ResponseStatus = New ResponseStatus
         retrieveBiomDataResponse.ResponseStatus.Return = 0
         retrieveBiomDataResponse.ResponseStatus.Message = "The biometric records have been sucessfully retrieved."
         Return retrieveBiomDataResponse
     End Function
 
+    ''' <summary>
+    ''' Retrieve requested information about a subject. This aggregate service may be used to retrieve both biographic and biometric information for a subject record.
+    ''' <param name="SubjectID">the identifier of the subject</param>
+    ''' <param name="GalleryID">the identifier of the gallery or population group from which the biometric information will be retrieved</param>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes.</returns>
+    ''' <returns name="Message">Message cooresponding to the Return parameter</returns>
+    ''' <returns name="ReturnData">An InformationType that holds biographic/biometric/all data.</returns>
+    ''' </summary>
     Public Function RetrieveData(RetrieveDataRequest As RetrieveDataRequest) As RetrieveDataResponsePackage Implements BIAS_v2.RetrieveData
 
         Dim subjectID As String = RetrieveDataRequest.Identity.SubjectID
@@ -1449,20 +1976,22 @@ Public Class BIAS_v2Client
 
         'Pull out all relavent information from the subject record file, to be used as needed.
         Dim subjectFilePath As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & subjectID & "\" & subjectID & ".txt"
+        Dim subjectRecordPath As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & subjectID & "\"
         Dim readText As List(Of String) = System.IO.File.ReadAllLines(subjectFilePath).ToList
 
 
-        'possible options - [biographicData, basic] [biographicData, full] [biographicData count] [biometric data, number] [biometric data, full] [biometric data, count] [allData, basic] [allData, full]
+        'possible options - [biographicData, basic] [biographicData, full] [biometricData, images], [allData, basic] [allData, full]
         '[biographicData, basic] - GUID = SubjectID/IdentityClaim, GivenName + FamilyName = FirstName+LastNAme
         Dim dataType As String = processingOptions(0).Key
         Dim dataSelection As String = processingOptions(0).Value
         Dim returnInfoType As New InformationType
+
         If dataType = "biographicData" Then
-            Dim identityClaimIndex, givenNameIndex, familyNameIndex, dateOfBirthIndex, sexIndex, citizenshipIndex As Integer
+            Dim GUIDIndex, givenNameIndex, familyNameIndex, dateOfBirthIndex, sexIndex, citizenshipIndex As Integer
 
             'find the indexes of all non-biometric information
             For Each line In readText
-                If line.StartsWith("IdentityClaim:") Then identityClaimIndex = readText.IndexOf(line)
+                If line.StartsWith("GUID:") Then GUIDIndex = readText.IndexOf(line)
                 If line.StartsWith("GivenName:") Then givenNameIndex = readText.IndexOf(line)
                 If line.StartsWith("FamilyName:") Then familyNameIndex = readText.IndexOf(line)
                 If line.StartsWith("DateOfBirth:") Then dateOfBirthIndex = readText.IndexOf(line)
@@ -1470,12 +1999,12 @@ Public Class BIAS_v2Client
                 If line.StartsWith("Citizenship:") Then citizenshipIndex = readText.IndexOf(line)
             Next
 
-            Dim GUID As String = readText(identityClaimIndex)
-            Dim givenName As String = readText(givenNameIndex)
-            Dim familyName As String = readText(familyNameIndex)
-            Dim dateOfBirth As String = readText(dateOfBirthIndex)
-            Dim sex As String = readText(sexIndex)
-            Dim citizenship As String = readText(citizenshipIndex)
+            Dim GUID As String = readText(GUIDIndex).Substring(5)
+            Dim givenName As String = readText(givenNameIndex).Substring(10)
+            Dim familyName As String = readText(familyNameIndex).Substring(11)
+            Dim dateOfBirth As String = readText(dateOfBirthIndex).Substring(12)
+            Dim sex As String = readText(sexIndex).Substring(4)
+            Dim citizenship As String = readText(citizenshipIndex).Substring(12)
 
             'Options
             If dataSelection = "basic" Then
@@ -1492,35 +2021,94 @@ Public Class BIAS_v2Client
                 returnInfoType.Citizenship = citizenship
             End If
         End If
-        If dataType = "biometricData" Then 'implement later
-            If dataSelection = "Images" Then
+
+        If dataType = "biometricData" Then
+            If dataSelection = "Images" Then 'return information type with images (list of image, with image being 64 byte strings), no biographic data
                 'return list of image names
+                Dim imageList = New InformationType.ImagesType
 
-                'Go through list, find the line # of ImageName instances
-                Dim imageNameIndexes = New List(Of Integer)
-                Dim lineNum = 0
-                For Each line In readText
-                    If line.IndexOf("ImageName") = 0 Then
-                        imageNameIndexes.Add(lineNum)
-                    End If
-                    lineNum = lineNum + 1
+                Dim subjectDirectory = New DirectoryInfo(subjectRecordPath)
+                Dim imagePathList = getImagePaths(subjectDirectory)
+
+                For Each img In imagePathList
+
+                    Dim subjectRawImage = System.Drawing.Image.FromFile(img)
+                    Dim subjectImageByteArray As Byte()
+                    Dim ms As System.IO.MemoryStream = New System.IO.MemoryStream
+                    subjectRawImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg)
+                    subjectImageByteArray = ms.ToArray()
+
+                    Dim subjectImage = New OASIS.BIAS.V2.Image
+                    subjectImage.ImageData = subjectImageByteArray
+
+                    imageList.Add(subjectImage)
                 Next
 
-                Dim imageList = New List(Of String)
-                For Each index In imageNameIndexes
-                    Dim imageName = readText(index).Substring(10)
-                    imageList.Add(imageName)
-                Next
+                returnInfoType.Images = imageList
+
+            End If
+        End If
+
+        If dataType = "allData" Then 'returns a full information type
+
+            'return all biographic data
+            Dim GUIDIndex, givenNameIndex, familyNameIndex, dateOfBirthIndex, sexIndex, citizenshipIndex As Integer
+
+            'find the indexes of all non-biometric information
+            For Each line In readText
+                If line.StartsWith("GUID") Then GUIDIndex = readText.IndexOf(line)
+                If line.StartsWith("GivenName:") Then givenNameIndex = readText.IndexOf(line)
+                If line.StartsWith("FamilyName:") Then familyNameIndex = readText.IndexOf(line)
+                If line.StartsWith("DateOfBirth:") Then dateOfBirthIndex = readText.IndexOf(line)
+                If line.StartsWith("Sex:") Then sexIndex = readText.IndexOf(line)
+                If line.StartsWith("Citizenship:") Then citizenshipIndex = readText.IndexOf(line)
+            Next
+
+            Dim GUID As String = readText(GUIDIndex).Substring(5)
+            Dim givenName As String = readText(givenNameIndex).Substring(10)
+            Dim familyName As String = readText(familyNameIndex).Substring(11)
+            Dim dateOfBirth As String = readText(dateOfBirthIndex).Substring(12)
+            Dim sex As String = readText(sexIndex).Substring(4)
+            Dim citizenship As String = readText(citizenshipIndex).Substring(12)
+
+            'Options
+            If dataSelection = "basic" Then
+                returnInfoType.GUID = GUID
+                returnInfoType.GivenName = givenName
+                returnInfoType.FamilyName = familyName
             End If
             If dataSelection = "full" Then
-                'return list of cbeff constructed items
-
-
+                returnInfoType.GUID = GUID
+                returnInfoType.GivenName = givenName
+                returnInfoType.FamilyName = familyName
+                returnInfoType.DateOfBirth = dateOfBirth
+                returnInfoType.Sex = sex
+                returnInfoType.Citizenship = citizenship
             End If
-        End If
-        If dataType = "allData" Then 'implement later
-        End If
 
+            'return all images 
+            Dim imageList = New InformationType.ImagesType
+
+            Dim subjectDirectory = New DirectoryInfo(subjectRecordPath)
+            Dim imagePathList = getImagePaths(subjectDirectory)
+
+            For Each img In imagePathList
+
+                Dim subjectRawImage = System.Drawing.Image.FromFile(img)
+                Dim subjectImageByteArray As Byte()
+                Dim ms As System.IO.MemoryStream = New System.IO.MemoryStream
+                subjectRawImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg)
+                subjectImageByteArray = ms.ToArray()
+
+                Dim subjectImage = New OASIS.BIAS.V2.Image
+                subjectImage.ImageData = subjectImageByteArray
+
+                imageList.Add(subjectImage)
+            Next
+
+            returnInfoType.Images = imageList
+
+        End If
 
         retrieveDataResponse.ReturnData = returnInfoType
         retrieveDataResponse.ResponseStatus = New ResponseStatus
@@ -1529,9 +2117,16 @@ Public Class BIAS_v2Client
         Return retrieveDataResponse
     End Function
 
+    ''' <summary>
+    ''' Associates biographic data to a given subject record. In a person centric model, the biographic information replaces any existing biographic information.
+    ''' Note: This means that empty values for things like "FirstName" or "Sex" will be used to populate pre-existing information.
+    ''' <param name="SubjectID">the identifier of the subject</param>
+    ''' <param name="GalleryID">the identifier of the gallery or population group from which the biometric information will be retrieved</param>
+    ''' <param name="BiographicData">a list of biographic data to associate with the subject</param>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes.</returns>
+    ''' <returns name="Message">Message cooresponding to the Return parameter</returns>
+    ''' </summary>
     Public Function SetBiographicData(SetBiographicDataRequest As SetBiographicDataRequest) As SetBiographicDataResponsePackage Implements BIAS_v2.SetBiographicData
-
-        Console.WriteLine("In SetBiographicData")
 
         Dim setBiogDataResponse As New SetBiographicDataResponsePackage()
         setBiogDataResponse.ResponseStatus = New ResponseStatus
@@ -1588,8 +2183,16 @@ Public Class BIAS_v2Client
         Return (setBiogDataResponse)
     End Function
 
+    ''' <summary>
+    ''' Associates biometric data to a given subject record. In a person centric model, the biometric information replaces any existing biometric information.
+    ''' Note: This means that empty values for things like "FirstName" or "Sex" will be used to populate pre-existing information.
+    ''' <param name="SubjectID">the identifier of the subject</param>
+    ''' <param name="GalleryID">the identifier of the gallery or population group from which the biometric information will be retrieved</param>
+    ''' <param name="BIR List">List containing populated into CBEFF_BIR types, which contain the new biometric samples(s)</param>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes.</returns>
+    ''' <returns name="Message">Message cooresponding to the Return parameter</returns>
+    ''' </summary>
     Public Function SetBiometricData(SetBiometricDataRequest As SetBiometricDataRequest) As SetBiometricDataResponsePackage Implements BIAS_v2.SetBiometricData
-
         Dim setBiomDataResponse As New SetBiometricDataResponsePackage()
         setBiomDataResponse.ResponseStatus = New ResponseStatus
 
@@ -1601,21 +2204,23 @@ Public Class BIAS_v2Client
             Return setBiomDataResponse
         End If
 
-
-        Console.WriteLine("In SetBiometricData")
-
         'Used to set the first set of biom data
         Dim SubjectID = SetBiometricDataRequest.Identity.SubjectID
         Dim biomList = SetBiometricDataRequest.Identity.BiometricData.BIRList
         Dim subjectDirectory = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & SubjectID & "\"
         For Each record In biomList
 
-            Dim biomImage = ImageFromBase64String(record.BIR.biometricImage) 'convert base64 image string to reg image
+            Dim biomImage As System.Drawing.Image = ImageFromBase64String(record.BIR.biometricImage) 'convert base64 image string to reg image
             Dim biomImageType = record.BIR.biometricImageType
 
             'save this image in the subjectID record
-            biomImage.Save(subjectDirectory & SubjectID & biomImageType & ".png")
-            Dim imageName = SubjectID & biomImageType & ".png"
+            Dim bytes As Byte() = Convert.FromBase64String(record.BIR.biometricImage)
+            Dim biomImageJPG As System.Drawing.Image
+            Using ms As New MemoryStream(bytes)
+                biomImageJPG = System.Drawing.Image.FromStream(ms)
+                biomImageJPG.Save(subjectDirectory & SubjectID & biomImageType & ".jpg", ImageFormat.Jpeg)
+            End Using
+            Dim imageName = SubjectID & biomImageType & ".jpg"
 
             'Open the text file
             Dim subjectFile = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & SubjectID & "\" & SubjectID & ".txt"
@@ -1682,6 +2287,16 @@ Public Class BIAS_v2Client
         Return setBiomDataResponse
     End Function
 
+    ''' <summary>
+    ''' Transforms or processes a given biometric in one format into a new target format. 
+    ''' Examples of transformations include: Feature extraction, centering or cropping biometric images, data format conversion.
+    ''' <param name="Transform Operation">Value indicating the type of transformation to perform</param>
+    ''' <param name="Transform Control">Specifies controls for the requested transform operation</param>
+    ''' <param name="Input BIRt">Data structure containing the biometric information to be transformed</param>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes.</returns>
+    ''' <returns name="Message">Message cooresponding to the Return parameter</returns>
+    ''' <returns name="Output BIR">Data structure containing the new, transformed biometric information</returns>
+    ''' </summary>
     Public Function TransformBiometricData(TransformBiometricDataRequest As TransformBiometricDataRequest) As TransformBiometricDataResponsePackage Implements BIAS_v2.TransformBiometricData
 
         Dim transformBiomDataResponse As New TransformBiometricDataResponsePackage()
@@ -1692,23 +2307,56 @@ Public Class BIAS_v2Client
         Dim transformationControl As String = TransformBiometricDataRequest.TransformControl
         Dim outputBIR As New CBEFF_BIR_Type
 
-        If transformOperation = 1 Then 'feature extraction
+        If transformOperation = 1 Then 'cropping image
+
+            'create the faceCascade
+            Dim cascadeFilePath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\haarcascade_frontalface_default.xml"
+            Dim faceCascade = New CascadeClassifier(cascadeFilePath)
+
+            Dim biomImage As System.Drawing.Image = ImageFromBase64String(inputBiometricData.BIR.biometricImage)
+            Dim biomBitmap As New Bitmap(biomImage)
+            Dim img As Image(Of Gray, Byte) = New Image(Of Gray, Byte)(biomBitmap)
+
+            'get the face area as a rectangle and create a new rectangle using the dimensions of the face rectangle
+            Dim faceRegion As Rectangle() = faceCascade.DetectMultiScale(img)
+            Dim CropRect As New Rectangle(faceRegion(0).X, faceRegion(0).Y, faceRegion(0).Width, faceRegion(0).Height)
+            'get the image from path, save in a new image variable. Also create a bitmap to save the cropped image in.
+            Dim OriginalImage = biomImage
+            Dim CropImage = New Bitmap(CropRect.Width, CropRect.Height)
+
+            'take the original image and crop it, using the CropRect dimensions.
+            Using grp = Graphics.FromImage(CropImage)
+                grp.DrawImage(OriginalImage, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
+            End Using
+
+            Dim croppedImage As System.Drawing.Image = DirectCast(CropImage, System.Drawing.Image)
+            Dim croppedImageString = ImageToBase64String(croppedImage, ImageFormat.Jpeg)
+
+            outputBIR.BIR.biometricImage = croppedImageString
+            transformBiomDataResponse.OutputBIR = outputBIR
+            transformBiomDataResponse.ResponseStatus.Return = 0
+            transformBiomDataResponse.ResponseStatus.Message = "Biometric image sucessfully cropped."
 
         End If
-        If transformOperation = 2 Then 'centering images
-
+        If transformOperation = 2 Then 'image format conversion
+            'transform controls indicate what format to convert the image, i.e. PNG, JPEG
+            'NOTE: Not supported in this implementation, as biometric images are stored as base64 strings, not as an Image
+            transformBiomDataResponse.OutputBIR = TransformBiometricDataRequest.InputBIR
+            transformBiomDataResponse.ResponseStatus.Return = 2
+            transformBiomDataResponse.ResponseStatus.Message = "Not supported in this implementation, as biometric images are stored as base64 strings, not as an Image"
         End If
-        If transformOperation = 3 Then 'cropping image
 
-        End If
-        If transformOperation = 4 Then 'standard biometric data format conversion
-        End If
-
-        transformBiomDataResponse.OutputBIR = outputBIR
-        transformBiomDataResponse.ResponseStatus.Return = 0
         Return transformBiomDataResponse
     End Function
 
+    ''' <summary>
+    ''' Updates the biographic data for an existing subject record. The service shall replace any existing biographic data with the new biographic data, within the subject record and in all galleries.
+    ''' NOTE: Unlike SetBiographicData(), UpdateBiographicData does not overwrite data within an attribute if the input record does not have anything to replace it.
+    ''' <param name="SubjectID">The identifier of the subject</param>
+    ''' <param name="BiographicData">The list of updated biographic data elements</param>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes.</returns>
+    ''' <returns name="Message">Message cooresponding to the Return parameter</returns>
+    ''' </summary>
     Public Function UpdateBiographicData(UpdateBiographicDataRequest As UpdateBiographicDataRequest) As UpdateBiographicDataResponsePackage Implements BIAS_v2.UpdateBiographicData
         'Used in person centric models
         Dim subjectID = UpdateBiographicDataRequest.Identity.SubjectID
@@ -1807,9 +2455,17 @@ Public Class BIAS_v2Client
         Return updateBiogDataResponse
     End Function
 
+    ''' <summary>
+    ''' Updates the biometric data for an existing subject record. The service shall replace any existing biometric data with the new biometric data, within the subject record and in all galleries.
+    ''' NOTE: Unlike SetBiometricData(), UpdateBiometricData() does not overwrite data within an attribute if the input record does not have anything to replace it.
+    ''' <param name="SubjectID">The identifier of the subject</param>
+    ''' <param name="BIR">The list of updated biographic data elements</param>
+    ''' <param name="Merge">Optional input that allows for the merging of two biometric samples. Functionality is implementation specific.</param>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes.</returns>
+    ''' <returns name="Message">Message cooresponding to the Return parameter</returns>
+    ''' </summary>
     Public Function UpdateBiometricData(UpdateBiometricDataRequest As UpdateBiometricDataRequest) As UpdateBiometricDataResponsePackage Implements BIAS_v2.UpdateBiometricData
-        'Used in person centric models
-        'Used in person centric models
+
         Dim updateBiomDataResponse As New UpdateBiometricDataResponsePackage()
 
         Dim subjectID = UpdateBiometricDataRequest.Identity.SubjectID
@@ -1903,9 +2559,7 @@ Public Class BIAS_v2Client
 
             'Update Image
             biomImage.Save(subjectGalFilepath & "\" & subjectID & biomImageType & ".png")
-
         Next
-
 
         updateBiomDataResponse.ResponseStatus = New ResponseStatus
         updateBiomDataResponse.ResponseStatus.Message = "Biometric Data Updated"
@@ -1913,17 +2567,384 @@ Public Class BIAS_v2Client
         Return updateBiomDataResponse
     End Function
 
+    ''' <summary>
+    ''' Performs a 1:1 verification function between a given biometric and either a claim of identity in a given gallery or another provided biometric and according to system requirements and/or resources.
+    ''' Either the Identity Claim or Reference BIR input parameters are required.
+    ''' <param name="Processing Options">Options that guide how the service request is processed, and may identify what type(s) of information should be returned</param>
+    ''' <param name="Input Data">Contains an input data record, which at a minimum must include biometric data</param>
+    ''' <param name="GalleryID">The identifier of the gallery or population group of which the subject must be a member - Optional</param>
+    ''' <param name="Reference BIR">Data structure containing the biometric sample that will be compared to the Input BIR, required if no Identity Claim is provided - Conditional</param>
+    ''' <param name="Identity Claim">The identifier by which the subject is known to the gallery, required if no Reference BIR is provided - Conditional</param>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes.</returns>
+    ''' <returns name="Message">Message cooresponding to the Return parameter</returns>
+    ''' <returns name="Match">indicates if the Input BIR matched either the biometric information associated with the Identity Claim or the Reference BIR</returns>
+    ''' <returns name="Score">The comparison score, if the biometric information matched - Optional</returns>
+    ''' <returns name="Return Data">contains a return data record</returns>
+    ''' </summary>
     Public Function Verify(VerifyRequest As VerifyRequest) As VerifyResponsePackage Implements BIAS_v2.Verify
         Dim verifyResponse As New VerifyResponsePackage()
+        verifyResponse.ResponseStatus = New ResponseStatus
+
+        'check for either reference BIR or identity claim. One must exist
+        If VerifyRequest.InputData.Images Is Nothing And VerifyRequest.IdentityClaim Is Nothing Then
+            verifyResponse.Match = False
+            verifyResponse.ResponseStatus.Return = 34
+            verifyResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
+            Return verifyResponse
+        End If
+
+        'Processing options - specifying BIR source and return values.
+        Dim options = VerifyRequest.ProcessingOptions
+        Dim useReference = ""
+        Dim returnScore = ""
+        Dim returnRecord = ""
+        For Each pOption In options
+            Dim key = pOption.Key
+            Dim val = pOption.Value
+            If key = "Use" Then
+                If val = "Reference" Then
+                    useReference = "True"
+                Else
+                    useReference = "False"
+                End If
+            End If
+            If key = "ReturnScore" Then
+                If val = "True" Then
+                    returnScore = "True"
+                End If
+            End If
+            If key = "ReturnRecord" Then
+                If val = "True" Then
+                    returnRecord = "True"
+                End If
+            End If
+        Next
+
+        'Verify, using either the reference BIR or the identity claim - specified in processing options.
+        If useReference = "True" Then
+
+            'Need to create the referenceBIR candidate identity from the Inputdata
+
+            Dim candidateList = New CandidateListType
+            Dim candidate = New CandidateType
+            candidate.Identity = New BIASIdentity
+            candidate.Identity.BiometricData = New BIASBiometricDataType
+            candidate.Identity.BiometricData.BIRList = New CBEFF_BIR_ListType
+            'Create BIR list
+            Dim imageList = VerifyRequest.InputData.Images
+            For Each Image In imageList
+                Dim imageString = Convert.ToBase64String(Image.ImageData)
+                Dim cbeffBirType = New CBEFF_BIR_Type
+                cbeffBirType.BIR = New BaseBIRType
+                cbeffBirType.BIR.biometricImage = imageString
+                candidate.Identity.BiometricData.BIRList.Add(cbeffBirType)
+            Next
+
+            candidateList.Add(candidate)
+
+            Dim trainer = New IdentifySubjectTrainer()
+            trainer.setGallery(candidateList)
+            Dim verifyTrainer = trainer.createTrainer()
+
+            'Load and convert base64 string to image.
+            Dim inputData As String = VerifyRequest.Identity.BiometricData.BIR.BIR.biometricImage
+            Dim inputImage As System.Drawing.Image = ImageFromBase64String(inputData)
+
+            'create the faceCascade
+            Dim cascadeFilePath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\haarcascade_frontalface_default.xml"
+            Dim faceCascade = New CascadeClassifier(cascadeFilePath)
+
+            'specified as 1 due to the singular nature of verify as opposed to the multiple match nature of identify
+            Dim maxListSize As Long = 1
+
+            Dim predictionResult = prediction(verifyTrainer, faceCascade, inputImage, maxListSize)
+            Dim predictSubjectID = predictionResult.Label
+            Dim predictDistance = predictionResult.Distance
+            Dim matchScore = New ScoreType
+            matchScore.Value = predictDistance
+
+            'if the distance is above 5, probable match. If not, reject match, return empty identity
+            If (predictDistance > 5) Then
+                verifyResponse.ResponseStatus.Return = 0
+                verifyResponse.Match = True
+                verifyResponse.ResponseStatus.Message = "Match verified."
+                If returnScore = "True" Then
+                    verifyResponse.Score = matchScore
+                End If
+            Else
+                verifyResponse.ResponseStatus.Return = 34
+                verifyResponse.Match = False
+                verifyResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
+                If returnScore = "True" Then
+                    verifyResponse.Score = matchScore
+                End If
+            End If
+
+        ElseIf useReference = "False" Then
+
+            Dim identityClaim = VerifyRequest.Identity.IdentityClaim
+            Dim candidateList = New CandidateListType
+            Dim candidate = New CandidateType
+
+            'use record in specified gallery if provided, otherwise use record from subject records folder.
+            Dim galleryID As String = VerifyRequest.GalleryID
+            If galleryID IsNot Nothing Then
+                'check if gallery exists
+                Dim galleriesPath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Galleries"
+                If (Directory.Exists(galleriesPath & "\" & galleryID) = False) Then
+                    verifyResponse.ResponseStatus.Return = 11
+                    verifyResponse.ResponseStatus.Message = "The gallery referenced by the input gallery ID does not exist."
+                    Return verifyResponse
+                End If
+
+                'retrieve the biometric information from the subject record folder in the gallery
+                Dim retrieveBiomData = New RetrieveBiometricDataRequest
+                retrieveBiomData.GalleryID = galleryID
+                retrieveBiomData.Identity.SubjectID = identityClaim
+                Dim bias1 = New BIAS_v2Client
+                Dim retrievedData = bias1.RetrieveBiometricData(retrieveBiomData)
+                candidate.Identity = retrievedData.Identity
+
+            ElseIf galleryID Is Nothing Then
+
+                'retrieve the biometric information from the subject records folder
+                Dim retrieveBiomData = New RetrieveBiometricDataRequest
+                retrieveBiomData.Identity.SubjectID = identityClaim
+                Dim bias1 = New BIAS_v2Client
+                Dim retrievedData = bias1.RetrieveBiometricData(retrieveBiomData)
+                candidate.Identity = retrievedData.Identity
+
+            End If
+
+            candidateList.Add(candidate)
+
+            Dim trainer = New IdentifySubjectTrainer()
+            trainer.setGallery(candidateList)
+            Dim verifyTrainer = trainer.createTrainer()
+
+            'Load and convert base64 string to image.
+            Dim inputData As String = VerifyRequest.Identity.BiometricData.BIR.BIR.biometricImage
+            Dim inputImage As System.Drawing.Image = ImageFromBase64String(inputData)
+
+            'create the faceCascade
+            Dim cascadeFilePath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\haarcascade_frontalface_default.xml"
+            Dim faceCascade = New CascadeClassifier(cascadeFilePath)
+
+            'specified as 1 due to the singular nature of verify as opposed to the multiple match nature of identify
+            Dim maxListSize As Long = 1
+
+            Dim predictionResult = prediction(verifyTrainer, faceCascade, inputImage, maxListSize)
+            Dim predictSubjectID = predictionResult.Label
+            Dim predictDistance = predictionResult.Distance
+            Dim matchScore = New ScoreType
+            matchScore.Value = predictDistance
+
+            'if the distance is above 5, probable match. If not, reject match, return empty identity
+            If (predictDistance > 5) Then
+                Dim predictionString = "Input image is most likely Subject " & predictionResult.Label & ", with a distance score of " & predictionResult.Distance
+                verifyResponse.ResponseStatus.Return = 0
+                verifyResponse.Match = True
+                verifyResponse.ResponseStatus.Message = predictionString
+                If returnScore = "True" Then
+                    verifyResponse.Score = matchScore
+                End If
+                If returnRecord = "True" Then
+                    verifyResponse.ReturnData = New InformationType
+                    verifyResponse.ReturnData.GivenName = "Implement"
+                    verifyResponse.ReturnData.FamilyName = "Later"
+                    'Dim subjectID = predictionResult.Label
+                    'Dim retrieveBiogData = New RetrieveBiographicDataRequest
+                    'If galleryID IsNot Nothing Then
+                    '    retrieveBiogData.GalleryID = galleryID
+                    'End If
+                    'retrieveBiogData.Identity = New BIASIdentity
+                    'retrieveBiogData.Identity.SubjectID = identityClaim
+                    'Dim bias1 = New BIAS_v2Client
+                    'Dim retrievedBiogData = bias1.RetrieveBiographicData(retrieveBiogData)
+                    'Dim test = retrievedBiogData.Identity.BiographicData.BiographicDataItemList(0)
+                End If
+            Else
+                verifyResponse.ResponseStatus.Return = 34
+                verifyResponse.Match = False
+                verifyResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
+                If returnScore = "True" Then
+                    verifyResponse.Score = matchScore
+                End If
+                If returnRecord = "True" Then
+                    'implement later
+                    verifyResponse.ReturnData = New InformationType
+                    verifyResponse.ReturnData.GivenName = "Implement"
+                    verifyResponse.ReturnData.FamilyName = "Later"
+                End If
+            End If
+
+        Else
+            verifyResponse.ResponseStatus.Return = 33
+            verifyResponse.ResponseStatus.Message = "No Reference BIR or Identity Claim provided."
+        End If
+
         Return verifyResponse
     End Function
 
+    ''' <summary>
+    ''' Performs a 1:1 verification comparison between a given biometric and either a claim to identity in a given gallery or another provided biometric. 
+    ''' As such, either the Identity Claim or Reference BIR input parameters are required.
+    ''' <param name="SubjectID">The identifier of the subject</param>
+    ''' <param name="GalleryID">The identifier of the gallery or population group of which the subject must be a member - Optional</param>
+    ''' <param name="Input BIR">Data structure containing the biometric sample for the search</param>
+    ''' <param name="Reference BIR">Data structure containing the biometric sample that will be compared to the Input BIR, required if no Identity Claim is provided - Conditional</param>
+    ''' <param name="Identity Claim">The identifier by which the subject is known to the gallery, required if no Reference BIR is provided - Conditional</param>
+    ''' <returns name="Return">Holds a code signifying success (0) or one of 39 error codes.</returns>
+    ''' <returns name="Message">Message cooresponding to the Return parameter</returns>
+    ''' <returns name="Match">indicates if the Input BIR matched either the biometric information associated with the Identity Claim or the Reference BIR</returns>
+    ''' <returns name="Score">The comparison score, if the biometric information matched - Optional</returns>
+    ''' </summary>
     Public Function VerifySubject(VerifySubjectRequest As VerifySubjectRequest) As VerifySubjectResponsePackage Implements BIAS_v2.VerifySubject
         Dim verifySubjectResponse As New VerifySubjectResponsePackage()
+        verifySubjectResponse.ResponseStatus = New ResponseStatus
+
+        'check for either reference BIR or identity claim. One must exist
+        If VerifySubjectRequest.InputData.Images Is Nothing And VerifySubjectRequest.IdentityClaim Is Nothing Then
+            verifySubjectResponse.Match = False
+            verifySubjectResponse.ResponseStatus.Return = 34
+            verifySubjectResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
+            Return verifySubjectResponse
+        End If
+
+        'Verify, using either the reference BIR or the identity claim - specified in processing options.
+        If VerifySubjectRequest.InputData IsNot Nothing Then
+
+            'Need to create the referenceBIR candidate identity from the Inputdata
+
+            Dim candidateList = New CandidateListType
+            Dim candidate = New CandidateType
+            candidate.Identity = New BIASIdentity
+            candidate.Identity.BiometricData = New BIASBiometricDataType
+            candidate.Identity.BiometricData.BIRList = New CBEFF_BIR_ListType
+            'Create BIR list
+            Dim imageList = VerifySubjectRequest.InputData.Images
+            For Each Image In imageList
+                Dim imageString = Convert.ToBase64String(Image.ImageData)
+                Dim cbeffBirType = New CBEFF_BIR_Type
+                cbeffBirType.BIR = New BaseBIRType
+                cbeffBirType.BIR.biometricImage = imageString
+                candidate.Identity.BiometricData.BIRList.Add(cbeffBirType)
+            Next
+
+            candidateList.Add(candidate)
+
+            Dim trainer = New IdentifySubjectTrainer()
+            trainer.setGallery(candidateList)
+            Dim verifyTrainer = trainer.createTrainer()
+
+            'Load and convert base64 string to image.
+            Dim inputData As String = VerifySubjectRequest.Identity.BiometricData.BIR.BIR.biometricImage
+            Dim inputImage As System.Drawing.Image = ImageFromBase64String(inputData)
+
+            'create the faceCascade
+            Dim cascadeFilePath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\haarcascade_frontalface_default.xml"
+            Dim faceCascade = New CascadeClassifier(cascadeFilePath)
+
+            'specified as 1 due to the singular nature of verify as opposed to the multiple match nature of identify
+            Dim maxListSize As Long = 1
+
+            Dim predictionResult = prediction(verifyTrainer, faceCascade, inputImage, maxListSize)
+            Dim predictSubjectID = predictionResult.Label
+            Dim predictDistance = predictionResult.Distance
+            Dim matchScore = New ScoreType
+            matchScore.Value = predictDistance
+
+            'if the distance is above 5, probable match. If not, reject match, return empty identity
+            If (predictDistance > 5) Then
+                verifySubjectResponse.ResponseStatus.Return = 0
+                verifySubjectResponse.Match = True
+                verifySubjectResponse.ResponseStatus.Message = "Match verified."
+                verifySubjectResponse.Score = matchScore
+            Else
+                verifySubjectResponse.ResponseStatus.Return = 34
+                verifySubjectResponse.Match = False
+                verifySubjectResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
+            End If
+
+        ElseIf VerifySubjectRequest.IdentityClaim IsNot Nothing Then
+
+            Dim identityClaim = VerifySubjectRequest.Identity.IdentityClaim
+            Dim candidateList = New CandidateListType
+            Dim candidate = New CandidateType
+
+            'use record in specified gallery if provided, otherwise use record from subject records folder.
+            Dim galleryID As String = VerifySubjectRequest.GalleryID
+            If galleryID IsNot Nothing Then
+                'check if gallery exists
+                Dim galleriesPath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Galleries"
+                If (Directory.Exists(galleriesPath & "\" & galleryID) = False) Then
+                    verifySubjectResponse.ResponseStatus.Return = 11
+                    verifySubjectResponse.ResponseStatus.Message = "The gallery referenced by the input gallery ID does not exist."
+                    Return verifySubjectResponse
+                End If
+
+                'retrieve the biometric information from the subject record folder in the gallery
+                Dim retrieveBiomData = New RetrieveBiometricDataRequest
+                retrieveBiomData.GalleryID = galleryID
+                retrieveBiomData.Identity.SubjectID = identityClaim
+                Dim bias1 = New BIAS_v2Client
+                Dim retrievedData = bias1.RetrieveBiometricData(retrieveBiomData)
+                candidate.Identity = retrievedData.Identity
+
+            ElseIf galleryID Is Nothing Then
+
+                'retrieve the biometric information from the subject records folder
+                Dim retrieveBiomData = New RetrieveBiometricDataRequest
+                retrieveBiomData.Identity.SubjectID = identityClaim
+                Dim bias1 = New BIAS_v2Client
+                Dim retrievedData = bias1.RetrieveBiometricData(retrieveBiomData)
+                candidate.Identity = retrievedData.Identity
+
+            End If
+
+            candidateList.Add(candidate)
+
+            Dim trainer = New IdentifySubjectTrainer()
+            trainer.setGallery(candidateList)
+            Dim verifyTrainer = trainer.createTrainer()
+
+            'Load and convert base64 string to image.
+            Dim inputData As String = VerifySubjectRequest.Identity.BiometricData.BIR.BIR.biometricImage
+            Dim inputImage As System.Drawing.Image = ImageFromBase64String(inputData)
+
+            'create the faceCascade
+            Dim cascadeFilePath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\haarcascade_frontalface_default.xml"
+            Dim faceCascade = New CascadeClassifier(cascadeFilePath)
+
+            'specified as 1 due to the singular nature of verify as opposed to the multiple match nature of identify
+            Dim maxListSize As Long = 1
+
+            Dim predictionResult = prediction(verifyTrainer, faceCascade, inputImage, maxListSize)
+            Dim predictSubjectID = predictionResult.Label
+            Dim predictDistance = predictionResult.Distance
+            Dim matchScore = New ScoreType
+            matchScore.Value = predictDistance
+
+            'if the distance is above 5, probable match. If not, reject match, return empty identity
+            If (predictDistance > 5) Then
+                Dim predictionString = "Input image is most likely Subject " & predictionResult.Label & ", with a distance score of " & predictionResult.Distance
+                verifySubjectResponse.ResponseStatus.Return = 0
+                verifySubjectResponse.Match = True
+                verifySubjectResponse.ResponseStatus.Message = predictionString
+                verifySubjectResponse.Score = matchScore
+            Else
+                verifySubjectResponse.ResponseStatus.Return = 34
+                verifySubjectResponse.Match = False
+                verifySubjectResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
+                verifySubjectResponse.Score = matchScore
+            End If
+
+        Else
+            verifySubjectResponse.ResponseStatus.Return = 33
+            verifySubjectResponse.ResponseStatus.Message = "No Reference BIR or Identity Claim provided."
+        End If
         Return verifySubjectResponse
     End Function
-
-
     'Public Function GetPolicy() As IO.Stream Implements IPolicyRetriever.GetPolicy
     '    '<cross-domain-policy xsi:noNamespaceSchemaLocation="http://www.adobe.com/xml/schemas/PolicyFile.xsd">
     '    '<allow-access-from domain="twitter.com"/>
