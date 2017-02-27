@@ -1519,7 +1519,7 @@ Public Class BIAS_v2Client
                 'Just average them together?
                 'Or we could do sample level fusion
 
-                
+
             Next
         Next
 
@@ -1946,7 +1946,7 @@ Public Class BIAS_v2Client
         End If
 
 
-        
+
 
         retrieveBiomDataResponse.ResponseStatus = New ResponseStatus
         retrieveBiomDataResponse.ResponseStatus.Return = 0
