@@ -269,6 +269,7 @@ Public Class MainForm
             mybytearray = ms.ToArray()
             Identifyrequest.InputData.Images(0).ImageData = mybytearray
         End If
+        Identifyresponse = client.Identify(Identifyrequest)
         Try
             Identifyresponse = client.Identify(Identifyrequest)
         Catch ex As Exception

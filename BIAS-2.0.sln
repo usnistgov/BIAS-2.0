@@ -9,6 +9,12 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Shared", "Shared\Shared.vbp
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WebCamera", "WebCamera\WebCamera.vbproj", "{020C380B-A545-4416-B336-3C00792315C3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{24492199-EE9E-4AE7-97B4-33F6A7A3009E}"
+	ProjectSection(SolutionItems) = preProject
+		packages\OpenCV.220.x64.1.0.2\output\opencv_core220.dll = packages\OpenCV.220.x64.1.0.2\output\opencv_core220.dll
+		packages\OpenCV.220.x64.1.0.2\output\opencv_imgproc220.dll = packages\OpenCV.220.x64.1.0.2\output\opencv_imgproc220.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
