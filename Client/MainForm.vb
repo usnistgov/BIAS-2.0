@@ -382,7 +382,7 @@ Public Class MainForm
 
         Dim returnedByteArray1() As Byte
         MessageBox.Show("# of images returned: " & getDataResponse.ReturnData.Images.Count)
-        returnedByteArray1 = getDataResponse.ReturnData.Images(0).ImageData
+        'returnedByteArray1 = getDataResponse.ReturnData.Images(0).ImageData
         Dim returnedImg1 As System.Drawing.Bitmap
         Dim ms2 As System.IO.MemoryStream = New System.IO.MemoryStream(returnedByteArray1)
         returnedImg1 = System.Drawing.Image.FromStream(ms2)
