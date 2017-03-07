@@ -3,6 +3,8 @@ Imports Emgu.CV
 Imports System.Collections.Generic
 Imports Emgu.CV.Structure
 Imports System.Drawing
+Imports System.Windows.Forms
+
 
 ''' <summary>
 ''' Class for creating instances of trainers using LBPHFaceRecognizer
@@ -23,6 +25,7 @@ Public Class IdentifyTrainer
 
         'load the classifier file and create the Local Binary Patterns Histograms Face Recognizer
         Dim classifierFileDirectory = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\haarcascade_frontalface_default.xml"
+
         Dim faceCascade = New CascadeClassifier(classifierFileDirectory)
         Dim trainer = New Face.LBPHFaceRecognizer
 

@@ -967,8 +967,6 @@ Namespace OASIS.BIAS.V2
     Partial Public Class IdentifyRequest
         Inherits OASIS.BIAS.V2.AggregateRequestTemplate
 
-        Public Trainer As Emgu.CV.Face.LBPHFaceRecognizer
-
         Private GalleryIDField As String
 
         Private MaxListSizeField As Long

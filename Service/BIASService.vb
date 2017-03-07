@@ -13,6 +13,7 @@ Imports System.Reflection
 Imports System.Windows.Forms
 Imports System.Drawing
 Imports Emgu.CV
+Imports Emgu.CV.Face.LBPHFaceRecognizer
 Imports Emgu.Util
 Imports Emgu.CV.Structure
 Imports Emgu.CV.Util
@@ -356,7 +357,7 @@ Public Class BIAS_v2Client
     ''' </summary>
     ''' <param name="path">The path of the subject records folder</param>
     ''' <returns>imagePathList - the list of all image paths in the subject record folder</returns>
-    Public Function getImagePaths(path As DirectoryInfo)
+    Public Function getImagePaths(path As DirectoryInfo) As List(Of String)
         Dim imagePathList As List(Of String) = New List(Of String)
 
         For Each currentFile In path.EnumerateFiles("*.*", SearchOption.AllDirectories)
@@ -1196,20 +1197,27 @@ Public Class BIAS_v2Client
         End If
 
         'Create the trainer. Need to create each time Identify is done due to variability of galleryID
+
         Dim trainer = New IdentifyTrainer()
+
         trainer.setGalleryID(galleryID)
+
         Dim identifyTrainer = trainer.createTrainer()
+        MessageBox.Show("12312")
 
         'In our case, inputData will only include the image. No other information will be used for identifcation
         'Load and convert byte() to image.
         Dim inputData As Byte() = IdentifyRequest.InputData.Images(0).ImageData
+
         Dim inputImage As System.Drawing.Image
 
         Dim ms As System.IO.MemoryStream = New System.IO.MemoryStream(inputData)
         inputImage = System.Drawing.Image.FromStream(ms)
 
         'create the faceCascade
+
         Dim cascadeFilePath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\haarcascade_frontalface_default.xml"
+
         Dim faceCascade = New CascadeClassifier(cascadeFilePath)
 
         'get the max list size
@@ -1968,17 +1976,18 @@ Public Class BIAS_v2Client
         Dim retrieveDataResponse As New RetrieveDataResponsePackage()
         Dim processingOptions As ProcessingOptionsType = RetrieveDataRequest.ProcessingOptions 'list of optionType, which are key/val pairs
 
+        MessageBox.Show("inside retrieve data....")
         If (RetrieveDataRequest.Identity.SubjectID Is Nothing) Then
             retrieveDataResponse.ResponseStatus.Return = 9
             retrieveDataResponse.ResponseStatus.Message = "The input subject ID is empty or in an invalid format."
             Return retrieveDataResponse
         End If
-
+        MessageBox.Show("inside retrieve data....2")
         'Pull out all relavent information from the subject record file, to be used as needed.
         Dim subjectFilePath As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & subjectID & "\" & subjectID & ".txt"
         Dim subjectRecordPath As String = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString & "\MasterDB\Subject Records\" & subjectID & "\"
         Dim readText As List(Of String) = System.IO.File.ReadAllLines(subjectFilePath).ToList
-
+        MessageBox.Show("inside retrieve data....3")
 
         'possible options - [biographicData, basic] [biographicData, full] [biometricData, images], [allData, basic] [allData, full]
         '[biographicData, basic] - GUID = SubjectID/IdentityClaim, GivenName + FamilyName = FirstName+LastNAme
@@ -2091,7 +2100,6 @@ Public Class BIAS_v2Client
 
             Dim subjectDirectory = New DirectoryInfo(subjectRecordPath)
             Dim imagePathList = getImagePaths(subjectDirectory)
-
             For Each img In imagePathList
 
                 Dim subjectRawImage = System.Drawing.Image.FromFile(img)
@@ -2107,8 +2115,9 @@ Public Class BIAS_v2Client
             Next
 
             returnInfoType.Images = imageList
-
+            MessageBox.Show("inside retrieve data....4 & ")
         End If
+
 
         retrieveDataResponse.ReturnData = returnInfoType
         retrieveDataResponse.ResponseStatus = New ResponseStatus

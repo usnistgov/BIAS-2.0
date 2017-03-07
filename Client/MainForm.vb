@@ -15,12 +15,15 @@ Public Class MainForm
 
     'Dim m_ActiveCamera As WebCamera = New WebCamera("Microsoft LifeCam Cinema", picbx1_Enroll)
     'Dim m_ActiveCamera As WebCamera
+    Dim camResourceImg As System.Drawing.Image = New Bitmap(My.Resources.photo_camera_318_115624)
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         'm_ActiveCamera = New WebCamera("Microsoft LifeCam Cinema", picbx1_Enroll) 'what if not on enrol but on identify tab? send feed to identify picbox?
         'Dim WebCameraPool As StreamPool
         'WebCameraPool = New StreamPool(m_ActiveCamera)
         'm_ActiveCamera.RegisterTargetPool(WebCameraPool)
+        webcamPictureBox_Identify.Image = CType(camResourceImg.GetThumbnailImage(40, 30, Nothing, New IntPtr), Bitmap)
+        '(My.Resources.photo_camera_318_115624)
     End Sub
 
     Private Sub btnClear_Enroll_Click(sender As Object, e As EventArgs) Handles ClearButton_Enroll.Click
@@ -128,7 +131,7 @@ Public Class MainForm
             Return
         End If
         Dim imgString As String = ImageToBase64String(enrolImg, ImageFormat.Gif)
-        userBiomRecord.BIR.biometricImage = imgString       'will soon come from a webcam
+        userBiomRecord.BIR.biometricImage = imgString
         userBiomRecord.BIR.biometricImageType = "Front"
 
         userBiomRecord.FormatOwner = 1
@@ -240,6 +243,16 @@ Public Class MainForm
         'TextBox7.Text = imageString
     End Sub
 
+    Private Sub btnClear_Identify_Click(sender As Object, e As EventArgs) Handles btnClear_Identify.Click
+        TextBoxBioImg_Identity.Text = ""
+        picbx1_Identify.Image = Nothing
+        iDimgFrmfile = Nothing
+
+        'going to delete these from design....
+        SubjectIdTextBox_Identify.Text = ""
+        ScoreTextBox_Identify.Text = ""
+
+    End Sub
 
     Private Sub btnIdentify_Identify_Click(sender As Object, e As EventArgs) Handles btnIdentify_Identify.Click
         Debug.Print("identify button clicked")
@@ -261,6 +274,7 @@ Public Class MainForm
         Dim identifyImg As New OASIS.BIAS.V2.Image 'this is needed in order to get to load data into imagedata field.
         Identifyrequest.InputData.Images.Add(identifyImg)
 
+        'if user types path into text box iDimgFrmfile is still empty so img is not converted to bytes and put into IdentifyRequest.  how to fix?
 
         Dim mybytearray As Byte()
         If iDimgFrmfile IsNot Nothing Then
@@ -270,35 +284,80 @@ Public Class MainForm
             Identifyrequest.InputData.Images(0).ImageData = mybytearray
         End If
         Identifyresponse = client.Identify(Identifyrequest)
-        Try
-            Identifyresponse = client.Identify(Identifyrequest)
-        Catch ex As Exception
-            MessageBox.Show("error making identify request call to server. exception msg: " & ex.Message)
-        End Try
+        'Try
+        '    Identifyresponse = client.Identify(Identifyrequest)
+        'Catch ex As Exception
+        '    MessageBox.Show("error making identify request call to server. exception msg: " & ex.Message)
+        'End Try
         MessageBox.Show("ResponseStatus: " & Identifyresponse.ResponseStatus.Message)
+
+        SubjectIdTextBox_Identify.Text = Identifyresponse.CandidateList(0).Identity.SubjectID
+        ScoreTextBox_Identify.Text = Identifyresponse.CandidateList(0).ScoreList.Score.Value
+
+
+        
 
         'returned should be candidateList-candidateListType
         'CandidateListType - is a list Of CandidateType items-each consists of a BIASIdentity, rank, score, and biographicData-biographicDataType
+        'Dim subjectIdString As String
 
-        For Each ob As Object In Identifyresponse.CandidateList   'this not implemented yet on the service side.
-            lstbx_CapabilitiesList.Items.Add(ob)
+        For Each ob As CandidateType In Identifyresponse.CandidateList   'this not implemented yet on the service side.
+            CandidatesListListBox_Identify.Items.Add(ob.Identity.SubjectID)
         Next
+        'paul will only return one candidate....but code as if more than one.
         'make it so when user click on one it shows in picbox
 
     End Sub
 
+    Private Sub RetrieveInfoButton_Identify_Click(sender As Object, e As EventArgs) Handles RetrieveInfoButton_Identify.Click
+        Dim retrieveIdentifyRequest As New RetrieveDataRequest()
+        Dim retrieveIdentifyResponse As New RetrieveDataResponsePackage()
+        Dim IdentifyprocOptn As New ProcessingOptionsType
+        Dim IdentifynewOption As New OptionType
+        IdentifynewOption.Key = "allData" 'choices: biometricData+images or full, allData+basic or full, biographicData+basic or full
+        IdentifynewOption.Value = "full"
+        IdentifyprocOptn.Add(IdentifynewOption)
+        retrieveIdentifyRequest.ProcessingOptions = IdentifyprocOptn
+        retrieveIdentifyRequest.Identity = New BIASIdentity
+        retrieveIdentifyRequest.Identity.SubjectID = CandidatesListListBox_Identify.SelectedItem
+
+
+        retrieveIdentifyResponse = client.RetrieveData(retrieveIdentifyRequest)
+
+        Dim returnedByteArray() As Byte
+        returnedByteArray = retrieveIdentifyResponse.ReturnData.Images(0).ImageData
+        Dim returnedImg As System.Drawing.Bitmap
+        Dim ms1 As System.IO.MemoryStream = New System.IO.MemoryStream(returnedByteArray)
+        returnedImg = System.Drawing.Image.FromStream(ms1)
+
+
+       
+
+        RetrievePictureBox2_Identify.Image = returnedImg
+
+
+        'RetrievePictureBox2_Identify.Image = retrieveIdentifyResponse.ReturnData.Images(0).ImageData
+    End Sub
 
     Private Sub btnRetrieveInformation_RetrieveInformation_Click(sender As Object, e As EventArgs) Handles btnRetrieveInformation_RetrieveInformation.Click
         Dim client As New BIAS_v2Client()
         Dim getDataRequest As New RetrieveDataRequest()
         Dim getDataResponse As New RetrieveDataResponsePackage()
+        getDataResponse.ResponseStatus = New ResponseStatus
+        getDataResponse.ReturnData = New InformationType
+        getDataResponse.ReturnData.Images = New InformationType.ImagesType
+
 
         Dim procOptn As New ProcessingOptionsType
         Dim newOption As New OptionType
-        newOption.Key = "biographicData" 'choices: biometricData+images or full, allData+basic or full, biographicData+basic or full
-        newOption.Value = "full"
+
+        'newOption.Key = "biographicData"
+        'newOption.Value = "basic"
+
+        newOption.Key = "allData" 'choices: biometricData+images or full, allData+basic or full, biographicData+basic or full
+        newOption.Value = "basic"
         'newOption.Key = "biometricData"
-        'newOption.Value = "image"
+        'newOption.Value = "full"
         procOptn.Add(newOption)
         getDataRequest.ProcessingOptions = procOptn
 
@@ -321,6 +380,24 @@ Public Class MainForm
         txtbxCitizenship_RetrieveInformation.Text = getDataResponse.ReturnData.Citizenship
 
 
+        Dim returnedByteArray1() As Byte
+        MessageBox.Show("# of images returned: " & getDataResponse.ReturnData.Images.Count)
+        returnedByteArray1 = getDataResponse.ReturnData.Images(0).ImageData
+        Dim returnedImg1 As System.Drawing.Bitmap
+        Dim ms2 As System.IO.MemoryStream = New System.IO.MemoryStream(returnedByteArray1)
+        returnedImg1 = System.Drawing.Image.FromStream(ms2)
+        picboxResult_RetrieveInformation.Image = returnedImg1
+
+
+
+
+
+
+
+
+
+
+
         'Waiting for Paul on this....
         'below will be attempted when biometric key/value is implemented. 
         'i converted a byte array (in response) to an image for display in the client window.
@@ -335,7 +412,6 @@ Public Class MainForm
         'If newOption.Key Is "biometricData" Then
         'picboxResult_RetrieveInformation.Image = resultImg
         'End If
-
 
         'note imagedata is returned as 1 dimentional byte array. i will have to convert it to base64string -then to an image (in our function)
         'or i will have to convert the byte array to an image. (than load to picboxResult )
@@ -429,25 +505,42 @@ Public Class MainForm
     End Sub
 
     Dim iDimgFrmfile As System.Drawing.Image
-    Private Sub txtbxBioImage_Identify_MouseClick(sender As Object, e As EventArgs) Handles txtbxBioImage_Identify.MouseClick
-        Dim OpenIdentifyImage As New OpenFileDialog()
-        OpenIdentifyImage.InitialDirectory = "C:/Temp/Samples"
-        OpenIdentifyImage.Filter = "All files (*.*)|*.*"
-        OpenIdentifyImage.RestoreDirectory = True
+    'Private Sub txtbxBioImage_Identify_MouseClick(sender As Object, e As EventArgs) Handles txtbxBioImage_Identify.MouseClick
+    '    Dim OpenIdentifyImage As New OpenFileDialog()
+    '    OpenIdentifyImage.InitialDirectory = "C:/Temp/Samples"
+    '    OpenIdentifyImage.Filter = "All files (*.*)|*.*"
+    '    OpenIdentifyImage.RestoreDirectory = True
 
-        If OpenIdentifyImage.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            Try
-                txtbxBioImage_Identify.Text = OpenIdentifyImage.FileName.ToString
-                picbx1_Identify.Image = Drawing.Image.FromFile(OpenIdentifyImage.FileName.ToString)
-                iDimgFrmfile = Drawing.Image.FromFile(OpenIdentifyImage.FileName.ToString) 'should this be set back to nothing somewhere? or made into a property?
+    '    If OpenIdentifyImage.ShowDialog() = Windows.Forms.DialogResult.OK Then
+    '        Try
+    '            txtbxBioImage_Identify.Text = OpenIdentifyImage.FileName.ToString
+    '            picbx1_Identify.Image = Drawing.Image.FromFile(OpenIdentifyImage.FileName.ToString)
+    '            iDimgFrmfile = Drawing.Image.FromFile(OpenIdentifyImage.FileName.ToString) 'should this be set back to nothing somewhere? or made into a property?
 
-            Catch ex As Exception
-                MessageBox.Show("Error opening Identify Biometric image")
-            End Try
+    '        Catch ex As Exception
+    '            MessageBox.Show("Error opening Identify Biometric image")
+    '        End Try
 
-        End If
+    '    End If
+    'End Sub
+
+    Private Sub openFileButton_Identify_Click(sender As Object, e As EventArgs) Handles openFileButton_Identify.Click
+        Dim OpenFileDialog_Identify As New OpenFileDialog()
+        OpenFileDialog_Identify.InitialDirectory = "C:\Temp\Samples"
+        OpenFileDialog_Identify.Filter = "All files (*.*)|*.*"
+        OpenFileDialog_Identify.RestoreDirectory = True
+        'TextBoxBioImg_Identity.Text = ""
+
+        Try
+            If OpenFileDialog_Identify.ShowDialog = Windows.Forms.DialogResult.OK Then
+                TextBoxBioImg_Identity.Text = OpenFileDialog_Identify.SafeFileName
+                picbx1_Identify.Image = Drawing.Image.FromFile(OpenFileDialog_Identify.FileName.ToString)
+                iDimgFrmfile = Drawing.Image.FromFile(OpenFileDialog_Identify.FileName.ToString) 'should this be set back to nothing somewhere? or made into a property?
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error opening Identify Biometric image")
+        End Try
     End Sub
 
     
-
 End Class

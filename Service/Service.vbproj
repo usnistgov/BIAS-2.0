@@ -12,8 +12,9 @@
     <AssemblyName>Service</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Empty</MyType>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -104,6 +105,8 @@
   <ItemGroup>
     <Compile Include="BIASService.vb" />
     <Compile Include="EntryPoint.vb" />
+    <Compile Include="IdentifySubjectTrainer.vb" />
+    <Compile Include="IdentifyTrainer.vb" />
     <Compile Include="IPolicyRetriever.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
