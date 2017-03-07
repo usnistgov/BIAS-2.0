@@ -3908,6 +3908,8 @@ Namespace OASIS.BIAS.V2
 
         Private FusionResultField As OASIS.BIAS.V2.FusionResult
 
+        Private biometricSampleField As String
+
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
                 Return Me.extensionDataField
@@ -3964,6 +3966,16 @@ Namespace OASIS.BIAS.V2
             End Get
             Set(value As OASIS.BIAS.V2.FusionResult)
                 Me.FusionResultField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=False)> _
+        Public Property biometricSample() As String
+            Get
+                Return Me.biometricSampleField
+            End Get
+            Set(value As String)
+                Me.biometricSampleField = value
             End Set
         End Property
     End Class
