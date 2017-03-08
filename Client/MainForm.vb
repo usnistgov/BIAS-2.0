@@ -33,7 +33,8 @@ Public Class MainForm
         SexComboBox_Enroll.SelectedIndex = -1
         CitizenshipComboBox_Enroll.SelectedIndex = -1
         DoBDateTimePicker_Enroll.Text = DateTime.Now
-
+        picbx1_Enroll.Image = Nothing
+        txtbxBioImage_Enroll.Text = ""
 
     End Sub
 
@@ -247,6 +248,7 @@ Public Class MainForm
         TextBoxBioImg_Identity.Text = ""
         picbx1_Identify.Image = Nothing
         iDimgFrmfile = Nothing
+        CandidatesListListBox_Identify.Text = ""
 
         'going to delete these from design....
         SubjectIdTextBox_Identify.Text = ""
@@ -274,6 +276,8 @@ Public Class MainForm
         Dim identifyImg As New OASIS.BIAS.V2.Image 'this is needed in order to get to load data into imagedata field.
         Identifyrequest.InputData.Images.Add(identifyImg)
 
+
+
         'if user types path into text box iDimgFrmfile is still empty so img is not converted to bytes and put into IdentifyRequest.  how to fix?
 
         Dim mybytearray As Byte()
@@ -283,13 +287,13 @@ Public Class MainForm
             mybytearray = ms.ToArray()
             Identifyrequest.InputData.Images(0).ImageData = mybytearray
         End If
-        Identifyresponse = client.Identify(Identifyrequest)
-        'Try
-        '    Identifyresponse = client.Identify(Identifyrequest)
-        'Catch ex As Exception
-        '    MessageBox.Show("error making identify request call to server. exception msg: " & ex.Message)
-        'End Try
-        MessageBox.Show("ResponseStatus: " & Identifyresponse.ResponseStatus.Message)
+        'Identifyresponse = client.Identify(Identifyrequest)
+        Try
+            Identifyresponse = client.Identify(Identifyrequest)
+        Catch ex As Exception
+            MessageBox.Show("error making identify request call to server. exception msg: " & ex.Message)
+        End Try
+        'MessageBox.Show("ResponseStatus: " & Identifyresponse.ResponseStatus.Message)
 
         SubjectIdTextBox_Identify.Text = Identifyresponse.CandidateList(0).Identity.SubjectID
         ScoreTextBox_Identify.Text = Identifyresponse.CandidateList(0).ScoreList.Score.Value
@@ -347,15 +351,12 @@ Public Class MainForm
         getDataResponse.ReturnData = New InformationType
         getDataResponse.ReturnData.Images = New InformationType.ImagesType
 
-
         Dim procOptn As New ProcessingOptionsType
         Dim newOption As New OptionType
-
         'newOption.Key = "biographicData"
-        'newOption.Value = "basic"
-
+        'newOption.Value = "full"
         newOption.Key = "allData" 'choices: biometricData+images or full, allData+basic or full, biographicData+basic or full
-        newOption.Value = "basic"
+        newOption.Value = "full"
         'newOption.Key = "biometricData"
         'newOption.Value = "full"
         procOptn.Add(newOption)
@@ -364,14 +365,12 @@ Public Class MainForm
         getDataRequest.Identity = New BIASIdentity()
         getDataRequest.Identity.SubjectID = txtbxGUID_RetrieveInformation.Text
 
-
-        'A51DU0R6
         Try
             getDataResponse = client.RetrieveData(getDataRequest)
         Catch ex As Exception
             Console.WriteLine("error: " & ex.Message)
         End Try
-        MessageBox.Show("RetrieveData ResponseStatus-" & getDataResponse.ResponseStatus.Return & vbTab & getDataResponse.ResponseStatus.Message)
+        MessageBox.Show("ResponseStatus: " & getDataResponse.ResponseStatus.Return & vbTab & getDataResponse.ResponseStatus.Message)
 
         txtbxGiven_RetrieveInformation.Text = getDataResponse.ReturnData.GivenName
         txtbxFamily_RetrieveInformation.Text = getDataResponse.ReturnData.FamilyName
@@ -379,10 +378,11 @@ Public Class MainForm
         txtbxSex_RetrieveInformation.Text = getDataResponse.ReturnData.Sex
         txtbxCitizenship_RetrieveInformation.Text = getDataResponse.ReturnData.Citizenship
 
+        'uncomment for returning an image
 
         Dim returnedByteArray1() As Byte
         MessageBox.Show("# of images returned: " & getDataResponse.ReturnData.Images.Count)
-        'returnedByteArray1 = getDataResponse.ReturnData.Images(0).ImageData
+        returnedByteArray1 = getDataResponse.ReturnData.Images(0).ImageData
         Dim returnedImg1 As System.Drawing.Bitmap
         Dim ms2 As System.IO.MemoryStream = New System.IO.MemoryStream(returnedByteArray1)
         returnedImg1 = System.Drawing.Image.FromStream(ms2)
@@ -485,6 +485,9 @@ Public Class MainForm
         SexComboBox_Verify.SelectedIndex = -1
         CitizenshipComboBox_Verify.SelectedIndex = -1
         DoBDateTimePicker_Verify.Text = DateTime.Now
+
+        PicBx2_Verify.Image = Nothing
+
     End Sub
 
     'Converts a biometric image to base64string
@@ -502,6 +505,10 @@ Public Class MainForm
     Private Sub webCamPictureButton_Click(sender As Object, e As EventArgs) Handles webCamPictureButton.Click
         webFrm.ShowDialog()
         picbx1_Enroll.Image = webFrm.SnapshotImg
+        'txtbxBioImage_Enroll.Text = ""
+        txtbxBioImage_Enroll.ForeColor = System.Drawing.Color.Gray
+
+
     End Sub
 
     Dim iDimgFrmfile As System.Drawing.Image
@@ -543,4 +550,9 @@ Public Class MainForm
     End Sub
 
     
+    Private Sub webcamPictureBox_Identify_Click(sender As Object, e As EventArgs) Handles webcamPictureBox_Identify.Click
+        webFrm.ShowDialog()
+        picbx1_Identify.Image = webFrm.SnapshotImg
+        TextBoxBioImg_Identity.ForeColor = System.Drawing.Color.Gray
+    End Sub
 End Class
