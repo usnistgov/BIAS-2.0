@@ -152,11 +152,6 @@ Module mainModule
 
     End Sub
 
-    Sub testUpdateBiom()
-
-
-    End Sub
-
     Sub testPerformFusion()
 
         Dim sample1 = New FusionInformationType
@@ -233,8 +228,8 @@ Module mainModule
     Sub Main()
 
         Dim bias1 = New BIAS_v2Client
-        'MessageBox.Show("Hello")
-        testRetrieve()
+        MessageBox.Show("Hello")
+        'testRetrieve()
         'testEnroll()
         'testUpdateBiom()
         'testFacial()
@@ -380,7 +375,7 @@ Public Class BIAS_v2Client
 
         'Detect the face in the image
         Dim nbr_predicted = trainer.Predict(predict_image_pilG)
-        CvInvoke.Imshow("test", predict_image_pilG)
+        'CvInvoke.Imshow("test", predict_image_pilG)
 
         Return nbr_predicted
 
@@ -1095,10 +1090,13 @@ Public Class BIAS_v2Client
 
         'If it is known, then update bio/biog data in a person centric model, or initiate set Biog/Biom data in an encounter-centric model
 
+        MessageBox.Show("Hello")
+
         enrollResponse.Identity = newIdentity
         enrollResponse.ResponseStatus.Return = 0
         enrollResponse.ResponseStatus.Message = "Participant Enrolled"
         Return enrollResponse
+
     End Function
 
     ''' <summary>
@@ -1214,8 +1212,9 @@ Public Class BIAS_v2Client
 
         'get the max list size
         Dim maxListSize As Long = IdentifyRequest.MaxListSize
-
+        Console.WriteLine("Right before Prediction")
         Dim predictionResult = prediction(identifyTrainer, faceCascade, inputImage, maxListSize)
+        Console.WriteLine("Post Prediction")
         Dim predictSubjectID = predictionResult.Label
         Dim predictDistance = predictionResult.Distance
 
@@ -1241,8 +1240,9 @@ Public Class BIAS_v2Client
             identifyResponse.ResponseStatus.Return = 34
             identifyResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
         End If
-
+        Console.WriteLine("After Loop")
         identifyResponse.CandidateList = candidateList
+        Console.WriteLine("Before returning the response")
         Return identifyResponse
     End Function
 
@@ -2039,7 +2039,7 @@ Public Class BIAS_v2Client
         End If
 
 
-        
+
 
         retrieveBiomDataResponse.ResponseStatus = New ResponseStatus
         retrieveBiomDataResponse.ResponseStatus.Return = 0
@@ -2056,7 +2056,7 @@ Public Class BIAS_v2Client
     ''' <returns name="ReturnData">An InformationType that holds biographic/biometric/all data.</returns>
     ''' </summary>
     Public Function RetrieveData(RetrieveDataRequest As RetrieveDataRequest) As RetrieveDataResponsePackage Implements BIAS_v2.RetrieveData
-
+        MessageBox.Show("Hello")
         Dim subjectID As String = RetrieveDataRequest.Identity.SubjectID
         Dim retrieveDataResponse As New RetrieveDataResponsePackage()
         Dim processingOptions As ProcessingOptionsType = RetrieveDataRequest.ProcessingOptions 'list of optionType, which are key/val pairs
@@ -2203,6 +2203,7 @@ Public Class BIAS_v2Client
             returnInfoType.Images = imageList
 
         End If
+
 
         retrieveDataResponse.ReturnData = returnInfoType
         retrieveDataResponse.ResponseStatus = New ResponseStatus
@@ -2680,7 +2681,7 @@ Public Class BIAS_v2Client
         verifyResponse.ResponseStatus = New ResponseStatus
 
         'check for either reference BIR or identity claim. One must exist
-        If VerifyRequest.InputData.Images Is Nothing And VerifyRequest.IdentityClaim Is Nothing Then
+        If VerifyRequest.InputData.Images Is Nothing And VerifyRequest.Identity.IdentityClaim Is Nothing Then
             verifyResponse.Match = False
             verifyResponse.ResponseStatus.Return = 34
             verifyResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
@@ -2898,7 +2899,7 @@ Public Class BIAS_v2Client
         verifySubjectResponse.ResponseStatus = New ResponseStatus
 
         'check for either reference BIR or identity claim. One must exist
-        If VerifySubjectRequest.InputData.Images Is Nothing And VerifySubjectRequest.IdentityClaim Is Nothing Then
+        If VerifySubjectRequest.InputData.Images Is Nothing And VerifySubjectRequest.Identity.IdentityClaim Is Nothing Then
             verifySubjectResponse.Match = False
             verifySubjectResponse.ResponseStatus.Return = 34
             verifySubjectResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
@@ -2960,7 +2961,7 @@ Public Class BIAS_v2Client
                 verifySubjectResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
             End If
 
-        ElseIf VerifySubjectRequest.IdentityClaim IsNot Nothing Then
+        ElseIf VerifySubjectRequest.Identity.IdentityClaim IsNot Nothing Then
 
             Dim identityClaim = VerifySubjectRequest.Identity.IdentityClaim
             Dim candidateList = New CandidateListType
