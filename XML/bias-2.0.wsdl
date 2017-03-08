@@ -246,11 +246,6 @@
 							<xsd:documentation>An Identity's biographic data.</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
-					<!--<xsd:element name="BiographicDataElements" type="tns:BiographicDataType" minOccurs="0" maxOccurs="1">-->
-					<!--<xsd:annotation>
-							<xsd:documentation>An Identity's biographic data elements that are stored in the implementing system.</xsd:documentation>
-						</xsd:annotation>
-					</xsd:element>-->
 					<xsd:element name="BiometricData" type="tns:BIASBiometricDataType" minOccurs="0" maxOccurs="1">
 						<xsd:annotation>
 							<xsd:documentation>An Identity's biometric data.</xsd:documentation>
@@ -464,7 +459,6 @@
 						</xsd:annotation>
 					</xsd:element>
 				</xsd:sequence>
-				<!--<xsd:attribute name="Rank" type="xsd:integer" minOccurs="1" maxOccurs="1" ></xsd:attribute>-->
 			</xsd:complexType>
 			<xsd:complexType name="CapabilityListType">
 				<xsd:annotation>
@@ -1110,12 +1104,6 @@
 					</xsd:enumeration>
 				</xsd:restriction>
 			</xsd:simpleType>
-			<!--<xsd:simpleType name="Score">
-				<xsd:annotation>
-					<xsd:documentation>Match result or quality score.</xsd:documentation>
-				</xsd:annotation>
-				<xsd:restriction base="xsd:float"/>
-			</xsd:simpleType>-->
 			<xsd:complexType name="ScoreType">
 				<xsd:annotation>
 					<xsd:documentation>Match result or quality score.</xsd:documentation>
@@ -2113,6 +2101,11 @@
 													<xsd:documentation>Score or decision input information to the fusion method for each identity.</xsd:documentation>
 												</xsd:annotation>
 											</xsd:element>
+											<xsd:element name="biometricSample" type="xsd:string" minOccurs="1" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Score or decision input information to the fusion method for each identity.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
 										</xsd:sequence>
 									</xsd:extension>
 								</xsd:complexContent>
@@ -2802,6 +2795,11 @@
 													<xsd:documentation>Includes the identifying information and/or input and reference biometric samples.</xsd:documentation>
 												</xsd:annotation>
 											</xsd:element>
+											<xsd:element name="InputData" type="tns:InformationType" minOccurs="0" maxOccurs="1">
+												<xsd:annotation>
+													<xsd:documentation>Contains the output data for the response.</xsd:documentation>
+												</xsd:annotation>
+											</xsd:element>
 										</xsd:sequence>
 									</xsd:extension>
 								</xsd:complexContent>
@@ -3263,7 +3261,7 @@
 								<xsd:complexContent>
 									<xsd:extension base="tns:AggregateResponseTemplate">
 										<xsd:sequence>
-											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="1" maxOccurs="1">
+											<xsd:element name="Identity" type="tns:BIASIdentity" minOccurs="0" maxOccurs="1">
 												<xsd:annotation>
 													<xsd:documentation>The identifier of the encounter, if assigned.</xsd:documentation>
 												</xsd:annotation>
