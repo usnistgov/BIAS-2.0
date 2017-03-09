@@ -39,9 +39,10 @@ Module mainModule
         Dim bias1 As New BIAS_v2Client()
         Dim retrieveBiomData As New RetrieveBiometricDataRequest
         retrieveBiomData.Identity = New BIASIdentity
-        retrieveBiomData.Identity.SubjectID = "QKLJZBOU"
-        retrieveBiomData.GalleryID = "1"
+        retrieveBiomData.Identity.SubjectID = "83439161"
+        'retrieveBiomData.GalleryID = "1"
         Dim a As RetrieveBiometricDataResponsePackage = bias1.RetrieveBiometricData(retrieveBiomData)
+        MessageBox.Show(a.Identity.BiometricData.BIRList.Count)
     End Sub
 
     Sub testEnroll()
@@ -225,11 +226,42 @@ Module mainModule
 
     End Sub
 
+    Sub testVerify()
+
+        Dim bias1 = New BIAS_v2Client
+        Dim verifyData As New VerifyRequest
+        verifyData.Identity = New BIASIdentity
+        verifyData.Identity.IdentityClaim = "83439161"
+
+        Dim procOpt As New ProcessingOptionsType
+        Dim opt1 As New OptionType
+        opt1.Key = "Use"
+        opt1.Value = "Identity"
+
+        Dim opt2 As New OptionType
+        opt2.Key = "ReturnScore"
+        opt2.Value = "True"
+
+        Dim opt3 As New OptionType
+        opt3.Key = "ReturnRecord"
+        opt3.Value = "True"
+
+        procOpt.Add(opt1)
+        procOpt.Add(opt2)
+        procOpt.Add(opt3)
+
+        verifyData.ProcessingOptions = procOpt
+        Dim a = bias1.Verify(verifyData)
+        MessageBox.Show(a.Match)
+
+    End Sub
+
     Sub Main()
 
         Dim bias1 = New BIAS_v2Client
-        MessageBox.Show("Hello")
-        'testRetrieve()
+        'MessageBox.Show("Hello")
+        'testRetrieveBiomData()
+        'testVerify()
         'testEnroll()
         'testUpdateBiom()
         'testFacial()
@@ -1815,7 +1847,7 @@ Public Class BIAS_v2Client
         Else 'get all biog data for the subjectID in all galleries available
             For Each Dir As String In Directory.GetDirectories(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
                                                        & "\MasterDB\Galleries\")
-                galleryID = Dir
+                galleryID = Dir.Substring(Dir.LastIndexOf("\") + 1)
                 If Directory.Exists(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
                                                        & "\MasterDB\Galleries\" & galleryID & "\" & subjectID) Then 'check if the subject record exists in the gallery
 
@@ -1900,7 +1932,7 @@ Public Class BIAS_v2Client
                                                            & "\MasterDB\Subject Records\" & SubjectID & "\"
 
                 Dim biomImage = System.Drawing.Image.FromFile(subjectRecordFolderPath & imageName)
-                bir.BIR.biometricImage = ImageToBase64String(biomImage, ImageFormat.Png)
+                bir.BIR.biometricImage = ImageToBase64String(biomImage, ImageFormat.Jpeg)
                 bir.FormatOwner = readText(index + 1).Substring(12)
                 bir.FormatType = readText(index + 2).Substring(11)
                 'BIR DB
@@ -1953,7 +1985,7 @@ Public Class BIAS_v2Client
         Else 'get all biom data for the subjectID in all galleries available
             For Each Dir As String In Directory.GetDirectories(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
                                                        & "\MasterDB\Galleries\")
-                GalleryID = Dir
+                GalleryID = Dir.Substring(Dir.LastIndexOf("\") + 1)
                 If Directory.Exists(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString).ToString _
                                                        & "\MasterDB\Galleries\" & GalleryID & "\" & SubjectID) Then 'check if the subject record exists in the gallery
 
@@ -1984,7 +2016,7 @@ Public Class BIAS_v2Client
                                                                    & "\MasterDB\Subject Records\" & SubjectID & "\"
 
                         Dim biomImage = System.Drawing.Image.FromFile(subjectRecordFolderPath & imageName)
-                        bir.BIR.biometricImage = ImageToBase64String(biomImage, ImageFormat.Png)
+                        bir.BIR.biometricImage = ImageToBase64String(biomImage, ImageFormat.Jpeg)
                         bir.FormatOwner = readText(index + 1).Substring(12)
                         bir.FormatType = readText(index + 2).Substring(11)
                         'BIR DB
@@ -2681,7 +2713,7 @@ Public Class BIAS_v2Client
         verifyResponse.ResponseStatus = New ResponseStatus
 
         'check for either reference BIR or identity claim. One must exist
-        If VerifyRequest.InputData.Images Is Nothing And VerifyRequest.Identity.IdentityClaim Is Nothing Then
+        If VerifyRequest.InputData Is Nothing And VerifyRequest.Identity.IdentityClaim Is Nothing Then
             verifyResponse.Match = False
             verifyResponse.ResponseStatus.Return = 34
             verifyResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
@@ -2905,7 +2937,7 @@ Public Class BIAS_v2Client
         verifySubjectResponse.ResponseStatus = New ResponseStatus
 
         'check for either reference BIR or identity claim. One must exist
-        If VerifySubjectRequest.InputData.Images Is Nothing And VerifySubjectRequest.Identity.IdentityClaim Is Nothing Then
+        If VerifySubjectRequest.InputData Is Nothing And VerifySubjectRequest.Identity.IdentityClaim Is Nothing Then
             verifySubjectResponse.Match = False
             verifySubjectResponse.ResponseStatus.Return = 34
             verifySubjectResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
