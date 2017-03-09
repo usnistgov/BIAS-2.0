@@ -2795,6 +2795,7 @@ Public Class BIAS_v2Client
                 'retrieve the biometric information from the subject record folder in the gallery
                 Dim retrieveBiomData = New RetrieveBiometricDataRequest
                 retrieveBiomData.GalleryID = galleryID
+                retrieveBiomData.Identity = New BIASIdentity
                 retrieveBiomData.Identity.SubjectID = identityClaim
                 Dim bias1 = New BIAS_v2Client
                 Dim retrievedData = bias1.RetrieveBiometricData(retrieveBiomData)
@@ -2804,6 +2805,7 @@ Public Class BIAS_v2Client
 
                 'retrieve the biometric information from the subject records folder
                 Dim retrieveBiomData = New RetrieveBiometricDataRequest
+                retrieveBiomData.Identity = New BIASIdentity
                 retrieveBiomData.Identity.SubjectID = identityClaim
                 Dim bias1 = New BIAS_v2Client
                 Dim retrievedData = bias1.RetrieveBiometricData(retrieveBiomData)
@@ -2818,7 +2820,11 @@ Public Class BIAS_v2Client
             Dim verifyTrainer = trainer.createTrainer()
 
             'Load and convert base64 string to image.
-            Dim inputData As String = VerifyRequest.Identity.BiometricData.BIR.BIR.biometricImage
+            Dim retrieveBiomInfoFromIC = New RetrieveBiometricDataRequest
+            retrieveBiomInfoFromIC.Identity = New BIASIdentity
+            retrieveBiomInfoFromIC.Identity.SubjectID = identityClaim
+            Dim retrievedInfo = RetrieveBiometricData(retrieveBiomInfoFromIC)
+            Dim inputData As String = retrievedInfo.Identity.BiometricData.BIRList(0).BIR.biometricImage
             Dim inputImage As System.Drawing.Image = ImageFromBase64String(inputData)
 
             'create the faceCascade
@@ -2981,6 +2987,7 @@ Public Class BIAS_v2Client
                 'retrieve the biometric information from the subject record folder in the gallery
                 Dim retrieveBiomData = New RetrieveBiometricDataRequest
                 retrieveBiomData.GalleryID = galleryID
+                retrieveBiomData.Identity = New BIASIdentity
                 retrieveBiomData.Identity.SubjectID = identityClaim
                 Dim bias1 = New BIAS_v2Client
                 Dim retrievedData = bias1.RetrieveBiometricData(retrieveBiomData)
@@ -2990,6 +2997,7 @@ Public Class BIAS_v2Client
 
                 'retrieve the biometric information from the subject records folder
                 Dim retrieveBiomData = New RetrieveBiometricDataRequest
+                retrieveBiomData.Identity = New BIASIdentity
                 retrieveBiomData.Identity.SubjectID = identityClaim
                 Dim bias1 = New BIAS_v2Client
                 Dim retrievedData = bias1.RetrieveBiometricData(retrieveBiomData)
@@ -3004,7 +3012,11 @@ Public Class BIAS_v2Client
             Dim verifyTrainer = trainer.createTrainer()
 
             'Load and convert base64 string to image.
-            Dim inputData As String = VerifySubjectRequest.Identity.BiometricData.BIR.BIR.biometricImage
+            Dim retrieveBiomInfoFromIC = New RetrieveBiometricDataRequest
+            retrieveBiomInfoFromIC.Identity = New BIASIdentity
+            retrieveBiomInfoFromIC.Identity.SubjectID = identityClaim
+            Dim retrievedInfo = RetrieveBiometricData(retrieveBiomInfoFromIC)
+            Dim inputData As String = retrievedInfo.Identity.BiometricData.BIRList(0).BIR.biometricImage
             Dim inputImage As System.Drawing.Image = ImageFromBase64String(inputData)
 
             'create the faceCascade
