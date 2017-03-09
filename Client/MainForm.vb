@@ -278,7 +278,7 @@ Public Class MainForm
 
 
 
-        'if user types path into text box iDimgFrmfile is still empty so img is not converted to bytes and put into IdentifyRequest.  how to fix?
+        'if user --types path into text box iDimgFrmfile is still empty so img is not converted to bytes and put into IdentifyRequest.  how to fix?
 
         Dim mybytearray As Byte()
         If iDimgFrmfile IsNot Nothing Then

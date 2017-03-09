@@ -45,12 +45,14 @@ Partial Class MainForm
         Me.GivenNameTextBox_Enroll = New System.Windows.Forms.TextBox()
         Me.grpbox1_Enroll = New System.Windows.Forms.GroupBox()
         Me.webCamPictureButton = New System.Windows.Forms.Button()
+        Me.picbx1_Enroll = New System.Windows.Forms.PictureBox()
         Me.txtbxBioImage_Enroll = New System.Windows.Forms.TextBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.ImageTxtBx_Verify = New System.Windows.Forms.TextBox()
+        Me.PicBx2_Verify = New System.Windows.Forms.PictureBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.VerifyButton_Verify = New System.Windows.Forms.Button()
         Me.ClearButton_Verify = New System.Windows.Forms.Button()
@@ -73,6 +75,7 @@ Partial Class MainForm
         Me.SubjectIdLabel_Identify = New System.Windows.Forms.Label()
         Me.ScoreTextBox_Identify = New System.Windows.Forms.TextBox()
         Me.SubjectIdTextBox_Identify = New System.Windows.Forms.TextBox()
+        Me.txtbxBioImage_Identify = New System.Windows.Forms.TextBox()
         Me.CitizenshipComboBox_Identify = New System.Windows.Forms.ComboBox()
         Me.SexComboBox_Identify = New System.Windows.Forms.ComboBox()
         Me.DoBDateTimePicker_Identify = New System.Windows.Forms.DateTimePicker()
@@ -83,13 +86,16 @@ Partial Class MainForm
         Me.Label12 = New System.Windows.Forms.Label()
         Me.FamilyNameTextBox_Identify = New System.Windows.Forms.TextBox()
         Me.GivenNameTextBox_Identify = New System.Windows.Forms.TextBox()
+        Me.PictureBox2_Identify = New System.Windows.Forms.PictureBox()
         Me.grpbox9_Identify = New System.Windows.Forms.GroupBox()
+        Me.webcamPictureBox_Identify = New System.Windows.Forms.PictureBox()
         Me.TextBoxBioImg_Identity = New System.Windows.Forms.TextBox()
         Me.openFileButton_Identify = New System.Windows.Forms.Button()
         Me.btnIdentify_Identify = New System.Windows.Forms.Button()
-        Me.txtbxBioImage_Identify = New System.Windows.Forms.TextBox()
+        Me.picbx1_Identify = New System.Windows.Forms.PictureBox()
         Me.btnClear_Identify = New System.Windows.Forms.Button()
         Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.RetrievePictureBox2_Identify = New System.Windows.Forms.PictureBox()
         Me.RetrieveInfoButton_Identify = New System.Windows.Forms.Button()
         Me.CandidatesListListBox_Identify = New System.Windows.Forms.ListBox()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
@@ -110,6 +116,7 @@ Partial Class MainForm
         Me.QueryCapabilitiesButton_QueryCapabilities = New System.Windows.Forms.Button()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.GroupBox2_RetrieveInformation = New System.Windows.Forms.GroupBox()
+        Me.picboxResult_RetrieveInformation = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtbxDOB_RetrieveInformation = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -128,41 +135,34 @@ Partial Class MainForm
         Me.btnClear_RetrieveInformation = New System.Windows.Forms.Button()
         Me.OpenFileDialog1_Verify = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialog_Identify = New System.Windows.Forms.OpenFileDialog()
-        Me.picbx1_Enroll = New System.Windows.Forms.PictureBox()
-        Me.PicBx2_Verify = New System.Windows.Forms.PictureBox()
-        Me.PictureBox2_Identify = New System.Windows.Forms.PictureBox()
-        Me.webcamPictureBox_Identify = New System.Windows.Forms.PictureBox()
-        Me.picbx1_Identify = New System.Windows.Forms.PictureBox()
-        Me.RetrievePictureBox2_Identify = New System.Windows.Forms.PictureBox()
-        Me.picboxResult_RetrieveInformation = New System.Windows.Forms.PictureBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.grpbxResult_Enroll.SuspendLayout()
         Me.grpbox2_Enroll.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.grpbox1_Enroll.SuspendLayout()
+        CType(Me.picbx1_Enroll, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
+        CType(Me.PicBx2_Verify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox5.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox10.SuspendLayout()
+        CType(Me.PictureBox2_Identify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpbox9_Identify.SuspendLayout()
+        CType(Me.webcamPictureBox_Identify, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picbx1_Identify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox8.SuspendLayout()
+        CType(Me.RetrievePictureBox2_Identify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage4.SuspendLayout()
         Me.grpbox_QueryCapabilities.SuspendLayout()
         Me.TabPage5.SuspendLayout()
         Me.GroupBox2_RetrieveInformation.SuspendLayout()
+        CType(Me.picboxResult_RetrieveInformation, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1_RetrieveInformation.SuspendLayout()
-        CType(Me.picbx1_Enroll, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PicBx2_Verify, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2_Identify, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.webcamPictureBox_Identify, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picbx1_Identify, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RetrievePictureBox2_Identify, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picboxResult_RetrieveInformation, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -386,18 +386,27 @@ Partial Class MainForm
         '
         'webCamPictureButton
         '
-        Me.webCamPictureButton.Location = New System.Drawing.Point(6, 273)
+        Me.webCamPictureButton.Location = New System.Drawing.Point(125, 273)
         Me.webCamPictureButton.Name = "webCamPictureButton"
-        Me.webCamPictureButton.Size = New System.Drawing.Size(275, 23)
+        Me.webCamPictureButton.Size = New System.Drawing.Size(82, 23)
         Me.webCamPictureButton.TabIndex = 5
         Me.webCamPictureButton.Text = "Web camera picture"
         Me.webCamPictureButton.UseVisualStyleBackColor = True
         '
+        'picbx1_Enroll
+        '
+        Me.picbx1_Enroll.Location = New System.Drawing.Point(6, 19)
+        Me.picbx1_Enroll.Name = "picbx1_Enroll"
+        Me.picbx1_Enroll.Size = New System.Drawing.Size(275, 248)
+        Me.picbx1_Enroll.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.picbx1_Enroll.TabIndex = 3
+        Me.picbx1_Enroll.TabStop = False
+        '
         'txtbxBioImage_Enroll
         '
-        Me.txtbxBioImage_Enroll.Location = New System.Drawing.Point(6, 302)
+        Me.txtbxBioImage_Enroll.Location = New System.Drawing.Point(104, 302)
         Me.txtbxBioImage_Enroll.Name = "txtbxBioImage_Enroll"
-        Me.txtbxBioImage_Enroll.Size = New System.Drawing.Size(275, 20)
+        Me.txtbxBioImage_Enroll.Size = New System.Drawing.Size(121, 20)
         Me.txtbxBioImage_Enroll.TabIndex = 1
         Me.txtbxBioImage_Enroll.Text = "click to select a picture.."
         '
@@ -452,6 +461,14 @@ Partial Class MainForm
         Me.ImageTxtBx_Verify.Size = New System.Drawing.Size(166, 20)
         Me.ImageTxtBx_Verify.TabIndex = 1
         Me.ImageTxtBx_Verify.Text = "chose an image"
+        '
+        'PicBx2_Verify
+        '
+        Me.PicBx2_Verify.Location = New System.Drawing.Point(6, 19)
+        Me.PicBx2_Verify.Name = "PicBx2_Verify"
+        Me.PicBx2_Verify.Size = New System.Drawing.Size(167, 191)
+        Me.PicBx2_Verify.TabIndex = 0
+        Me.PicBx2_Verify.TabStop = False
         '
         'GroupBox5
         '
@@ -676,6 +693,14 @@ Partial Class MainForm
         Me.SubjectIdTextBox_Identify.Size = New System.Drawing.Size(132, 20)
         Me.SubjectIdTextBox_Identify.TabIndex = 23
         '
+        'txtbxBioImage_Identify
+        '
+        Me.txtbxBioImage_Identify.Location = New System.Drawing.Point(509, 20)
+        Me.txtbxBioImage_Identify.Name = "txtbxBioImage_Identify"
+        Me.txtbxBioImage_Identify.Size = New System.Drawing.Size(166, 20)
+        Me.txtbxBioImage_Identify.TabIndex = 1
+        Me.txtbxBioImage_Identify.Text = "click here to select a file..."
+        '
         'CitizenshipComboBox_Identify
         '
         Me.CitizenshipComboBox_Identify.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -763,6 +788,14 @@ Partial Class MainForm
         Me.GivenNameTextBox_Identify.Size = New System.Drawing.Size(209, 20)
         Me.GivenNameTextBox_Identify.TabIndex = 13
         '
+        'PictureBox2_Identify
+        '
+        Me.PictureBox2_Identify.Location = New System.Drawing.Point(31, 20)
+        Me.PictureBox2_Identify.Name = "PictureBox2_Identify"
+        Me.PictureBox2_Identify.Size = New System.Drawing.Size(132, 116)
+        Me.PictureBox2_Identify.TabIndex = 0
+        Me.PictureBox2_Identify.TabStop = False
+        '
         'grpbox9_Identify
         '
         Me.grpbox9_Identify.Controls.Add(Me.webcamPictureBox_Identify)
@@ -777,6 +810,17 @@ Partial Class MainForm
         Me.grpbox9_Identify.TabIndex = 4
         Me.grpbox9_Identify.TabStop = False
         Me.grpbox9_Identify.Text = "Biometric Data"
+        '
+        'webcamPictureBox_Identify
+        '
+        Me.webcamPictureBox_Identify.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.webcamPictureBox_Identify.Image = Global.My.Resources.Resources.photo_camera_318_115624
+        Me.webcamPictureBox_Identify.Location = New System.Drawing.Point(6, 309)
+        Me.webcamPictureBox_Identify.Name = "webcamPictureBox_Identify"
+        Me.webcamPictureBox_Identify.Size = New System.Drawing.Size(60, 25)
+        Me.webcamPictureBox_Identify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.webcamPictureBox_Identify.TabIndex = 5
+        Me.webcamPictureBox_Identify.TabStop = False
         '
         'TextBoxBioImg_Identity
         '
@@ -804,13 +848,14 @@ Partial Class MainForm
         Me.btnIdentify_Identify.Text = "Identify"
         Me.btnIdentify_Identify.UseVisualStyleBackColor = True
         '
-        'txtbxBioImage_Identify
+        'picbx1_Identify
         '
-        Me.txtbxBioImage_Identify.Location = New System.Drawing.Point(509, 20)
-        Me.txtbxBioImage_Identify.Name = "txtbxBioImage_Identify"
-        Me.txtbxBioImage_Identify.Size = New System.Drawing.Size(166, 20)
-        Me.txtbxBioImage_Identify.TabIndex = 1
-        Me.txtbxBioImage_Identify.Text = "click here to select a file..."
+        Me.picbx1_Identify.Location = New System.Drawing.Point(6, 19)
+        Me.picbx1_Identify.Name = "picbx1_Identify"
+        Me.picbx1_Identify.Size = New System.Drawing.Size(275, 248)
+        Me.picbx1_Identify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.picbx1_Identify.TabIndex = 0
+        Me.picbx1_Identify.TabStop = False
         '
         'btnClear_Identify
         '
@@ -833,6 +878,15 @@ Partial Class MainForm
         Me.GroupBox8.TabIndex = 3
         Me.GroupBox8.TabStop = False
         Me.GroupBox8.Text = "Identity Results"
+        '
+        'RetrievePictureBox2_Identify
+        '
+        Me.RetrievePictureBox2_Identify.Location = New System.Drawing.Point(17, 161)
+        Me.RetrievePictureBox2_Identify.Name = "RetrievePictureBox2_Identify"
+        Me.RetrievePictureBox2_Identify.Size = New System.Drawing.Size(275, 248)
+        Me.RetrievePictureBox2_Identify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.RetrievePictureBox2_Identify.TabIndex = 2
+        Me.RetrievePictureBox2_Identify.TabStop = False
         '
         'RetrieveInfoButton_Identify
         '
@@ -1023,6 +1077,14 @@ Partial Class MainForm
         Me.GroupBox2_RetrieveInformation.TabStop = False
         Me.GroupBox2_RetrieveInformation.Text = "Retrieve Information Results"
         '
+        'picboxResult_RetrieveInformation
+        '
+        Me.picboxResult_RetrieveInformation.Location = New System.Drawing.Point(327, 19)
+        Me.picboxResult_RetrieveInformation.Name = "picboxResult_RetrieveInformation"
+        Me.picboxResult_RetrieveInformation.Size = New System.Drawing.Size(359, 234)
+        Me.picboxResult_RetrieveInformation.TabIndex = 7
+        Me.picboxResult_RetrieveInformation.TabStop = False
+        '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.txtbxDOB_RetrieveInformation)
@@ -1177,68 +1239,6 @@ Partial Class MainForm
         Me.OpenFileDialog_Identify.InitialDirectory = "C:\Temp\Samples"
         Me.OpenFileDialog_Identify.RestoreDirectory = True
         '
-        'picbx1_Enroll
-        '
-        Me.picbx1_Enroll.Location = New System.Drawing.Point(6, 19)
-        Me.picbx1_Enroll.Name = "picbx1_Enroll"
-        Me.picbx1_Enroll.Size = New System.Drawing.Size(275, 248)
-        Me.picbx1_Enroll.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.picbx1_Enroll.TabIndex = 3
-        Me.picbx1_Enroll.TabStop = False
-        '
-        'PicBx2_Verify
-        '
-        Me.PicBx2_Verify.Location = New System.Drawing.Point(6, 19)
-        Me.PicBx2_Verify.Name = "PicBx2_Verify"
-        Me.PicBx2_Verify.Size = New System.Drawing.Size(167, 191)
-        Me.PicBx2_Verify.TabIndex = 0
-        Me.PicBx2_Verify.TabStop = False
-        '
-        'PictureBox2_Identify
-        '
-        Me.PictureBox2_Identify.Location = New System.Drawing.Point(31, 20)
-        Me.PictureBox2_Identify.Name = "PictureBox2_Identify"
-        Me.PictureBox2_Identify.Size = New System.Drawing.Size(132, 116)
-        Me.PictureBox2_Identify.TabIndex = 0
-        Me.PictureBox2_Identify.TabStop = False
-        '
-        'webcamPictureBox_Identify
-        '
-        Me.webcamPictureBox_Identify.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.webcamPictureBox_Identify.Image = Global.My.Resources.Resources.photo_camera_318_115624
-        Me.webcamPictureBox_Identify.Location = New System.Drawing.Point(6, 309)
-        Me.webcamPictureBox_Identify.Name = "webcamPictureBox_Identify"
-        Me.webcamPictureBox_Identify.Size = New System.Drawing.Size(60, 25)
-        Me.webcamPictureBox_Identify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.webcamPictureBox_Identify.TabIndex = 5
-        Me.webcamPictureBox_Identify.TabStop = False
-        '
-        'picbx1_Identify
-        '
-        Me.picbx1_Identify.Location = New System.Drawing.Point(6, 19)
-        Me.picbx1_Identify.Name = "picbx1_Identify"
-        Me.picbx1_Identify.Size = New System.Drawing.Size(275, 248)
-        Me.picbx1_Identify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.picbx1_Identify.TabIndex = 0
-        Me.picbx1_Identify.TabStop = False
-        '
-        'RetrievePictureBox2_Identify
-        '
-        Me.RetrievePictureBox2_Identify.Location = New System.Drawing.Point(17, 161)
-        Me.RetrievePictureBox2_Identify.Name = "RetrievePictureBox2_Identify"
-        Me.RetrievePictureBox2_Identify.Size = New System.Drawing.Size(275, 248)
-        Me.RetrievePictureBox2_Identify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.RetrievePictureBox2_Identify.TabIndex = 2
-        Me.RetrievePictureBox2_Identify.TabStop = False
-        '
-        'picboxResult_RetrieveInformation
-        '
-        Me.picboxResult_RetrieveInformation.Location = New System.Drawing.Point(327, 19)
-        Me.picboxResult_RetrieveInformation.Name = "picboxResult_RetrieveInformation"
-        Me.picboxResult_RetrieveInformation.Size = New System.Drawing.Size(359, 234)
-        Me.picboxResult_RetrieveInformation.TabIndex = 7
-        Me.picboxResult_RetrieveInformation.TabStop = False
-        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1256,11 +1256,13 @@ Partial Class MainForm
         Me.Panel4.PerformLayout()
         Me.grpbox1_Enroll.ResumeLayout(False)
         Me.grpbox1_Enroll.PerformLayout()
+        CType(Me.picbx1_Enroll, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
+        CType(Me.PicBx2_Verify, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox5.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
@@ -1268,25 +1270,23 @@ Partial Class MainForm
         Me.TabPage3.PerformLayout()
         Me.GroupBox10.ResumeLayout(False)
         Me.GroupBox10.PerformLayout()
+        CType(Me.PictureBox2_Identify, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpbox9_Identify.ResumeLayout(False)
         Me.grpbox9_Identify.PerformLayout()
+        CType(Me.webcamPictureBox_Identify, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picbx1_Identify, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox8.ResumeLayout(False)
+        CType(Me.RetrievePictureBox2_Identify, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage4.ResumeLayout(False)
         Me.grpbox_QueryCapabilities.ResumeLayout(False)
         Me.grpbox_QueryCapabilities.PerformLayout()
         Me.TabPage5.ResumeLayout(False)
         Me.GroupBox2_RetrieveInformation.ResumeLayout(False)
+        CType(Me.picboxResult_RetrieveInformation, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.GroupBox1_RetrieveInformation.ResumeLayout(False)
         Me.GroupBox1_RetrieveInformation.PerformLayout()
-        CType(Me.picbx1_Enroll, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PicBx2_Verify, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2_Identify, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.webcamPictureBox_Identify, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picbx1_Identify, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RetrievePictureBox2_Identify, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picboxResult_RetrieveInformation, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
