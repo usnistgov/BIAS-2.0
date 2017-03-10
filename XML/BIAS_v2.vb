@@ -557,6 +557,8 @@ Namespace OASIS.BIAS.V2
         
         Private FusionInputField As OASIS.BIAS.V2.FusionIdentityListType
         
+        Private biometricSampleField As String
+        
         <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true, EmitDefaultValue:=false)>  _
         Public Property FusionInput() As OASIS.BIAS.V2.FusionIdentityListType
             Get
@@ -564,6 +566,16 @@ Namespace OASIS.BIAS.V2
             End Get
             Set
                 Me.FusionInputField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true, EmitDefaultValue:=false)>  _
+        Public Property biometricSample() As String
+            Get
+                Return Me.biometricSampleField
+            End Get
+            Set
+                Me.biometricSampleField = value
             End Set
         End Property
     End Class
@@ -838,6 +850,8 @@ Namespace OASIS.BIAS.V2
         
         Private IdentityField As OASIS.BIAS.V2.BIASIdentity
         
+        Private InputDataField As OASIS.BIAS.V2.InformationType
+        
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=false)>  _
         Public Property GalleryID() As String
             Get
@@ -855,6 +869,16 @@ Namespace OASIS.BIAS.V2
             End Get
             Set
                 Me.IdentityField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=false)>  _
+        Public Property InputData() As OASIS.BIAS.V2.InformationType
+            Get
+                Return Me.InputDataField
+            End Get
+            Set
+                Me.InputDataField = value
             End Set
         End Property
     End Class
@@ -3133,7 +3157,7 @@ Namespace OASIS.BIAS.V2
         
         Private TokenField As OASIS.BIAS.V2.TokenType
         
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true, EmitDefaultValue:=false)>  _
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=false)>  _
         Public Property Identity() As OASIS.BIAS.V2.BIASIdentity
             Get
                 Return Me.IdentityField
