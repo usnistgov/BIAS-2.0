@@ -50,24 +50,28 @@ Partial Class MainForm
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.Label18_Verify = New System.Windows.Forms.Label()
+        Me.ResultPictureBox1_Verify = New System.Windows.Forms.PictureBox()
+        Me.CitizenshipComboBox_Verify = New System.Windows.Forms.ComboBox()
+        Me.SexComboBox_Verify = New System.Windows.Forms.ComboBox()
+        Me.DoBDateTimePicker_Verify = New System.Windows.Forms.DateTimePicker()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.FamilyNameTextBox_Verify = New System.Windows.Forms.TextBox()
+        Me.GivenNameTextBox_Verify = New System.Windows.Forms.TextBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.ImageTxtBx_Verify = New System.Windows.Forms.TextBox()
+        Me.openFileButton_Verify = New System.Windows.Forms.Button()
+        Me.webcamPictureBox_Verify = New System.Windows.Forms.PictureBox()
+        Me.TextBoxBioImg_Verify = New System.Windows.Forms.TextBox()
         Me.PicBx2_Verify = New System.Windows.Forms.PictureBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.VerifyButton_Verify = New System.Windows.Forms.Button()
         Me.ClearButton_Verify = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.CitizenshipComboBox_Verify = New System.Windows.Forms.ComboBox()
-        Me.SexComboBox_Verify = New System.Windows.Forms.ComboBox()
-        Me.DoBDateTimePicker_Verify = New System.Windows.Forms.DateTimePicker()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.DateofBirthLabel_Verify = New System.Windows.Forms.Label()
-        Me.FamilyNameLabel_Verify = New System.Windows.Forms.Label()
-        Me.GivenNameLabel_Verify = New System.Windows.Forms.Label()
         Me.SubjectIDLabel_Verify = New System.Windows.Forms.Label()
-        Me.FamilyNameTextbox_Verify = New System.Windows.Forms.TextBox()
-        Me.GivenNameTextbox_Verify = New System.Windows.Forms.TextBox()
         Me.SubjectIDTextbox_Verify = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
@@ -135,6 +139,7 @@ Partial Class MainForm
         Me.btnClear_RetrieveInformation = New System.Windows.Forms.Button()
         Me.OpenFileDialog1_Verify = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialog_Identify = New System.Windows.Forms.OpenFileDialog()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.grpbxResult_Enroll.SuspendLayout()
@@ -144,7 +149,10 @@ Partial Class MainForm
         CType(Me.picbx1_Enroll, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
+        CType(Me.ResultPictureBox1_Verify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox6.SuspendLayout()
+        CType(Me.webcamPictureBox_Verify, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PicBx2_Verify, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox5.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -436,37 +444,176 @@ Partial Class MainForm
         '
         'GroupBox7
         '
-        Me.GroupBox7.Location = New System.Drawing.Point(39, 310)
+        Me.GroupBox7.Controls.Add(Me.Label18_Verify)
+        Me.GroupBox7.Controls.Add(Me.ResultPictureBox1_Verify)
+        Me.GroupBox7.Controls.Add(Me.CitizenshipComboBox_Verify)
+        Me.GroupBox7.Controls.Add(Me.SexComboBox_Verify)
+        Me.GroupBox7.Controls.Add(Me.DoBDateTimePicker_Verify)
+        Me.GroupBox7.Controls.Add(Me.Label13)
+        Me.GroupBox7.Controls.Add(Me.Label14)
+        Me.GroupBox7.Controls.Add(Me.Label15)
+        Me.GroupBox7.Controls.Add(Me.Label16)
+        Me.GroupBox7.Controls.Add(Me.Label17)
+        Me.GroupBox7.Controls.Add(Me.FamilyNameTextBox_Verify)
+        Me.GroupBox7.Controls.Add(Me.GivenNameTextBox_Verify)
+        Me.GroupBox7.Location = New System.Drawing.Point(39, 387)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(555, 119)
+        Me.GroupBox7.Size = New System.Drawing.Size(651, 270)
         Me.GroupBox7.TabIndex = 4
         Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Verification Result"
+        Me.GroupBox7.Text = "Verify Result"
+        '
+        'Label18_Verify
+        '
+        Me.Label18_Verify.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18_Verify.Location = New System.Drawing.Point(339, 20)
+        Me.Label18_Verify.Name = "Label18_Verify"
+        Me.Label18_Verify.Size = New System.Drawing.Size(287, 32)
+        Me.Label18_Verify.TabIndex = 34
+        Me.Label18_Verify.Text = "Result"
+        Me.Label18_Verify.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'ResultPictureBox1_Verify
+        '
+        Me.ResultPictureBox1_Verify.Location = New System.Drawing.Point(23, 20)
+        Me.ResultPictureBox1_Verify.Name = "ResultPictureBox1_Verify"
+        Me.ResultPictureBox1_Verify.Size = New System.Drawing.Size(275, 248)
+        Me.ResultPictureBox1_Verify.TabIndex = 33
+        Me.ResultPictureBox1_Verify.TabStop = False
+        '
+        'CitizenshipComboBox_Verify
+        '
+        Me.CitizenshipComboBox_Verify.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CitizenshipComboBox_Verify.FormattingEnabled = True
+        Me.CitizenshipComboBox_Verify.Items.AddRange(New Object() {"US Citizen", "Non-US Citizen", "Permanent Resident", "Work Visa", "Green Card", "Illegal Immigrant"})
+        Me.CitizenshipComboBox_Verify.Location = New System.Drawing.Point(417, 165)
+        Me.CitizenshipComboBox_Verify.Name = "CitizenshipComboBox_Verify"
+        Me.CitizenshipComboBox_Verify.Size = New System.Drawing.Size(212, 21)
+        Me.CitizenshipComboBox_Verify.TabIndex = 25
+        '
+        'SexComboBox_Verify
+        '
+        Me.SexComboBox_Verify.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.SexComboBox_Verify.FormattingEnabled = True
+        Me.SexComboBox_Verify.Items.AddRange(New Object() {"M", "F", "Unknown"})
+        Me.SexComboBox_Verify.Location = New System.Drawing.Point(417, 138)
+        Me.SexComboBox_Verify.Name = "SexComboBox_Verify"
+        Me.SexComboBox_Verify.Size = New System.Drawing.Size(212, 21)
+        Me.SexComboBox_Verify.TabIndex = 26
+        '
+        'DoBDateTimePicker_Verify
+        '
+        Me.DoBDateTimePicker_Verify.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.DoBDateTimePicker_Verify.Location = New System.Drawing.Point(417, 113)
+        Me.DoBDateTimePicker_Verify.Name = "DoBDateTimePicker_Verify"
+        Me.DoBDateTimePicker_Verify.Size = New System.Drawing.Size(212, 20)
+        Me.DoBDateTimePicker_Verify.TabIndex = 32
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(336, 165)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(57, 13)
+        Me.Label13.TabIndex = 31
+        Me.Label13.Text = "Citizenship"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(336, 139)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(25, 13)
+        Me.Label14.TabIndex = 30
+        Me.Label14.Text = "Sex"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(336, 113)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(66, 13)
+        Me.Label15.TabIndex = 29
+        Me.Label15.Text = "Date of Birth"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(336, 90)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(67, 13)
+        Me.Label16.TabIndex = 28
+        Me.Label16.Text = "Family Name"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(336, 68)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(66, 13)
+        Me.Label17.TabIndex = 27
+        Me.Label17.Text = "Given Name"
+        '
+        'FamilyNameTextBox_Verify
+        '
+        Me.FamilyNameTextBox_Verify.Location = New System.Drawing.Point(417, 87)
+        Me.FamilyNameTextBox_Verify.Name = "FamilyNameTextBox_Verify"
+        Me.FamilyNameTextBox_Verify.Size = New System.Drawing.Size(209, 20)
+        Me.FamilyNameTextBox_Verify.TabIndex = 24
+        '
+        'GivenNameTextBox_Verify
+        '
+        Me.GivenNameTextBox_Verify.Location = New System.Drawing.Point(417, 61)
+        Me.GivenNameTextBox_Verify.Name = "GivenNameTextBox_Verify"
+        Me.GivenNameTextBox_Verify.Size = New System.Drawing.Size(209, 20)
+        Me.GivenNameTextBox_Verify.TabIndex = 23
         '
         'GroupBox6
         '
-        Me.GroupBox6.Controls.Add(Me.ImageTxtBx_Verify)
+        Me.GroupBox6.Controls.Add(Me.openFileButton_Verify)
+        Me.GroupBox6.Controls.Add(Me.webcamPictureBox_Verify)
+        Me.GroupBox6.Controls.Add(Me.TextBoxBioImg_Verify)
         Me.GroupBox6.Controls.Add(Me.PicBx2_Verify)
         Me.GroupBox6.Location = New System.Drawing.Point(39, 32)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(197, 256)
+        Me.GroupBox6.Size = New System.Drawing.Size(308, 320)
         Me.GroupBox6.TabIndex = 3
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Biometric Data"
         '
-        'ImageTxtBx_Verify
+        'openFileButton_Verify
         '
-        Me.ImageTxtBx_Verify.Location = New System.Drawing.Point(7, 218)
-        Me.ImageTxtBx_Verify.Name = "ImageTxtBx_Verify"
-        Me.ImageTxtBx_Verify.Size = New System.Drawing.Size(166, 20)
-        Me.ImageTxtBx_Verify.TabIndex = 1
-        Me.ImageTxtBx_Verify.Text = "chose an image"
+        Me.openFileButton_Verify.Location = New System.Drawing.Point(248, 278)
+        Me.openFileButton_Verify.Name = "openFileButton_Verify"
+        Me.openFileButton_Verify.Size = New System.Drawing.Size(33, 23)
+        Me.openFileButton_Verify.TabIndex = 7
+        Me.openFileButton_Verify.Text = "..."
+        Me.openFileButton_Verify.UseVisualStyleBackColor = True
+        '
+        'webcamPictureBox_Verify
+        '
+        Me.webcamPictureBox_Verify.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.webcamPictureBox_Verify.Image = Global.My.Resources.Resources.photo_camera_318_115624
+        Me.webcamPictureBox_Verify.Location = New System.Drawing.Point(6, 273)
+        Me.webcamPictureBox_Verify.Name = "webcamPictureBox_Verify"
+        Me.webcamPictureBox_Verify.Size = New System.Drawing.Size(60, 25)
+        Me.webcamPictureBox_Verify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.webcamPictureBox_Verify.TabIndex = 6
+        Me.webcamPictureBox_Verify.TabStop = False
+        '
+        'TextBoxBioImg_Verify
+        '
+        Me.TextBoxBioImg_Verify.Location = New System.Drawing.Point(83, 278)
+        Me.TextBoxBioImg_Verify.Name = "TextBoxBioImg_Verify"
+        Me.TextBoxBioImg_Verify.Size = New System.Drawing.Size(159, 20)
+        Me.TextBoxBioImg_Verify.TabIndex = 1
+        Me.TextBoxBioImg_Verify.Text = "supply an image . . ."
         '
         'PicBx2_Verify
         '
         Me.PicBx2_Verify.Location = New System.Drawing.Point(6, 19)
         Me.PicBx2_Verify.Name = "PicBx2_Verify"
-        Me.PicBx2_Verify.Size = New System.Drawing.Size(167, 191)
+        Me.PicBx2_Verify.Size = New System.Drawing.Size(275, 248)
         Me.PicBx2_Verify.TabIndex = 0
         Me.PicBx2_Verify.TabStop = False
         '
@@ -476,122 +623,39 @@ Partial Class MainForm
         Me.GroupBox5.Controls.Add(Me.VerifyButton_Verify)
         Me.GroupBox5.Controls.Add(Me.ClearButton_Verify)
         Me.GroupBox5.Controls.Add(Me.Panel2)
-        Me.GroupBox5.Location = New System.Drawing.Point(276, 32)
+        Me.GroupBox5.Location = New System.Drawing.Point(372, 40)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(318, 259)
+        Me.GroupBox5.Size = New System.Drawing.Size(318, 312)
         Me.GroupBox5.TabIndex = 2
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Identity Claim"
         '
         'VerifyButton_Verify
         '
-        Me.VerifyButton_Verify.Location = New System.Drawing.Point(115, 216)
+        Me.VerifyButton_Verify.Location = New System.Drawing.Point(174, 270)
         Me.VerifyButton_Verify.Name = "VerifyButton_Verify"
-        Me.VerifyButton_Verify.Size = New System.Drawing.Size(75, 23)
+        Me.VerifyButton_Verify.Size = New System.Drawing.Size(135, 23)
         Me.VerifyButton_Verify.TabIndex = 2
         Me.VerifyButton_Verify.Text = "Verify"
         Me.VerifyButton_Verify.UseVisualStyleBackColor = True
         '
         'ClearButton_Verify
         '
-        Me.ClearButton_Verify.Location = New System.Drawing.Point(6, 217)
+        Me.ClearButton_Verify.Location = New System.Drawing.Point(10, 270)
         Me.ClearButton_Verify.Name = "ClearButton_Verify"
-        Me.ClearButton_Verify.Size = New System.Drawing.Size(75, 23)
+        Me.ClearButton_Verify.Size = New System.Drawing.Size(123, 23)
         Me.ClearButton_Verify.TabIndex = 1
         Me.ClearButton_Verify.Text = "Clear"
         Me.ClearButton_Verify.UseVisualStyleBackColor = True
         '
         'Panel2
         '
-        Me.Panel2.Controls.Add(Me.CitizenshipComboBox_Verify)
-        Me.Panel2.Controls.Add(Me.SexComboBox_Verify)
-        Me.Panel2.Controls.Add(Me.DoBDateTimePicker_Verify)
-        Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Controls.Add(Me.DateofBirthLabel_Verify)
-        Me.Panel2.Controls.Add(Me.FamilyNameLabel_Verify)
-        Me.Panel2.Controls.Add(Me.GivenNameLabel_Verify)
         Me.Panel2.Controls.Add(Me.SubjectIDLabel_Verify)
-        Me.Panel2.Controls.Add(Me.FamilyNameTextbox_Verify)
-        Me.Panel2.Controls.Add(Me.GivenNameTextbox_Verify)
         Me.Panel2.Controls.Add(Me.SubjectIDTextbox_Verify)
         Me.Panel2.Location = New System.Drawing.Point(6, 19)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(306, 191)
         Me.Panel2.TabIndex = 0
-        '
-        'CitizenshipComboBox_Verify
-        '
-        Me.CitizenshipComboBox_Verify.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CitizenshipComboBox_Verify.FormattingEnabled = True
-        Me.CitizenshipComboBox_Verify.Items.AddRange(New Object() {"US Citizen", "Non-US Citizen", "Permanent Resident", "Work Visa", "Green Card", "Illegal Immigrant"})
-        Me.CitizenshipComboBox_Verify.Location = New System.Drawing.Point(86, 146)
-        Me.CitizenshipComboBox_Verify.Name = "CitizenshipComboBox_Verify"
-        Me.CitizenshipComboBox_Verify.Size = New System.Drawing.Size(212, 21)
-        Me.CitizenshipComboBox_Verify.TabIndex = 18
-        '
-        'SexComboBox_Verify
-        '
-        Me.SexComboBox_Verify.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.SexComboBox_Verify.FormattingEnabled = True
-        Me.SexComboBox_Verify.Items.AddRange(New Object() {"M", "F", "Unknown"})
-        Me.SexComboBox_Verify.Location = New System.Drawing.Point(86, 115)
-        Me.SexComboBox_Verify.Name = "SexComboBox_Verify"
-        Me.SexComboBox_Verify.Size = New System.Drawing.Size(212, 21)
-        Me.SexComboBox_Verify.TabIndex = 17
-        '
-        'DoBDateTimePicker_Verify
-        '
-        Me.DoBDateTimePicker_Verify.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DoBDateTimePicker_Verify.Location = New System.Drawing.Point(86, 90)
-        Me.DoBDateTimePicker_Verify.Name = "DoBDateTimePicker_Verify"
-        Me.DoBDateTimePicker_Verify.Size = New System.Drawing.Size(217, 20)
-        Me.DoBDateTimePicker_Verify.TabIndex = 16
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(13, 149)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(57, 13)
-        Me.Label6.TabIndex = 15
-        Me.Label6.Text = "Citizenship"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(13, 118)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(25, 13)
-        Me.Label7.TabIndex = 14
-        Me.Label7.Text = "Sex"
-        '
-        'DateofBirthLabel_Verify
-        '
-        Me.DateofBirthLabel_Verify.AutoSize = True
-        Me.DateofBirthLabel_Verify.Location = New System.Drawing.Point(13, 90)
-        Me.DateofBirthLabel_Verify.Name = "DateofBirthLabel_Verify"
-        Me.DateofBirthLabel_Verify.Size = New System.Drawing.Size(66, 13)
-        Me.DateofBirthLabel_Verify.TabIndex = 9
-        Me.DateofBirthLabel_Verify.Text = "Date of Birth"
-        '
-        'FamilyNameLabel_Verify
-        '
-        Me.FamilyNameLabel_Verify.AutoSize = True
-        Me.FamilyNameLabel_Verify.Location = New System.Drawing.Point(13, 67)
-        Me.FamilyNameLabel_Verify.Name = "FamilyNameLabel_Verify"
-        Me.FamilyNameLabel_Verify.Size = New System.Drawing.Size(67, 13)
-        Me.FamilyNameLabel_Verify.TabIndex = 8
-        Me.FamilyNameLabel_Verify.Text = "Family Name"
-        '
-        'GivenNameLabel_Verify
-        '
-        Me.GivenNameLabel_Verify.AutoSize = True
-        Me.GivenNameLabel_Verify.Location = New System.Drawing.Point(13, 45)
-        Me.GivenNameLabel_Verify.Name = "GivenNameLabel_Verify"
-        Me.GivenNameLabel_Verify.Size = New System.Drawing.Size(66, 13)
-        Me.GivenNameLabel_Verify.TabIndex = 7
-        Me.GivenNameLabel_Verify.Text = "Given Name"
         '
         'SubjectIDLabel_Verify
         '
@@ -601,20 +665,6 @@ Partial Class MainForm
         Me.SubjectIDLabel_Verify.Size = New System.Drawing.Size(54, 13)
         Me.SubjectIDLabel_Verify.TabIndex = 6
         Me.SubjectIDLabel_Verify.Text = "SubjectID"
-        '
-        'FamilyNameTextbox_Verify
-        '
-        Me.FamilyNameTextbox_Verify.Location = New System.Drawing.Point(86, 64)
-        Me.FamilyNameTextbox_Verify.Name = "FamilyNameTextbox_Verify"
-        Me.FamilyNameTextbox_Verify.Size = New System.Drawing.Size(217, 20)
-        Me.FamilyNameTextbox_Verify.TabIndex = 2
-        '
-        'GivenNameTextbox_Verify
-        '
-        Me.GivenNameTextbox_Verify.Location = New System.Drawing.Point(86, 38)
-        Me.GivenNameTextbox_Verify.Name = "GivenNameTextbox_Verify"
-        Me.GivenNameTextbox_Verify.Size = New System.Drawing.Size(217, 20)
-        Me.GivenNameTextbox_Verify.TabIndex = 1
         '
         'SubjectIDTextbox_Verify
         '
@@ -654,17 +704,17 @@ Partial Class MainForm
         Me.GroupBox10.Controls.Add(Me.FamilyNameTextBox_Identify)
         Me.GroupBox10.Controls.Add(Me.GivenNameTextBox_Identify)
         Me.GroupBox10.Controls.Add(Me.PictureBox2_Identify)
-        Me.GroupBox10.Location = New System.Drawing.Point(50, 455)
+        Me.GroupBox10.Location = New System.Drawing.Point(50, 390)
         Me.GroupBox10.Name = "GroupBox10"
-        Me.GroupBox10.Size = New System.Drawing.Size(669, 203)
+        Me.GroupBox10.Size = New System.Drawing.Size(653, 268)
         Me.GroupBox10.TabIndex = 5
         Me.GroupBox10.TabStop = False
-        Me.GroupBox10.Text = "Messages"
+        Me.GroupBox10.Text = "Subject Data"
         '
         'ScoreLabel_Identify
         '
         Me.ScoreLabel_Identify.AutoSize = True
-        Me.ScoreLabel_Identify.Location = New System.Drawing.Point(283, 164)
+        Me.ScoreLabel_Identify.Location = New System.Drawing.Point(326, 192)
         Me.ScoreLabel_Identify.Name = "ScoreLabel_Identify"
         Me.ScoreLabel_Identify.Size = New System.Drawing.Size(35, 13)
         Me.ScoreLabel_Identify.TabIndex = 26
@@ -673,7 +723,7 @@ Partial Class MainForm
         'SubjectIdLabel_Identify
         '
         Me.SubjectIdLabel_Identify.AutoSize = True
-        Me.SubjectIdLabel_Identify.Location = New System.Drawing.Point(31, 168)
+        Me.SubjectIdLabel_Identify.Location = New System.Drawing.Point(326, 235)
         Me.SubjectIdLabel_Identify.Name = "SubjectIdLabel_Identify"
         Me.SubjectIdLabel_Identify.Size = New System.Drawing.Size(55, 13)
         Me.SubjectIdLabel_Identify.TabIndex = 25
@@ -681,21 +731,21 @@ Partial Class MainForm
         '
         'ScoreTextBox_Identify
         '
-        Me.ScoreTextBox_Identify.Location = New System.Drawing.Point(357, 164)
+        Me.ScoreTextBox_Identify.Location = New System.Drawing.Point(407, 192)
         Me.ScoreTextBox_Identify.Name = "ScoreTextBox_Identify"
-        Me.ScoreTextBox_Identify.Size = New System.Drawing.Size(190, 20)
+        Me.ScoreTextBox_Identify.Size = New System.Drawing.Size(212, 20)
         Me.ScoreTextBox_Identify.TabIndex = 24
         '
         'SubjectIdTextBox_Identify
         '
-        Me.SubjectIdTextBox_Identify.Location = New System.Drawing.Point(108, 164)
+        Me.SubjectIdTextBox_Identify.Location = New System.Drawing.Point(407, 228)
         Me.SubjectIdTextBox_Identify.Name = "SubjectIdTextBox_Identify"
-        Me.SubjectIdTextBox_Identify.Size = New System.Drawing.Size(132, 20)
+        Me.SubjectIdTextBox_Identify.Size = New System.Drawing.Size(212, 20)
         Me.SubjectIdTextBox_Identify.TabIndex = 23
         '
         'txtbxBioImage_Identify
         '
-        Me.txtbxBioImage_Identify.Location = New System.Drawing.Point(509, 20)
+        Me.txtbxBioImage_Identify.Location = New System.Drawing.Point(453, 15)
         Me.txtbxBioImage_Identify.Name = "txtbxBioImage_Identify"
         Me.txtbxBioImage_Identify.Size = New System.Drawing.Size(166, 20)
         Me.txtbxBioImage_Identify.TabIndex = 1
@@ -706,7 +756,7 @@ Partial Class MainForm
         Me.CitizenshipComboBox_Identify.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CitizenshipComboBox_Identify.FormattingEnabled = True
         Me.CitizenshipComboBox_Identify.Items.AddRange(New Object() {"US Citizen", "Non-US Citizen", "Permanent Resident", "Work Visa", "Green Card", "Illegal Immigrant"})
-        Me.CitizenshipComboBox_Identify.Location = New System.Drawing.Point(264, 124)
+        Me.CitizenshipComboBox_Identify.Location = New System.Drawing.Point(407, 145)
         Me.CitizenshipComboBox_Identify.Name = "CitizenshipComboBox_Identify"
         Me.CitizenshipComboBox_Identify.Size = New System.Drawing.Size(212, 21)
         Me.CitizenshipComboBox_Identify.TabIndex = 15
@@ -716,7 +766,7 @@ Partial Class MainForm
         Me.SexComboBox_Identify.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.SexComboBox_Identify.FormattingEnabled = True
         Me.SexComboBox_Identify.Items.AddRange(New Object() {"M", "F", "Unknown"})
-        Me.SexComboBox_Identify.Location = New System.Drawing.Point(264, 97)
+        Me.SexComboBox_Identify.Location = New System.Drawing.Point(407, 118)
         Me.SexComboBox_Identify.Name = "SexComboBox_Identify"
         Me.SexComboBox_Identify.Size = New System.Drawing.Size(212, 21)
         Me.SexComboBox_Identify.TabIndex = 16
@@ -724,7 +774,7 @@ Partial Class MainForm
         'DoBDateTimePicker_Identify
         '
         Me.DoBDateTimePicker_Identify.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DoBDateTimePicker_Identify.Location = New System.Drawing.Point(264, 72)
+        Me.DoBDateTimePicker_Identify.Location = New System.Drawing.Point(407, 93)
         Me.DoBDateTimePicker_Identify.Name = "DoBDateTimePicker_Identify"
         Me.DoBDateTimePicker_Identify.Size = New System.Drawing.Size(212, 20)
         Me.DoBDateTimePicker_Identify.TabIndex = 22
@@ -732,7 +782,7 @@ Partial Class MainForm
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(183, 124)
+        Me.Label8.Location = New System.Drawing.Point(326, 145)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(57, 13)
         Me.Label8.TabIndex = 21
@@ -741,7 +791,7 @@ Partial Class MainForm
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(183, 98)
+        Me.Label9.Location = New System.Drawing.Point(326, 119)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(25, 13)
         Me.Label9.TabIndex = 20
@@ -750,7 +800,7 @@ Partial Class MainForm
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(183, 72)
+        Me.Label10.Location = New System.Drawing.Point(326, 93)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(66, 13)
         Me.Label10.TabIndex = 19
@@ -759,7 +809,7 @@ Partial Class MainForm
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(183, 49)
+        Me.Label11.Location = New System.Drawing.Point(326, 70)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(67, 13)
         Me.Label11.TabIndex = 18
@@ -768,7 +818,7 @@ Partial Class MainForm
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(183, 27)
+        Me.Label12.Location = New System.Drawing.Point(326, 48)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(66, 13)
         Me.Label12.TabIndex = 17
@@ -776,23 +826,23 @@ Partial Class MainForm
         '
         'FamilyNameTextBox_Identify
         '
-        Me.FamilyNameTextBox_Identify.Location = New System.Drawing.Point(264, 46)
+        Me.FamilyNameTextBox_Identify.Location = New System.Drawing.Point(407, 67)
         Me.FamilyNameTextBox_Identify.Name = "FamilyNameTextBox_Identify"
         Me.FamilyNameTextBox_Identify.Size = New System.Drawing.Size(209, 20)
         Me.FamilyNameTextBox_Identify.TabIndex = 14
         '
         'GivenNameTextBox_Identify
         '
-        Me.GivenNameTextBox_Identify.Location = New System.Drawing.Point(264, 20)
+        Me.GivenNameTextBox_Identify.Location = New System.Drawing.Point(407, 41)
         Me.GivenNameTextBox_Identify.Name = "GivenNameTextBox_Identify"
         Me.GivenNameTextBox_Identify.Size = New System.Drawing.Size(209, 20)
         Me.GivenNameTextBox_Identify.TabIndex = 13
         '
         'PictureBox2_Identify
         '
-        Me.PictureBox2_Identify.Location = New System.Drawing.Point(31, 20)
+        Me.PictureBox2_Identify.Location = New System.Drawing.Point(33, 14)
         Me.PictureBox2_Identify.Name = "PictureBox2_Identify"
-        Me.PictureBox2_Identify.Size = New System.Drawing.Size(132, 116)
+        Me.PictureBox2_Identify.Size = New System.Drawing.Size(275, 248)
         Me.PictureBox2_Identify.TabIndex = 0
         Me.PictureBox2_Identify.TabStop = False
         '
@@ -804,9 +854,9 @@ Partial Class MainForm
         Me.grpbox9_Identify.Controls.Add(Me.btnIdentify_Identify)
         Me.grpbox9_Identify.Controls.Add(Me.picbx1_Identify)
         Me.grpbox9_Identify.Controls.Add(Me.btnClear_Identify)
-        Me.grpbox9_Identify.Location = New System.Drawing.Point(50, 37)
+        Me.grpbox9_Identify.Location = New System.Drawing.Point(50, 25)
         Me.grpbox9_Identify.Name = "grpbox9_Identify"
-        Me.grpbox9_Identify.Size = New System.Drawing.Size(308, 397)
+        Me.grpbox9_Identify.Size = New System.Drawing.Size(308, 359)
         Me.grpbox9_Identify.TabIndex = 4
         Me.grpbox9_Identify.TabStop = False
         Me.grpbox9_Identify.Text = "Biometric Data"
@@ -815,7 +865,7 @@ Partial Class MainForm
         '
         Me.webcamPictureBox_Identify.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.webcamPictureBox_Identify.Image = Global.My.Resources.Resources.photo_camera_318_115624
-        Me.webcamPictureBox_Identify.Location = New System.Drawing.Point(6, 309)
+        Me.webcamPictureBox_Identify.Location = New System.Drawing.Point(6, 284)
         Me.webcamPictureBox_Identify.Name = "webcamPictureBox_Identify"
         Me.webcamPictureBox_Identify.Size = New System.Drawing.Size(60, 25)
         Me.webcamPictureBox_Identify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
@@ -824,7 +874,7 @@ Partial Class MainForm
         '
         'TextBoxBioImg_Identity
         '
-        Me.TextBoxBioImg_Identity.Location = New System.Drawing.Point(80, 314)
+        Me.TextBoxBioImg_Identity.Location = New System.Drawing.Point(80, 289)
         Me.TextBoxBioImg_Identity.Name = "TextBoxBioImg_Identity"
         Me.TextBoxBioImg_Identity.Size = New System.Drawing.Size(160, 20)
         Me.TextBoxBioImg_Identity.TabIndex = 4
@@ -832,7 +882,7 @@ Partial Class MainForm
         '
         'openFileButton_Identify
         '
-        Me.openFileButton_Identify.Location = New System.Drawing.Point(248, 314)
+        Me.openFileButton_Identify.Location = New System.Drawing.Point(248, 289)
         Me.openFileButton_Identify.Name = "openFileButton_Identify"
         Me.openFileButton_Identify.Size = New System.Drawing.Size(33, 23)
         Me.openFileButton_Identify.TabIndex = 3
@@ -841,7 +891,7 @@ Partial Class MainForm
         '
         'btnIdentify_Identify
         '
-        Me.btnIdentify_Identify.Location = New System.Drawing.Point(155, 354)
+        Me.btnIdentify_Identify.Location = New System.Drawing.Point(155, 327)
         Me.btnIdentify_Identify.Name = "btnIdentify_Identify"
         Me.btnIdentify_Identify.Size = New System.Drawing.Size(126, 23)
         Me.btnIdentify_Identify.TabIndex = 2
@@ -850,7 +900,7 @@ Partial Class MainForm
         '
         'picbx1_Identify
         '
-        Me.picbx1_Identify.Location = New System.Drawing.Point(6, 19)
+        Me.picbx1_Identify.Location = New System.Drawing.Point(27, 19)
         Me.picbx1_Identify.Name = "picbx1_Identify"
         Me.picbx1_Identify.Size = New System.Drawing.Size(275, 248)
         Me.picbx1_Identify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
@@ -859,7 +909,7 @@ Partial Class MainForm
         '
         'btnClear_Identify
         '
-        Me.btnClear_Identify.Location = New System.Drawing.Point(6, 354)
+        Me.btnClear_Identify.Location = New System.Drawing.Point(6, 327)
         Me.btnClear_Identify.Name = "btnClear_Identify"
         Me.btnClear_Identify.Size = New System.Drawing.Size(128, 23)
         Me.btnClear_Identify.TabIndex = 1
@@ -872,16 +922,16 @@ Partial Class MainForm
         Me.GroupBox8.Controls.Add(Me.RetrievePictureBox2_Identify)
         Me.GroupBox8.Controls.Add(Me.RetrieveInfoButton_Identify)
         Me.GroupBox8.Controls.Add(Me.CandidatesListListBox_Identify)
-        Me.GroupBox8.Location = New System.Drawing.Point(407, 25)
+        Me.GroupBox8.Location = New System.Drawing.Point(385, 25)
         Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Size = New System.Drawing.Size(318, 428)
+        Me.GroupBox8.Size = New System.Drawing.Size(318, 378)
         Me.GroupBox8.TabIndex = 3
         Me.GroupBox8.TabStop = False
-        Me.GroupBox8.Text = "Identity Results"
+        Me.GroupBox8.Text = "Identity Result"
         '
         'RetrievePictureBox2_Identify
         '
-        Me.RetrievePictureBox2_Identify.Location = New System.Drawing.Point(17, 161)
+        Me.RetrievePictureBox2_Identify.Location = New System.Drawing.Point(17, 111)
         Me.RetrievePictureBox2_Identify.Name = "RetrievePictureBox2_Identify"
         Me.RetrievePictureBox2_Identify.Size = New System.Drawing.Size(275, 248)
         Me.RetrievePictureBox2_Identify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
@@ -890,7 +940,7 @@ Partial Class MainForm
         '
         'RetrieveInfoButton_Identify
         '
-        Me.RetrieveInfoButton_Identify.Location = New System.Drawing.Point(63, 114)
+        Me.RetrieveInfoButton_Identify.Location = New System.Drawing.Point(64, 81)
         Me.RetrieveInfoButton_Identify.Name = "RetrieveInfoButton_Identify"
         Me.RetrieveInfoButton_Identify.Size = New System.Drawing.Size(150, 23)
         Me.RetrieveInfoButton_Identify.TabIndex = 1
@@ -900,7 +950,7 @@ Partial Class MainForm
         'CandidatesListListBox_Identify
         '
         Me.CandidatesListListBox_Identify.FormattingEnabled = True
-        Me.CandidatesListListBox_Identify.Location = New System.Drawing.Point(37, 32)
+        Me.CandidatesListListBox_Identify.Location = New System.Drawing.Point(37, 19)
         Me.CandidatesListListBox_Identify.Name = "CandidatesListListBox_Identify"
         Me.CandidatesListListBox_Identify.Size = New System.Drawing.Size(224, 56)
         Me.CandidatesListListBox_Identify.TabIndex = 0
@@ -1239,6 +1289,10 @@ Partial Class MainForm
         Me.OpenFileDialog_Identify.InitialDirectory = "C:\Temp\Samples"
         Me.OpenFileDialog_Identify.RestoreDirectory = True
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1260,8 +1314,12 @@ Partial Class MainForm
         Me.TabPage2.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
+        CType(Me.ResultPictureBox1_Verify, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
+        CType(Me.webcamPictureBox_Verify, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PicBx2_Verify, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox5.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
@@ -1305,18 +1363,13 @@ Partial Class MainForm
     Friend WithEvents VerifyButton_Verify As System.Windows.Forms.Button
     Friend WithEvents ClearButton_Verify As System.Windows.Forms.Button
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents DateofBirthLabel_Verify As System.Windows.Forms.Label
-    Friend WithEvents FamilyNameLabel_Verify As System.Windows.Forms.Label
-    Friend WithEvents GivenNameLabel_Verify As System.Windows.Forms.Label
     Friend WithEvents SubjectIDLabel_Verify As System.Windows.Forms.Label
-    Friend WithEvents FamilyNameTextbox_Verify As System.Windows.Forms.TextBox
     Friend WithEvents SubjectIDTextbox_Verify As System.Windows.Forms.TextBox
     Friend WithEvents txtbxBioImage_Enroll As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
-    Friend WithEvents ImageTxtBx_Verify As System.Windows.Forms.TextBox
+    Friend WithEvents TextBoxBioImg_Verify As System.Windows.Forms.TextBox
     Friend WithEvents PicBx2_Verify As System.Windows.Forms.PictureBox
-    Friend WithEvents GivenNameTextbox_Verify As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox10 As System.Windows.Forms.GroupBox
     Friend WithEvents grpbox9_Identify As System.Windows.Forms.GroupBox
     Friend WithEvents btnIdentify_Identify As System.Windows.Forms.Button
@@ -1358,8 +1411,6 @@ Partial Class MainForm
     Friend WithEvents btnClear_RetrieveInformation As System.Windows.Forms.Button
     Friend WithEvents txtbxGUID_RetrieveInformation As System.Windows.Forms.TextBox
     Friend WithEvents txtbxDOB_RetrieveInformation As System.Windows.Forms.TextBox
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Panel4 As System.Windows.Forms.Panel
     Friend WithEvents DoBDateTimePicker_Enroll As System.Windows.Forms.DateTimePicker
     Friend WithEvents CitizenshipLabel_Enroll As System.Windows.Forms.Label
@@ -1374,9 +1425,6 @@ Partial Class MainForm
     Friend WithEvents SubjectIDLable_Enroll As System.Windows.Forms.Label
     Friend WithEvents SexComboBox_Enroll As System.Windows.Forms.ComboBox
     Friend WithEvents CitizenshipComboBox_Enroll As System.Windows.Forms.ComboBox
-    Friend WithEvents DoBDateTimePicker_Verify As System.Windows.Forms.DateTimePicker
-    Friend WithEvents SexComboBox_Verify As System.Windows.Forms.ComboBox
-    Friend WithEvents CitizenshipComboBox_Verify As System.Windows.Forms.ComboBox
     Friend WithEvents OpenFileDialog1_Verify As System.Windows.Forms.OpenFileDialog
     Friend WithEvents picbx1_Enroll As System.Windows.Forms.PictureBox
     Friend WithEvents webCamPictureButton As System.Windows.Forms.Button
@@ -1403,4 +1451,19 @@ Partial Class MainForm
     Friend WithEvents OpenFileDialog_Identify As System.Windows.Forms.OpenFileDialog
     Friend WithEvents TextBoxBioImg_Identity As System.Windows.Forms.TextBox
     Friend WithEvents webcamPictureBox_Identify As System.Windows.Forms.PictureBox
+    Friend WithEvents Label18_Verify As System.Windows.Forms.Label
+    Friend WithEvents ResultPictureBox1_Verify As System.Windows.Forms.PictureBox
+    Friend WithEvents CitizenshipComboBox_Verify As System.Windows.Forms.ComboBox
+    Friend WithEvents SexComboBox_Verify As System.Windows.Forms.ComboBox
+    Friend WithEvents DoBDateTimePicker_Verify As System.Windows.Forms.DateTimePicker
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label16 As System.Windows.Forms.Label
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents FamilyNameTextBox_Verify As System.Windows.Forms.TextBox
+    Friend WithEvents GivenNameTextBox_Verify As System.Windows.Forms.TextBox
+    Friend WithEvents openFileButton_Verify As System.Windows.Forms.Button
+    Friend WithEvents webcamPictureBox_Verify As System.Windows.Forms.PictureBox
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
 End Class

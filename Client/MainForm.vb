@@ -1,4 +1,4 @@
-﻿Imports System
+﻿
 Imports System.Windows.Forms
 Imports System.Drawing
 Imports System.Drawing.Image
@@ -248,7 +248,16 @@ Public Class MainForm
         TextBoxBioImg_Identity.Text = ""
         picbx1_Identify.Image = Nothing
         iDimgFrmfile = Nothing
-        CandidatesListListBox_Identify.Text = ""
+        'CandidatesListListBox_Identify.Text = Nothing 'this not working...how to clear this box?
+        'CandidatesListListBox_Identify.SetSelected = -1
+
+        PictureBox2_Identify.Image = Nothing
+        GivenNameTextBox_Identify.Text = ""
+        FamilyNameTextBox_Identify.Text = ""
+        DoBDateTimePicker_Identify.Text = Nothing
+        SexComboBox_Identify.Text = Nothing
+        CitizenshipComboBox_Identify.Text = Nothing
+        CandidatesListListBox_Identify.Items.Clear()
 
         'going to delete these from design....
         SubjectIdTextBox_Identify.Text = ""
@@ -276,8 +285,6 @@ Public Class MainForm
         Dim identifyImg As New OASIS.BIAS.V2.Image 'this is needed in order to get to load data into imagedata field.
         Identifyrequest.InputData.Images.Add(identifyImg)
 
-
-
         'if user --types path into text box iDimgFrmfile is still empty so img is not converted to bytes and put into IdentifyRequest.  how to fix?
 
         Dim mybytearray As Byte()
@@ -287,29 +294,26 @@ Public Class MainForm
             mybytearray = ms.ToArray()
             Identifyrequest.InputData.Images(0).ImageData = mybytearray
         End If
-        'Identifyresponse = client.Identify(Identifyrequest)
         Try
             Identifyresponse = client.Identify(Identifyrequest)
         Catch ex As Exception
             MessageBox.Show("error making identify request call to server. exception msg: " & ex.Message)
         End Try
-        'MessageBox.Show("ResponseStatus: " & Identifyresponse.ResponseStatus.Message)
 
+        'sending over a webcam image is failing on next line... why?
         SubjectIdTextBox_Identify.Text = Identifyresponse.CandidateList(0).Identity.SubjectID
         ScoreTextBox_Identify.Text = Identifyresponse.CandidateList(0).ScoreList.Score.Value
 
-
-        
+        'for subject 94917924 the service is unable to recognize a face and so is returning error to client: "Index out of bounds of array"
+        'So Paul has to address the cases of 1)what is facerecognizer cannot recognize a face? 2)what if it finds multiple faces?
+        'what info will be returned to client/and make sure app doesn't crash!
 
         'returned should be candidateList-candidateListType
         'CandidateListType - is a list Of CandidateType items-each consists of a BIASIdentity, rank, score, and biographicData-biographicDataType
-        'Dim subjectIdString As String
 
         For Each ob As CandidateType In Identifyresponse.CandidateList   'this not implemented yet on the service side.
             CandidatesListListBox_Identify.Items.Add(ob.Identity.SubjectID)
         Next
-        'paul will only return one candidate....but code as if more than one.
-        'make it so when user click on one it shows in picbox
 
     End Sub
 
@@ -325,7 +329,6 @@ Public Class MainForm
         retrieveIdentifyRequest.Identity = New BIASIdentity
         retrieveIdentifyRequest.Identity.SubjectID = CandidatesListListBox_Identify.SelectedItem
 
-
         retrieveIdentifyResponse = client.RetrieveData(retrieveIdentifyRequest)
 
         Dim returnedByteArray() As Byte
@@ -334,17 +337,19 @@ Public Class MainForm
         Dim ms1 As System.IO.MemoryStream = New System.IO.MemoryStream(returnedByteArray)
         returnedImg = System.Drawing.Image.FromStream(ms1)
 
+        'RetrievePictureBox2_Identify.Image = returnedImg
+        PictureBox2_Identify.Image = returnedImg
 
-       
+        GivenNameTextBox_Identify.Text = retrieveIdentifyResponse.ReturnData.GivenName
+        FamilyNameTextBox_Identify.Text = retrieveIdentifyResponse.ReturnData.FamilyName
+        DoBDateTimePicker_Identify.Text = retrieveIdentifyResponse.ReturnData.DateOfBirth
+        SexComboBox_Identify.Text = retrieveIdentifyResponse.ReturnData.Sex
+        CitizenshipComboBox_Identify.Text = retrieveIdentifyResponse.ReturnData.Citizenship
 
-        RetrievePictureBox2_Identify.Image = returnedImg
-
-
-        'RetrievePictureBox2_Identify.Image = retrieveIdentifyResponse.ReturnData.Images(0).ImageData
     End Sub
 
     Private Sub btnRetrieveInformation_RetrieveInformation_Click(sender As Object, e As EventArgs) Handles btnRetrieveInformation_RetrieveInformation.Click
-        Dim client As New BIAS_v2Client()
+        'Dim client As New BIAS_v2Client()
         Dim getDataRequest As New RetrieveDataRequest()
         Dim getDataResponse As New RetrieveDataResponsePackage()
         getDataResponse.ResponseStatus = New ResponseStatus
@@ -391,13 +396,6 @@ Public Class MainForm
 
 
 
-
-
-
-
-
-
-
         'Waiting for Paul on this....
         'below will be attempted when biometric key/value is implemented. 
         'i converted a byte array (in response) to an image for display in the client window.
@@ -422,71 +420,127 @@ Public Class MainForm
     Private Sub VerifyButton_Verify_Click(sender As Object, e As EventArgs) Handles VerifyButton_Verify.Click
 
         Debug.Print("verify button clicked")
-        Dim request As New VerifyRequest()
-        Dim response As New VerifyResponsePackage()
+        Dim verifyRequest As New VerifyRequest()
+        Dim verifyResponse As New VerifyResponsePackage()
+        verifyResponse.ResponseStatus = New ResponseStatus()
+        verifyResponse.ReturnData = New InformationType()
         Dim procOptn As New ProcessingOptionsType
-        request.ProcessingOptions = procOptn
-        request.GalleryID = "1"
+        Dim birOrIDC As New OptionType
+        Dim returnScore As New OptionType
+        Dim returnRecord As New OptionType
 
-        'A51DU0R6()
-        Dim strg As BIASIdentity = New BIASIdentity
-        strg.IdentityClaim = "A51DU0R6"
+        birOrIDC.Key = "Use"
+        'birOrIDC.Value = "Identity"
+        birOrIDC.Value = "Reference"
+        returnScore.Key = "ReturnScore"
+        returnScore.Value = "True"
+        returnRecord.Key = "ReturnRecord"
+        returnRecord.Value = "True"
 
-        Dim vUserInput As InformationType = New InformationType
-        request.Identity = strg
-        'request.Identity.IdentityClaim = SubjectIDTextbox_Verify.Text
-        vUserInput.GivenName = GivenNameTextbox_Verify.Text
-        vUserInput.FamilyName = FamilyNameTextbox_Verify.Text
-        vUserInput.DateOfBirth = DoBDateTimePicker_Verify.Text
-        vUserInput.Sex = SexComboBox_Verify.SelectedItem
-        vUserInput.Citizenship = CitizenshipComboBox_Verify.SelectedItem
-
-        'reference an image subject01.png
-        'convert it to a byte array
-        'load it into vUserInput.Images(0).imagedata
-
-        Dim myImage As System.Drawing.Bitmap = New System.Drawing.Bitmap(My.Resources.subject01)
-        Dim myImgByteArray As Byte() = Nothing
-        Dim myImgMemStream As System.IO.MemoryStream = New System.IO.MemoryStream
-        'myImage.Save(myImgMemStream, System.Drawing.Imaging.ImageFormat.Jpeg)
-        myImage.Save(myImgMemStream, myImage.RawFormat)
-        'myImgByteArray = myImgMemStream.GetBuffer()
-        myImgByteArray = myImgMemStream.ToArray
+        procOptn.Add(birOrIDC)
+        procOptn.Add(returnScore)
+        procOptn.Add(returnRecord)
+        verifyRequest.ProcessingOptions = procOptn
+        verifyRequest.GalleryID = "1"
 
 
-        vUserInput.Images = New InformationType.ImagesType
-        Dim clientImg As OASIS.BIAS.V2.Image = New OASIS.BIAS.V2.Image
-        'clientImg.ImageData = myImgMemStream.GetBuffer()
-        clientImg.ImageData = myImgMemStream.ToArray
-        vUserInput.Images.Add(clientImg)
+        verifyRequest.InputData = New OASIS.BIAS.V2.InformationType
+        verifyRequest.InputData.Images = New OASIS.BIAS.V2.InformationType.ImagesType
+        Dim verifyImg As New OASIS.BIAS.V2.Image 'this is needed in order to get to load data into imagedata field.
+        verifyRequest.InputData.Images.Add(verifyImg)
 
-        request.InputData = vUserInput
+        Dim mybytearray As Byte()
+        If iDimgFrmfile IsNot Nothing Then
+            Dim ms As System.IO.MemoryStream = New MemoryStream
+            iDimgFrmfile.Save(ms, System.Drawing.Imaging.ImageFormat.Gif)
+            mybytearray = ms.ToArray()
+            verifyRequest.InputData.Images(0).ImageData = mybytearray
+        End If
+        verifyRequest.Identity = New BIASIdentity
+        verifyRequest.Identity.IdentityClaim = SubjectIDTextbox_Verify.Text
+
         Try
-            response = client.Verify(request)
-
+            verifyResponse = client.Verify(verifyRequest)
         Catch ex As Exception
             MessageBox.Show("generic exception: " & ex.Message)
-            MessageBox.Show("service exception: " & response.ResponseStatus.Return & response.ResponseStatus.Message)
+            MessageBox.Show("service exception: " & verifyResponse.ResponseStatus.Return & verifyResponse.ResponseStatus.Message)
         End Try
 
-        'If response.ResponseStatus.Return = 0 Then
-        '    MessageBox.Show("success")
-        'Else
-        '    MessageBox.Show("exception: ")
+        'must have a subject ID...
+        'get an image by sending subject id to retrievedata request
+        Dim getImgRequest As New RetrieveDataRequest()
+        Dim imgResponse As New RetrieveDataResponsePackage()
+        imgResponse.ResponseStatus = New ResponseStatus
+        imgResponse.ReturnData = New InformationType
+        imgResponse.ReturnData.Images = New InformationType.ImagesType
 
-        'End If
+        Dim rProcOptn As New ProcessingOptionsType
+        Dim rnewOption As New OptionType
+        'newOption.Key = "biographicData"
+        'newOption.Value = "full"
+        rnewOption.Key = "allData" 'choices: biometricData+images or full, allData+basic or full, biographicData+basic or full
+        rnewOption.Value = "full"
+        'newOption.Key = "biometricData"
+        'newOption.Value = "full"
+        rProcOptn.Add(rnewOption)
+        getImgRequest.ProcessingOptions = rProcOptn
+        getImgRequest.Identity = New BIASIdentity()
+
+        getImgRequest.Identity.SubjectID = verifyRequest.Identity.IdentityClaim
+        MessageBox.Show(getImgRequest.Identity.SubjectID)
+
+        Try
+            imgResponse = client.RetrieveData(getImgRequest)
+        Catch ex As Exception
+            MessageBox.Show("generic exception: " & ex.Message)
+            MessageBox.Show("service exception: " & imgResponse.ResponseStatus.Return & imgResponse.ResponseStatus.Message)
+        End Try
+
+
+
+        If verifyResponse.Match = True Then
+            GivenNameTextBox_Verify.Text = verifyResponse.ReturnData.GivenName
+            FamilyNameTextBox_Verify.Text = verifyResponse.ReturnData.FamilyName
+            Label18_Verify.Text = "Subject Verified"
+            Label18_Verify.BackColor = Color.Honeydew
+            'this info comes from the retrieveData response
+            DoBDateTimePicker_Verify.Text = imgResponse.ReturnData.DateOfBirth
+            SexComboBox_Verify.Text = imgResponse.ReturnData.Sex
+            CitizenshipComboBox_Verify.Text = imgResponse.ReturnData.Citizenship
+
+            'this too
+            Dim returnedByteArray1() As Byte
+            MessageBox.Show("# of images returned: " & imgResponse.ReturnData.Images.Count)
+            returnedByteArray1 = imgResponse.ReturnData.Images(0).ImageData
+            Dim returnedImg1 As System.Drawing.Bitmap
+            Dim ms2 As System.IO.MemoryStream = New System.IO.MemoryStream(returnedByteArray1)
+            returnedImg1 = System.Drawing.Image.FromStream(ms2)
+            ResultPictureBox1_Verify.Image = returnedImg1
+
+        Else
+            GivenNameTextBox_Verify.Text = ""
+            FamilyNameTextBox_Verify.Text = ""
+            Label18_Verify.Text = "Unable to Verify"
+            Label18_Verify.BackColor = Color.Red
+        End If
+
+        
+
     End Sub
 
     Private Sub ClearButton_Verify_Click(sender As Object, e As EventArgs) Handles ClearButton_Verify.Click
         MessageBox.Show("Clear button was clicked")
         SubjectIDTextbox_Verify.Text = ""
-        GivenNameTextbox_Verify.Text = ""
-        FamilyNameTextbox_Verify.Text = ""
-        SexComboBox_Verify.SelectedIndex = -1
-        CitizenshipComboBox_Verify.SelectedIndex = -1
-        DoBDateTimePicker_Verify.Text = DateTime.Now
-
         PicBx2_Verify.Image = Nothing
+        GivenNameTextBox_Verify.Text = ""
+        FamilyNameTextBox_Verify.Text = ""
+        SexComboBox_Verify.Text = Nothing
+        DoBDateTimePicker_Verify.Text = Nothing
+        CitizenshipComboBox_Verify.Text = Nothing
+        Label18_Verify.Text = ""
+        Label18_Verify.BackColor = Nothing
+        ResultPictureBox1_Verify.Image = Nothing
+
 
     End Sub
 
@@ -505,7 +559,6 @@ Public Class MainForm
     Private Sub webCamPictureButton_Click(sender As Object, e As EventArgs) Handles webCamPictureButton.Click
         webFrm.ShowDialog()
         picbx1_Enroll.Image = webFrm.SnapshotImg
-        'txtbxBioImage_Enroll.Text = ""
         txtbxBioImage_Enroll.ForeColor = System.Drawing.Color.Gray
 
 
@@ -536,7 +589,7 @@ Public Class MainForm
         OpenFileDialog_Identify.InitialDirectory = "C:\Temp\Samples"
         OpenFileDialog_Identify.Filter = "All files (*.*)|*.*"
         OpenFileDialog_Identify.RestoreDirectory = True
-        'TextBoxBioImg_Identity.Text = ""
+        'TextBoxBioImg_Identity.ForeColor = System.Drawing.Color.Gray
 
         Try
             If OpenFileDialog_Identify.ShowDialog = Windows.Forms.DialogResult.OK Then
@@ -549,10 +602,40 @@ Public Class MainForm
         End Try
     End Sub
 
-    
+
     Private Sub webcamPictureBox_Identify_Click(sender As Object, e As EventArgs) Handles webcamPictureBox_Identify.Click
         webFrm.ShowDialog()
         picbx1_Identify.Image = webFrm.SnapshotImg
         TextBoxBioImg_Identity.ForeColor = System.Drawing.Color.Gray
+        'iDimgFrmfile = Drawing.Image.FromFile(OpenIdentifyImage.FileName.ToString)
+        iDimgFrmfile = webFrm.SnapshotImg
+    End Sub
+
+
+    Private Sub openFileButton_Verify_Click(sender As Object, e As EventArgs) Handles openFileButton_Verify.Click
+        Dim OpenFileDialog_Verify As New OpenFileDialog()
+        OpenFileDialog_Verify.InitialDirectory = "C:\Temp\Samples"
+        OpenFileDialog_Verify.Filter = "All files (*.*)|*.*"
+        OpenFileDialog_Verify.RestoreDirectory = True
+
+        Try
+            If OpenFileDialog_Verify.ShowDialog = Windows.Forms.DialogResult.OK Then
+                TextBoxBioImg_Verify.Text = OpenFileDialog_Verify.SafeFileName
+                PicBx2_Verify.Image = Drawing.Image.FromFile(OpenFileDialog_Verify.FileName.ToString)
+                iDimgFrmfile = Drawing.Image.FromFile(OpenFileDialog_Verify.FileName.ToString) 'should this be set back to nothing somewhere? or made into a property?
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error opening Verify Biometric image")
+        End Try
+    End Sub
+
+
+    Private Sub webcamPictureBox_Verify_Click(sender As Object, e As EventArgs) Handles webcamPictureBox_Verify.Click
+        webFrm.ShowDialog()
+        PicBx2_Verify.Image = webFrm.SnapshotImg
+        TextBoxBioImg_Verify.ForeColor = System.Drawing.Color.Gray
+        'iDimgFrmfile = Drawing.Image.FromFile(OpenIdentifyImage.FileName.ToString)
+        iDimgFrmfile = webFrm.SnapshotImg
+
     End Sub
 End Class
