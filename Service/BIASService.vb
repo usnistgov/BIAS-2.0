@@ -1700,6 +1700,8 @@ Public Class BIAS_v2Client
         conformanceClass.CapabilityValue = "1"
         capabilityList.Add(conformanceClass)
 
+
+        ''TODO -- this should not throw anexception if the directory structure doesn't exist
         Dim Gallery As New CapabilityType
         Gallery.CapabilityName = 9
         Gallery.CapabilityID = "9"
