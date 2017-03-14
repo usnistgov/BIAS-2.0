@@ -2682,7 +2682,7 @@ Public Class BIAS_v2Client
         verifyResponse.ResponseStatus = New ResponseStatus
 
         'check for either reference BIR or identity claim. One must exist
-        If VerifyRequest.InputData.Images Is Nothing And VerifyRequest.IdentityClaim Is Nothing Then
+        If VerifyRequest.InputData.Images Is Nothing And VerifyRequest.Identity.IdentityClaim Is Nothing Then
             verifyResponse.Match = False
             verifyResponse.ResponseStatus.Return = 34
             verifyResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
@@ -2900,7 +2900,7 @@ Public Class BIAS_v2Client
         verifySubjectResponse.ResponseStatus = New ResponseStatus
 
         'check for either reference BIR or identity claim. One must exist
-        If VerifySubjectRequest.InputData.Images Is Nothing And VerifySubjectRequest.IdentityClaim Is Nothing Then
+        If VerifySubjectRequest.InputData.Images Is Nothing And VerifySubjectRequest.Identity.IdentityClaim Is Nothing Then
             verifySubjectResponse.Match = False
             verifySubjectResponse.ResponseStatus.Return = 34
             verifySubjectResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
@@ -2962,7 +2962,7 @@ Public Class BIAS_v2Client
                 verifySubjectResponse.ResponseStatus.Message = "Cannot perform a 1:N identification of the supplied and/or stored data."
             End If
 
-        ElseIf VerifySubjectRequest.IdentityClaim IsNot Nothing Then
+        ElseIf VerifySubjectRequest.Identity.IdentityClaim IsNot Nothing Then
 
             Dim identityClaim = VerifySubjectRequest.Identity.IdentityClaim
             Dim candidateList = New CandidateListType

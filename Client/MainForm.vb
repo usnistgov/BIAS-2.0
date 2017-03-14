@@ -418,6 +418,10 @@ Public Class MainForm
 
 
     Private Sub VerifyButton_Verify_Click(sender As Object, e As EventArgs) Handles VerifyButton_Verify.Click
+        If SubjectIDTextbox_Verify.Text.Length = 0 Or iDimgFrmfile Is Nothing Then
+            MessageBox.Show("SubjectID or image is missing")
+            Exit Sub
+        End If
 
         Debug.Print("verify button clicked")
         Dim verifyRequest As New VerifyRequest()
@@ -443,6 +447,7 @@ Public Class MainForm
         verifyRequest.ProcessingOptions = procOptn
         verifyRequest.GalleryID = "1"
 
+       
 
         verifyRequest.InputData = New OASIS.BIAS.V2.InformationType
         verifyRequest.InputData.Images = New OASIS.BIAS.V2.InformationType.ImagesType
@@ -524,7 +529,7 @@ Public Class MainForm
             Label18_Verify.BackColor = Color.Red
         End If
 
-        
+
 
     End Sub
 
