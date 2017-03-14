@@ -939,7 +939,7 @@
 											<xsd:element name="PupilDistance" type="xsd:string" minOccurs="0" />
 											<xsd:element name="BridgeWidth" type="xsd:string" minOccurs="0" />
 											<xsd:element name="NoseAlarWidth" type="xsd:string" minOccurs="0" />
-											<xsd:element name="NostrilWidth" type="xsd:D" minOccurs="0" />
+											<xsd:element name="NostrilWidth" type="xsd:string" minOccurs="0" />
 											<xsd:element name="UpperLipHeight" type="xsd:string" minOccurs="0" />
 											<xsd:element name="LowerLipHeight" type="xsd:string" minOccurs="0" />
 											<xsd:element name="ImageData" type="xsd:base64Binary" minOccurs="0" />
@@ -957,6 +957,16 @@
 						</xsd:complexType>
 					</xsd:element>
 				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Example_BIR">
+				<xsd:complexContent>
+					<xsd:extension base="tns:BaseBIRType">
+						<xsd:sequence>
+							<xsd:element name="BiometricSample" type="xsd:string"/>
+							<xsd:element name="BiometricSampleType" type="xsd:string"/>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
 			</xsd:complexType>
 			<xsd:complexType name="ListFilterType">
 				<xsd:annotation>
@@ -2097,11 +2107,6 @@
 									<xsd:extension base="tns:RequestTemplate">
 										<xsd:sequence>
 											<xsd:element name="FusionInput" type="tns:FusionIdentityListType" minOccurs="1" maxOccurs="1">
-												<xsd:annotation>
-													<xsd:documentation>Score or decision input information to the fusion method for each identity.</xsd:documentation>
-												</xsd:annotation>
-											</xsd:element>
-											<xsd:element name="biometricSample" type="xsd:string" minOccurs="1" maxOccurs="1">
 												<xsd:annotation>
 													<xsd:documentation>Score or decision input information to the fusion method for each identity.</xsd:documentation>
 												</xsd:annotation>
