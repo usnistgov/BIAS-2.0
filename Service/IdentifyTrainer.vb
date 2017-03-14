@@ -109,7 +109,7 @@ Public Class IdentifyTrainer
                 MessageBox.Show("No face detected in image " & Path)
                 Environment.Exit(0)
             End If
-            
+
         Next
 
         Return New Tuple(Of Emgu.CV.Image(Of Gray, Byte)(), Integer())(images, labels)

@@ -68,6 +68,8 @@ Public Class MainForm
 
         Dim userBiomRecord As New CBEFF_BIR_Type
 
+
+
         Dim userIdentity As New BIASIdentity
         userIdentity.BiometricData = New BIASBiometricDataType
         userIdentity.BiometricData.BIRList = New CBEFF_BIR_ListType
@@ -117,8 +119,12 @@ Public Class MainForm
         userBiomRecord.BIR_Information.BDB_Info = userBDB
         userBiomRecord.BIR_Information.SB_Info = userSB
 
+
         'Create image
-        userBiomRecord.BIR = New BaseBIRType
+        '-userBiomRecord.BIR = New BaseBIRType
+        userBiomRecord.BIR = New Example_BIR
+        Dim sampleBIR As New Example_BIR
+
         'Dim testImage As System.Drawing.Image = System.Drawing.Image.FromFile("C:\Users\karenm.XE\Documents\BIAS_Client\BIAS-2.0\Client\Resources\subject01.gif")
         'Dim imgString As String = ImageToBase64String(testImage, ImageFormat.Gif)
         Dim enrolImg As System.Drawing.Image
@@ -132,8 +138,17 @@ Public Class MainForm
             Return
         End If
         Dim imgString As String = ImageToBase64String(enrolImg, ImageFormat.Gif)
-        userBiomRecord.BIR.biometricImage = imgString
-        userBiomRecord.BIR.biometricImageType = "Front"
+
+        'userBiomRecord.BIR.biometricImage = imgString
+        sampleBIR.BiometricSample = imgString
+        'userBiomRecord.BIR.biometricImageType = "Front"
+        sampleBIR.BiometricSampleType = "Front"
+
+
+        'sampleBIR.BiometricSampleType = "Front"
+        userBiomRecord.BIR = sampleBIR
+
+
 
         userBiomRecord.FormatOwner = 1
         userBiomRecord.FormatType = 1
@@ -290,7 +305,7 @@ Public Class MainForm
         Dim mybytearray As Byte()
         If iDimgFrmfile IsNot Nothing Then
             Dim ms As System.IO.MemoryStream = New MemoryStream
-            iDimgFrmfile.Save(ms, System.Drawing.Imaging.ImageFormat.Gif)
+            iDimgFrmfile.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg)
             mybytearray = ms.ToArray()
             Identifyrequest.InputData.Images(0).ImageData = mybytearray
         End If
