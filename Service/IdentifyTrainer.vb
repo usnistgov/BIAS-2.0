@@ -82,28 +82,34 @@ Public Class IdentifyTrainer
         For Each Path In imagePathList
             'Get image from the path
             Dim img1 As New Image(Of Gray, Byte)(Path)
-
             'get the face area as a rectangle and create a new rectangle using the dimensions of the face rectangle
             Dim faceRegion As Rectangle() = faceCascade.DetectMultiScale(img1)
-            Dim CropRect As New Rectangle(faceRegion(0).X, faceRegion(0).Y, faceRegion(0).Width, faceRegion(0).Height)
-            'get the image from path, save in a new image variable. Also create a bitmap to save the cropped image in.
-            Dim OriginalImage = System.Drawing.Image.FromFile(Path)
-            Dim CropImage = New Bitmap(CropRect.Width, CropRect.Height)
+            If faceRegion.Length = 1 Then
+                Dim CropRect As New Rectangle(faceRegion(0).X, faceRegion(0).Y, faceRegion(0).Width, faceRegion(0).Height)
+                'get the image from path, save in a new image variable. Also create a bitmap to save the cropped image in.
+                Dim OriginalImage = System.Drawing.Image.FromFile(Path)
 
-            'take the original image and crop it, using the CropRect dimensions.
-            Using grp = Graphics.FromImage(CropImage)
-                grp.DrawImage(OriginalImage, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
-            End Using
+                Dim CropImage = New Bitmap(CropRect.Width, CropRect.Height)
 
-            Dim img2 As New Image(Of Gray, Byte)(CropImage)
-            'add cropped image to the array of images. 
-            Array.Resize(images, images.Length + 1)
-            images(images.Length - 1) = img2
+                'take the original image and crop it, using the CropRect dimensions.
+                Using grp = Graphics.FromImage(CropImage)
+                    grp.DrawImage(OriginalImage, New Rectangle(0, 0, CropRect.Width, CropRect.Height), CropRect, GraphicsUnit.Pixel)
+                End Using
 
-            'Get the label/subjectID of the image
-            Dim subjectID = Convert.ToInt32(Path.Substring(Path.LastIndexOf("\") + 1, 8))
-            Array.Resize(labels, labels.Length + 1)
-            labels(labels.Length - 1) = subjectID
+                Dim img2 As New Image(Of Gray, Byte)(CropImage)
+                'add cropped image to the array of images. 
+                Array.Resize(images, images.Length + 1)
+                images(images.Length - 1) = img2
+
+                'Get the label/subjectID of the image
+                Dim subjectID = Convert.ToInt32(Path.Substring(Path.LastIndexOf("\") + 1, 8))
+                Array.Resize(labels, labels.Length + 1)
+                labels(labels.Length - 1) = subjectID
+            Else
+                MessageBox.Show("No face detected in image " & Path)
+                Environment.Exit(0)
+            End If
+            
         Next
 
         Return New Tuple(Of Emgu.CV.Image(Of Gray, Byte)(), Integer())(images, labels)

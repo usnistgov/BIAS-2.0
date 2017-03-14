@@ -4,6 +4,7 @@ Imports System.Collections.Generic
 Imports Emgu.CV.Structure
 Imports System.Drawing
 Imports OASIS.BIAS.V2
+Imports System.Windows.Forms
 
 ''' <summary>
 ''' Class for creating instances of trainers using LBPHFaceRecognizer
@@ -28,7 +29,6 @@ Public Class IdentifySubjectTrainer
         Dim imageAndSubjectIDs As Tuple(Of Emgu.CV.Image(Of Gray, Byte)(), Integer()) = testTrain(gallery, faceCascade)
         Dim images = imageAndSubjectIDs.Item1
         Dim subjectIDs = imageAndSubjectIDs.Item2
-
         'Perform training of the recognizer
         trainer.Train(images, subjectIDs)
 
@@ -41,7 +41,8 @@ Public Class IdentifySubjectTrainer
         Dim bitmapList As List(Of Bitmap)
 
         For Each sample In gallery
-            Dim biomImage As System.Drawing.Image = ImageFromBase64String(sample.Identity.BiometricData.BIR.BIR.biometricImage)
+            Dim sampleBIR As Example_BIR = sample.Identity.BiometricData.BIR.BIR
+            Dim biomImage As System.Drawing.Image = ImageFromBase64String(sampleBIR.BiometricSample)
             Dim biomBitmap As New Bitmap(biomImage)
             bitmapList.Add(biomBitmap)
         Next
@@ -66,7 +67,8 @@ Public Class IdentifySubjectTrainer
         For Each sample In gallery
             For Each btest In sample.Identity.BiometricData.BIRList
                 'convert to bitmap, then to CV.Image
-                Dim biomImage As System.Drawing.Image = ImageFromBase64String(btest.BIR.biometricImage)
+                Dim sampleBIR As Example_BIR = btest.BIR
+                Dim biomImage As System.Drawing.Image = ImageFromBase64String(sampleBIR.BiometricSample)
 
                 Dim biomBitmap As New Bitmap(biomImage)
                 Dim img As Image(Of Gray, Byte) = New Image(Of Gray, Byte)(biomBitmap)
