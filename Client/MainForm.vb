@@ -310,13 +310,13 @@ Public Class MainForm
             Identifyrequest.InputData.Images(0).ImageData = mybytearray
         End If
 
-        Identifyresponse = client.Identify(Identifyrequest)
+        'Identifyresponse = client.Identify(Identifyrequest)
 
-        'Try
-        '    Identifyresponse = client.Identify(Identifyrequest)
-        'Catch ex As Exception
-        '    MessageBox.Show("error making identify request call to server. exception msg: " & ex.Message)
-        'End Try
+        Try
+            Identifyresponse = client.Identify(Identifyrequest)
+        Catch ex As Exception
+            MessageBox.Show("error making identify request call to server. exception msg: " & ex.Message)
+        End Try
 
         'sending over a webcam image is failing on next line... why?
         SubjectIdTextBox_Identify.Text = Identifyresponse.CandidateList(0).Identity.SubjectID
