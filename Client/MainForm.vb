@@ -309,11 +309,14 @@ Public Class MainForm
             mybytearray = ms.ToArray()
             Identifyrequest.InputData.Images(0).ImageData = mybytearray
         End If
-        Try
-            Identifyresponse = client.Identify(Identifyrequest)
-        Catch ex As Exception
-            MessageBox.Show("error making identify request call to server. exception msg: " & ex.Message)
-        End Try
+
+        Identifyresponse = client.Identify(Identifyrequest)
+
+        'Try
+        '    Identifyresponse = client.Identify(Identifyrequest)
+        'Catch ex As Exception
+        '    MessageBox.Show("error making identify request call to server. exception msg: " & ex.Message)
+        'End Try
 
         'sending over a webcam image is failing on next line... why?
         SubjectIdTextBox_Identify.Text = Identifyresponse.CandidateList(0).Identity.SubjectID
@@ -462,7 +465,7 @@ Public Class MainForm
         verifyRequest.ProcessingOptions = procOptn
         verifyRequest.GalleryID = "1"
 
-       
+
 
         verifyRequest.InputData = New OASIS.BIAS.V2.InformationType
         verifyRequest.InputData.Images = New OASIS.BIAS.V2.InformationType.ImagesType
@@ -488,33 +491,33 @@ Public Class MainForm
 
         'must have a subject ID...
         'get an image by sending subject id to retrievedata request
-        Dim getImgRequest As New RetrieveDataRequest()
-        Dim imgResponse As New RetrieveDataResponsePackage()
-        imgResponse.ResponseStatus = New ResponseStatus
-        imgResponse.ReturnData = New InformationType
-        imgResponse.ReturnData.Images = New InformationType.ImagesType
+        'Dim getImgRequest As New RetrieveDataRequest()
+        'Dim imgResponse As New RetrieveDataResponsePackage()
+        'imgResponse.ResponseStatus = New ResponseStatus
+        'imgResponse.ReturnData = New InformationType
+        'imgResponse.ReturnData.Images = New InformationType.ImagesType
 
-        Dim rProcOptn As New ProcessingOptionsType
-        Dim rnewOption As New OptionType
-        'newOption.Key = "biographicData"
-        'newOption.Value = "full"
-        rnewOption.Key = "allData" 'choices: biometricData+images or full, allData+basic or full, biographicData+basic or full
-        rnewOption.Value = "full"
-        'newOption.Key = "biometricData"
-        'newOption.Value = "full"
-        rProcOptn.Add(rnewOption)
-        getImgRequest.ProcessingOptions = rProcOptn
-        getImgRequest.Identity = New BIASIdentity()
+        'Dim rProcOptn As New ProcessingOptionsType
+        'Dim rnewOption As New OptionType
+        ''newOption.Key = "biographicData"
+        ''newOption.Value = "full"
+        'rnewOption.Key = "allData" 'choices: biometricData+images or full, allData+basic or full, biographicData+basic or full
+        'rnewOption.Value = "full"
+        ''newOption.Key = "biometricData"
+        ''newOption.Value = "full"
+        'rProcOptn.Add(rnewOption)
+        'getImgRequest.ProcessingOptions = rProcOptn
+        'getImgRequest.Identity = New BIASIdentity()
 
-        getImgRequest.Identity.SubjectID = verifyRequest.Identity.IdentityClaim
-        MessageBox.Show(getImgRequest.Identity.SubjectID)
+        'getImgRequest.Identity.SubjectID = verifyRequest.Identity.IdentityClaim
+        'MessageBox.Show(getImgRequest.Identity.SubjectID)
 
-        Try
-            imgResponse = client.RetrieveData(getImgRequest)
-        Catch ex As Exception
-            MessageBox.Show("generic exception: " & ex.Message)
-            MessageBox.Show("service exception: " & imgResponse.ResponseStatus.Return & imgResponse.ResponseStatus.Message)
-        End Try
+        'Try
+        '    imgResponse = client.RetrieveData(getImgRequest)
+        'Catch ex As Exception
+        '    MessageBox.Show("generic exception: " & ex.Message)
+        '    MessageBox.Show("service exception: " & imgResponse.ResponseStatus.Return & imgResponse.ResponseStatus.Message)
+        'End Try
 
 
 
@@ -524,18 +527,18 @@ Public Class MainForm
             Label18_Verify.Text = "Subject Verified"
             Label18_Verify.BackColor = Color.Honeydew
             'this info comes from the retrieveData response
-            DoBDateTimePicker_Verify.Text = imgResponse.ReturnData.DateOfBirth
-            SexComboBox_Verify.Text = imgResponse.ReturnData.Sex
-            CitizenshipComboBox_Verify.Text = imgResponse.ReturnData.Citizenship
+            'DoBDateTimePicker_Verify.Text = imgResponse.ReturnData.DateOfBirth
+            'SexComboBox_Verify.Text = imgResponse.ReturnData.Sex
+            'CitizenshipComboBox_Verify.Text = imgResponse.ReturnData.Citizenship
 
             'this too
-            Dim returnedByteArray1() As Byte
-            MessageBox.Show("# of images returned: " & imgResponse.ReturnData.Images.Count)
-            returnedByteArray1 = imgResponse.ReturnData.Images(0).ImageData
-            Dim returnedImg1 As System.Drawing.Bitmap
-            Dim ms2 As System.IO.MemoryStream = New System.IO.MemoryStream(returnedByteArray1)
-            returnedImg1 = System.Drawing.Image.FromStream(ms2)
-            ResultPictureBox1_Verify.Image = returnedImg1
+            'Dim returnedByteArray1() As Byte
+            'MessageBox.Show("# of images returned: " & imgResponse.ReturnData.Images.Count)
+            'returnedByteArray1 = imgResponse.ReturnData.Images(0).ImageData
+            'Dim returnedImg1 As System.Drawing.Bitmap
+            'Dim ms2 As System.IO.MemoryStream = New System.IO.MemoryStream(returnedByteArray1)
+            'returnedImg1 = System.Drawing.Image.FromStream(ms2)
+            'ResultPictureBox1_Verify.Image = returnedImg1
 
         Else
             GivenNameTextBox_Verify.Text = ""
