@@ -7,7 +7,7 @@
 <!--
     Document   : BIAS.xml
     Created on : December 17, 2009, 9:31 AM
-    Last Edit  : April 14, 2016 by Karen Marshall, National Institute of Standards and Technology
+    Last Edit  : May 26, 2017 by Kevin Mangold, National Institute of Standards and Technology
     Description:
         This document represents the WSDL definitions of BIAS Profile.
 -->
@@ -2902,16 +2902,16 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="Enroll">
+			<xsd:element name="Enrol">
 				<xsd:complexType>
 					<xsd:annotation>
 						<xsd:documentation>
-							The Enroll aggregate service adds a new subject or, in an
+							The Enrol aggregate service adds a new subject or, in an
 							encounter-centric model, a new encounter to the system. 
 						</xsd:documentation>
 					</xsd:annotation>
 					<xsd:sequence>
-						<xsd:element name="EnrollRequest" nillable="true">
+						<xsd:element name="EnrolRequest" nillable="true">
 							<xsd:complexType>
 								<xsd:complexContent>
 									<xsd:extension base="tns:AggregateRequestTemplate">
@@ -2929,13 +2929,13 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="EnrollResponse">
+			<xsd:element name="EnrolResponse">
 				<xsd:complexType>
 					<xsd:annotation>
-						<xsd:documentation>The response to an Enroll request.</xsd:documentation>
+						<xsd:documentation>The response to an Enrol request.</xsd:documentation>
 					</xsd:annotation>
 					<xsd:sequence>
-						<xsd:element name="EnrollResponsePackage" nillable="true">
+						<xsd:element name="EnrolResponsePackage" nillable="true">
 							<xsd:complexType>
 								<xsd:complexContent>
 									<xsd:extension base="tns:AggregateResponseTemplate">
@@ -2947,7 +2947,7 @@
 											</xsd:element>
 											<xsd:element name="Token" type="tns:TokenType" minOccurs="0" maxOccurs="1">
 												<xsd:annotation>
-													<xsd:documentation>A value used to retrieve the results of the Enroll request.</xsd:documentation>
+													<xsd:documentation>A value used to retrieve the results of the Enrol request.</xsd:documentation>
 												</xsd:annotation>
 											</xsd:element>
 										</xsd:sequence>
@@ -3008,23 +3008,23 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="GetEnrollResults">
+			<xsd:element name="GetEnrolResults">
 				<xsd:complexType>
 					<xsd:annotation>
 						<xsd:documentation>
-							The GetEnrollResults aggregate service retrieves the enrollment
+							The GetEnrolResults aggregate service retrieves the enrolment
 							results for the specified token. 
 						</xsd:documentation>
 					</xsd:annotation>
 					<xsd:sequence>
-						<xsd:element name="GetEnrollResultsRequest" nillable="true">
+						<xsd:element name="GetEnrolResultsRequest" nillable="true">
 							<xsd:complexType>
 								<xsd:complexContent>
 									<xsd:extension base="tns:RequestTemplate">
 										<xsd:sequence>
 											<xsd:element name="Token" type="tns:TokenType" minOccurs="1" maxOccurs="1">
 												<xsd:annotation>
-													<xsd:documentation>A value used to retrieve the results of the Enroll request.</xsd:documentation>
+													<xsd:documentation>A value used to retrieve the results of the Enrol request.</xsd:documentation>
 												</xsd:annotation>
 											</xsd:element>
 										</xsd:sequence>
@@ -3035,13 +3035,13 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="GetEnrollResultsResponse">
+			<xsd:element name="GetEnrolResultsResponse">
 				<xsd:complexType>
 					<xsd:annotation>
-						<xsd:documentation>The response to a GetEnrollResults request.</xsd:documentation>
+						<xsd:documentation>The response to a GetEnrolResults request.</xsd:documentation>
 					</xsd:annotation>
 					<xsd:sequence>
-						<xsd:element name="GetEnrollResultsResponsePackage" nillable="true">
+						<xsd:element name="GetEnrolResultsResponsePackage" nillable="true">
 							<xsd:complexType>
 								<xsd:complexContent>
 									<xsd:extension base="tns:AggregateResponseTemplate">
@@ -3603,17 +3603,17 @@
 	<wsdl:message name="VerifySubjectResponseMessage">
 		<wsdl:part name="parameters" element="tns:VerifySubjectResponse"/>
 	</wsdl:message>
-	<wsdl:message name="EnrollRequestMessage">
-		<wsdl:part name="parameters" element="tns:Enroll"/>
+	<wsdl:message name="EnrolRequestMessage">
+		<wsdl:part name="parameters" element="tns:Enrol"/>
 	</wsdl:message>
-	<wsdl:message name="EnrollResponseMessage">
-		<wsdl:part name="parameters" element="tns:EnrollResponse"/>
+	<wsdl:message name="EnrolResponseMessage">
+		<wsdl:part name="parameters" element="tns:EnrolResponse"/>
 	</wsdl:message>
-	<wsdl:message name="GetEnrollResultsRequestMessage">
-		<wsdl:part name="parameters" element="tns:GetEnrollResults"/>
+	<wsdl:message name="GetEnrolResultsRequestMessage">
+		<wsdl:part name="parameters" element="tns:GetEnrolResults"/>
 	</wsdl:message>
-	<wsdl:message name="GetEnrollResultsResponseMessage">
-		<wsdl:part name="parameters" element="tns:GetEnrollResultsResponse"/>
+	<wsdl:message name="GetEnrolResultsResponseMessage">
+		<wsdl:part name="parameters" element="tns:GetEnrolResultsResponse"/>
 	</wsdl:message>
 	<wsdl:message name="GetIdentifyResultsRequestMessage">
 		<wsdl:part name="parameters" element="tns:GetIdentifyResults"/>
@@ -3756,14 +3756,14 @@
 			<wsdl:output name="VerifySubjectResponse" message="tns:VerifySubjectResponseMessage"/>
 			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
 		</wsdl:operation>
-		<wsdl:operation name="Enroll">
-			<wsdl:input name="Enroll" message="tns:EnrollRequestMessage"/>
-			<wsdl:output name="EnrollResponse" message="tns:EnrollResponseMessage"/>
+		<wsdl:operation name="Enrol">
+			<wsdl:input name="Enrol" message="tns:EnrolRequestMessage"/>
+			<wsdl:output name="EnrolResponse" message="tns:EnrolResponseMessage"/>
 			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
 		</wsdl:operation>
-		<wsdl:operation name="GetEnrollResults">
-			<wsdl:input name="GetEnrollResults" message="tns:GetEnrollResultsRequestMessage"/>
-			<wsdl:output name="GetEnrollResultsResponse" message="tns:GetEnrollResultsResponseMessage"/>
+		<wsdl:operation name="GetEnrolResults">
+			<wsdl:input name="GetEnrolResults" message="tns:GetEnrolResultsRequestMessage"/>
+			<wsdl:output name="GetEnrolResultsResponse" message="tns:GetEnrolResultsResponseMessage"/>
 			<wsdl:fault name="BIASFault" message="tns:BIASFaultMessage"/>
 		</wsdl:operation>
 		<wsdl:operation name="GetIdentifyResults">
@@ -4058,24 +4058,24 @@
 				<soap:fault name="BIASFault" use="literal"/>
 			</wsdl:fault>
 		</wsdl:operation>
-		<wsdl:operation name="Enroll">
-			<soap:operation soapAction="Enroll"/>
-			<wsdl:input name="Enroll">
+		<wsdl:operation name="Enrol">
+			<soap:operation soapAction="Enrol"/>
+			<wsdl:input name="Enrol">
 				<soap:body use="literal"/>
 			</wsdl:input>
-			<wsdl:output name="EnrollResponse">
+			<wsdl:output name="EnrolResponse">
 				<soap:body use="literal"/>
 			</wsdl:output>
 			<wsdl:fault name="BIASFault">
 				<soap:fault name="BIASFault" use="literal"/>
 			</wsdl:fault>
 		</wsdl:operation>
-		<wsdl:operation name="GetEnrollResults">
-			<soap:operation soapAction="GetEnrollResults"/>
-			<wsdl:input name="GetEnrollResults">
+		<wsdl:operation name="GetEnrolResults">
+			<soap:operation soapAction="GetEnrolResults"/>
+			<wsdl:input name="GetEnrolResults">
 				<soap:body use="literal"/>
 			</wsdl:input>
-			<wsdl:output name="GetEnrollResultsResponse">
+			<wsdl:output name="GetEnrolResultsResponse">
 				<soap:body use="literal"/>
 			</wsdl:output>
 			<wsdl:fault name="BIASFault">
